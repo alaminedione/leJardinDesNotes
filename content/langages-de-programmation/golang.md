@@ -1,0 +1,646 @@
+---
+title: Go
+draft: false
+tags:
+  - golang
+  - programming
+description: Langage de programmation compilé, concurrent et typé statiquement, conçu par Google.
+---
+
+## Sommaire
+
+1.  Introduction à Go
+    *   Qu'est-ce que Go ?
+    *   Historique et philosophie
+    *   Installation et configuration
+    *   Espace de travail Go (GOPATH, Modules)
+2.  Bases du Langage
+    *   Syntaxe de base
+    *   Variables et types de données
+    *   Constantes
+    *   Opérateurs
+    *   Structures de contrôle (if, for, switch)
+    *   Fonctions
+    *   Pointeurs
+3.  Types Composés
+    *   Tableaux (Arrays)
+    *   Slices
+    *   Maps
+    *   Structs
+4.  Interfaces
+    *   Déclaration et implémentation
+    *   Interfaces vides
+5.  Gestion des Erreurs
+    *   Le type `error`
+    *   Gestion des erreurs avec `if err != nil`
+    *   Panic et Recover
+6.  Concurrence (Goroutines et Channels)
+    *   Goroutines
+    *   Channels (synchronisés et bufferisés)
+    *   Le mot-clé `select`
+    *   Mutexes et WaitGroups
+7.  Packages et Modules
+    *   Création et utilisation de packages
+    *   Gestion des dépendances avec Go Modules
+8.  Entrées/Sorties (I/O)
+    *   Le package `io`
+    *   Lecture et écriture de fichiers
+    *   Manipulation de chaînes de caractères
+9.  Tests en Go
+    *   Le package `testing`
+    *   Tests unitaires
+    *   Tests d'exemple
+10. Développement Web avec Go
+    *   Le package `net/http`
+    *   Création de serveurs web
+    *   Gestion des requêtes et réponses
+    *   Frameworks populaires (Gin, Echo)
+11. Bonnes Pratiques
+    *   Conventions de nommage
+    *   Formatage du code (go fmt)
+    *   Documentation (go doc)
+12. Ressources et Communauté
+    *   Documentation officielle
+    *   Communautés en ligne
+## 1. Introduction à Go
+
+### Qu'est-ce que Go ?
+
+Go (ou Golang) est un langage de programmation compilé, concurrent et typé statiquement, développé par Google. Il a été conçu pour être simple, efficace et fiable.
+
+### Historique et philosophie
+
+*   Développé chez Google par Robert Griesemer, Rob Pike et Ken Thompson.
+*   Première version en 2009.
+*   Objectifs : simplicité, concurrence, performance.
+*   Inspiré par des langages comme C, Pascal et Newsqueak.
+
+### Installation et configuration
+
+1.  Télécharger le paquetage d'installation depuis [le site officiel](https://golang.org/dl/).
+2.  Installer Go en suivant les instructions spécifiques à votre système d'exploitation.
+3.  Configurer les variables d'environnement (GOPATH, PATH).
+
+### Espace de travail Go (GOPATH, Modules)
+
+*   **GOPATH** (déprécié) : Ancien système de gestion des dépendances.  Définit l'emplacement du code source Go.
+*   **Go Modules** (recommandé) : Nouveau système de gestion des dépendances.  Permet de gérer les dépendances de manière plus flexible et isolée.
+
+```bash
+# Activer les modules Go
+go env -w GO111MODULE=on
+
+# Initialiser un module Go
+go mod init nom_du_module
+```
+
+## 2. Bases du Langage
+
+### Syntaxe de base
+
+*   Similaire à C, mais avec une syntaxe plus propre et plus simple.
+*   Utilisation de `:=` pour l'inférence de type lors de la déclaration et de l'initialisation.
+*   Pas de point-virgule obligatoire à la fin des instructions.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("Hello, World!")
+}
+```
+
+### Variables et types de données
+
+*   Déclaration : `var nom_variable type` ou `nom_variable := valeur`
+*   Types de base :
+    *   `int`, `int8`, `int16`, `int32`, `int64` : Entiers signés
+    *   `uint`, `uint8`, `uint16`, `uint32`, `uint64` : Entiers non signés
+    *   `float32`, `float64` : Nombres à virgule flottante
+    *   `complex64`, `complex128` : Nombres complexes
+    *   `bool` : Booléens (true ou false)
+    *   `string` : Chaînes de caractères
+
+```go
+var age int = 30
+name := "John"
+var pi float64 = 3.14159
+is_valid := true
+```
+
+### Constantes
+
+*   Déclaration : `const nom_constante type = valeur`
+*   Les constantes doivent être connues à la compilation.
+
+```go
+const PI float64 = 3.14159
+const MAX_SIZE int = 100
+```
+
+### Opérateurs
+
+*   Arithmétiques : `+`, `-`, `*`, `/`, `%`
+*   Relationnels : `==`, `!=`, `<`, `>`, `<=`, `>=`
+*   Logiques : `&&`, `||`, `!`
+*   Affectation : `=`, `+=`, `-=`, `*=`, `/=`, `%=`
+*   Incrémentation/Décrémentation : `++`, `--`
+
+```go
+x := 10
+y := 5
+sum := x + y
+is_equal := (x == y)
+condition := (x > 0 && y < 10)
+x++
+```
+
+### Structures de contrôle (if, for, switch)
+
+*   `if` : Conditionnelle
+*   `for` : Boucle
+*   `switch` : Sélection multiple
+
+```go
+score := 85
+if score > 90 {
+    // ...
+} else if score > 80 {
+    // ...
+} else {
+    // ...
+}
+
+for i := 0; i < 5; i++ {
+    // ...
+}
+
+switch score {
+case 100:
+    // ...
+case 90:
+    // ...
+default:
+    // ...
+}
+```
+
+### Fonctions
+
+*   Déclaration : `func nom_fonction(paramètres) type_retour { // corps }`
+*   Possibilité de retourner plusieurs valeurs.
+
+```go
+func add(a int, b int) int {
+    return a + b
+}
+
+func divide(a int, b int) (int, error) {
+    if b == 0 {
+        return 0, fmt.Errorf("division par zéro")
+    }
+    return a / b, nil
+}
+
+func main() {
+    result := add(5, 3)
+    fmt.Println(result)
+}
+```
+
+### Pointeurs
+
+*   Similaires à C, mais avec une gestion de la mémoire plus sûre.
+*   Opérateur d'adresse : `&`
+*   Opérateur de déréférencement : `*`
+
+```go
+var x int = 10
+var ptr *int = &x
+
+fmt.Println("Adresse de x:", &x)
+fmt.Println("Valeur de ptr:", ptr)
+fmt.Println("Valeur pointée par ptr:", *ptr)
+
+*ptr = 20
+fmt.Println("Nouvelle valeur de x:", x)
+```
+## 3. Types Composés
+
+### Tableaux (Arrays)
+
+*   Collection d'éléments du même type avec une taille fixe.
+*   Déclaration : `var nom_tableau [taille]type`
+
+```go
+var numbers [5]int
+numbers[0] = 10
+numbers[1] = 20
+
+names := [3]string{"Alice", "Bob", "Charlie"}
+```
+
+### Slices
+
+*   Abstraction au-dessus des tableaux, permettant une taille dynamique.
+*   Déclaration : `var nom_slice []type`
+*   Utilisation de `make` pour créer un slice.
+*   Fonctions `append` et `len` pour manipuler les slices.
+
+```go
+var numbers []int
+numbers = make([]int, 5) // Crée un slice de taille 5
+
+numbers = append(numbers, 10) // Ajoute un élément
+
+fmt.Println("Taille du slice:", len(numbers))
+```
+
+### Maps
+
+*   Table de hachage (dictionnaire) associant des clés à des valeurs.
+*   Déclaration : `var nom_map map[type_clé]type_valeur`
+*   Utilisation de `make` pour créer une map.
+
+```go
+var ages map[string]int
+ages = make(map[string]int)
+
+ages["Alice"] = 30
+ages["Bob"] = 25
+
+fmt.Println("Age de Alice:", ages["Alice"])
+```
+
+### Structs
+
+*   Type composite regroupant des champs de types différents.
+*   Déclaration :
+
+```go
+type Person struct {
+    Name string
+    Age  int
+}
+
+var person Person
+person.Name = "John"
+person.Age = 30
+
+fmt.Println("Nom:", person.Name)
+```
+## 4. Interfaces
+
+### Déclaration et implémentation
+
+*   Une interface définit un ensemble de méthodes qu'un type doit implémenter.
+*   Un type implémente une interface en définissant toutes les méthodes de l'interface.
+
+```go
+type Animal interface {
+    Speak() string
+}
+
+type Dog struct {
+    Name string
+}
+
+func (d Dog) Speak() string {
+    return "Woof!"
+}
+
+var animal Animal = Dog{Name: "Fido"}
+fmt.Println(animal.Speak())
+```
+
+### Interfaces vides
+
+*   L'interface vide `interface{}` peut contenir n'importe quel type de valeur.
+*   Utile pour écrire du code générique.
+
+```go
+var i interface{}
+i = 10
+i = "Hello"
+
+fmt.Println(i)
+```
+## 5. Gestion des Erreurs
+
+### Le type `error`
+
+*   Go n'a pas d'exceptions.  Les erreurs sont gérées en retournant une valeur de type `error`.
+*   Le type `error` est une interface avec une seule méthode : `Error() string`.
+
+### Gestion des erreurs avec `if err != nil`
+
+*   La manière la plus courante de gérer les erreurs en Go est de vérifier si la valeur de retour `error` est `nil`.
+
+```go
+result, err := divide(10, 2)
+if err != nil {
+    fmt.Println("Erreur:", err)
+    return
+}
+
+fmt.Println("Résultat:", result)
+```
+
+### Panic et Recover
+
+*   `panic` : Provoque l'arrêt brutal du programme.  À utiliser en cas d'erreurs irrécupérables.
+*   `recover` : Permet de récupérer après un `panic`.  Doit être utilisé dans une fonction `defer`.
+
+```go
+func main() {
+    defer func() {
+        if r := recover(); r != nil {
+            fmt.Println("Récupération après panic:", r)
+        }
+    }()
+
+    // ... code qui peut provoquer un panic ...
+}
+```
+## 6. Concurrence (Goroutines et Channels)
+
+### Goroutines
+
+*   Fonctions légères exécutées de manière concurrente.
+*   Lancées avec le mot-clé `go`.
+
+```go
+go maFonction()
+```
+
+### Channels (synchronisés et bufferisés)
+
+*   Permettent la communication et la synchronisation entre les goroutines.
+*   Déclaration : `make(chan type)`
+*   Synchronisés : Bloquent l'expéditeur jusqu'à ce que le récepteur reçoive la valeur.
+*   Bufferisés : Peuvent stocker un nombre limité de valeurs avant de bloquer l'expéditeur.
+
+```go
+ch := make(chan int) // Channel synchronisé
+
+go func() {
+    ch <- 10 // Envoie la valeur 10 dans le channel
+}()
+
+value := <-ch // Reçoit la valeur du channel
+fmt.Println(value)
+```
+
+### Le mot-clé `select`
+
+*   Permet d'attendre sur plusieurs opérations de channel.
+
+```go
+select {
+case value := <-ch1:
+    // ...
+case value := <-ch2:
+    // ...
+default:
+    // ...
+}
+```
+
+### Mutexes et WaitGroups
+
+*   `Mutex` : Permet de protéger l'accès concurrent à une ressource partagée.
+*   `WaitGroup` : Permet d'attendre la fin de plusieurs goroutines.
+
+```go
+var mutex sync.Mutex
+
+mutex.Lock()
+// ... accéder à la ressource partagée ...
+mutex.Unlock()
+
+var wg sync.WaitGroup
+wg.Add(2) // Ajoute 2 goroutines à attendre
+
+go func() {
+    defer wg.Done() // Indique que la goroutine est terminée
+    // ...
+}()
+
+go func() {
+    defer wg.Done()
+    // ...
+}()
+
+wg.Wait() // Attend que toutes les goroutines soient terminées
+```
+## 7. Packages et Modules
+
+### Création et utilisation de packages
+
+*   Un package est un ensemble de fichiers Go regroupés dans un même répertoire.
+*   Le nom du package est spécifié en haut de chaque fichier avec le mot-clé `package`.
+*   Les fonctions et les variables exportées (commençant par une majuscule) peuvent être utilisées depuis d'autres packages.
+
+```go
+// mypackage/mypackage.go
+package mypackage
+
+func MyFunction() {
+    // ...
+}
+```
+
+```go
+// main.go
+package main
+
+import "mypackage"
+
+func main() {
+    mypackage.MyFunction()
+}
+```
+
+### Gestion des dépendances avec Go Modules
+
+*   Go Modules est le système de gestion des dépendances intégré à Go.
+*   Permet de gérer les versions des dépendances et d'assurer la reproductibilité des builds.
+
+```bash
+go mod init nom_du_module
+go get github.com/nom/du/paquet
+```
+## 8. Entrées/Sorties (I/O)
+
+### Le package `io`
+
+*   Le package `io` fournit des interfaces de base pour les opérations d'entrée/sortie.
+*   Interfaces principales : `Reader`, `Writer`.
+
+### Lecture et écriture de fichiers
+
+*   Utilisation des packages `os` et `io/ioutil` pour lire et écrire des fichiers.
+
+```go
+package main
+
+import (
+    "fmt"
+    "io/ioutil"
+    "os"
+)
+
+func main() {
+    // Écriture dans un fichier
+    err := ioutil.WriteFile("myfile.txt", []byte("Hello, file!"), 0644)
+    if err != nil {
+        fmt.Println("Erreur lors de l'écriture:", err)
+        return
+    }
+
+    // Lecture depuis un fichier
+    data, err := ioutil.ReadFile("myfile.txt")
+    if err != nil {
+        fmt.Println("Erreur lors de la lecture:", err)
+        return
+    }
+
+    fmt.Println("Contenu du fichier:", string(data))
+
+    os.Remove("myfile.txt") // Supprime le fichier
+}
+```
+
+### Manipulation de chaînes de caractères
+
+*   Le package `strings` fournit des fonctions pour manipuler les chaînes de caractères.
+
+```go
+import "strings"
+
+str := "Hello, World!"
+fmt.Println(strings.ToUpper(str)) // HELLO, WORLD!
+```
+## 9. Tests en Go
+
+### Le package `testing`
+
+*   Le package `testing` fournit les outils nécessaires pour écrire des tests en Go.
+*   Les fichiers de test doivent avoir le suffixe `_test.go`.
+*   Les fonctions de test doivent commencer par `Test`.
+
+### Tests unitaires
+
+*   Vérifient le comportement d'une fonction ou d'une méthode.
+
+```go
+// mypackage/mypackage.go
+package mypackage
+
+func Add(a, b int) int {
+    return a + b
+}
+```
+
+```go
+// mypackage/mypackage_test.go
+package mypackage
+
+import "testing"
+
+func TestAdd(t *testing.T) {
+    result := Add(2, 3)
+    if result != 5 {
+        t.Errorf("Add(2, 3) = %d; want 5", result)
+    }
+}
+```
+
+### Tests d'exemple
+
+*   Fournissent des exemples d'utilisation du code.
+*   Sont compilés et exécutés lors des tests.
+
+```go
+func ExampleAdd() {
+    result := Add(2, 3)
+    fmt.Println(result)
+    // Output: 5
+}
+```
+## 10. Développement Web avec Go
+
+### Le package `net/http`
+
+*   Le package `net/http` fournit les outils nécessaires pour créer des serveurs web en Go.
+
+### Création de serveurs web
+
+*   Utilisation de la fonction `HandleFunc` pour enregistrer des gestionnaires de requêtes.
+*   Utilisation de la fonction `ListenAndServe` pour démarrer le serveur.
+
+```go
+package main
+
+import (
+    "fmt"
+    "net/http"
+)
+
+func handler(w http.ResponseWriter, r *http.Request) {
+    fmt.Fprintf(w, "Hello, World!")
+}
+
+func main() {
+    http.HandleFunc("/", handler)
+    http.ListenAndServe(":8080", nil)
+}
+```
+
+### Gestion des requêtes et réponses
+
+*   L'objet `http.Request` contient des informations sur la requête HTTP.
+*   L'objet `http.ResponseWriter` permet d'écrire la réponse HTTP.
+
+### Frameworks populaires (Gin, Echo)
+
+*   `Gin` : Framework web léger et performant.
+*   `Echo` : Autre framework web populaire, mettant l'accent sur la simplicité et la performance.
+## 11. Bonnes Pratiques
+
+### Conventions de nommage
+
+*   Utiliser des noms clairs et descriptifs.
+*   Utiliser le camelCase pour les noms de variables et de fonctions.
+*   Utiliser des noms courts pour les variables locales.
+*   Utiliser des noms longs pour les variables globales.
+
+### Formatage du code (go fmt)
+
+*   Utiliser l'outil `go fmt` pour formater automatiquement le code.
+*   Assure une cohérence du style de code dans tout le projet.
+
+```bash
+go fmt ./...
+```
+
+### Documentation (go doc)
+
+*   Écrire des commentaires pour documenter le code.
+*   Utiliser l'outil `go doc` pour générer la documentation.
+
+```bash
+go doc nom_du_package
+```
+## 12. Ressources et Communauté
+
+### Documentation officielle
+
+*   [The Go Programming Language](https://golang.org/)
+
+### Communautés en ligne
+
+*   [Stack Overflow](https://stackoverflow.com/)
+*   [Reddit (r/golang)](https://www.reddit.com/r/golang/)
