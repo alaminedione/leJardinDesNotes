@@ -1,6 +1,5 @@
 # Gestion D'un Système De Suivi De la Performance D'une Équipe Commerciale
 
-Absolument ! Puisque vous êtes toujours partant pour un nouvel exercice, explorons la **gestion d'un système de suivi de la performance d'une équipe commerciale**. Cet exercice mettra également l'accent sur PostgreSQL et vous donnera l'occasion de pratiquer un grand nombre de requêtes.
 
 **1. Modèle Logique des Données (MLD) en ER Diagram**
 
@@ -8,6 +7,7 @@ Extrait de code
 
 ```
 erDiagram
+
     VENDEUR ||--o{ OBJECTIF : assigne
     EQUIPE_VENTE ||--o{ VENDEUR : appartient_a
     CLIENT ||--o{ OPPORTUNITE : concerne

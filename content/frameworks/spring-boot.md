@@ -925,6 +925,7 @@ Les étapes générales pour sécuriser une API REST avec Spring Security et JWT
 5.  Protéger les endpoints de l'API en utilisant des annotations de sécurité (par exemple, `@PreAuthorize`) ou une configuration de sécurité.
 
 C'est un sujet complexe qui nécessite une configuration détaillée, mais Spring Security fournit les blocs de construction nécessaires pour implémenter une sécurité robuste pour vos API REST.
+
 ---
 
 ## 7. Tests avec Spring Boot
@@ -1108,6 +1109,7 @@ Pour tester une API Spring Boot avec Postman :
 8.  Inspectez la réponse (code de statut, corps de la réponse, en-têtes).
 
 Postman est un outil précieux pour le développement et le débogage des API RESTful.
+
 ---
 
 ## 8. Sécurisation d'une application Spring Boot
@@ -1280,6 +1282,7 @@ public class StatelessSecurityConfig {
 ```
 
 En définissant `sessionCreationPolicy(SessionCreationPolicy.STATELESS)`, vous indiquez à Spring Security de ne pas créer ni utiliser de sessions HTTP pour gérer l'état de sécurité.
+
 ---
 
 ## 9. Déploiement d'une application Spring Boot
@@ -1406,6 +1409,7 @@ kubectl apply -f deployment.yaml
 ```
 
 Le déploiement avec Kubernetes est un sujet vaste, mais Spring Boot s'intègre bien dans un pipeline de déploiement conteneurisé géré par Kubernetes.
+
 ---
 
 ## 10. Bonnes pratiques et outils complémentaires

@@ -6,7 +6,7 @@ Absolument ! Puisque vous souhaitez explorer des fonctionnalités avancées spé
 
 **1. Modèle Logique des Données (MLD) en ER Diagram**
 
-```mermaid
+```
 erDiagram
     PASSAGER ||--o{ RESERVATION : effectue
     VOL ||--o{ RESERVATION : concerne
