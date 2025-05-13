@@ -1,6 +1,9 @@
 ---
-title: Welcome to Quartz
+title: Mes Notes
 ---
 
-This is a blank Quartz installation.
-See the [documentation](https://quartz.jzhao.xyz) for how to get started.
+# 🗂️ Mes Notes
+
+Bienvenue. Cet espace regroupe mes notes personnelles sur le développement, l’architecture logicielle, les algorithmes et autres sujets techniques.
+
+
