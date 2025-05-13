@@ -1,18 +1,25 @@
-# Quartz v4
+# 🌹 Le Jardin des Notes 🌹
 
-> “[One] who works with the door open gets all kinds of interruptions, but [they] also occasionally gets clues as to what the world is and what might be important.” — Richard Hamming
+*Où les idées fleurissent comme des roses dans un jardin bien entretenu*
 
-Quartz is a set of tools that helps you publish your [digital garden](https://jzhao.xyz/posts/networked-thought) and notes as a website for free.
-Quartz v4 features a from-the-ground rewrite focusing on end-user extensibility and ease-of-use.
+## 🌱 À propos
 
-🔗 Read the documentation and get started: https://quartz.jzhao.xyz/
+Bienvenue dans "Le Jardin des Notes", un espace personnel où je cultive et partage mes réflexions, connaissances et apprentissages en tant que développeur. Tel un jardinier passionné, je plante ici des graines d'idées et les regarde s'épanouir avec le temps.
 
-[Join the Discord Community](https://discord.gg/cRFFHYye7t)
 
-## Sponsors
+## 🌹 Comment contribuer
 
-<p align="center">
-  <a href="https://github.com/sponsors/jackyzha0">
-    <img src="https://cdn.jsdelivr.net/gh/jackyzha0/jackyzha0/sponsorkit/sponsors.svg" />
-  </a>
-</p>
+Ce jardin est personnel, mais les visiteurs sont bienvenus pour:
+1. Explorer les allées de connaissances
+2. Proposer des amendements pour enrichir le sol
+3. Suggérer de nouvelles variétés de plantes (idées)
+4. Partager vos propres techniques de jardinage (développement)
+
+
+## 🪴 Remerciements                   
+
+Un grand merci à [Quartz](https://quartz.jzhao.xyz/) pour l'inspiration et les outils qui ont contribué à faire fleurir ce jardin de connaissances. Quartz est un système formidable pour cultiver et partager des notes.
+
+---
+
+*« Comme un jardinier patient, le développeur cultive ses idées avant de récolter des solutions. »*
