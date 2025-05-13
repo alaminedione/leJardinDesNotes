@@ -1,4 +1,4 @@
-# 🌹 Le Jardin des Notes 🌹
+# 🌹  Jardin de Notes 🌹
 
 *Où les idées fleurissent comme des roses dans un jardin bien entretenu*
 

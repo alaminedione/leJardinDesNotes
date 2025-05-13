@@ -1,9 +1,26 @@
 ---
-title: Mes Notes
+title: Accueil
 ---
+# 🗂️  Jardin De Notes
+Bienvenue. Cet espace regroupe mes notes personnelles sur le développement, l'architecture logicielle, les algorithmes et autres sujets techniques.
 
-# 🗂️ Mes Notes
+```
+           _,--._.-,
+          /\_r-,\_ )
+       .-.) _;='_/ (.;
+        \ \'     \/S )
+         L.'-. _.'|-'
+         <_`-'\'_.'/
+           `'-._( \
+                ;-'
+                /
+              .'
+             (
+             `-
+```
 
-Bienvenue. Cet espace regroupe mes notes personnelles sur le développement, l’architecture logicielle, les algorithmes et autres sujets techniques.
-
-
+## Catégories
+- 📚 **Développement**
+- 🏛️ **Architecture logicielle**
+- 🧮 **Algorithmes**
+- 🔧 **Outils & Techniques**
