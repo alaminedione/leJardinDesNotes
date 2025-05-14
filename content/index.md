@@ -4,6 +4,8 @@ title: Accueil
 # 🗂️  Mes Notes
 Bienvenue. Cet espace regroupe mes notes personnelles sur le développement, l'architecture logicielle, les algorithmes et autres sujets techniques.
 
+vous pouvez trouver les notes dans mon compte github : https://github.com/alaminedione/jardin-de-notes .
+
 ```
            _,--._.-,
           /\_r-,\_ )
