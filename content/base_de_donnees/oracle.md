@@ -38,10 +38,13 @@ graph LR
 - **Téléchargement** : [Oracle Database](https://www.oracle.com/database/technologies/).
 - **Installation via Docker** (simplifiée) :
 
+
   ```bash
   docker pull container-registry.oracle.com/database/express:latest
   docker run -d -p 1521:1521 --name oracle-xe container-registry.oracle.com/database/express:latest
   ```
+
+[official guide](https://github.com/oracle/db-sharding/blob/master/container-based-sharding-deployment/README.md)
 
 ---
 
