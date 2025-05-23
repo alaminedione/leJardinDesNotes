@@ -7,7 +7,7 @@ tags:
 description: Langage de script principalement utilisé pour le développement web côté client, mais aussi côté serveur avec Node.js.
 ---
 
-# Javascript
+# JavaScript
 
 ## Sommaire
 
@@ -27,30 +27,40 @@ description: Langage de script principalement utilisé pour le développement we
     * Prototypes et Héritage
     * Asynchronisme (Callbacks, Promises, Async/Await)
     * Modules (CommonJS, ES Modules)
-4. Manipulation du DOM
+4. Programmation Fonctionnelle
+    * Fonctions Pures et Impures
+    * Immuabilité
+    * Fonctions d'Ordre Supérieur (map, filter, reduce)
+5. Manipulation du DOM
     * Accès et modification des éléments HTML
     * Gestion des événements
     * Manipulation des styles CSS
-5. Développement Côté Serveur avec Node.js
+6. Développement Côté Serveur avec Node.js
     * Introduction à Node.js
     * Modules intégrés
     * Gestion des paquets (npm, yarn)
     * Frameworks populaires (Express, NestJS)
-6. Frameworks et Bibliothèques Front-end
+7. Frameworks et Bibliothèques Front-end
     * React
     * Angular
     * Vue.js
     * Autres bibliothèques utiles
-7. Tests en JavaScript
+8. TypeScript
+    * Qu'est-ce que TypeScript ?
+    * Avantages de TypeScript
+    * Intégration avec les frameworks
+9. Tests en JavaScript
     * Types de tests (Unitaires, d'intégration, End-to-End)
     * Outils de test (Jest, Mocha, Cypress)
-8. Bonnes Pratiques et Patterns
+10. Bonnes Pratiques et Patterns
     * Conventions de nommage
     * Gestion des erreurs
     * Patterns de conception courants
-9. TypeScript
-10. Tests en JavaScript
-11. Bonnes Pratiques et Patterns
+11. Design Patterns
+    * Singleton Pattern
+    * Factory Pattern
+    * Observer Pattern
+    * Module Pattern
 12. Ressources et Communauté
     * Documentation officielle
     * Communautés en ligne
@@ -386,7 +396,90 @@ console.log(maVariable);
 maFonction();
 ```
 
-## 4. Manipulation Du DOM
+## 4. Programmation Fonctionnelle
+
+### Fonctions Pures Et Impures
+
+* **Fonction Pure** : Une fonction qui, étant donné les mêmes entrées, retourne toujours les mêmes sorties et n'a pas d'effets secondaires (ne modifie pas l'état en dehors de son scope).
+    * Facile à tester et à raisonner.
+    * Exemple : `function add(a, b) { return a + b; }`
+* **Fonction Impure** : Une fonction qui peut avoir des effets secondaires (modifie l'état global, effectue des I/O, etc.) ou dont la sortie dépend de facteurs externes.
+    * Plus difficile à tester et à déboguer.
+    * Exemple : `console.log()`, `Math.random()`, modification d'une variable globale.
+
+```javascript
+// Fonction pure
+function multiplier(a, b) {
+    return a * b;
+}
+
+// Fonction impure (modifie une variable globale)
+let total = 0;
+function ajouterAuTotal(valeur) {
+    total += valeur;
+    return total;
+}
+
+console.log(multiplier(2, 3)); // 6
+console.log(ajouterAuTotal(5)); // 5
+console.log(ajouterAuTotal(10)); // 15
+```
+
+### Immuabilité
+
+* Le concept d'immuabilité signifie qu'une fois qu'une donnée est créée, elle ne peut pas être modifiée. Au lieu de modifier une donnée existante, on crée une nouvelle donnée avec les modifications.
+* Avantages : Prévient les effets secondaires inattendus, facilite le débogage, améliore la prévisibilité du code.
+* Méthodes pour l'immuabilité : `Object.assign()`, spread operator (`…`), `Array.prototype.slice()`, `Array.prototype.map()`, `Array.prototype.filter()`.
+
+```javascript
+// Objet mutable
+let personneMutable = { nom: "Alice", age: 30 };
+personneMutable.age = 31; // Modification directe
+
+// Objet immutable (avec spread operator)
+let personneImmutable = { nom: "Bob", age: 25 };
+let nouvellePersonne = { ...personneImmutable, age: 26 }; // Crée un nouvel objet
+
+console.log(personneImmutable); // { nom: "Bob", age: 25 }
+console.log(nouvellePersonne); // { nom: "Bob", age: 26 }
+
+// Tableau mutable
+let nombresMutables = [1, 2, 3];
+nombresMutables.push(4); // Modification directe
+
+// Tableau immutable (avec spread operator)
+let nombresImmutables = [1, 2, 3];
+let nouveauxNombres = [...nombresImmutables, 4]; // Crée un nouveau tableau
+
+console.log(nombresMutables); // [1, 2, 3, 4]
+console.log(nombresImmutables); // [1, 2, 3]
+console.log(nouveauxNombres); // [1, 2, 3, 4]
+```
+
+### Fonctions D'ordre Supérieur (map, Filter, reduce)
+
+* Une fonction d'ordre supérieur est une fonction qui prend une ou plusieurs fonctions en argument, ou qui retourne une fonction.
+* **`map()`** : Crée un nouveau tableau en appelant une fonction fournie sur chaque élément du tableau appelant.
+* **`filter()`** : Crée un nouveau tableau avec tous les éléments qui passent le test implémenté par la fonction fournie.
+* **`reduce()`** : Exécute une fonction de "réducteur" (fournie par l'utilisateur) sur chaque élément du tableau, de gauche à droite, afin de réduire le tableau à une seule valeur.
+
+```javascript
+const chiffres = [1, 2, 3, 4, 5];
+
+// map : Doubler chaque chiffre
+const chiffresDoubles = chiffres.map(chiffre => chiffre * 2);
+console.log(chiffresDoubles); // [2, 4, 6, 8, 10]
+
+// filter : Garder seulement les chiffres pairs
+const chiffresPairs = chiffres.filter(chiffre => chiffre % 2 === 0);
+console.log(chiffresPairs); // [2, 4]
+
+// reduce : Somme de tous les chiffres
+const sommeChiffres = chiffres.reduce((accumulateur, chiffre) => accumulateur + chiffre, 0);
+console.log(sommeChiffres); // 15
+```
+
+## 5. Manipulation Du DOM
 
 ### Accès Et Modification Des Éléments HTML
 
@@ -633,7 +726,151 @@ console.log(p.getDistance());
 * Observer Pattern
 * Factory Pattern
 
-## 10. Ressources Et Communauté
+## 11. Design Patterns
+
+Les Design Patterns sont des solutions réutilisables à des problèmes courants en conception logicielle. Ils ne sont pas des bibliothèques ou des frameworks, mais des modèles que l'on peut adapter à ses propres besoins.
+
+### Singleton Pattern
+
+* Garantit qu'une classe n'a qu'une seule instance et fournit un point d'accès global à cette instance.
+* Utile pour la gestion de configurations, de bases de données, ou de ressources partagées.
+
+```javascript
+const Singleton = (function () {
+    let instance;
+
+    function createInstance() {
+        const object = new Object("Je suis l'instance unique");
+        return object;
+    }
+
+    return {
+        getInstance: function () {
+            if (!instance) {
+                instance = createInstance();
+            }
+            return instance;
+        }
+    };
+})();
+
+const instance1 = Singleton.getInstance();
+const instance2 = Singleton.getInstance();
+
+console.log(instance1 === instance2); // true
+```
+
+### Factory Pattern
+
+* Fournit une interface pour créer des objets dans une superclasse, mais permet aux sous-classes de modifier le type d'objets qui seront créés.
+* Utile lorsque le processus de création d'objets est complexe ou dépend de conditions.
+
+```javascript
+class Voiture {
+    constructor(options) {
+        this.portes = options.portes || 4;
+        this.couleur = options.couleur || "noir";
+    }
+}
+
+class Camion {
+    constructor(options) {
+        this.roues = options.roues || 6;
+        this.chargeMax = options.chargeMax || "10 tonnes";
+    }
+}
+
+class VehiculeFactory {
+    creerVehicule(type, options) {
+        switch (type) {
+            case "voiture":
+                return new Voiture(options);
+            case "camion":
+                return new Camion(options);
+            default:
+                return null;
+        }
+    }
+}
+
+const factory = new VehiculeFactory();
+const maVoiture = factory.creerVehicule("voiture", { couleur: "rouge" });
+const monCamion = factory.creerVehicule("camion", { roues: 8 });
+
+console.log(maVoiture); // Voiture { portes: 4, couleur: 'rouge' }
+console.log(monCamion); // Camion { roues: 8, chargeMax: '10 tonnes' }
+```
+
+### Observer Pattern
+
+* Définit une dépendance un-à-plusieurs entre des objets, de sorte que lorsqu'un objet change d'état, tous ses dépendants sont avertis et mis à jour automatiquement.
+* Utile pour la gestion d'événements, les systèmes de notification, ou les architectures réactives.
+
+```javascript
+class Sujet {
+    constructor() {
+        this.observateurs = [];
+    }
+
+    ajouterObservateur(observateur) {
+        this.observateurs.push(observateur);
+    }
+
+    notifier(donnees) {
+        this.observateurs.forEach(observateur => observateur.miseAJour(donnees));
+    }
+}
+
+class Observateur {
+    constructor(nom) {
+        this.nom = nom;
+    }
+
+    miseAJour(donnees) {
+        console.log(`${this.nom} a reçu la mise à jour: ${donnees}`);
+    }
+}
+
+const sujet = new Sujet();
+const obs1 = new Observateur("Observateur 1");
+const obs2 = new Observateur("Observateur 2");
+
+sujet.ajouterObservateur(obs1);
+sujet.ajouterObservateur(obs2);
+
+sujet.notifier("Nouvelles données disponibles !");
+// Observateur 1 a reçu la mise à jour: Nouvelles données disponibles !
+// Observateur 2 a reçu la mise à jour: Nouvelles données disponibles !
+```
+
+### Module Pattern
+
+* Permet d'encapsuler des variables et des fonctions privées, exposant uniquement une interface publique.
+* Utile pour organiser le code, éviter les collisions de noms dans l'espace global et créer des modules réutilisables.
+
+```javascript
+const MonModule = (function () {
+    let privateVariable = "Je suis privé";
+
+    function privateMethod() {
+        console.log(privateVariable);
+    }
+
+    return {
+        publicMethod: function () {
+            console.log("Je suis une méthode publique.");
+            privateMethod();
+        },
+        publicVariable: "Je suis public"
+    };
+})();
+
+MonModule.publicMethod(); // Je suis une méthode publique. \n Je suis privé
+console.log(MonModule.publicVariable); // Je suis public
+// console.log(MonModule.privateVariable); // undefined (non accessible)
+```
+
+## 12. Ressources Et Communauté
 
 ### Documentation Officielle
 
