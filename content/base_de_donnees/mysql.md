@@ -80,7 +80,7 @@ CALL GetUser(1);
 
 ### **5. Gestion Des Utilisateurs Et Bases De Données**
 
--   **Créer un nouvel utilisateur** :
+- **Créer un nouvel utilisateur** :
 
     ```sql
     CREATE USER 'mon_utilisateur'@'localhost' IDENTIFIED BY 'mot_de_passe_utilisateur';
@@ -88,7 +88,7 @@ CALL GetUser(1);
     -- CREATE USER 'mon_utilisateur'@'%' IDENTIFIED BY 'mot_de_passe_utilisateur';
     ```
 
--   **Accorder des privilèges sur une base de données** :
+- **Accorder des privilèges sur une base de données** :
 
     ```sql
     -- Accorder tous les privilèges sur une base spécifique
@@ -101,14 +101,14 @@ CALL GetUser(1);
     FLUSH PRIVILEGES;
     ```
 
--   **Révoquer des privilèges** :
+- **Révoquer des privilèges** :
 
     ```sql
     REVOKE INSERT ON ma_nouvelle_base.ma_table FROM 'mon_utilisateur'@'localhost';
     FLUSH PRIVILEGES;
     ```
 
--   **Supprimer un utilisateur** :
+- **Supprimer un utilisateur** :
 
     ```sql
     DROP USER 'mon_utilisateur'@'localhost';
@@ -170,21 +170,21 @@ query_cache_size = 64M
 
 Les index sont cruciaux pour optimiser les performances des requêtes. MySQL supporte plusieurs types d'index :
 
--   **B-Tree**: Index par défaut, efficace pour les recherches d'égalité et les intervalles.
--   **Hash**: Rapide pour les recherches d'égalité, mais ne supporte pas les intervalles.
--   **Fulltext**: Pour la recherche de texte intégral dans les colonnes de type TEXT.
--   **Spatial**: Pour les données géographiques.
+- **B-Tree**: Index par défaut, efficace pour les recherches d'égalité et les intervalles.
+- **Hash**: Rapide pour les recherches d'égalité, mais ne supporte pas les intervalles.
+- **Fulltext**: Pour la recherche de texte intégral dans les colonnes de type TEXT.
+- **Spatial**: Pour les données géographiques.
 
 **Comment choisir le bon index ?**
 
--   Analyser les requêtes avec `EXPLAIN` pour identifier les colonnes utilisées dans les clauses `WHERE`, `JOIN` et `ORDER BY`.
--   Créer des index sur ces colonnes.
--   Considérer les index composites (sur plusieurs colonnes) pour les requêtes complexes.
--   Surveiller la taille des index, car ils peuvent ralentir les opérations d'écriture.
+- Analyser les requêtes avec `EXPLAIN` pour identifier les colonnes utilisées dans les clauses `WHERE`, `JOIN` et `ORDER BY`.
+- Créer des index sur ces colonnes.
+- Considérer les index composites (sur plusieurs colonnes) pour les requêtes complexes.
+- Surveiller la taille des index, car ils peuvent ralentir les opérations d'écriture.
 
 ---
 
-### **8. Réplication et Clustering**
+### **8. Réplication Et Clustering**
 
 **Réplication** : Permet de copier les données d'un serveur MySQL (maître) vers un ou plusieurs autres serveurs (esclaves). Utile pour la sauvegarde, la répartition de charge et la haute disponibilité.
 
@@ -224,16 +224,16 @@ Les index sont cruciaux pour optimiser les performances des requêtes. MySQL sup
 
 ### **11. Sécurité**
 
--   **Mettre à jour MySQL** : Garder MySQL à jour pour bénéficier des derniers correctifs de sécurité.
--   **Utiliser des mots de passe forts** : Pour tous les utilisateurs, y compris root.
--   **Limiter les privilèges** : N'accorder que les privilèges nécessaires aux utilisateurs.
--   **Désactiver les connexions à distance pour root** : Pour éviter les accès non autorisés.
--   **Utiliser SSL** : Pour chiffrer les connexions entre le client et le serveur.
--   **Se protéger contre les injections SQL** : En utilisant des requêtes préparées ou des fonctions d'échappement.
+- **Mettre à jour MySQL** : Garder MySQL à jour pour bénéficier des derniers correctifs de sécurité.
+- **Utiliser des mots de passe forts** : Pour tous les utilisateurs, y compris root.
+- **Limiter les privilèges** : N'accorder que les privilèges nécessaires aux utilisateurs.
+- **Désactiver les connexions à distance pour root** : Pour éviter les accès non autorisés.
+- **Utiliser SSL** : Pour chiffrer les connexions entre le client et le serveur.
+- **Se protéger contre les injections SQL** : En utilisant des requêtes préparées ou des fonctions d'échappement.
 
 ---
 
-### **12. Utilisation avec Différents Langages de Programmation**
+### **12. Utilisation Avec Différents Langages De Programmation**
 
 MySQL peut être utilisé avec de nombreux langages de programmation. Voici quelques exemples :
 

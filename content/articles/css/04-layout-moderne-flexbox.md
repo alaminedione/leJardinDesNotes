@@ -84,7 +84,7 @@ Flexbox excelle dans les scénarios où vous devez aligner des éléments sur un
 
 *   **Création d'une barre de navigation responsive :** Une barre de navigation est un cas d'utilisation classique. On applique `display: flex` au conteneur `ul`. On utilise `justify-content` pour répartir les éléments `li` (les liens) et `align-items` pour les centrer verticalement. Avec `flex-wrap: wrap`, la navigation peut passer sur plusieurs lignes sur des écrans plus petits.
 
-    ```/dev/null/example.html#L1-12
+    ```html
     <nav>
       <ul>
         <li><a href="#">Accueil</a></li>
@@ -111,7 +111,7 @@ Flexbox excelle dans les scénarios où vous devez aligner des éléments sur un
 
 *   **Centrage vertical et horizontal parfait :** C'est un problème classique qui devient trivial avec Flexbox. Pour centrer un élément (l'enfant) dans un autre (le parent), il suffit d'appliquer `display: flex; justify-content: center; align-items: center;` au conteneur parent.
 
-    ```/dev/null/example.html#L1-11
+    ```html
     <div class="conteneur">
       <div class="element-a-centrer">
         Je suis centré !

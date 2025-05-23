@@ -283,4 +283,3 @@ Voici une longue liste de requêtes pour explorer votre système de gestion de l
 103. Mettez en place un système d'audit pour suivre les modifications apportées aux données critiques (par exemple, prix des produits, niveaux de stock).
 104. Analysez la performance des différents transporteurs (si vous aviez des données de transport).
 105. Simulez des scénarios de perturbation de la chaîne d'approvisionnement pour tester la résilience du système.
-

@@ -196,5 +196,3 @@ Maintenant, exécutez une série de requêtes SQL avancées pour interroger votr
 28. Trouvez les passagers qui ont des réservations sur des vols opérés par plus d'une compagnie aérienne.
 29. Affichez les aéroports qui n'ont aucun vol au départ.
 30. Affichez les compagnies aériennes qui n'ont aucun vol à destination d'un aéroport spécifique.
-
-

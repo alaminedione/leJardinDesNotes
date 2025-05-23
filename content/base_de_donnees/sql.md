@@ -1526,7 +1526,7 @@ JOIN DepartmentAverageSalary das ON e.department_id = das.department_id
 WHERE e.salary > das.avg_salary;
 ```
 
-#### CTE Récursives
+### CTE Récursives
 
 Les CTE récursives sont utilisées pour interroger des données hiérarchiques ou en forme d'arbre. Elles se composent d'une partie d'ancrage (la base de la récursion) et d'une partie récursive (qui se réfère à la CTE elle-même).
 
@@ -1636,7 +1636,7 @@ SELECT * FROM large_table WHERE condition;
 SELECT id, nom, email FROM large_table WHERE condition;
 ```
 
-### Éviter les Fonctions Sur les Colonnes Indexées dans WHERE
+### Éviter Les Fonctions Sur Les Colonnes Indexées Dans WHERE
 
 Appliquer une fonction à une colonne dans la clause `WHERE` empêche généralement le SGBDR d'utiliser un index sur cette colonne, forçant un scan complet de la table.
 
@@ -1656,7 +1656,7 @@ SELECT * FROM utilisateurs WHERE email = 'jean.dupont@example.com';
 SELECT * FROM utilisateurs WHERE LOWER(email) = 'jean.dupont@example.com';
 ```
 
-### Utiliser NOT IN avec des NULLs
+### Utiliser NOT IN Avec Des NULLs
 
 `NOT IN` peut donner des résultats inattendus si la sous-requête ou la colonne comparée contient des valeurs `NULL`. Une comparaison avec `NULL` retourne `UNKNOWN`, et `NOT IN` traite `UNKNOWN` comme `FALSE`.
 
@@ -1680,7 +1680,7 @@ LEFT JOIN managers m ON e.manager_id = m.id AND m.status = 'inactive'
 WHERE m.id IS NULL; -- S'assure qu'il n'y a PAS de manager inactif
 ```
 
-### Utiliser OR sur des Colonnes Non Indexées
+### Utiliser OR Sur Des Colonnes Non Indexées
 
 Utiliser `OR` dans la clause `WHERE` sur des colonnes qui ne sont pas toutes indexées peut empêcher l'optimiseur d'utiliser les index efficacement.
 
@@ -1693,9 +1693,10 @@ SELECT * FROM table WHERE colonne1 = 'A'
 UNION ALL
 SELECT * FROM table WHERE colonne2 = 'B' AND colonne1 <> 'A'; -- Évite les doublons si nécessaire
 ```
+
 *Note : Les SGBDR modernes sont souvent capables d'optimiser les clauses OR si les colonnes sont indexées.*
 
-### Utiliser des Curseurs pour des Opérations en Masse
+### Utiliser Des Curseurs Pour Des Opérations En Masse
 
 Les curseurs traitent les données ligne par ligne, ce qui est très inefficace pour les opérations qui pourraient être effectuées en une seule requête SQL basée sur des ensembles.
 
@@ -1708,7 +1709,7 @@ Les curseurs traitent les données ligne par ligne, ce qui est très inefficace 
 UPDATE employees SET salaire = salaire * 1.10 WHERE condition;
 ```
 
-### Stocker des Listes Séparées par des Virgules dans une Colonne
+### Stocker Des Listes Séparées Par Des Virgules Dans Une Colonne
 
 Stocker plusieurs valeurs dans une seule colonne (ex: 'tag1,tag2,tag3') rend les recherches, les mises à jour et les rapports difficiles et inefficaces. Cela viole la première forme normale (1NF).
 
@@ -1740,7 +1741,7 @@ CREATE TABLE produit_tags (
 );
 ```
 
-### Utiliser des Requêtes Implicites (Comma Joins)
+### Utiliser Des Requêtes Implicites (Comma Joins)
 
 Les jointures implicites (`FROM table1, table2 WHERE table1.col = table2.col`) sont moins lisibles et plus sujettes aux erreurs (produits cartésiens accidentels) que les jointures explicites (`INNER JOIN`, `LEFT JOIN`, etc.).
 
@@ -1752,7 +1753,7 @@ SELECT e.nom, d.nom FROM employees e, departments d WHERE e.department_id = d.id
 SELECT e.nom, d.nom FROM employees e INNER JOIN departments d ON e.department_id = d.id;
 ```
 
-### Utiliser des Sous-requêtes Scalaires dans la Liste SELECT qui Retournent Plusieurs Lignes
+### Utiliser Des Sous-requêtes Scalaires Dans la Liste SELECT Qui Retournent Plusieurs Lignes
 
 Une sous-requête scalaire est censée retourner une seule valeur. Si elle retourne plusieurs lignes, la requête échouera.
 

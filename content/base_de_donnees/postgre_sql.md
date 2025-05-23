@@ -76,26 +76,26 @@ graph LR
 
 Les fichiers de configuration principaux se trouvent généralement dans le répertoire de données (souvent `/var/lib/postgres/data/` sur Linux).
 
--   **`postgresql.conf`** : Paramètres généraux du serveur.
--   **`pg_hba.conf`** : Règles d'authentification des clients.
+- **`postgresql.conf`** : Paramètres généraux du serveur.
+- **`pg_hba.conf`** : Règles d'authentification des clients.
 
 ---
 
 ### **5. Gestion Des Utilisateurs Et Bases De Données**
 
--   **Créer une nouvelle base de données** :
+- **Créer une nouvelle base de données** :
 
     ```sql
     CREATE DATABASE ma_nouvelle_base;
     ```
 
--   **Créer un nouvel utilisateur** :
+- **Créer un nouvel utilisateur** :
 
     ```sql
     CREATE USER mon_utilisateur WITH PASSWORD 'mot_de_passe_utilisateur';
     ```
 
--   **Accorder des privilèges sur une base de données** :
+- **Accorder des privilèges sur une base de données** :
 
     ```sql
     GRANT ALL PRIVILEGES ON DATABASE ma_nouvelle_base TO mon_utilisateur;
@@ -105,17 +105,18 @@ Les fichiers de configuration principaux se trouvent généralement dans le rép
 
 ### **6. Extensions Utiles**
 
--   **PostGIS** (données géospatiales) :
+- **PostGIS** (données géospatiales) :
 
     ```sql
     CREATE EXTENSION postgis;
     ```
 
--   **pgcrypto** (chiffrement) :
+- **pgcrypto** (chiffrement) :
 
     ```sql
     CREATE EXTENSION pgcrypto;
     SELECT crypt('motdepasse', gen_salt('bf'));
+
   ```
 
 ---
@@ -176,34 +177,34 @@ FROM Articles;
   CREATE INDEX idx_actifs ON Utilisateurs (nom) WHERE est_actif = true;
   ```
 
-#### Types d'Index et Utilisation
+#### Types d'Index Et Utilisation
 
 PostgreSQL offre une variété de types d'index pour optimiser les requêtes :
 
--   **B-Tree**: Le type d'index le plus courant, adapté à une large gamme de requêtes (égalité, intervalles, LIKE avec préfixe).
--   **Hash**: Pour les recherches d'égalité uniquement, généralement moins performant que B-Tree.
--   **GIN (Generalized Inverted Index)**: Excellent pour les données indexées composites, comme les tableaux et les types de données de document (JSONB, XML).
--   **GiST (Generalized Search Tree)**: Supporte une variété de structures de données et de méthodes de recherche (géospatiales, pleine recherche de texte).
--   **SP-GiST (Space-Partitioned Generalized Search Tree)**: Similaire à GiST, mais optimisé pour les données non équilibrées.
--   **BRIN (Block Range Index)**: Pour les tables volumineuses où les données sont naturellement ordonnées.
+- **B-Tree**: Le type d'index le plus courant, adapté à une large gamme de requêtes (égalité, intervalles, LIKE avec préfixe).
+- **Hash**: Pour les recherches d'égalité uniquement, généralement moins performant que B-Tree.
+- **GIN (Generalized Inverted Index)**: Excellent pour les données indexées composites, comme les tableaux et les types de données de document (JSONB, XML).
+- **GiST (Generalized Search Tree)**: Supporte une variété de structures de données et de méthodes de recherche (géospatiales, pleine recherche de texte).
+- **SP-GiST (Space-Partitioned Generalized Search Tree)**: Similaire à GiST, mais optimisé pour les données non équilibrées.
+- **BRIN (Block Range Index)**: Pour les tables volumineuses où les données sont naturellement ordonnées.
 
 **Comment choisir le bon index ?**
 
--   Analyser les requêtes lentes avec `EXPLAIN ANALYZE`.
--   Identifier les colonnes utilisées dans les clauses `WHERE`, `JOIN`, `ORDER BY`, et `GROUP BY`.
--   Choisir le type d'index approprié en fonction du type de données et du type de requête.
--   Créer des index composites pour les requêtes qui filtrent sur plusieurs colonnes.
--   Surveiller la taille et l'utilisation des index.
+- Analyser les requêtes lentes avec `EXPLAIN ANALYZE`.
+- Identifier les colonnes utilisées dans les clauses `WHERE`, `JOIN`, `ORDER BY`, et `GROUP BY`.
+- Choisir le type d'index approprié en fonction du type de données et du type de requête.
+- Créer des index composites pour les requêtes qui filtrent sur plusieurs colonnes.
+- Surveiller la taille et l'utilisation des index.
 
 ---
 
-### **9. Réplication et Haute Disponibilité**
+### **9. Réplication Et Haute Disponibilité**
 
 PostgreSQL offre plusieurs options pour la réplication et la haute disponibilité :
 
--   **Streaming Replication**: Envoie les journaux de transactions (WAL) en temps réel à un ou plusieurs serveurs esclaves.
--   **Logical Replication**: Permet de répliquer des données sélectivement en fonction des tables ou des changements.
--   **Clustering**: Peut être réalisé avec des outils externes comme Patroni ou repmgr pour la gestion automatique du failover.
+- **Streaming Replication**: Envoie les journaux de transactions (WAL) en temps réel à un ou plusieurs serveurs esclaves.
+- **Logical Replication**: Permet de répliquer des données sélectivement en fonction des tables ou des changements.
+- **Clustering**: Peut être réalisé avec des outils externes comme Patroni ou repmgr pour la gestion automatique du failover.
 
 ---
 

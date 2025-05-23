@@ -38,7 +38,6 @@ graph LR
 - **Téléchargement** : [Oracle Database](https://www.oracle.com/database/technologies/).
 - **Installation via Docker** (simplifiée) :
 
-
   ```bash
   docker pull container-registry.oracle.com/database/express:latest
   docker run -d -p 1521:1521 --name oracle-xe container-registry.oracle.com/database/express:latest
@@ -213,16 +212,16 @@ END pkg_employés;
 
 Les index sont essentiels pour optimiser les performances des requêtes dans Oracle. Voici quelques types d'index courants :
 
--   **B-Tree indexes**: Le type d'index par défaut dans Oracle, adapté à une grande variété de requêtes.
--   **Bitmap indexes**: Utiles pour les colonnes avec une faible cardinalité (peu de valeurs distinctes).
--   **Function-based indexes**: Permettent d'indexer le résultat d'une fonction ou d'une expression.
+- **B-Tree indexes**: Le type d'index par défaut dans Oracle, adapté à une grande variété de requêtes.
+- **Bitmap indexes**: Utiles pour les colonnes avec une faible cardinalité (peu de valeurs distinctes).
+- **Function-based indexes**: Permettent d'indexer le résultat d'une fonction ou d'une expression.
 
 **Comment choisir le bon index ?**
 
--   Utiliser `EXPLAIN PLAN` pour analyser les plans d'exécution des requêtes et identifier les goulots d'étranglement.
--   Créer des index sur les colonnes fréquemment utilisées dans les clauses `WHERE`, `JOIN` et `ORDER BY`.
--   Envisager des index composites pour les requêtes qui impliquent plusieurs colonnes.
--   Surveiller l'utilisation des index et les reconstruire si nécessaire.
+- Utiliser `EXPLAIN PLAN` pour analyser les plans d'exécution des requêtes et identifier les goulots d'étranglement.
+- Créer des index sur les colonnes fréquemment utilisées dans les clauses `WHERE`, `JOIN` et `ORDER BY`.
+- Envisager des index composites pour les requêtes qui impliquent plusieurs colonnes.
+- Surveiller l'utilisation des index et les reconstruire si nécessaire.
 
 ---
 
@@ -242,12 +241,12 @@ Oracle RAC est une option de base de données en cluster qui permet à plusieurs
 
 ### **10. Sécurité**
 
--   **Mettre à jour Oracle Database**: Appliquer régulièrement les correctifs de sécurité et les mises à jour.
--   **Gestion des utilisateurs et des privilèges**: Accorder uniquement les privilèges nécessaires aux utilisateurs.
--   **Authentification forte**: Utiliser des mots de passe complexes et activer l'authentification multifacteur.
--   **Chiffrement des données**: Chiffrer les données sensibles au repos et en transit.
--   **Audit**: Activer l'audit pour surveiller l'activité de la base de données et détecter les anomalies.
--   **Virtual Private Database (VPD)**: Implémenter des politiques de sécurité au niveau des lignes pour contrôler l'accès aux données.
+- **Mettre à jour Oracle Database**: Appliquer régulièrement les correctifs de sécurité et les mises à jour.
+- **Gestion des utilisateurs et des privilèges**: Accorder uniquement les privilèges nécessaires aux utilisateurs.
+- **Authentification forte**: Utiliser des mots de passe complexes et activer l'authentification multifacteur.
+- **Chiffrement des données**: Chiffrer les données sensibles au repos et en transit.
+- **Audit**: Activer l'audit pour surveiller l'activité de la base de données et détecter les anomalies.
+- **Virtual Private Database (VPD)**: Implémenter des politiques de sécurité au niveau des lignes pour contrôler l'accès aux données.
 
 ---
 
@@ -263,7 +262,7 @@ Oracle RAC est une option de base de données en cluster qui permet à plusieurs
 
 ---
 
-### **12. Utilisation avec Différents Langages de Programmation**
+### **12. Utilisation Avec Différents Langages De Programmation**
 
 Oracle peut être utilisé avec de nombreux langages de programmation. Voici quelques exemples :
 

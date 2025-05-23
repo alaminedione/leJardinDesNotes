@@ -6,7 +6,8 @@ tags:
   - Custom Properties
 draft: false
 ---
-# Article 8 : CSS Variables (Custom Properties) - Pour un code plus dynamique
+
+# Article 8 : CSS Variables (Custom Properties) - Pour Un Code plus Dynamique
 
 ## Introduction
 
@@ -16,15 +17,15 @@ Les **variables CSS natives**, officiellement appelées **Custom Properties for 
 
 Cet article vous fera découvrir la puissance des variables CSS natives : comment les déclarer, les utiliser, gérer leur portée et les exploiter pour rendre votre CSS plus puissant et plus facile à maintenir.
 
-## Contenu principal
+## Contenu Principal
 
 Les variables CSS sont des entités définies par l'auteur d'une feuille de style qui contiennent des valeurs spécifiques réutilisables à travers un document. Elles fonctionnent comme n'importe quelle autre propriété CSS en termes de cascade et d'héritage.
 
-### Syntaxe des variables CSS
+### Syntaxe Des Variables CSS
 
 La syntaxe des variables CSS est simple et se compose de deux parties : la déclaration et l'utilisation.
 
-*   **Déclaration (--ma-variable) :**
+* **Déclaration (--ma-variable) :**
     Les variables CSS sont déclarées avec un préfixe double tiret (`--`), suivi d'un nom (qui peut inclure des lettres, des chiffres, des tirets et des underscores). La déclaration se fait à l'intérieur d'un bloc de règles, comme n'importe quelle autre propriété.
 
     ```css
@@ -33,6 +34,7 @@ La syntaxe des variables CSS est simple et se compose de deux parties : la décl
       --spacing-unit: 8px;
     }
     ```
+
     Le sélecteur `:root` est une pseudo-classe qui cible l'élément racine du document (généralement `<html>`), ce qui est l'endroit habituel pour déclarer des variables qui doivent être accessibles globalement.
 
     Vous pouvez déclarer des variables dans n'importe quel sélecteur, ce qui limite leur portée à ce sélecteur et à ses descendants.
@@ -43,7 +45,7 @@ La syntaxe des variables CSS est simple et se compose de deux parties : la décl
     }
     ```
 
-*   **Utilisation (var(--ma-variable)) :**
+* **Utilisation (var(--ma-variable)) :**
     Pour utiliser la valeur d'une variable CSS, vous utilisez la fonction `var()` en lui passant le nom de la variable en argument.
 
     ```css
@@ -57,7 +59,7 @@ La syntaxe des variables CSS est simple et se compose de deux parties : la décl
     }
     ```
 
-*   **Valeurs par défaut :**
+* **Valeurs par défaut :**
     La fonction `var()` accepte un deuxième argument facultatif, qui est une valeur de secours (fallback). Cette valeur sera utilisée si la variable spécifiée n'est pas trouvée ou n'est pas valide dans la portée actuelle.
 
     ```css
@@ -66,13 +68,14 @@ La syntaxe des variables CSS est simple et se compose de deux parties : la décl
       border: 1px solid var(--card-border-color, black); /* Utilise --card-border-color si elle existe, sinon utilise black */
     }
     ```
+
     Cela est utile pour rendre vos composants plus robustes, car ils peuvent fonctionner même si certaines variables ne sont pas définies globalement.
 
-### Portée des variables
+### Portée Des Variables
 
 L'un des aspects les plus puissants des variables CSS est qu'elles respectent les règles de la cascade et de l'héritage CSS, tout comme les propriétés standard.
 
-*   **Variables globales (:root) :**
+* **Variables globales (:root) :**
     Déclarer des variables dans le sélecteur `:root` les rend accessibles à tous les éléments du document. C'est l'endroit idéal pour définir des valeurs globales qui font partie de votre système de design (couleurs principales, typographie de base, espacements standards).
 
     ```css
@@ -87,7 +90,7 @@ L'un des aspects les plus puissants des variables CSS est qu'elles respectent le
     }
     ```
 
-*   **Variables locales (dans un sélecteur) :**
+* **Variables locales (dans un sélecteur) :**
     Vous pouvez déclarer des variables à l'intérieur de n'importe quel sélecteur. Ces variables ne seront accessibles qu'aux éléments ciblés par ce sélecteur et à leurs éléments descendants. Cela permet de créer des variables spécifiques à des composants ou des sections particulières.
 
     ```css
@@ -101,9 +104,10 @@ L'un des aspects les plus puissants des variables CSS est qu'elles respectent le
       --text-color: #333;
     }
     ```
+
     Ici, les variables `--background-color` et `--text-color` sont définies localement aux classes `.theme-dark` et `.theme-light`.
 
-*   **Cascade et héritage :**
+* **Cascade et héritage :**
     Si une variable est déclarée dans plusieurs règles, la règle la plus spécifique (selon les règles de spécificité CSS) l'emporte. Les variables déclarées sur un élément parent sont héritées par ses enfants, à moins qu'un enfant ne redéclare la même variable.
 
     ```css
@@ -120,13 +124,14 @@ L'un des aspects les plus puissants des variables CSS est qu'elles respectent le
       background-color: var(--main-bg); /* Hérite la variable de son parent (div si à l\'intérieur) ou de :root si pas dans un div */
     }
     ```
+
     Cela signifie que vous pouvez facilement surcharger des variables pour des sections spécifiques de votre site, ce qui est idéal pour les thèmes ou les variations de composants.
 
-### Cas d'utilisation
+### Cas D'utilisation
 
 Les variables CSS sont incroyablement polyvalentes. Voici quelques exemples concrets de leur utilité :
 
-*   **Systèmes de couleurs :** Définissez votre palette de couleurs principale avec des noms sémantiques (ex: `--color-primary`, `--color-secondary`, `--color-success`, `--color-error`).
+* **Systèmes de couleurs :** Définissez votre palette de couleurs principale avec des noms sémantiques (ex: `--color-primary`, `--color-secondary`, `--color-success`, `--color-error`).
 
     ```css
     :root {
@@ -137,9 +142,10 @@ Les variables CSS sont incroyablement polyvalentes. Voici quelques exemples conc
       --color-background-dark: #121212;
     }
     ```
+
     Utilisez ensuite ces variables dans toute votre feuille de style. Changer une couleur globale devient aussi simple que de modifier une seule ligne dans le sélecteur `:root`.
 
-*   **Thèmes (clair/sombre) :** Combinez les variables locales avec la cascade. Définissez des variables pour les couleurs de texte et de fond par défaut, puis créez une classe (par exemple, `.theme-dark`) qui redéfinit ces mêmes variables pour un thème sombre. En appliquant cette classe à l'élément `<body>` ou à un conteneur, vous changez facilement le thème de toute la section.
+* **Thèmes (clair/sombre) :** Combinez les variables locales avec la cascade. Définissez des variables pour les couleurs de texte et de fond par défaut, puis créez une classe (par exemple, `.theme-dark`) qui redéfinit ces mêmes variables pour un thème sombre. En appliquant cette classe à l'élément `<body>` ou à un conteneur, vous changez facilement le thème de toute la section.
 
     ```css
     /* Thème par défaut (clair) */
@@ -160,7 +166,7 @@ Les variables CSS sont incroyablement polyvalentes. Voici quelques exemples conc
     }
     ```
 
-*   **Espacement cohérent :** Définissez une échelle d'espacement basée sur une unité de base.
+* **Espacement cohérent :** Définissez une échelle d'espacement basée sur une unité de base.
 
     ```css
     :root {
@@ -175,7 +181,7 @@ Les variables CSS sont incroyablement polyvalentes. Voici quelques exemples conc
     }
     ```
 
-*   **Réutilisation de valeurs complexes :** Stockez des valeurs complexes comme des ombres portées ou des dégradés.
+* **Réutilisation de valeurs complexes :** Stockez des valeurs complexes comme des ombres portées ou des dégradés.
 
     ```css
     :root {
@@ -187,11 +193,11 @@ Les variables CSS sont incroyablement polyvalentes. Voici quelques exemples conc
     }
     ```
 
-### Manipulation dynamique avec JavaScript
+### Manipulation Dynamique Avec JavaScript
 
 C'est là que les variables CSS deviennent vraiment dynamiques et surpassent les variables des préprocesseurs. Comme elles existent dans le DOM, vous pouvez les lire et les modifier avec JavaScript.
 
-*   **Lecture des variables :**
+* **Lecture des variables :**
     Utilisez `getComputedStyle()` pour lire la valeur finale calculée d'une variable sur un élément.
 
     ```javascript
@@ -200,7 +206,7 @@ C'est là que les variables CSS deviennent vraiment dynamiques et surpassent les
     console.log(primaryColor); // Affiche la valeur actuelle de --primary-color
     ```
 
-*   **Modification des variables :**
+* **Modification des variables :**
     Utilisez `style.setProperty()` sur un élément pour modifier dynamiquement la valeur d'une variable pour cet élément et ses descendants.
 
     ```javascript
@@ -210,13 +216,14 @@ C'est là que les variables CSS deviennent vraiment dynamiques et surpassent les
     element.style.setProperty(\'--primary-color\', \'#ff4500\'); // Change la couleur principale
     element.style.setProperty(\'--spacing-unit\', \'12px\'); // Change l\'unité d\'espacement
     ```
+
     Cela est extrêmement utile pour implémenter des thèmes basculables (sombre/clair), des paramètres personnalisables par l'utilisateur, ou des animations complexes contrôlées par JavaScript modifiant des propriétés CSS indirectement via des variables.
 
-## En pratique
+## En Pratique
 
 Passons à quelques exemples concrets pour voir les variables CSS en action.
 
-### Création d'un système de design simple avec variables
+### Création D'un Système De Design Simple Avec Variables
 
 Définissons des variables pour les couleurs, la typographie et l'espacement de base dans un fichier `style.css`.
 
@@ -271,9 +278,10 @@ button:hover {
   background-color: var(--color-dark);
 }
 ```
+
 Maintenant, tous vos éléments utilisent ces variables. Si votre marque change de couleur principale, il suffit de modifier `--color-primary` à un seul endroit.
 
-### Implémentation d'un thème sombre/clair
+### Implémentation D'un Thème sombre/clair
 
 En étendant l'exemple précédent, ajoutez une classe pour surcharger les variables de thème.
 
@@ -285,6 +293,7 @@ En étendant l'exemple précédent, ajoutez une classe pour surcharger les varia
   --color-primary: #bb86fc; /* Peut aussi changer les couleurs d\'accentuation */
 }
 ```
+
 Dans votre HTML, basculez la classe `theme-dark` sur le `<body>` (ou un autre conteneur) pour changer instantanément le thème.
 
 ```html
@@ -301,9 +310,10 @@ Dans votre HTML, basculez la classe `theme-dark` sur le `<body>` (ou un autre co
 <!--   <button>Cliquez moi</button> -->
 <!-- </body> -->
 ```
+
 Un simple script JavaScript peut gérer la bascule de classe, éventuellement en sauvegardant le choix de l'utilisateur dans le stockage local.
 
-### Adaptation responsive avec variables CSS
+### Adaptation Responsive Avec Variables CSS
 
 Bien que les media queries soient le principal outil pour le design responsive, les variables CSS peuvent les compléter en permettant de modifier des valeurs clés en fonction de la taille de l'écran.
 
@@ -323,6 +333,7 @@ body {
   }
 }
 ```
+
 Ici, le padding du corps s'adapte grâce à la variable `--fluid-padding` dont la valeur est modifiée dans la media query. Vous pouvez faire de même pour la taille de police, l'espacement, etc.
 
 ## Conclusion
@@ -335,7 +346,7 @@ Elles se combinent également très bien avec d'autres fonctionnalités CSS mode
 
 Le support des navigateurs pour les variables CSS est excellent aujourd'hui, ce qui vous permet de les utiliser en toute confiance dans vos projets.
 
-## Comparaison avec les variables de préprocesseurs
+## Comparaison Avec Les Variables De Préprocesseurs
 
 | Caractéristique       | Variables Préprocesseurs (SASS, LESS) | Variables CSS Natives (--*)      |
 | :-------------------- | :------------------------------------ | :------------------------------ |
@@ -347,7 +358,7 @@ Le support des navigateurs pour les variables CSS est excellent aujourd'hui, ce 
 
 Bien que les préprocesseurs offrent d'autres fonctionnalités (imbrication, mixins, boucles) qui restent utiles, les variables CSS natives sont supérieures pour tout ce qui nécessite une flexibilité au moment de l'exécution ou une intégration avec la cascade.
 
-## Combinaison avec `calc()` et autres fonctions CSS
+## Combinaison Avec `calc()` Et Autres Fonctions CSS
 
 Les variables CSS sont particulièrement puissantes lorsqu'elles sont combinées avec des fonctions CSS comme `calc()`, `min()`, `max()`, et `clamp()`.
 
@@ -369,12 +380,13 @@ Les variables CSS sont particulièrement puissantes lorsqu'elles sont combinées
   font-size: clamp(var(--min-font), calc(1rem + 2vw), var(--max-font));
 }
 ```
+
 Cette capacité à effectuer des calculs et à utiliser des fonctions basées sur des valeurs stockées dans des variables rend le CSS incroyablement flexible et permet de créer des designs véritablement adaptatifs et basés sur des règles claires.
 
-## Ressources pour approfondir
+## Ressources Pour Approfondir
 
-*   [MDN Web Docs - Utilisation des variables CSS](https://developer.mozilla.org/fr/docs/Web/CSS/Using_CSS_custom_properties)
-*   [Une introduction aux variables CSS (Custom Properties)](https://grafikart.fr/tutoriels/variables-css-1021)
+* [MDN Web Docs - Utilisation des variables CSS](https://developer.mozilla.org/fr/docs/Web/CSS/Using_CSS_custom_properties)
+* [Une introduction aux variables CSS (Custom Properties)](https://grafikart.fr/tutoriels/variables-css-1021)
 
 En intégrant les variables CSS dans votre pratique quotidienne, vous ferez un grand pas vers l'écriture de CSS plus moderne, plus propre et plus puissant.
 

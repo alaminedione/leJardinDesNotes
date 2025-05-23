@@ -102,7 +102,7 @@ ELSE
 END IF;
 ```
 
-#### Exemples Détaillés de Structures de Contrôle
+#### Exemples Détaillés De Structures De Contrôle
 
 **Condition (`IF-THEN-ELSEIF-ELSE`) :**
 
@@ -201,11 +201,11 @@ END $$;
 
 ---
 
-### **6. Utilisation avec Tableaux et JSONB**
+### **6. Utilisation Avec Tableaux Et JSONB**
 
 PL/pgSQL offre un bon support pour les types de données avancés de PostgreSQL comme les tableaux et JSONB.
 
-#### Utilisation de Tableaux
+#### Utilisation De Tableaux
 
 Vous pouvez déclarer des variables de type tableau et les manipuler dans votre code PL/pgSQL.
 
@@ -222,7 +222,7 @@ BEGIN
 END $$;
 ```
 
-#### Utilisation de JSONB
+#### Utilisation De JSONB
 
 PL/pgSQL fournit des opérateurs et des fonctions pour travailler avec les données JSONB.
 
@@ -377,13 +377,13 @@ SELECT * FROM employes_par_departement(2);
 
 ---
 
-### **12. Considérations de Sécurité**
+### **12. Considérations De Sécurité**
 
 Lors de l'écriture de code PL/pgSQL, il est important de prendre en compte les aspects de sécurité :
 
--   **Droits d'exécution**: Définir les droits d'exécution des fonctions et procédures avec `SECURITY DEFINER` ou `SECURITY INVOKER`. `SECURITY DEFINER` exécute la fonction avec les privilèges de l'utilisateur qui a créé la fonction, tandis que `SECURITY INVOKER` utilise les privilèges de l'utilisateur qui appelle la fonction.
--   **Injections SQL**: Utiliser des requêtes paramétrées ou la fonction `quote_literal()` pour éviter les injections SQL lors de la construction de requêtes dynamiques.
--   **Audit**: Enregistrer les actions importantes effectuées par le code PL/pgSQL pour des raisons d'audit.
+- **Droits d'exécution**: Définir les droits d'exécution des fonctions et procédures avec `SECURITY DEFINER` ou `SECURITY INVOKER`. `SECURITY DEFINER` exécute la fonction avec les privilèges de l'utilisateur qui a créé la fonction, tandis que `SECURITY INVOKER` utilise les privilèges de l'utilisateur qui appelle la fonction.
+- **Injections SQL**: Utiliser des requêtes paramétrées ou la fonction `quote_literal()` pour éviter les injections SQL lors de la construction de requêtes dynamiques.
+- **Audit**: Enregistrer les actions importantes effectuées par le code PL/pgSQL pour des raisons d'audit.
 
 ---
 

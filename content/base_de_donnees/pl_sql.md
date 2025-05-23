@@ -101,7 +101,7 @@ ELSE
 END IF;
 ```
 
-#### Exemples Détaillés de Structures de Contrôle
+#### Exemples Détaillés De Structures De Contrôle
 
 **Condition (`IF-THEN-ELSIF-ELSE`) :**
 
@@ -234,7 +234,7 @@ END;
 
 ---
 
-### **6. Utilisation avec Collections**
+### **6. Utilisation Avec Collections**
 
 PL/SQL supporte les collections, qui sont des types de données composites permettant de stocker plusieurs éléments du même type. Les types de collections les plus courants sont les tables imbriquées (nested tables) et les VARRAYs.
 

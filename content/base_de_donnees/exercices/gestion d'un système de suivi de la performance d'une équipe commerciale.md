@@ -1,6 +1,5 @@
 # Gestion D'un Système De Suivi De la Performance D'une Équipe Commerciale
 
-
 **1. Modèle Logique des Données (MLD) en ER Diagram**
 
 Extrait de code
@@ -210,5 +209,3 @@ Voici une longue liste de requêtes pour explorer votre système de suivi de la 
 58. Affichez les équipes avec la date de création de l'opportunité la plus ancienne encore ouverte.
 59. Trouvez les vendeurs qui n'ont aucune activité planifiée pour la semaine prochaine.
 60. Utilisez une fonction de fenêtre pour calculer la moyenne mobile de la valeur des opportunités gagnées par vendeur sur les 3 derniers mois.
-
-

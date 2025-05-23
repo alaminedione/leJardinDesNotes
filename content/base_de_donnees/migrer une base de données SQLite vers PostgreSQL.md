@@ -43,14 +43,13 @@ psql -d nom_base -U utilisateur -f dump_pg.sql
 
 ```
 
-###  Adaptations Nécessaires
+### Adaptations Nécessaires
 
 1. **Types de Données** :
   - INTEGER PRIMARY KEY → SERIAL PRIMARY KEY
   - DATETIME → TIMESTAMP
   - BOOLEAN → SMALLINT
   - BLOB → bytea
-
 
 2. **Clés Étrangères** :
 

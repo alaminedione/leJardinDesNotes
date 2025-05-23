@@ -1,4 +1,4 @@
-# Apprendre Spring Boot avec Java
+# Apprendre Spring Boot Avec Java
 
 ## 📘 Sommaire
 
@@ -74,7 +74,7 @@
 
 ## 1. Introduction à Spring Boot
 
-### Qu'est-ce que Spring Boot ?
+### Qu'est-ce Que Spring Boot ?
 
 Spring Boot est un projet du Spring Framework qui vise à simplifier la création d'applications Spring autonomes, prêtes à l'emploi ("production-ready"). Il met l'accent sur la "convention over configuration", réduisant ainsi la quantité de configuration boilerplate nécessaire pour démarrer un projet Spring.
 
@@ -84,13 +84,13 @@ Les objectifs principaux de Spring Boot sont :
 - Offrir un ensemble de fonctionnalités non fonctionnelles communes (comme les métriques, les contrôles de santé et la configuration externalisée) prêtes à l'emploi.
 - Éviter la nécessité d'une configuration XML complexe.
 
-### Différences entre Spring Framework et Spring Boot
+### Différences Entre Spring Framework Et Spring Boot
 
 Spring Framework est un framework d'application Java complet qui fournit une infrastructure pour le développement d'applications d'entreprise. Il offre une large gamme de fonctionnalités, notamment l'injection de dépendances, la gestion transactionnelle, l'accès aux données, le développement web (Spring MVC), etc. Cependant, la configuration initiale d'un projet Spring Framework peut être complexe et fastidieuse, nécessitant souvent beaucoup de configuration XML ou Java.
 
 Spring Boot s'appuie sur Spring Framework mais simplifie considérablement le processus de démarrage et de configuration. Il offre des configurations automatiques basées sur les dépendances présentes dans le classpath, des serveurs embarqués (Tomcat, Jetty, Undertow), et une approche opinionated pour le développement d'applications Spring. En bref, Spring Boot rend le développement avec Spring plus rapide et plus facile.
 
-### Avantages de Spring Boot : simplicité, rapidité, convention over configuration
+### Avantages De Spring Boot : Simplicité, Rapidité, Convention over Configuration
 
 - **Simplicité :** Spring Boot simplifie grandement la configuration des applications Spring grâce à l'auto-configuration et aux starters.
 - **Rapidité :** Le démarrage rapide des applications et la réduction de la configuration permettent de développer et de déployer des applications plus rapidement.
@@ -98,46 +98,46 @@ Spring Boot s'appuie sur Spring Framework mais simplifie considérablement le pr
 - **Serveurs embarqués :** Il inclut des serveurs web embarqués (Tomcat, Jetty, Undertow), ce qui permet de créer des applications autonomes qui peuvent être exécutées directement avec un simple `java -jar`.
 - **Starters :** Les "Starters" sont des ensembles de dépendances préconfigurées qui facilitent l'ajout de fonctionnalités à votre application (par exemple, `spring-boot-starter-web` pour le développement web, `spring-boot-starter-data-jpa` pour l'accès aux données).
 
-### Installation de l'environnement de développement (JDK, IDE, Maven/Gradle)
+### Installation De L'environnement De Développement (JDK, IDE, Maven/Gradle)
 
 Pour développer avec Spring Boot, vous aurez besoin des éléments suivants :
 
-1.  **JDK (Java Development Kit) :** Spring Boot nécessite Java 8 ou une version ultérieure. Vous pouvez télécharger le JDK depuis le site d'Oracle ou utiliser une distribution OpenJDK.
-2.  **IDE (Integrated Development Environment) :** Un IDE facilite grandement le développement. Les IDE populaires pour le développement Spring Boot incluent :
-    -   Spring Tool Suite (STS) : Basé sur Eclipse, spécifiquement conçu pour le développement Spring.
-    -   IntelliJ IDEA : Une option très populaire avec une excellente prise en charge de Spring.
-    -   VS Code : Avec les extensions Java et Spring Boot appropriées.
-3.  **Outil de build :** Vous aurez besoin d'un outil pour gérer les dépendances et construire votre projet. Les plus couramment utilisés sont :
-    -   **Maven :** Un outil de gestion de projet basé sur le concept de Project Object Model (POM).
-    -   **Gradle :** Un outil de build flexible et performant.
+1. **JDK (Java Development Kit) :** Spring Boot nécessite Java 8 ou une version ultérieure. Vous pouvez télécharger le JDK depuis le site d'Oracle ou utiliser une distribution OpenJDK.
+2. **IDE (Integrated Development Environment) :** Un IDE facilite grandement le développement. Les IDE populaires pour le développement Spring Boot incluent :
+    - Spring Tool Suite (STS) : Basé sur Eclipse, spécifiquement conçu pour le développement Spring.
+    - IntelliJ IDEA : Une option très populaire avec une excellente prise en charge de Spring.
+    - VS Code : Avec les extensions Java et Spring Boot appropriées.
+3. **Outil de build :** Vous aurez besoin d'un outil pour gérer les dépendances et construire votre projet. Les plus couramment utilisés sont :
+    - **Maven :** Un outil de gestion de projet basé sur le concept de Project Object Model (POM).
+    - **Gradle :** Un outil de build flexible et performant.
 
 Assurez-vous que le JDK est installé et que les variables d'environnement `JAVA_HOME` et `PATH` sont correctement configurées. Installez votre IDE préféré et l'outil de build de votre choix.
 
-### Création d'un projet Spring Boot avec Spring Initializr
+### Création D'un Projet Spring Boot Avec Spring Initializr
 
 Spring Initializr est un service web qui permet de générer rapidement la structure de base d'un projet Spring Boot. C'est le moyen le plus simple et le plus recommandé pour démarrer un nouveau projet.
 
 Étapes pour créer un projet avec Spring Initializr :
 
-1.  Ouvrez votre navigateur et allez sur [https://start.spring.io/](https://start.spring.io/).
-2.  Configurez les options de votre projet :
-    -   **Project :** Choisissez Maven Project ou Gradle Project.
-    -   **Language :** Choisissez Java.
-    -   **Spring Boot :** Sélectionnez la version de Spring Boot (il est recommandé d'utiliser la dernière version stable).
-    -   **Project Metadata :** Remplissez les informations du projet (Group, Artifact, Name, Description, Package name).
-    -   **Packaging :** Choisissez Jar (pour une application autonome avec serveur embarqué) ou War (pour déployer sur un serveur d'applications externe).
-    -   **Java :** Sélectionnez la version de Java que vous souhaitez utiliser.
-    -   **Dependencies :** Ajoutez les dépendances nécessaires pour votre application. Par exemple, pour une application web, ajoutez "Spring Web". Pour l'accès aux données, ajoutez "Spring Data JPA" et le driver de base de données approprié (par exemple, "H2 Database" pour une base de données en mémoire).
-3.  Cliquez sur le bouton "Generate". Cela téléchargera un fichier ZIP contenant la structure de base de votre projet.
-4.  Extrayz le fichier ZIP et importez le projet dans votre IDE.
+1. Ouvrez votre navigateur et allez sur [https://start.spring.io/](https://start.spring.io/).
+2. Configurez les options de votre projet :
+    - **Project :** Choisissez Maven Project ou Gradle Project.
+    - **Language :** Choisissez Java.
+    - **Spring Boot :** Sélectionnez la version de Spring Boot (il est recommandé d'utiliser la dernière version stable).
+    - **Project Metadata :** Remplissez les informations du projet (Group, Artifact, Name, Description, Package name).
+    - **Packaging :** Choisissez Jar (pour une application autonome avec serveur embarqué) ou War (pour déployer sur un serveur d'applications externe).
+    - **Java :** Sélectionnez la version de Java que vous souhaitez utiliser.
+    - **Dependencies :** Ajoutez les dépendances nécessaires pour votre application. Par exemple, pour une application web, ajoutez "Spring Web". Pour l'accès aux données, ajoutez "Spring Data JPA" et le driver de base de données approprié (par exemple, "H2 Database" pour une base de données en mémoire).
+3. Cliquez sur le bouton "Generate". Cela téléchargera un fichier ZIP contenant la structure de base de votre projet.
+4. Extrayz le fichier ZIP et importez le projet dans votre IDE.
 
 Votre projet Spring Boot est maintenant prêt à être développé !
 
 ---
 
-## 2. Architecture d'une application Spring Boot
+## 2. Architecture D'une Application Spring Boot
 
-### Structure d'un projet Spring Boot
+### Structure D'un Projet Spring Boot
 
 Un projet Spring Boot généré par Spring Initializr a généralement une structure de répertoire standard qui facilite l'organisation du code. Voici une structure typique :
 
@@ -166,17 +166,17 @@ myproject/
     └── myproject.jar (ou .war) // Fichier exécutable ou déployable
 ```
 
--   `pom.xml` (Maven) ou `build.gradle` (Gradle) : Fichier de configuration du build, listant les dépendances et les plugins.
--   `src/main/java` : Contient le code source Java principal de l'application.
--   `src/main/resources` : Contient les fichiers de configuration, les fichiers statiques et les templates de vues.
--   `src/test/java` : Contient le code source des tests.
--   `target/` (Maven) ou `build/` (Gradle) : Contient les fichiers générés par le build (classes compilées, JAR/WAR).
+- `pom.xml` (Maven) ou `build.gradle` (Gradle) : Fichier de configuration du build, listant les dépendances et les plugins.
+- `src/main/java` : Contient le code source Java principal de l'application.
+- `src/main/resources` : Contient les fichiers de configuration, les fichiers statiques et les templates de vues.
+- `src/test/java` : Contient le code source des tests.
+- `target/` (Maven) ou `build/` (Gradle) : Contient les fichiers générés par le build (classes compilées, JAR/WAR).
 
-### Les annotations principales : `@SpringBootApplication`, `@RestController`, `@Service`, `@Repository`
+### Les Annotations Principales : `@SpringBootApplication`, `@RestController`, `@Service`, `@Repository`
 
 Spring Boot utilise intensivement les annotations pour configurer et définir les composants de l'application. Voici quelques-unes des annotations les plus courantes :
 
--   [`@SpringBootApplication`](https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/autoconfigure/SpringBootApplication.html): Cette annotation est une annotation de commodité qui combine `@Configuration`, `@EnableAutoConfiguration` et `@ComponentScan`. Elle est généralement placée sur la classe principale de l'application et active l'auto-configuration de Spring Boot et la recherche de composants dans le package courant et ses sous-packages.
+- [`@SpringBootApplication`](https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/autoconfigure/SpringBootApplication.html): Cette annotation est une annotation de commodité qui combine `@Configuration`, `@EnableAutoConfiguration` et `@ComponentScan`. Elle est généralement placée sur la classe principale de l'application et active l'auto-configuration de Spring Boot et la recherche de composants dans le package courant et ses sous-packages.
 
     ```java
     import org.springframework.boot.SpringApplication;
@@ -190,7 +190,7 @@ Spring Boot utilise intensivement les annotations pour configurer et définir le
     }
     ```
 
--   [`@RestController`](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/bind/annotation/RestController.html): Une annotation spécialisée pour les contrôleurs RESTful. Elle combine `@Controller` et `@ResponseBody`, ce qui signifie que les méthodes de ce contrôleur retournent directement des données (généralement au format JSON ou XML) plutôt que des noms de vues.
+- [`@RestController`](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/bind/annotation/RestController.html): Une annotation spécialisée pour les contrôleurs RESTful. Elle combine `@Controller` et `@ResponseBody`, ce qui signifie que les méthodes de ce contrôleur retournent directement des données (généralement au format JSON ou XML) plutôt que des noms de vues.
 
     ```java
     import org.springframework.web.bind.annotation.GetMapping;
@@ -206,7 +206,7 @@ Spring Boot utilise intensivement les annotations pour configurer et définir le
     }
     ```
 
--   [`@Service`](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/stereotype/Service.html): Indique qu'une classe est un composant de service, généralement utilisé pour encapsuler la logique métier. Spring gère le cycle de vie de ces beans.
+- [`@Service`](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/stereotype/Service.html): Indique qu'une classe est un composant de service, généralement utilisé pour encapsuler la logique métier. Spring gère le cycle de vie de ces beans.
 
     ```java
     import org.springframework.stereotype.Service;
@@ -219,7 +219,7 @@ Spring Boot utilise intensivement les annotations pour configurer et définir le
     }
     ```
 
--   [`@Repository`](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/stereotype/Repository.html): Indique qu'une classe est un composant de repository, généralement utilisé pour l'accès aux données (interactions avec la base de données). Spring fournit des fonctionnalités supplémentaires pour les repositories, comme la traduction des exceptions spécifiques aux bases de données en exceptions Spring DataAccessException.
+- [`@Repository`](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/stereotype/Repository.html): Indique qu'une classe est un composant de repository, généralement utilisé pour l'accès aux données (interactions avec la base de données). Spring fournit des fonctionnalités supplémentaires pour les repositories, comme la traduction des exceptions spécifiques aux bases de données en exceptions Spring DataAccessException.
 
     ```java
     import org.springframework.stereotype.Repository;
@@ -230,7 +230,7 @@ Spring Boot utilise intensivement les annotations pour configurer et définir le
     }
     ```
 
-### Le rôle de la classe principale avec `public static void main`
+### Le Rôle De la Classe Principale Avec `public static void main`
 
 La classe principale d'une application Spring Boot est le point d'entrée de l'application. Elle contient la méthode `main` standard de Java, annotée avec `@SpringBootApplication`.
 
@@ -241,13 +241,13 @@ La méthode [`SpringApplication.run()`](https://docs.spring.io/spring-boot/docs/
 
 C'est cette méthode qui initialise et exécute l'application Spring Boot.
 
-### Configuration de l'application via `application.properties` ou `application.yml`
+### Configuration De L'application via `application.properties` Ou `application.yml`
 
 Spring Boot permet de configurer facilement votre application à l'aide de fichiers de propriétés. Les formats les plus courants sont `application.properties` et `application.yml` (YAML). Ces fichiers sont généralement placés dans le répertoire `src/main/resources`.
 
 Exemple dans `application.properties`:
 
-```properties
+```yml
 server.port=8080
 spring.datasource.url=jdbc:h2:mem:mydb
 spring.datasource.username=sa
@@ -274,19 +274,19 @@ Ces fichiers permettent de configurer divers aspects de l'application, tels que 
 
 ---
 
-## 3. Injection de dépendances et gestion des beans
+## 3. Injection De Dépendances Et Gestion Des Beans
 
-### Principe de l'inversion de contrôle (IoC)
+### Principe De L'inversion De Contrôle (IoC)
 
 L'Inversion de Contrôle (IoC) est un principe de conception logicielle dans lequel le contrôle de l'objet ou de la fonction est transféré à un conteneur ou un framework. Dans le contexte de Spring, le conteneur IoC (représenté par l'interface `ApplicationContext`) est responsable de l'instanciation, de la configuration et de l'assemblage des beans (objets gérés par Spring).
 
 Au lieu que les objets créent ou recherchent leurs dépendances, le conteneur IoC injecte les dépendances dans les objets. Cela réduit le couplage entre les composants et rend l'application plus modulaire et plus facile à tester.
 
-### Types d'injection : par constructeur, par setter, par champ
+### Types D'injection : Par Constructeur, Par Setter, Par Champ
 
 Spring prend en charge plusieurs types d'injection de dépendances :
 
--   **Injection par constructeur :** Les dépendances sont fournies via les arguments du constructeur de la classe. C'est le type d'injection recommandé car il garantit que les dépendances requises sont présentes lors de la création de l'objet et facilite les tests unitaires.
+- **Injection par constructeur :** Les dépendances sont fournies via les arguments du constructeur de la classe. C'est le type d'injection recommandé car il garantit que les dépendances requises sont présentes lors de la création de l'objet et facilite les tests unitaires.
 
     ```java
     import org.springframework.beans.factory.annotation.Autowired;
@@ -306,7 +306,7 @@ Spring prend en charge plusieurs types d'injection de dépendances :
     }
     ```
 
--   **Injection par setter :** Les dépendances sont injectées via les méthodes setter de la classe. Cela rend les dépendances optionnelles et permet de modifier les dépendances après la création de l'objet.
+- **Injection par setter :** Les dépendances sont injectées via les méthodes setter de la classe. Cela rend les dépendances optionnelles et permet de modifier les dépendances après la création de l'objet.
 
     ```java
     import org.springframework.beans.factory.annotation.Autowired;
@@ -326,7 +326,7 @@ Spring prend en charge plusieurs types d'injection de dépendances :
     }
     ```
 
--   **Injection par champ :** Les dépendances sont injectées directement dans les champs de la classe à l'aide de l'annotation `@Autowired`. Bien que plus concise, cette méthode est généralement déconseillée car elle rend la classe plus difficile à tester (les dépendances sont cachées) et viole le principe de l'encapsulation.
+- **Injection par champ :** Les dépendances sont injectées directement dans les champs de la classe à l'aide de l'annotation `@Autowired`. Bien que plus concise, cette méthode est généralement déconseillée car elle rend la classe plus difficile à tester (les dépendances sont cachées) et viole le principe de l'encapsulation.
 
     ```java
     import org.springframework.beans.factory.annotation.Autowired;
@@ -342,14 +342,14 @@ Spring prend en charge plusieurs types d'injection de dépendances :
     }
     ```
 
-### Cycle de vie des beans : initialisation, destruction
+### Cycle De Vie Des Beans : Initialisation, Destruction
 
 Les beans gérés par le conteneur Spring ont un cycle de vie qui comprend plusieurs étapes, notamment l'initialisation et la destruction. Vous pouvez définir des méthodes de callback pour exécuter du code à ces étapes.
 
--   **Initialisation :** Des méthodes peuvent être appelées après que le bean a été instancié et que ses dépendances ont été injectées. Vous pouvez utiliser :
-    -   L'annotation [`@PostConstruct`](https://docs.oracle.com/javase/8/docs/api/javax.annotation.PostConstruct.html) (JSR-250).
-    -   L'interface [`InitializingBean`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/beans/factory/InitializingBean.html) (méthode `afterPropertiesSet()`).
-    -   Une méthode spécifiée dans la configuration du bean (par exemple, l'attribut `init-method` en XML).
+- **Initialisation :** Des méthodes peuvent être appelées après que le bean a été instancié et que ses dépendances ont été injectées. Vous pouvez utiliser :
+    - L'annotation [`@PostConstruct`](https://docs.oracle.com/javase/8/docs/api/javax.annotation.PostConstruct.html) (JSR-250).
+    - L'interface [`InitializingBean`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/beans/factory/InitializingBean.html) (méthode `afterPropertiesSet()`).
+    - Une méthode spécifiée dans la configuration du bean (par exemple, l'attribut `init-method` en XML).
 
     ```java
     import javax.annotation.PostConstruct;
@@ -368,10 +368,10 @@ Les beans gérés par le conteneur Spring ont un cycle de vie qui comprend plusi
     }
     ```
 
--   **Destruction :** Des méthodes peuvent être appelées avant que le bean ne soit retiré du conteneur. Vous pouvez utiliser :
-    -   L'annotation [`@PreDestroy`](https://docs.oracle.com/javase/8/docs/api/javax.annotation/PreDestroy.html) (JSR-250).
-    -   L'interface [`DisposableBean`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/beans/factory/DisposableBean.html) (méthode `destroy()`).
-    -   Une méthode spécifiée dans la configuration du bean (par exemple, l'attribut `destroy-method` en XML).
+- **Destruction :** Des méthodes peuvent être appelées avant que le bean ne soit retiré du conteneur. Vous pouvez utiliser :
+    - L'annotation [`@PreDestroy`](https://docs.oracle.com/javase/8/docs/api/javax.annotation/PreDestroy.html) (JSR-250).
+    - L'interface [`DisposableBean`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/beans/factory/DisposableBean.html) (méthode `destroy()`).
+    - Une méthode spécifiée dans la configuration du bean (par exemple, l'attribut `destroy-method` en XML).
 
     ```java
     import javax.annotation.PreDestroy;
@@ -390,7 +390,7 @@ Les beans gérés par le conteneur Spring ont un cycle de vie qui comprend plusi
     }
     ```
 
-### Profils Spring : gestion des environnements (dev, prod, test)
+### Profils Spring : Gestion Des Environnements (dev, Prod, test)
 
 Les profils Spring permettent de gérer des configurations spécifiques à différents environnements (développement, production, test, etc.). Vous pouvez marquer des beans ou des configurations avec l'annotation [`@Profile`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/annotation/Profile.html) pour indiquer qu'ils ne doivent être activés que lorsque le profil correspondant est actif.
 
@@ -432,30 +432,30 @@ spring.profiles.active=dev
 
 ---
 
-## 4. Développement d'une application Web avec Spring MVC
+## 4. Développement D'une Application Web Avec Spring MVC
 
 ### Architecture MVC : Modèle, Vue, Contrôleur
 
 Spring MVC suit le modèle de conception Model-View-Controller (MVC), qui sépare l'application en trois composants principaux :
 
--   **Modèle (Model) :** Représente les données de l'application et la logique métier. Il est indépendant de l'interface utilisateur.
--   **Vue (View) :** Est responsable de l'affichage des données du modèle à l'utilisateur. Elle peut être implémentée à l'aide de technologies comme Thymeleaf, JSP, etc.
--   **Contrôleur (Controller) :** Agit comme un intermédiaire entre le Modèle et la Vue. Il reçoit les requêtes de l'utilisateur, interagit avec le Modèle pour récupérer ou mettre à jour les données, et sélectionne la Vue appropriée pour afficher la réponse.
+- **Modèle (Model) :** Représente les données de l'application et la logique métier. Il est indépendant de l'interface utilisateur.
+- **Vue (View) :** Est responsable de l'affichage des données du modèle à l'utilisateur. Elle peut être implémentée à l'aide de technologies comme Thymeleaf, JSP, etc.
+- **Contrôleur (Controller) :** Agit comme un intermédiaire entre le Modèle et la Vue. Il reçoit les requêtes de l'utilisateur, interagit avec le Modèle pour récupérer ou mettre à jour les données, et sélectionne la Vue appropriée pour afficher la réponse.
 
 Spring MVC fournit les outils nécessaires pour implémenter cette architecture, notamment le `DispatcherServlet` qui agit comme le contrôleur frontal, acheminant les requêtes vers les contrôleurs appropriés.
 
-### Création de contrôleurs avec `@GetMapping`, `@PostMapping`, etc.
+### Création De Contrôleurs Avec `@GetMapping`, `@PostMapping`, Etc
 
 Dans Spring MVC, les contrôleurs sont des classes annotées avec `@Controller` ou `@RestController`. Les méthodes de ces contrôleurs gèrent les requêtes HTTP entrantes et retournent une réponse.
 
 Les annotations de mapping les plus courantes sont :
 
--   [`@RequestMapping`](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/bind/annotation/RequestMapping.html): Annotation générale pour mapper les requêtes web aux méthodes du contrôleur.
--   [`@GetMapping`](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/bind/annotation/GetMapping.html): Raccourci pour `@RequestMapping(method = RequestMethod.GET)`.
--   [`@PostMapping`](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/bind/annotation/PostMapping.html): Raccourci pour `@RequestMapping(method = RequestMethod.POST)`.
--   [`@PutMapping`](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/bind/annotation/PutMapping.html): Raccourci pour `@RequestMapping(method = RequestMethod.PUT)`.
--   [`@DeleteMapping`](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/bind/annotation/DeleteMapping.html): Raccourci pour `@RequestMapping(method = RequestMethod.DELETE)`.
--   [`@PatchMapping`](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/bind/annotation/PatchMapping.html): Raccourci pour `@RequestMapping(method = RequestMethod.PATCH)`.
+- [`@RequestMapping`](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/bind/annotation/RequestMapping.html): Annotation générale pour mapper les requêtes web aux méthodes du contrôleur.
+- [`@GetMapping`](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/bind/annotation/GetMapping.html): Raccourci pour `@RequestMapping(method = RequestMethod.GET)`.
+- [`@PostMapping`](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/bind/annotation/PostMapping.html): Raccourci pour `@RequestMapping(method = RequestMethod.POST)`.
+- [`@PutMapping`](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/bind/annotation/PutMapping.html): Raccourci pour `@RequestMapping(method = RequestMethod.PUT)`.
+- [`@DeleteMapping`](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/bind/annotation/DeleteMapping.html): Raccourci pour `@RequestMapping(method = RequestMethod.DELETE)`.
+- [`@PatchMapping`](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/bind/annotation/PatchMapping.html): Raccourci pour `@RequestMapping(method = RequestMethod.PATCH)`.
 
 Exemple de contrôleur simple :
 
@@ -478,7 +478,7 @@ public class WebController {
 
 Dans cet exemple, la méthode `greeting` gère les requêtes GET sur `/greeting`, prend un paramètre de requête `name`, ajoute un attribut au modèle et retourne le nom de la vue "greeting".
 
-### Gestion des vues avec Thymeleaf et Bootstrap
+### Gestion Des Vues Avec Thymeleaf Et Bootstrap
 
 Spring Boot prend en charge plusieurs technologies de vues. Thymeleaf est un moteur de templates côté serveur populaire pour les applications web Java. Il s'intègre bien avec Spring et permet de créer des vues dynamiques en utilisant des attributs spéciaux dans les balises HTML.
 
@@ -501,7 +501,7 @@ Exemple de template Thymeleaf (`src/main/resources/templates/greeting.html`):
 
 Bootstrap est un framework CSS populaire pour développer des interfaces utilisateur responsives et modernes. Vous pouvez l'inclure dans vos templates Thymeleaf en ajoutant les liens vers les fichiers CSS et JS de Bootstrap dans la section `<head>` de votre HTML.
 
-### Validation des formulaires avec `@Valid` et `BindingResult`
+### Validation Des Formulaires Avec `@Valid` Et `BindingResult`
 
 Spring MVC intègre la validation des données d'entrée à l'aide de l'API Bean Validation (JSR 303/380). Vous pouvez utiliser des annotations comme `@NotNull`, `@Size`, `@Email`, etc., sur les champs de vos objets de formulaire (DTOs ou entités).
 
@@ -546,11 +546,11 @@ public class FormController {
 }
 ```
 
-### Gestion des erreurs et des exceptions
+### Gestion Des Erreurs Et Des Exceptions
 
 Spring MVC offre plusieurs mécanismes pour gérer les erreurs et les exceptions :
 
--   **Gestion globale des exceptions :** Vous pouvez utiliser l'annotation [`@ControllerAdvice`](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/bind/annotation/ControllerAdvice.html) avec [`@ExceptionHandler`](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/bind/annotation/ExceptionHandler.html) pour gérer les exceptions de manière centralisée dans votre application.
+- **Gestion globale des exceptions :** Vous pouvez utiliser l'annotation [`@ControllerAdvice`](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/bind/annotation/ControllerAdvice.html) avec [`@ExceptionHandler`](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/bind/annotation/ExceptionHandler.html) pour gérer les exceptions de manière centralisée dans votre application.
 
     ```java
     import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -569,13 +569,14 @@ Spring MVC offre plusieurs mécanismes pour gérer les erreurs et les exceptions
     }
     ```
 
--   **Gestion des erreurs spécifiques au contrôleur :** Vous pouvez définir des méthodes annotées avec `@ExceptionHandler` directement dans un contrôleur pour gérer les exceptions spécifiques à ce contrôleur.
--   **Pages d'erreur personnalisées :** Vous pouvez configurer des pages d'erreur personnalisées pour différents codes de statut HTTP (par exemple, 404, 500) en créant des fichiers de template nommés d'après le code de statut dans le répertoire `src/main/resources/templates/error/` (par exemple, `404.html`, `500.html`).
+- **Gestion des erreurs spécifiques au contrôleur :** Vous pouvez définir des méthodes annotées avec `@ExceptionHandler` directement dans un contrôleur pour gérer les exceptions spécifiques à ce contrôleur.
+- **Pages d'erreur personnalisées :** Vous pouvez configurer des pages d'erreur personnalisées pour différents codes de statut HTTP (par exemple, 404, 500) en créant des fichiers de template nommés d'après le code de statut dans le répertoire `src/main/resources/templates/error/` (par exemple, `404.html`, `500.html`).
+
 ---
 
-## 5. Accès aux données avec Spring Data JPA
+## 5. Accès Aux Données Avec Spring Data JPA
 
-### Introduction à JPA et Hibernate
+### Introduction à JPA Et Hibernate
 
 **JPA (Java Persistence API)** est une spécification Java qui définit une API standard pour la gestion de la persistance des données relationnelles dans les applications Java. Elle permet aux développeurs de mapper des objets Java à des tables de base de données (Object-Relational Mapping - ORM).
 
@@ -583,7 +584,7 @@ Spring MVC offre plusieurs mécanismes pour gérer les erreurs et les exceptions
 
 Spring Data JPA simplifie considérablement l'implémentation des couches d'accès aux données en fournissant des abstractions de haut niveau et en réduisant la quantité de code boilerplate nécessaire pour les opérations CRUD (Create, Read, Update, Delete).
 
-### Création d'entités avec `@Entity`, `@Id`, `@GeneratedValue`
+### Création D'entités Avec `@Entity`, `@Id`, `@GeneratedValue`
 
 Dans JPA, les entités sont des classes Java qui représentent des tables dans la base de données. Elles sont annotées avec [`@Entity`](https://jakarta.ee/specifications/persistence/3.1/apidocs/jakarta/persistence/Entity.html). Chaque entité doit avoir une clé primaire, généralement annotée avec [`@Id`](https://jakarta.ee/specifications/persistence/3.1/apidocs/jakarta/persistence/Id.html). L'annotation [`@GeneratedValue`](https://jakarta.ee/specifications/persistence/3.1/apidocs/jakarta/persistence/GeneratedValue.html) est utilisée pour spécifier la stratégie de génération de la clé primaire (par exemple, auto-incrémentée).
 
@@ -633,7 +634,7 @@ public class Product {
 
 D'autres annotations JPA courantes incluent `@Table`, `@Column`, `@Transient`, `@OneToOne`, `@OneToMany`, `@ManyToOne`, `@ManyToMany` pour définir le mapping entre les objets et la base de données.
 
-### Définition de repositories avec `JpaRepository`
+### Définition De Repositories Avec `JpaRepository`
 
 Spring Data JPA fournit une abstraction appelée "Repository" qui simplifie l'accès aux données. En étendant l'interface [`JpaRepository`](https://docs.spring.io/spring-data/jpa/docs/current/api/org/springframework/data/jpa/repository/JpaRepository.html), vous obtenez automatiquement des méthodes CRUD de base (comme `save`, `findById`, `findAll`, `deleteById`) sans avoir à écrire d'implémentation.
 
@@ -654,16 +655,16 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
 Spring Data JPA crée automatiquement une implémentation de cette interface au moment de l'exécution. Vous pouvez ensuite injecter ce repository dans vos services pour interagir avec la base de données.
 
-### Requêtes personnalisées avec `@Query` et `Query Methods`
+### Requêtes Personnalisées Avec `@Query` Et `Query Methods`
 
 En plus des méthodes CRUD automatiques, Spring Data JPA permet de définir des requêtes personnalisées de deux manières principales :
 
--   **Query Methods :** Spring Data JPA peut générer automatiquement des requêtes basées sur le nom des méthodes de l'interface du repository. En suivant une convention de nommage spécifique, vous pouvez créer des requêtes complexes sans écrire de code SQL ou JPQL.
+- **Query Methods :** Spring Data JPA peut générer automatiquement des requêtes basées sur le nom des méthodes de l'interface du repository. En suivant une convention de nommage spécifique, vous pouvez créer des requêtes complexes sans écrire de code SQL ou JPQL.
 
     Exemples de Query Methods :
-    -   `findByName(String name)` : Trouve un produit par son nom.
-    -   `findByPriceGreaterThan(double price)` : Trouve les produits dont le prix est supérieur à une valeur donnée.
-    -   `findByNameContainingIgnoreCase(String name)` : Trouve les produits dont le nom contient une chaîne de caractères (insensible à la casse).
+    - `findByName(String name)` : Trouve un produit par son nom.
+    - `findByPriceGreaterThan(double price)` : Trouve les produits dont le prix est supérieur à une valeur donnée.
+    - `findByNameContainingIgnoreCase(String name)` : Trouve les produits dont le nom contient une chaîne de caractères (insensible à la casse).
 
     ```java
     import org.springframework.data.jpa.repository.JpaRepository;
@@ -677,7 +678,7 @@ En plus des méthodes CRUD automatiques, Spring Data JPA permet de définir des 
     }
     ```
 
--   **[`@Query`](https://docs.spring.io/spring-data/jpa/docs/current/api/org/springframework/data/jpa/repository/Query.html):** Pour des requêtes plus complexes qui ne peuvent pas être exprimées avec les Query Methods, vous pouvez utiliser l'annotation `@Query` pour définir des requêtes JPQL (Java Persistence Query Language) ou SQL natives.
+- **[`@Query`](https://docs.spring.io/spring-data/jpa/docs/current/api/org/springframework/data/jpa/repository/Query.html):** Pour des requêtes plus complexes qui ne peuvent pas être exprimées avec les Query Methods, vous pouvez utiliser l'annotation `@Query` pour définir des requêtes JPQL (Java Persistence Query Language) ou SQL natives.
 
     ```java
     import org.springframework.data.jpa.repository.JpaRepository;
@@ -696,7 +697,7 @@ En plus des méthodes CRUD automatiques, Spring Data JPA permet de définir des 
     }
     ```
 
-### Gestion des transactions avec `@Transactional`
+### Gestion Des Transactions Avec `@Transactional`
 
 La gestion des transactions est essentielle pour garantir l'intégrité des données lors des opérations sur la base de données. Spring offre une gestion déclarative des transactions à l'aide de l'annotation [`@Transactional`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/transaction/annotation/Transactional.html).
 
@@ -740,30 +741,30 @@ L'attribut `readOnly = true` est utilisé pour les opérations de lecture seule 
 
 ## 6. Développement d'API RESTful
 
-### Principes REST : stateless, ressources, verbes HTTP
+### Principes REST : Stateless, Ressources, Verbes HTTP
 
 REST (Representational State Transfer) est un style d'architecture logicielle pour les systèmes hypermédia distribués. Les principes clés de REST incluent :
 
--   **Client-Server :** Séparation des préoccupations entre l'interface utilisateur (client) et le stockage des données (serveur).
--   **Stateless :** Chaque requête du client au serveur doit contenir toutes les informations nécessaires pour comprendre et traiter la requête. Le serveur ne doit pas stocker d'informations sur l'état du client entre les requêtes.
--   **Cacheable :** Les réponses du serveur peuvent être mises en cache par le client pour améliorer les performances.
--   **Layered System :** L'architecture peut être composée de plusieurs couches, et chaque couche ne peut "voir" que la couche directement adjacente.
--   **Code on Demand (Optional) :** Le serveur peut étendre la fonctionnalité du client en téléchargeant et en exécutant du code (par exemple, JavaScript).
--   **Uniform Interface :** Un ensemble de contraintes architecturales qui simplifient et découplent l'architecture, permettant à chaque partie d'évoluer indépendamment. Les contraintes de l'interface uniforme incluent :
-    -   **Identification des ressources :** Les ressources sont identifiées par des URIs (Uniform Resource Identifiers).
-    -   **Manipulation des ressources via des représentations :** Les clients interagissent avec les ressources en utilisant des représentations de celles-ci (par exemple, JSON, XML).
-    -   **Messages auto-descriptifs :** Chaque message contient suffisamment d'informations pour décrire comment traiter le message.
-    -   **Hypermedia as the Engine of Application State (HATEOAS) :** Le client interagit avec l'application entièrement via les hyperliens contenus dans les représentations des ressources.
+- **Client-Server :** Séparation des préoccupations entre l'interface utilisateur (client) et le stockage des données (serveur).
+- **Stateless :** Chaque requête du client au serveur doit contenir toutes les informations nécessaires pour comprendre et traiter la requête. Le serveur ne doit pas stocker d'informations sur l'état du client entre les requêtes.
+- **Cacheable :** Les réponses du serveur peuvent être mises en cache par le client pour améliorer les performances.
+- **Layered System :** L'architecture peut être composée de plusieurs couches, et chaque couche ne peut "voir" que la couche directement adjacente.
+- **Code on Demand (Optional) :** Le serveur peut étendre la fonctionnalité du client en téléchargeant et en exécutant du code (par exemple, JavaScript).
+- **Uniform Interface :** Un ensemble de contraintes architecturales qui simplifient et découplent l'architecture, permettant à chaque partie d'évoluer indépendamment. Les contraintes de l'interface uniforme incluent :
+    - **Identification des ressources :** Les ressources sont identifiées par des URIs (Uniform Resource Identifiers).
+    - **Manipulation des ressources via des représentations :** Les clients interagissent avec les ressources en utilisant des représentations de celles-ci (par exemple, JSON, XML).
+    - **Messages auto-descriptifs :** Chaque message contient suffisamment d'informations pour décrire comment traiter le message.
+    - **Hypermedia as the Engine of Application State (HATEOAS) :** Le client interagit avec l'application entièrement via les hyperliens contenus dans les représentations des ressources.
 
 Les API RESTful utilisent généralement les verbes HTTP standard pour effectuer des opérations sur les ressources :
 
--   `GET` : Récupérer une ressource ou une collection de ressources.
--   `POST` : Créer une nouvelle ressource.
--   `PUT` : Mettre à jour une ressource existante.
--   `DELETE` : Supprimer une ressource.
--   `PATCH` : Appliquer des modifications partielles à une ressource.
+- `GET` : Récupérer une ressource ou une collection de ressources.
+- `POST` : Créer une nouvelle ressource.
+- `PUT` : Mettre à jour une ressource existante.
+- `DELETE` : Supprimer une ressource.
+- `PATCH` : Appliquer des modifications partielles à une ressource.
 
-### Création de services REST avec `@RestController`
+### Création De Services REST Avec `@RestController`
 
 Dans Spring Boot, la création d'API RESTful est simplifiée grâce à l'annotation [`@RestController`](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/bind/annotation/RestController.html). Comme mentionné précédemment, `@RestController` combine `@Controller` et `@ResponseBody`, ce qui signifie que les méthodes de cette classe retournent directement les données de réponse (sérialisées en JSON ou XML par défaut) plutôt que des noms de vues.
 
@@ -847,23 +848,23 @@ class Product {
 }
 ```
 
--   [`@RequestMapping("/api/products")`](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/bind/annotation/RequestMapping.html): Définit le chemin de base pour toutes les méthodes de ce contrôleur.
--   [`@GetMapping`](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/bind/annotation/GetMapping.html), [`@PostMapping`](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/bind/annotation/PostMapping.html), etc. : Mappent les requêtes HTTP spécifiques aux méthodes du contrôleur.
--   [`@PathVariable`](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/bind/annotation/PathVariable.html): Extrait une partie de l'URI de la requête (par exemple, l'ID du produit).
--   [`@RequestBody`](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/bind/annotation/RequestBody.html): Indique qu'un paramètre de méthode doit être lié au corps de la requête HTTP. Spring utilise un convertisseur de messages (comme Jackson) pour désérialiser le corps de la requête en un objet Java.
+- [`@RequestMapping("/api/products")`](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/bind/annotation/RequestMapping.html): Définit le chemin de base pour toutes les méthodes de ce contrôleur.
+- [`@GetMapping`](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/bind/annotation/GetMapping.html), [`@PostMapping`](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/bind/annotation/PostMapping.html), etc. : Mappent les requêtes HTTP spécifiques aux méthodes du contrôleur.
+- [`@PathVariable`](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/bind/annotation/PathVariable.html): Extrait une partie de l'URI de la requête (par exemple, l'ID du produit).
+- [`@RequestBody`](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/bind/annotation/RequestBody.html): Indique qu'un paramètre de méthode doit être lié au corps de la requête HTTP. Spring utilise un convertisseur de messages (comme Jackson) pour désérialiser le corps de la requête en un objet Java.
 
-### Sérialisation et désérialisation JSON avec Jackson
+### Sérialisation Et Désérialisation JSON Avec Jackson
 
 Spring Boot utilise Jackson par défaut pour la sérialisation (conversion d'objets Java en JSON) et la désérialisation (conversion de JSON en objets Java). Lorsque vous utilisez `@RestController` et retournez un objet Java, Spring Boot, avec l'aide de Jackson, convertit automatiquement cet objet en réponse JSON. De même, lorsque vous utilisez `@RequestBody`, Jackson désérialise le corps de la requête JSON en l'objet Java spécifié.
 
 Vous pouvez personnaliser le comportement de Jackson en ajoutant des annotations Jackson à vos classes de modèle (par exemple, `@JsonIgnore`, `@JsonProperty`) ou en configurant l'objet `ObjectMapper` de Jackson.
 
-### Gestion des codes de statut HTTP et des réponses personnalisées
+### Gestion Des Codes De Statut HTTP Et Des Réponses Personnalisées
 
 Il est important de retourner les codes de statut HTTP appropriés dans vos API RESTful pour indiquer le résultat de l'opération. Spring MVC vous permet de contrôler le code de statut HTTP de la réponse.
 
--   **Codes de statut par défaut :** Par défaut, Spring retourne un code 200 OK pour les requêtes réussies. Pour les requêtes POST, il retourne un code 200 OK ou 201 Created si une nouvelle ressource est créée.
--   [`@ResponseStatus`](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/bind/annotation/ResponseStatus.html): Vous pouvez utiliser cette annotation sur une méthode de contrôleur ou une classe d'exception pour spécifier le code de statut HTTP de la réponse.
+- **Codes de statut par défaut :** Par défaut, Spring retourne un code 200 OK pour les requêtes réussies. Pour les requêtes POST, il retourne un code 200 OK ou 201 Created si une nouvelle ressource est créée.
+- [`@ResponseStatus`](https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/bind/annotation/ResponseStatus.html): Vous pouvez utiliser cette annotation sur une méthode de contrôleur ou une classe d'exception pour spécifier le code de statut HTTP de la réponse.
 
     ```java
     import org.springframework.http.HttpStatus;
@@ -882,7 +883,7 @@ Il est important de retourner les codes de statut HTTP appropriés dans vos API 
     }
     ```
 
--   [`ResponseEntity`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/http/ResponseEntity.html): Pour un contrôle plus fin sur la réponse (y compris les en-têtes HTTP et le corps de la réponse), vous pouvez retourner un objet `ResponseEntity` depuis votre méthode de contrôleur.
+- [`ResponseEntity`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/http/ResponseEntity.html): Pour un contrôle plus fin sur la réponse (y compris les en-têtes HTTP et le corps de la réponse), vous pouvez retourner un objet `ResponseEntity` depuis votre méthode de contrôleur.
 
     ```java
     import org.springframework.http.HttpStatus;
@@ -912,27 +913,27 @@ Il est important de retourner les codes de statut HTTP appropriés dans vos API 
     }
     ```
 
-### Sécurisation des API avec Spring Security et JWT
+### Sécurisation Des API Avec Spring Security Et JWT
 
 La sécurisation des API RESTful est cruciale. Spring Security est un framework puissant et hautement configurable pour l'authentification et l'autorisation dans les applications Spring. Pour les API RESTful, une approche courante consiste à utiliser l'authentification basée sur les tokens, comme JWT (JSON Web Tokens).
 
 Les étapes générales pour sécuriser une API REST avec Spring Security et JWT incluent :
 
-1.  Ajouter les dépendances Spring Security et JWT.
-2.  Configurer Spring Security pour désactiver la protection CSRF (Cross-Site Request Forgery) car elle n'est généralement pas nécessaire pour les API stateless.
-3.  Configurer un filtre pour intercepter les requêtes et valider les tokens JWT.
-4.  Implémenter un mécanisme d'authentification (par exemple, nom d'utilisateur/mot de passe) pour générer des tokens JWT lors de la connexion réussie.
-5.  Protéger les endpoints de l'API en utilisant des annotations de sécurité (par exemple, `@PreAuthorize`) ou une configuration de sécurité.
+1. Ajouter les dépendances Spring Security et JWT.
+2. Configurer Spring Security pour désactiver la protection CSRF (Cross-Site Request Forgery) car elle n'est généralement pas nécessaire pour les API stateless.
+3. Configurer un filtre pour intercepter les requêtes et valider les tokens JWT.
+4. Implémenter un mécanisme d'authentification (par exemple, nom d'utilisateur/mot de passe) pour générer des tokens JWT lors de la connexion réussie.
+5. Protéger les endpoints de l'API en utilisant des annotations de sécurité (par exemple, `@PreAuthorize`) ou une configuration de sécurité.
 
 C'est un sujet complexe qui nécessite une configuration détaillée, mais Spring Security fournit les blocs de construction nécessaires pour implémenter une sécurité robuste pour vos API REST.
 
 ---
 
-## 7. Tests avec Spring Boot
+## 7. Tests Avec Spring Boot
 
 Spring Boot facilite l'écriture de tests pour votre application en fournissant des annotations et des utilitaires de test pratiques. Une bonne stratégie de test inclut généralement des tests unitaires, des tests d'intégration et des tests de tranche (slice tests).
 
-### Tests unitaires avec JUnit 5 et Mockito
+### Tests Unitaires Avec JUnit 5 Et Mockito
 
 Les tests unitaires visent à tester de petites unités de code isolément, généralement des méthodes ou des classes individuelles, sans dépendances externes (comme une base de données ou un serveur web). JUnit 5 est le framework de test le plus couramment utilisé en Java, et Mockito est une bibliothèque de mocking populaire pour créer des objets simulés (mocks) et vérifier les interactions.
 
@@ -989,12 +990,12 @@ class MyService {
 }
 ```
 
--   [`@ExtendWith(MockitoExtension.class)`](https://javadoc.io/doc/org.mockito/mockito-junit-jupiter/latest/org/mockito/junit/jupiter/MockitoExtension.html): Intègre Mockito avec JUnit 5.
--   [`@Mock`](https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mock.html): Crée un mock de l'interface ou de la classe spécifiée.
--   [`@InjectMocks`](https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/InjectMocks.html): Injecte les mocks créés avec `@Mock` dans l'instance de la classe annotée.
--   `when(...).thenReturn(...)` : Définit le comportement d'une méthode mockée.
+- [`@ExtendWith(MockitoExtension.class)`](https://javadoc.io/doc/org.mockito/mockito-junit-jupiter/latest/org/mockito/junit/jupiter/MockitoExtension.html): Intègre Mockito avec JUnit 5.
+- [`@Mock`](https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mock.html): Crée un mock de l'interface ou de la classe spécifiée.
+- [`@InjectMocks`](https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/InjectMocks.html): Injecte les mocks créés avec `@Mock` dans l'instance de la classe annotée.
+- `when(…).thenReturn(…)` : Définit le comportement d'une méthode mockée.
 
-### Tests d'intégration avec `@SpringBootTest`
+### Tests D'intégration Avec `@SpringBootTest`
 
 Les tests d'intégration testent l'interaction entre plusieurs composants de l'application, voire l'application complète avec ses dépendances externes (base de données, serveurs externes, etc.). L'annotation [`@SpringBootTest`](https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/test/context/SpringBootTest.html) est l'annotation principale pour les tests d'intégration Spring Boot. Elle démarre un contexte Spring complet pour votre application.
 
@@ -1019,7 +1020,7 @@ public class MyprojectApplicationTests {
 
 [`@SpringBootTest`](https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/test/context/SpringBootTest.html) peut être configuré avec différents attributs (par exemple, `webEnvironment`) pour contrôler la manière dont le contexte Spring est chargé.
 
-### Tests de contrôleurs avec `@WebMvcTest`
+### Tests De Contrôleurs Avec `@WebMvcTest`
 
 [`@WebMvcTest`](https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/test/autoconfigure/web/servlet/WebMvcTest.html) est une annotation de test de tranche (slice test) qui se concentre sur les composants de la couche web (contrôleurs). Elle démarre un contexte Spring limité qui ne contient que les beans pertinents pour tester les contrôleurs (contrôleurs, filtres, etc.), sans démarrer le serveur web complet ni charger d'autres couches (services, repositories).
 
@@ -1050,13 +1051,13 @@ public class WebControllerTests {
 }
 ```
 
--   [`@WebMvcTest(WebController.class)`](https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/test/autoconfigure/web/servlet/WebMvcTest.html): Configure le test pour se concentrer sur `WebController`.
--   [`MockMvc`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/test/web/servlet/MockMvc.html): Permet d'envoyer des requêtes simulées.
--   `mockMvc.perform(get("/greeting?name=Test"))` : Exécute une requête GET simulée.
--   `.andExpect(status().isOk())` : Vérifie que le code de statut HTTP est 200 OK.
--   `.andExpect(content().string("..."))` : Vérifie le contenu de la réponse.
+- [`@WebMvcTest(WebController.class)`](https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/test/autoconfigure/web/servlet/WebMvcTest.html): Configure le test pour se concentrer sur `WebController`.
+- [`MockMvc`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/test/web/servlet/MockMvc.html): Permet d'envoyer des requêtes simulées.
+- `mockMvc.perform(get("/greeting?name=Test"))` : Exécute une requête GET simulée.
+- `.andExpect(status().isOk())` : Vérifie que le code de statut HTTP est 200 OK.
+- `.andExpect(content().string("…"))` : Vérifie le contenu de la réponse.
 
-### Tests de services avec `@MockBean`
+### Tests De Services Avec `@MockBean`
 
 Lors des tests de tranche ou d'intégration, vous pourriez vouloir simuler (mock) certaines dépendances pour isoler la couche que vous testez. L'annotation [`@MockBean`](https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/test/mock/mockito/MockBean.html) est utilisée dans les tests Spring Boot pour ajouter des mocks Mockito au contexte de l'application Spring.
 
@@ -1093,26 +1094,26 @@ public class MyServiceIntegrationTest {
 
 Dans cet exemple, `@MockBean` remplace l'implémentation réelle de `MyRepository` par un mock Mockito dans le contexte Spring démarré par `@SpringBootTest`.
 
-### Utilisation de Postman pour tester les API
+### Utilisation De Postman Pour Tester Les API
 
 En plus des tests automatisés, il est souvent utile de tester manuellement les API RESTful à l'aide d'outils comme Postman. Postman est un outil populaire qui permet d'envoyer des requêtes HTTP (GET, POST, PUT, DELETE, etc.) à vos endpoints d'API, d'inspecter les réponses, de gérer les environnements et de créer des collections de requêtes.
 
 Pour tester une API Spring Boot avec Postman :
 
-1.  Démarrez votre application Spring Boot.
-2.  Ouvrez Postman.
-3.  Créez une nouvelle requête.
-4.  Sélectionnez la méthode HTTP appropriée (GET, POST, etc.).
-5.  Entrez l'URL de votre endpoint d'API (par exemple, `http://localhost:8080/api/products`).
-6.  Si nécessaire, ajoutez des paramètres de requête, des en-têtes (par exemple, `Content-Type: application/json`), ou un corps de requête (pour les requêtes POST ou PUT).
-7.  Cliquez sur "Send" pour envoyer la requête.
-8.  Inspectez la réponse (code de statut, corps de la réponse, en-têtes).
+1. Démarrez votre application Spring Boot.
+2. Ouvrez Postman.
+3. Créez une nouvelle requête.
+4. Sélectionnez la méthode HTTP appropriée (GET, POST, etc.).
+5. Entrez l'URL de votre endpoint d'API (par exemple, `http://localhost:8080/api/products`).
+6. Si nécessaire, ajoutez des paramètres de requête, des en-têtes (par exemple, `Content-Type: application/json`), ou un corps de requête (pour les requêtes POST ou PUT).
+7. Cliquez sur "Send" pour envoyer la requête.
+8. Inspectez la réponse (code de statut, corps de la réponse, en-têtes).
 
 Postman est un outil précieux pour le développement et le débogage des API RESTful.
 
 ---
 
-## 8. Sécurisation d'une application Spring Boot
+## 8. Sécurisation D'une Application Spring Boot
 
 La sécurisation des applications web est une préoccupation majeure. Spring Security est un framework puissant et flexible qui fournit des solutions complètes pour l'authentification et l'autorisation dans les applications Spring.
 
@@ -1120,18 +1121,18 @@ La sécurisation des applications web est une préoccupation majeure. Spring Sec
 
 Spring Security est un framework de sécurité déclaratif qui s'intègre facilement aux applications Spring. Il offre une large gamme de fonctionnalités de sécurité, notamment :
 
--   **Authentification :** Vérification de l'identité d'un utilisateur.
--   **Autorisation :** Détermination si un utilisateur authentifié a la permission d'accéder à une ressource ou d'effectuer une action.
--   **Protection contre les attaques courantes :** CSRF, XSS, etc.
--   **Intégration avec d'autres technologies de sécurité :** LDAP, OAuth2, JWT, etc.
+- **Authentification :** Vérification de l'identité d'un utilisateur.
+- **Autorisation :** Détermination si un utilisateur authentifié a la permission d'accéder à une ressource ou d'effectuer une action.
+- **Protection contre les attaques courantes :** CSRF, XSS, etc.
+- **Intégration avec d'autres technologies de sécurité :** LDAP, OAuth2, JWT, etc.
 
 Spring Security utilise une chaîne de filtres pour intercepter les requêtes et appliquer les règles de sécurité. Vous configurez Spring Security en créant des classes de configuration qui étendent `WebSecurityConfigurerAdapter` (dans les versions plus anciennes) ou en utilisant des classes de configuration basées sur des composants (dans les versions plus récentes avec Spring Security 5.x et au-delà).
 
-### Authentification : en mémoire, en base de données, via LDAP
+### Authentification : En Mémoire, En Base De Données, via LDAP
 
 Spring Security prend en charge diverses méthodes d'authentification :
 
--   **Authentification en mémoire :** Utile pour les applications simples ou les tests. Les informations d'identification des utilisateurs sont stockées directement en mémoire.
+- **Authentification en mémoire :** Utile pour les applications simples ou les tests. Les informations d'identification des utilisateurs sont stockées directement en mémoire.
 
     ```java
     import org.springframework.context.annotation.Bean;
@@ -1176,14 +1177,14 @@ Spring Security prend en charge diverses méthodes d'authentification :
     }
     ```
 
--   **Authentification en base de données :** Les informations d'identification des utilisateurs sont stockées dans une base de données. Vous implémentez une interface `UserDetailsService` pour charger les détails de l'utilisateur depuis la base de données.
--   **Authentification via LDAP :** Intégration avec un serveur LDAP (Lightweight Directory Access Protocol) pour l'authentification.
+- **Authentification en base de données :** Les informations d'identification des utilisateurs sont stockées dans une base de données. Vous implémentez une interface `UserDetailsService` pour charger les détails de l'utilisateur depuis la base de données.
+- **Authentification via LDAP :** Intégration avec un serveur LDAP (Lightweight Directory Access Protocol) pour l'authentification.
 
-### Autorisation : rôles et permissions
+### Autorisation : Rôles Et Permissions
 
 Une fois qu'un utilisateur est authentifié, Spring Security détermine s'il est autorisé à accéder à une ressource ou à effectuer une action. L'autorisation est généralement basée sur les rôles ou les permissions attribués à l'utilisateur.
 
--   **Rôles :** Vous pouvez définir des rôles (par exemple, `ROLE_USER`, `ROLE_ADMIN`) et les attribuer aux utilisateurs. Vous pouvez ensuite configurer Spring Security pour autoriser l'accès à certaines URLs ou méthodes uniquement aux utilisateurs ayant des rôles spécifiques.
+- **Rôles :** Vous pouvez définir des rôles (par exemple, `ROLE_USER`, `ROLE_ADMIN`) et les attribuer aux utilisateurs. Vous pouvez ensuite configurer Spring Security pour autoriser l'accès à certaines URLs ou méthodes uniquement aux utilisateurs ayant des rôles spécifiques.
 
     ```java
     import org.springframework.context.annotation.Bean;
@@ -1210,7 +1211,7 @@ Une fois qu'un utilisateur est authentifié, Spring Security détermine s'il est
     }
     ```
 
--   **Permissions :** Pour un contrôle d'autorisation plus fin, vous pouvez utiliser des permissions (par exemple, `READ_PRODUCT`, `WRITE_PRODUCT`) et les vérifier au niveau de la méthode à l'aide d'annotations comme [`@PreAuthorize`](https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/access/prepost/PreAuthorize.html).
+- **Permissions :** Pour un contrôle d'autorisation plus fin, vous pouvez utiliser des permissions (par exemple, `READ_PRODUCT`, `WRITE_PRODUCT`) et les vérifier au niveau de la méthode à l'aide d'annotations comme [`@PreAuthorize`](https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/access/prepost/PreAuthorize.html).
 
     ```java
     import org.springframework.security.access.prepost.PreAuthorize;
@@ -1233,20 +1234,20 @@ Une fois qu'un utilisateur est authentifié, Spring Security détermine s'il est
     }
     ```
 
-### Sécurisation des API REST avec JWT
+### Sécurisation Des API REST Avec JWT
 
 Comme mentionné dans la section précédente, JWT est une approche courante pour sécuriser les API RESTful stateless. Le flux typique est le suivant :
 
-1.  L'utilisateur s'authentifie (par exemple, avec nom d'utilisateur/mot de passe) auprès d'un endpoint de connexion.
-2.  Si l'authentification réussit, le serveur génère un token JWT contenant des informations sur l'utilisateur (claims) et le renvoie au client.
-3.  Le client stocke le token (par exemple, dans le stockage local du navigateur).
-4.  Pour les requêtes ultérieures vers les endpoints sécurisés, le client inclut le token JWT dans l'en-tête `Authorization` (généralement au format `Bearer <token>`).
-5.  Le serveur, configuré avec Spring Security, intercepte la requête, extrait le token JWT, le valide (signature, expiration, etc.), et authentifie l'utilisateur en fonction des informations contenues dans le token.
-6.  Spring Security applique ensuite les règles d'autorisation basées sur les rôles ou permissions extraits du token.
+1. L'utilisateur s'authentifie (par exemple, avec nom d'utilisateur/mot de passe) auprès d'un endpoint de connexion.
+2. Si l'authentification réussit, le serveur génère un token JWT contenant des informations sur l'utilisateur (claims) et le renvoie au client.
+3. Le client stocke le token (par exemple, dans le stockage local du navigateur).
+4. Pour les requêtes ultérieures vers les endpoints sécurisés, le client inclut le token JWT dans l'en-tête `Authorization` (généralement au format `Bearer <token>`).
+5. Le serveur, configuré avec Spring Security, intercepte la requête, extrait le token JWT, le valide (signature, expiration, etc.), et authentifie l'utilisateur en fonction des informations contenues dans le token.
+6. Spring Security applique ensuite les règles d'autorisation basées sur les rôles ou permissions extraits du token.
 
 L'implémentation de l'authentification JWT avec Spring Security implique la configuration de filtres personnalisés et l'utilisation d'une bibliothèque JWT (comme JJWT).
 
-### Gestion des sessions et des cookies
+### Gestion Des Sessions Et Des Cookies
 
 Pour les applications web traditionnelles basées sur des sessions, Spring Security gère automatiquement les sessions et les cookies pour maintenir l'état d'authentification de l'utilisateur entre les requêtes.
 
@@ -1285,11 +1286,11 @@ En définissant `sessionCreationPolicy(SessionCreationPolicy.STATELESS)`, vous i
 
 ---
 
-## 9. Déploiement d'une application Spring Boot
+## 9. Déploiement D'une Application Spring Boot
 
 Spring Boot facilite le déploiement de vos applications grâce à ses fonctionnalités intégrées et à la possibilité de créer des fichiers exécutables autonomes.
 
-### Création d'un fichier exécutable `.jar` ou `.war`
+### Création D'un Fichier Exécutable `.jar` Ou `.war`
 
 La manière la plus courante de déployer une application Spring Boot est de créer un fichier JAR exécutable ("fat JAR" ou "uber JAR") qui contient toutes les dépendances nécessaires, y compris le serveur web embarqué. Cela permet d'exécuter l'application avec un simple commande `java -jar`.
 
@@ -1297,7 +1298,7 @@ Si vous avez choisi l'empaquetage WAR lors de la création du projet (par exempl
 
 Pour créer le fichier exécutable, utilisez votre outil de build :
 
--   **Maven :** Exécutez la commande suivante dans le répertoire racine de votre projet :
+- **Maven :** Exécutez la commande suivante dans le répertoire racine de votre projet :
 
     ```bash
     ./mvnw clean package
@@ -1305,7 +1306,7 @@ Pour créer le fichier exécutable, utilisez votre outil de build :
 
     Cela créera un fichier JAR exécutable dans le répertoire `target/`.
 
--   **Gradle :** Exécutez la commande suivante dans le répertoire racine de votre projet :
+- **Gradle :** Exécutez la commande suivante dans le répertoire racine de votre projet :
 
     ```bash
     ./gradlew clean build
@@ -1319,28 +1320,28 @@ Le fichier JAR exécutable peut ensuite être exécuté à partir de la ligne de
 java -jar your-application.jar
 ```
 
-### Déploiement sur un serveur Tomcat ou Jetty
+### Déploiement Sur Un Serveur Tomcat Ou Jetty
 
 Bien que Spring Boot inclue des serveurs embarqués, vous pouvez également déployer votre application sur un serveur d'applications externe comme Tomcat ou Jetty en empaquetant votre application sous forme de fichier WAR.
 
-1.  Assurez-vous que votre projet est configuré pour produire un fichier WAR (dans `pom.xml` ou `build.gradle`).
-2.  Construisez le projet pour générer le fichier WAR.
-3.  Déployez le fichier WAR sur votre serveur d'applications (les étapes spécifiques dépendent du serveur d'applications).
+1. Assurez-vous que votre projet est configuré pour produire un fichier WAR (dans `pom.xml` ou `build.gradle`).
+2. Construisez le projet pour générer le fichier WAR.
+3. Déployez le fichier WAR sur votre serveur d'applications (les étapes spécifiques dépendent du serveur d'applications).
 
-### Déploiement sur des plateformes cloud : Heroku, AWS, Azure
+### Déploiement Sur Des Plateformes Cloud : Heroku, AWS, Azure
 
 Spring Boot est bien adapté au déploiement sur des plateformes cloud. La nature autonome des fichiers JAR exécutables simplifie le processus.
 
--   **Heroku :** Heroku prend en charge nativement les applications Spring Boot. Vous pouvez déployer votre application en poussant votre code vers un dépôt Git Heroku. Heroku détectera qu'il s'agit d'une application Spring Boot et la construira et la déploiera automatiquement.
--   **AWS (Amazon Web Services) :** Vous pouvez déployer des applications Spring Boot sur diverses services AWS, notamment :
-    -   **Elastic Beanstalk :** Un service facile à utiliser pour déployer et gérer des applications web.
-    -   **EC2 (Elastic Compute Cloud) :** Vous pouvez déployer votre JAR exécutable sur une instance EC2.
-    -   **ECS (Elastic Container Service) ou EKS (Elastic Kubernetes Service) :** En utilisant Docker (voir ci-dessous).
--   **Azure (Microsoft Azure) :** Azure offre également plusieurs options de déploiement pour les applications Spring Boot, comme Azure App Service ou Azure Kubernetes Service (AKS).
+- **Heroku :** Heroku prend en charge nativement les applications Spring Boot. Vous pouvez déployer votre application en poussant votre code vers un dépôt Git Heroku. Heroku détectera qu'il s'agit d'une application Spring Boot et la construira et la déploiera automatiquement.
+- **AWS (Amazon Web Services) :** Vous pouvez déployer des applications Spring Boot sur diverses services AWS, notamment :
+    - **Elastic Beanstalk :** Un service facile à utiliser pour déployer et gérer des applications web.
+    - **EC2 (Elastic Compute Cloud) :** Vous pouvez déployer votre JAR exécutable sur une instance EC2.
+    - **ECS (Elastic Container Service) ou EKS (Elastic Kubernetes Service) :** En utilisant Docker (voir ci-dessous).
+- **Azure (Microsoft Azure) :** Azure offre également plusieurs options de déploiement pour les applications Spring Boot, comme Azure App Service ou Azure Kubernetes Service (AKS).
 
 Les étapes spécifiques varient en fonction de la plateforme cloud et du service choisi, mais l'idée générale est de fournir votre fichier JAR exécutable ou une image Docker de votre application à la plateforme.
 
-### Création d'une image Docker pour l'application
+### Création D'une Image Docker Pour L'application
 
 Docker est une plateforme populaire pour le développement, l'expédition et l'exécution d'applications dans des conteneurs. La création d'une image Docker pour votre application Spring Boot permet de la déployer de manière cohérente dans différents environnements.
 
@@ -1353,10 +1354,10 @@ COPY ${JAR_FILE} app.jar
 ENTRYPOINT ["java","-jar","/app.jar"]
 ```
 
--   `FROM openjdk:17-jdk-slim` : Utilise une image de base OpenJDK légère.
--   `ARG JAR_FILE=target/*.jar` : Définit un argument de build pour le chemin du fichier JAR.
--   `COPY ${JAR_FILE} app.jar` : Copie le fichier JAR construit dans le conteneur.
--   `ENTRYPOINT ["java","-jar","/app.jar"]` : Définit la commande à exécuter lorsque le conteneur démarre.
+- `FROM openjdk:17-jdk-slim` : Utilise une image de base OpenJDK légère.
+- `ARG JAR_FILE=target/*.jar` : Définit un argument de build pour le chemin du fichier JAR.
+- `COPY ${JAR_FILE} app.jar` : Copie le fichier JAR construit dans le conteneur.
+- `ENTRYPOINT ["java","-jar","/app.jar"]` : Définit la commande à exécuter lorsque le conteneur démarre.
 
 Pour construire l'image Docker :
 
@@ -1372,7 +1373,7 @@ docker run -p 8080:8080 my-spring-boot-app
 
 Cela démarrera votre application Spring Boot dans un conteneur Docker, mappant le port 8080 du conteneur au port 8080 de votre machine locale.
 
-### Déploiement avec Kubernetes
+### Déploiement Avec Kubernetes
 
 Kubernetes est un système open source pour l'automatisation du déploiement, de la mise à l'échelle et de la gestion des applications conteneurisées. Si vous utilisez Docker, vous pouvez déployer vos images Docker Spring Boot sur un cluster Kubernetes.
 
@@ -1412,11 +1413,11 @@ Le déploiement avec Kubernetes est un sujet vaste, mais Spring Boot s'intègre 
 
 ---
 
-## 10. Bonnes pratiques et outils complémentaires
+## 10. Bonnes Pratiques Et Outils Complémentaires
 
 Cette section couvre quelques bonnes pratiques et outils utiles pour le développement d'applications Spring Boot.
 
-### Utilisation de Spring Boot DevTools pour le redémarrage automatique
+### Utilisation De Spring Boot DevTools Pour Le Redémarrage Automatique
 
 Spring Boot DevTools est un ensemble d'outils qui améliorent l'expérience de développement. L'une de ses fonctionnalités les plus utiles est le redémarrage automatique de l'application lorsque des fichiers sont modifiés. Cela accélère considérablement le cycle de développement en évitant d'avoir à redémarrer manuellement le serveur après chaque changement de code.
 
@@ -1443,7 +1444,7 @@ dependencies {
 
 Avec cette dépendance, votre application redémarrera automatiquement chaque fois que vous compilez des classes ou modifiez des fichiers dans le classpath.
 
-### Surveillance de l'application avec Spring Boot Actuator
+### Surveillance De L'application Avec Spring Boot Actuator
 
 Spring Boot Actuator fournit des endpoints prêts pour la production qui vous permettent de surveiller et de gérer votre application lorsqu'elle est déployée. Il offre des informations sur l'état de santé de l'application, les métriques, les informations de configuration, etc.
 
@@ -1468,7 +1469,7 @@ dependencies {
 
 Une fois la dépendance ajoutée, plusieurs endpoints seront disponibles par défaut (par exemple, `/actuator/health`, `/actuator/info`). Vous pouvez configurer les endpoints exposés et leur sécurité via les fichiers de configuration (`application.properties` ou `application.yml`).
 
-### Gestion des logs avec SLF4J et Logback
+### Gestion Des Logs Avec SLF4J Et Logback
 
 Une bonne gestion des logs est essentielle pour le débogage et la surveillance des applications. Spring Boot utilise SLF4J (Simple Logging Facade for Java) comme façade de logging par défaut, avec Logback comme implémentation par défaut.
 
@@ -1485,7 +1486,7 @@ logging.file.name=myapp.log
 
 Cela configure le niveau de logging pour différentes parties de l'application et spécifie un fichier de sortie pour les logs.
 
-### Documentation de l'API avec Swagger/OpenAPI
+### Documentation De l'API Avec Swagger/OpenAPI
 
 Documenter vos API RESTful est crucial pour les développeurs qui les consomment. Swagger (maintenant partie de l'initiative OpenAPI) est un framework populaire pour concevoir, construire, documenter et consommer des API RESTful.
 
@@ -1513,7 +1514,7 @@ dependencies {
 
 Une fois la dépendance ajoutée et l'application démarrée, vous pourrez accéder à l'interface utilisateur Swagger UI à l'adresse `http://localhost:8080/swagger-ui.html` (par défaut) pour visualiser et interagir avec la documentation de votre API.
 
-### Gestion des dépendances avec Maven ou Gradle
+### Gestion Des Dépendances Avec Maven Ou Gradle
 
 Spring Boot s'appuie sur Maven ou Gradle pour la gestion des dépendances. Les "Starters" de Spring Boot simplifient la déclaration des dépendances en fournissant des ensembles de dépendances préconfigurées et compatibles.
 

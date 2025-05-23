@@ -7,87 +7,90 @@ tags:
 description: Langage de script côté serveur, largement utilisé pour le développement web dynamique.
 ---
 
+# Php
+
 ## Sommaire
 
-1.  Introduction à PHP
-    *   Qu'est-ce que PHP ?
-    *   Historique et évolution
-    *   Installation et configuration (avec un serveur web comme Apache ou Nginx)
-    *   Structure d'un script PHP
-2.  Bases du Langage
-    *   Syntaxe de base
-    *   Variables et types de données (scalaires, composés, spéciaux)
-    *   Opérateurs
-    *   Structures de contrôle (if, else, elseif, switch, while, do-while, for, foreach)
-    *   Fonctions
-3.  Tableaux (Arrays)
-    *   Tableaux indexés et associatifs
-    *   Manipulation des tableaux
-4.  Chaînes de Caractères
-    *   Manipulation des chaînes
-    *   Expressions régulières
-5.  Programmation Orientée Objet (POO) en PHP
-    *   Classes et Objets
-    *   Propriétés et Méthodes
-    *   Constructeurs et Destructeurs
-    *   Héritage
-    *   Interfaces et Classes abstraites
-    *   Visibilité (public, private, protected)
-    *   Traits
-6.  Gestion des Erreurs et Exceptions
-    *   Types d'erreurs
-    *   Gestion des exceptions (try-catch-finally)
-7.  Interaction avec les Bases de Données
-    *   Extensions (MySQLi, PDO)
-    *   Connexion à une base de données
-    *   Exécution de requêtes (SELECT, INSERT, UPDATE, DELETE)
-    *   Préparation des requêtes
-8.  Gestion des Sessions et Cookies
-    *   Sessions
-    *   Cookies
-9.  Inclusion de Fichiers
-    *   include, require, include_once, require_once
+1. Introduction à PHP
+    * Qu'est-ce que PHP ?
+    * Historique et évolution
+    * Installation et configuration (avec un serveur web comme Apache ou Nginx)
+    * Structure d'un script PHP
+2. Bases du Langage
+    * Syntaxe de base
+    * Variables et types de données (scalaires, composés, spéciaux)
+    * Opérateurs
+    * Structures de contrôle (if, else, elseif, switch, while, do-while, for, foreach)
+    * Fonctions
+3. Tableaux (Arrays)
+    * Tableaux indexés et associatifs
+    * Manipulation des tableaux
+4. Chaînes de Caractères
+    * Manipulation des chaînes
+    * Expressions régulières
+5. Programmation Orientée Objet (POO) en PHP
+    * Classes et Objets
+    * Propriétés et Méthodes
+    * Constructeurs et Destructeurs
+    * Héritage
+    * Interfaces et Classes abstraites
+    * Visibilité (public, private, protected)
+    * Traits
+6. Gestion des Erreurs et Exceptions
+    * Types d'erreurs
+    * Gestion des exceptions (try-catch-finally)
+7. Interaction avec les Bases de Données
+    * Extensions (MySQLi, PDO)
+    * Connexion à une base de données
+    * Exécution de requêtes (SELECT, INSERT, UPDATE, DELETE)
+    * Préparation des requêtes
+8. Gestion des Sessions et Cookies
+    * Sessions
+    * Cookies
+9. Inclusion de Fichiers
+    * include, require, include_once, require_once
 10. Développement Web avec PHP
-    *   Variables superglobales ($_GET, $_POST, $_SERVER, etc.)
-    *   Gestion des formulaires
-    *   Téléchargement de fichiers
-    *   Frameworks populaires (Laravel, Symfony, CodeIgniter)
+    * Variables superglobales ($_GET, $_POST, $_SERVER, etc.)
+    * Gestion des formulaires
+    * Téléchargement de fichiers
+    * Frameworks populaires (Laravel, Symfony, CodeIgniter)
 11. Composer (Gestionnaire de Dépendances)
-    *   Installation et utilisation
-    *   Autoloading
+    * Installation et utilisation
+    * Autoloading
 12. Tests en PHP
-    *   PHPUnit
+    * PHPUnit
 13. Bonnes Pratiques et PSR
-    *   Conventions de codage (PSR)
-    *   Sécurité
+    * Conventions de codage (PSR)
+    * Sécurité
 14. Ressources et Communauté
-    *   Documentation officielle
-    *   Communautés en ligne
+    * Documentation officielle
+    * Communautés en ligne
+
 ## 1. Introduction à PHP
 
-### Qu'est-ce que PHP ?
+### Qu'est-ce Que PHP ?
 
 PHP (Hypertext Preprocessor) est un langage de script côté serveur, largement utilisé pour le développement web dynamique. Il est conçu pour être intégré dans le code HTML et permet de créer des pages web interactives et personnalisées.
 
-### Historique et évolution
+### Historique Et Évolution
 
-*   Créé par Rasmus Lerdorf en 1994.
-*   Initialement un ensemble de scripts Perl pour suivre les visites de son CV en ligne.
-*   Évolue rapidement pour devenir un langage de script complet.
-*   PHP 5 (2004) introduit un modèle objet plus robuste.
-*   PHP 7 (2015) améliore considérablement les performances et introduit de nouvelles fonctionnalités.
-*   PHP 8 (2020) continue d'améliorer les performances et ajoute de nouvelles fonctionnalités (ex: JIT compiler).
+* Créé par Rasmus Lerdorf en 1994.
+* Initialement un ensemble de scripts Perl pour suivre les visites de son CV en ligne.
+* Évolue rapidement pour devenir un langage de script complet.
+* PHP 5 (2004) introduit un modèle objet plus robuste.
+* PHP 7 (2015) améliore considérablement les performances et introduit de nouvelles fonctionnalités.
+* PHP 8 (2020) continue d'améliorer les performances et ajoute de nouvelles fonctionnalités (ex: JIT compiler).
 
-### Installation et configuration (avec un serveur web comme Apache ou Nginx)
+### Installation Et Configuration (avec Un Serveur Web Comme Apache Ou Nginx)
 
-1.  Installer un serveur web (Apache ou Nginx).
-2.  Installer PHP et les extensions nécessaires.
-3.  Configurer le serveur web pour traiter les fichiers PHP.
+1. Installer un serveur web (Apache ou Nginx).
+2. Installer PHP et les extensions nécessaires.
+3. Configurer le serveur web pour traiter les fichiers PHP.
 
-### Structure d'un script PHP
+### Structure D'un Script PHP
 
-*   Le code PHP est délimité par les balises `<?php` et `?>`.
-*   Peut être intégré dans du code HTML.
+* Le code PHP est délimité par les balises `<?php` et `?>`.
+* Peut être intégré dans du code HTML.
 
 ```php
 <!DOCTYPE html>
@@ -104,14 +107,14 @@ PHP (Hypertext Preprocessor) est un langage de script côté serveur, largement 
 </html>
 ```
 
-## 2. Bases du Langage
+## 2. Bases Du Langage
 
-### Syntaxe de base
+### Syntaxe De Base
 
-*   Syntaxe inspirée de C, C++ et Perl.
-*   Utilisation de variables, de types de données, d'opérateurs et de structures de contrôle.
-*   Les instructions se terminent par un point-virgule (`;`).
-*   Sensible à la casse (majuscules et minuscules) pour les noms de variables.
+* Syntaxe inspirée de C, C++ et Perl.
+* Utilisation de variables, de types de données, d'opérateurs et de structures de contrôle.
+* Les instructions se terminent par un point-virgule (`;`).
+* Sensible à la casse (majuscules et minuscules) pour les noms de variables.
 
 ```php
 <?php
@@ -122,19 +125,19 @@ echo "Hello, " . $nom . "!"; // Affichage dans la console
 ?>
 ```
 
-### Variables et types de données (scalaires, composés, spéciaux)
+### Variables Et Types De Données (scalaires, Composés, spéciaux)
 
-*   Types scalaires :
-    *   `int` : Entiers.
-    *   `float` : Nombres à virgule flottante.
-    *   `string` : Chaînes de caractères.
-    *   `bool` : Booléens (true ou false).
-*   Types composés :
-    *   `array` : Tableaux.
-    *   `object` : Objets.
-*   Types spéciaux :
-    *   `resource` : Référence à une ressource externe (ex: connexion à une base de données).
-    *   `NULL` : Absence de valeur.
+* Types scalaires :
+    * `int` : Entiers.
+    * `float` : Nombres à virgule flottante.
+    * `string` : Chaînes de caractères.
+    * `bool` : Booléens (true ou false).
+* Types composés :
+    * `array` : Tableaux.
+    * `object` : Objets.
+* Types spéciaux :
+    * `resource` : Référence à une ressource externe (ex: connexion à une base de données).
+    * `NULL` : Absence de valeur.
 
 ```php
 <?php
@@ -151,11 +154,11 @@ $valeur_nulle = NULL; // NULL
 
 ### Opérateurs
 
-*   Arithmétiques : `+`, `-`, `*`, `/`, `%`, `**` (exponentiation)
-*   Relationnels : `==`, `!=`, `<`, `>`, `<=`, `>=`
-*   Logiques : `&&`, `||`, `!`
-*   Affectation : `=`, `+=`, `-=`, `*=`, `/=`, `%=`, `.=` (concaténation)
-*   Incrémentation/Décrémentation : `++`, `--`
+* Arithmétiques : `+`, `-`, `*`, `/`, `%`, `**` (exponentiation)
+* Relationnels : `==`, `!=`, `<`, `>`, `<=`, `>=`
+* Logiques : `&&`, `||`, `!`
+* Affectation : `=`, `+=`, `-=`, `*=`, `/=`, `%=`, `.=` (concaténation)
+* Incrémentation/Décrémentation : `++`, `--`
 
 ```php
 <?php
@@ -168,14 +171,14 @@ $x++;
 ?>
 ```
 
-### Structures de contrôle (if, else, elseif, switch, while, do-while, for, foreach)
+### Structures De Contrôle (if, Else, Elseif, Switch, While, Do-while, For, foreach)
 
-*   `if`, `elseif`, `else` : Conditionnelles
-*   `while` : Boucle while
-*   `do-while` : Boucle do-while
-*   `for` : Boucle for
-*   `foreach` : Boucle foreach (pour parcourir les tableaux)
-*   `switch` : Sélection multiple
+* `if`, `elseif`, `else` : Conditionnelles
+* `while` : Boucle while
+* `do-while` : Boucle do-while
+* `for` : Boucle for
+* `foreach` : Boucle foreach (pour parcourir les tableaux)
+* `switch` : Sélection multiple
 
 ```php
 <?php
@@ -213,9 +216,9 @@ switch ($score) {
 
 ### Fonctions
 
-*   Blocs de code réutilisables.
-*   Déclaration : `function nomFonction(paramètres) { // corps }`
-*   Retour de valeurs avec le mot-clé `return`.
+* Blocs de code réutilisables.
+* Déclaration : `function nomFonction(paramètres) { // corps }`
+* Retour de valeurs avec le mot-clé `return`.
 
 ```php
 <?php
@@ -227,12 +230,13 @@ $result = add(5, 3);
 echo $result;
 ?>
 ```
+
 ## 3. Tableaux (Arrays)
 
-### Tableaux indexés et associatifs
+### Tableaux Indexés Et Associatifs
 
-*   **Tableaux indexés** : Les éléments sont accessibles par un index numérique (à partir de 0).
-*   **Tableaux associatifs** : Les éléments sont accessibles par une clé (chaîne de caractères ou nombre).
+* **Tableaux indexés** : Les éléments sont accessibles par un index numérique (à partir de 0).
+* **Tableaux associatifs** : Les éléments sont accessibles par une clé (chaîne de caractères ou nombre).
 
 ```php
 <?php
@@ -249,15 +253,15 @@ echo $ages["Alice"]; // 30
 ?>
 ```
 
-### Manipulation des tableaux
+### Manipulation Des Tableaux
 
-*   Fonctions courantes :
-    *   `count()` : Retourne le nombre d'éléments dans un tableau.
-    *   `array_push()` : Ajoute un élément à la fin d'un tableau.
-    *   `array_pop()` : Supprime le dernier élément d'un tableau.
-    *   `array_shift()` : Supprime le premier élément d'un tableau.
-    *   `array_unshift()` : Ajoute un élément au début d'un tableau.
-    *   `unset()` : Supprime un élément d'un tableau.
+* Fonctions courantes :
+    * `count()` : Retourne le nombre d'éléments dans un tableau.
+    * `array_push()` : Ajoute un élément à la fin d'un tableau.
+    * `array_pop()` : Supprime le dernier élément d'un tableau.
+    * `array_shift()` : Supprime le premier élément d'un tableau.
+    * `array_unshift()` : Ajoute un élément au début d'un tableau.
+    * `unset()` : Supprime un élément d'un tableau.
 
 ```php
 <?php
@@ -270,18 +274,19 @@ array_pop($nombres); // Supprime le dernier élément
 unset($nombres[0]); // Supprime l'élément à l'index 0
 ?>
 ```
-## 4. Chaînes de Caractères
 
-### Manipulation des chaînes
+## 4. Chaînes De Caractères
 
-*   Concaténation : Utilisation de l'opérateur `.` (point).
-*   Fonctions courantes :
-    *   `strlen()` : Retourne la longueur d'une chaîne.
-    *   `strpos()` : Recherche la position d'une sous-chaîne dans une chaîne.
-    *   `substr()` : Extrait une partie d'une chaîne.
-    *   `str_replace()` : Remplace une sous-chaîne par une autre.
-    *   `strtolower()` : Convertit une chaîne en minuscules.
-    *   `strtoupper()` : Convertit une chaîne en majuscules.
+### Manipulation Des Chaînes
+
+* Concaténation : Utilisation de l'opérateur `.` (point).
+* Fonctions courantes :
+    * `strlen()` : Retourne la longueur d'une chaîne.
+    * `strpos()` : Recherche la position d'une sous-chaîne dans une chaîne.
+    * `substr()` : Extrait une partie d'une chaîne.
+    * `str_replace()` : Remplace une sous-chaîne par une autre.
+    * `strtolower()` : Convertit une chaîne en minuscules.
+    * `strtoupper()` : Convertit une chaîne en majuscules.
 
 ```php
 <?php
@@ -297,9 +302,9 @@ echo strtoupper($message); // HELLO, JOHN!
 ?>
 ```
 
-### Expressions régulières
+### Expressions Régulières
 
-*   PHP supporte les expressions régulières avec les fonctions `preg_match`, `preg_replace`, etc.
+* PHP supporte les expressions régulières avec les fonctions `preg_match`, `preg_replace`, etc.
 
 ```php
 <?php
@@ -309,12 +314,13 @@ if (preg_match("/[0-9]{10}/", $chaine)) {
 }
 ?>
 ```
-## 5. Programmation Orientée Objet (POO) en PHP
 
-### Classes et Objets
+## 5. Programmation Orientée Objet (POO) En PHP
 
-*   Une classe est un modèle pour créer des objets.
-*   Un objet est une instance d'une classe.
+### Classes Et Objets
+
+* Une classe est un modèle pour créer des objets.
+* Un objet est une instance d'une classe.
 
 ```php
 <?php
@@ -335,20 +341,20 @@ $objet->direBonjour();
 ?>
 ```
 
-### Propriétés et Méthodes
+### Propriétés Et Méthodes
 
-*   Les propriétés sont les attributs d'une classe.
-*   Les méthodes sont les fonctions d'une classe.
+* Les propriétés sont les attributs d'une classe.
+* Les méthodes sont les fonctions d'une classe.
 
-### Constructeurs et Destructeurs
+### Constructeurs Et Destructeurs
 
-*   Le constructeur est une méthode spéciale appelée lors de la création d'un objet (`__construct`).
-*   Le destructeur est une méthode spéciale appelée lors de la destruction d'un objet (`__destruct`).
+* Le constructeur est une méthode spéciale appelée lors de la création d'un objet (`__construct`).
+* Le destructeur est une méthode spéciale appelée lors de la destruction d'un objet (`__destruct`).
 
 ### Héritage
 
-*   Permet à une classe (sous-classe) d'hériter des propriétés et des méthodes d'une autre classe (super-classe).
-*   Utilisation du mot-clé `extends`.
+* Permet à une classe (sous-classe) d'hériter des propriétés et des méthodes d'une autre classe (super-classe).
+* Utilisation du mot-clé `extends`.
 
 ```php
 <?php
@@ -375,21 +381,21 @@ $chien->faireDuBruit(); // Woof!
 ?>
 ```
 
-### Interfaces et Classes abstraites
+### Interfaces Et Classes Abstraites
 
-*   **Interface** : Contrat définissant un ensemble de méthodes qu'une classe doit implémenter.
-*   **Classe abstraite** : Classe qui ne peut pas être instanciée directement et qui peut contenir des méthodes abstraites (sans implémentation).
+* **Interface** : Contrat définissant un ensemble de méthodes qu'une classe doit implémenter.
+* **Classe abstraite** : Classe qui ne peut pas être instanciée directement et qui peut contenir des méthodes abstraites (sans implémentation).
 
-### Visibilité (public, private, protected)
+### Visibilité (public, Private, protected)
 
-*   `public` : Accessible depuis n'importe où.
-*   `private` : Accessible uniquement depuis la classe où elle est définie.
-*   `protected` : Accessible depuis la classe où elle est définie et depuis ses sous-classes.
+* `public` : Accessible depuis n'importe où.
+* `private` : Accessible uniquement depuis la classe où elle est définie.
+* `protected` : Accessible depuis la classe où elle est définie et depuis ses sous-classes.
 
 ### Traits
 
-*   Les traits sont un mécanisme de réutilisation de code dans les langages à héritage simple comme PHP.
-*   Un trait est un ensemble de méthodes qui peuvent être incluses dans une classe.
+* Les traits sont un mécanisme de réutilisation de code dans les langages à héritage simple comme PHP.
+* Un trait est un ensemble de méthodes qui peuvent être incluses dans une classe.
 
 ```php
 <?php
@@ -407,18 +413,19 @@ $objet = new MaClasse();
 $objet->direAuRevoir(); // Au revoir!
 ?>
 ```
-## 6. Gestion des Erreurs et Exceptions
 
-### Types d'erreurs
+## 6. Gestion Des Erreurs Et Exceptions
 
-*   **Erreurs de syntaxe** : Erreurs détectées lors de la compilation (ex: erreur de point-virgule).
-*   **Erreurs d'exécution** : Erreurs détectées lors de l'exécution du code (ex: division par zéro).
-*   **Exceptions** : Erreurs gérées avec les blocs `try...catch`.
+### Types D'erreurs
 
-### Gestion des exceptions (try-catch-finally)
+* **Erreurs de syntaxe** : Erreurs détectées lors de la compilation (ex: erreur de point-virgule).
+* **Erreurs d'exécution** : Erreurs détectées lors de l'exécution du code (ex: division par zéro).
+* **Exceptions** : Erreurs gérées avec les blocs `try…catch`.
 
-*   Utilisation des blocs `try...catch` pour capturer et gérer les exceptions.
-*   Le bloc `finally` est exécuté que l'exception soit levée ou non.
+### Gestion Des Exceptions (try-catch-finally)
+
+* Utilisation des blocs `try…catch` pour capturer et gérer les exceptions.
+* Le bloc `finally` est exécuté que l'exception soit levée ou non.
 
 ```php
 <?php
@@ -434,16 +441,17 @@ try {
 }
 ?>
 ```
-## 7. Interaction avec les Bases de Données
+
+## 7. Interaction Avec Les Bases De Données
 
 ### Extensions (MySQLi, PDO)
 
-*   **MySQLi** : Extension pour interagir avec les bases de données MySQL (améliorée par rapport à l'ancienne extension `mysql`).
-*   **PDO (PHP Data Objects)** : Interface d'accès aux bases de données, permettant d'utiliser différents types de bases de données avec la même API.
+* **MySQLi** : Extension pour interagir avec les bases de données MySQL (améliorée par rapport à l'ancienne extension `mysql`).
+* **PDO (PHP Data Objects)** : Interface d'accès aux bases de données, permettant d'utiliser différents types de bases de données avec la même API.
 
-### Connexion à une base de données
+### Connexion à Une Base De Données
 
-*   Utilisation des fonctions `mysqli_connect` (pour MySQLi) ou de la classe `PDO`.
+* Utilisation des fonctions `mysqli_connect` (pour MySQLi) ou de la classe `PDO`.
 
 ```php
 <?php
@@ -463,20 +471,21 @@ try {
 ?>
 ```
 
-### Exécution de requêtes (SELECT, INSERT, UPDATE, DELETE)
+### Exécution De Requêtes (SELECT, INSERT, UPDATE, DELETE)
 
-*   Utilisation des fonctions `mysqli_query` (pour MySQLi) ou des méthodes `query` et `exec` (pour PDO).
+* Utilisation des fonctions `mysqli_query` (pour MySQLi) ou des méthodes `query` et `exec` (pour PDO).
 
-### Préparation des requêtes
+### Préparation Des Requêtes
 
-*   La préparation des requêtes permet d'éviter les injections SQL.
-*   Utilisation des fonctions `mysqli_prepare` (pour MySQLi) ou des méthodes `prepare` (pour PDO).
-## 8. Gestion des Sessions et Cookies
+* La préparation des requêtes permet d'éviter les injections SQL.
+* Utilisation des fonctions `mysqli_prepare` (pour MySQLi) ou des méthodes `prepare` (pour PDO).
+
+## 8. Gestion Des Sessions Et Cookies
 
 ### Sessions
 
-*   Les sessions permettent de stocker des informations sur un utilisateur entre les requêtes.
-*   Utilisation des fonctions `session_start`, `$_SESSION`, `session_destroy`.
+* Les sessions permettent de stocker des informations sur un utilisateur entre les requêtes.
+* Utilisation des fonctions `session_start`, `$_SESSION`, `session_destroy`.
 
 ```php
 <?php
@@ -492,8 +501,8 @@ session_destroy(); // Destruction de la session
 
 ### Cookies
 
-*   Les cookies sont de petits fichiers texte stockés sur l'ordinateur de l'utilisateur.
-*   Utilisation de la fonction `setcookie` pour créer un cookie et de la variable superglobale `$_COOKIE` pour accéder aux cookies.
+* Les cookies sont de petits fichiers texte stockés sur l'ordinateur de l'utilisateur.
+* Utilisation de la fonction `setcookie` pour créer un cookie et de la variable superglobale `$_COOKIE` pour accéder aux cookies.
 
 ```php
 <?php
@@ -502,14 +511,15 @@ setcookie("nom", "John", time() + (86400 * 30), "/"); // Création d'un cookie v
 echo "Bonjour, " . $_COOKIE["nom"];
 ?>
 ```
-## 9. Inclusion de Fichiers
 
-### include, require, include_once, require_once
+## 9. Inclusion De Fichiers
 
-*   `include` : Inclut un fichier.  Si le fichier n'est pas trouvé, une alerte est générée, mais le script continue.
-*   `require` : Inclut un fichier.  Si le fichier n'est pas trouvé, une erreur fatale est générée et le script s'arrête.
-*   `include_once` : Inclut un fichier une seule fois.
-*   `require_once` : Inclut un fichier une seule fois.
+### Include, Require, include_once, require_once
+
+* `include` : Inclut un fichier. Si le fichier n'est pas trouvé, une alerte est générée, mais le script continue.
+* `require` : Inclut un fichier. Si le fichier n'est pas trouvé, une erreur fatale est générée et le script s'arrête.
+* `include_once` : Inclut un fichier une seule fois.
+* `require_once` : Inclut un fichier une seule fois.
 
 ```php
 <?php
@@ -520,68 +530,73 @@ include_once 'monfichier.php';
 require_once 'monfichier.php';
 ?>
 ```
-## 10. Développement Web avec PHP
 
-### Variables superglobales ($_GET, $_POST, $_SERVER, etc.)
+## 10. Développement Web Avec PHP
 
-*   Les variables superglobales sont des variables prédéfinies qui sont toujours disponibles, quel que soit le scope.
-*   `$_GET` : Contient les paramètres passés dans l'URL (méthode GET).
-*   `$_POST` : Contient les données envoyées par un formulaire (méthode POST).
-*   `$_SERVER` : Contient des informations sur le serveur web et l'environnement d'exécution.
+### Variables Superglobales ($_GET, $_POST, $_SERVER, etc.)
 
-### Gestion des formulaires
+* Les variables superglobales sont des variables prédéfinies qui sont toujours disponibles, quel que soit le scope.
+* `$_GET` : Contient les paramètres passés dans l'URL (méthode GET).
+* `$_POST` : Contient les données envoyées par un formulaire (méthode POST).
+* `$_SERVER` : Contient des informations sur le serveur web et l'environnement d'exécution.
 
-*   Récupération des données envoyées par un formulaire avec les variables `$_GET` ou `$_POST`.
-*   Validation des données du formulaire.
-*   Traitement des données du formulaire.
+### Gestion Des Formulaires
 
-### Téléchargement de fichiers
+* Récupération des données envoyées par un formulaire avec les variables `$_GET` ou `$_POST`.
+* Validation des données du formulaire.
+* Traitement des données du formulaire.
 
-*   Utilisation de la variable superglobale `$_FILES` pour gérer les fichiers téléchargés.
-*   Validation du type et de la taille des fichiers.
-*   Déplacement des fichiers téléchargés vers un répertoire de stockage.
+### Téléchargement De Fichiers
 
-### Frameworks populaires (Laravel, Symfony, CodeIgniter)
+* Utilisation de la variable superglobale `$_FILES` pour gérer les fichiers téléchargés.
+* Validation du type et de la taille des fichiers.
+* Déplacement des fichiers téléchargés vers un répertoire de stockage.
 
-*   **Laravel** : Framework PHP open-source, élégant et puissant, offrant de nombreuses fonctionnalités (ORM, templating, routing, etc.).
-*   **Symfony** : Framework PHP open-source, flexible et réutilisable, adapté aux applications complexes.
-*   **CodeIgniter** : Framework PHP léger et simple à apprendre, idéal pour les projets de petite et moyenne taille.
-## 11. Composer (Gestionnaire de Dépendances)
+### Frameworks Populaires (Laravel, Symfony, CodeIgniter)
 
-### Installation et utilisation
+* **Laravel** : Framework PHP open-source, élégant et puissant, offrant de nombreuses fonctionnalités (ORM, templating, routing, etc.).
+* **Symfony** : Framework PHP open-source, flexible et réutilisable, adapté aux applications complexes.
+* **CodeIgniter** : Framework PHP léger et simple à apprendre, idéal pour les projets de petite et moyenne taille.
 
-*   Composer est un gestionnaire de dépendances pour PHP.
-*   Il permet de gérer les dépendances d'un projet PHP et de les installer facilement.
+## 11. Composer (Gestionnaire De Dépendances)
+
+### Installation Et Utilisation
+
+* Composer est un gestionnaire de dépendances pour PHP.
+* Il permet de gérer les dépendances d'un projet PHP et de les installer facilement.
 
 ### Autoloading
 
-*   Composer permet de générer un fichier d'autoloading qui charge automatiquement les classes utilisées dans le projet.
-## 12. Tests en PHP
+* Composer permet de générer un fichier d'autoloading qui charge automatiquement les classes utilisées dans le projet.
+
+## 12. Tests En PHP
 
 ### PHPUnit
 
-*   PHPUnit est un framework de test unitaire pour PHP.
-*   Il permet d'écrire des tests unitaires pour vérifier le comportement du code.
-## 13. Bonnes Pratiques et PSR
+* PHPUnit est un framework de test unitaire pour PHP.
+* Il permet d'écrire des tests unitaires pour vérifier le comportement du code.
 
-### Conventions de codage (PSR)
+## 13. Bonnes Pratiques Et PSR
 
-*   PSR (PHP Standards Recommendations) est un ensemble de recommandations pour le style de code PHP.
-*   Suivre les PSR permet d'assurer la cohérence et la lisibilité du code.
+### Conventions De Codage (PSR)
+
+* PSR (PHP Standards Recommendations) est un ensemble de recommandations pour le style de code PHP.
+* Suivre les PSR permet d'assurer la cohérence et la lisibilité du code.
 
 ### Sécurité
 
-*   Éviter les injections SQL.
-*   Valider les données utilisateur.
-*   Protéger les sessions et les cookies.
-*   Utiliser des fonctions de hachage robustes pour stocker les mots de passe.
-## 14. Ressources et Communauté
+* Éviter les injections SQL.
+* Valider les données utilisateur.
+* Protéger les sessions et les cookies.
+* Utiliser des fonctions de hachage robustes pour stocker les mots de passe.
 
-### Documentation officielle
+## 14. Ressources Et Communauté
 
-*   [PHP Manual](https://www.php.net/manual/fr/)
+### Documentation Officielle
 
-### Communautés en ligne
+* [PHP Manual](https://www.php.net/manual/fr/)
 
-*   [Stack Overflow](https://stackoverflow.com/)
-*   [Reddit (r/php)](https://www.reddit.com/r/php/)
+### Communautés En Ligne
+
+* [Stack Overflow](https://stackoverflow.com/)
+* [Reddit (r/php)](https://www.reddit.com/r/php/)
