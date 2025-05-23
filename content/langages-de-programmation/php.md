@@ -62,7 +62,15 @@ description: Langage de script côté serveur, largement utilisé pour le dével
 13. Bonnes Pratiques et PSR
     * Conventions de codage (PSR)
     * Sécurité
-14. Ressources et Communauté
+14. Concepts Avancés
+    * Générateurs
+    * Closures (Fonctions anonymes)
+    * Attributs (PHP 8+)
+15. Outils de Développement
+    * IDEs (VS Code, PhpStorm)
+    * Débogueurs (Xdebug)
+    * Linters et Formatters
+16. Ressources et Communauté
     * Documentation officielle
     * Communautés en ligne
 
@@ -582,6 +590,80 @@ require_once 'monfichier.php';
 
 * PSR (PHP Standards Recommendations) est un ensemble de recommandations pour le style de code PHP.
 * Suivre les PSR permet d'assurer la cohérence et la lisibilité du code.
+## 14. Concepts Avancés
+
+### Générateurs
+
+* Les générateurs permettent d'itérer sur un ensemble de données sans avoir à les stocker entièrement en mémoire.
+* Ils sont utiles pour travailler avec de grandes collections de données ou des flux infinis.
+* Utilisation du mot-clé `yield`.
+
+```php
+<?php
+function generateNumbers() {
+    for ($i = 0; $i < 5; $i++) {
+        yield $i;
+    }
+}
+
+foreach (generateNumbers() as $number) {
+    echo $number . " "; // 0 1 2 3 4
+}
+?>
+```
+
+### Closures (Fonctions Anonymes)
+
+* Les closures sont des fonctions sans nom qui peuvent être stockées dans une variable et passées en tant qu'arguments.
+* Elles peuvent accéder aux variables de leur portée parente en utilisant le mot-clé `use`.
+
+```php
+<?php
+$multiplier = 2;
+$multiply = function ($number) use ($multiplier) {
+    return $number * $multiplier;
+};
+
+echo $multiply(5); // 10
+?>
+```
+
+### Attributs (PHP 8+)
+
+* Les attributs (ou annotations) permettent d'ajouter des métadonnées aux classes, méthodes, propriétés et fonctions.
+* Ils sont définis avec `#[Attribute]`.
+
+```php
+<?php
+#[Attribute]
+class Route {
+    public function __construct(public string $path) {}
+}
+
+class UserController {
+    #[Route("/users")]
+    public function index() {
+        // ...
+    }
+}
+?>
+```
+
+## 15. Outils de Développement
+
+### IDEs (Environnements de Développement Intégrés)
+
+* **VS Code** : Éditeur de code léger et puissant avec de nombreuses extensions pour PHP.
+* **PhpStorm** : IDE complet et professionnel spécifiquement conçu pour le développement PHP.
+
+### Débogueurs
+
+* **Xdebug** : Extension PHP qui fournit des capacités de débogage, de profilage et d'analyse de couverture de code.
+
+### Linters et Formatters
+
+* **PHP_CodeSniffer** : Outil qui détecte les violations des standards de codage PHP.
+* **PHP-CS-Fixer** : Outil qui corrige automatiquement les violations des standards de codage PHP.
 
 ### Sécurité
 
