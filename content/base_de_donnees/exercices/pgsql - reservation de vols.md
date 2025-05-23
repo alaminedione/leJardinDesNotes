@@ -14,42 +14,42 @@ erDiagram
     AEROPORT ||--o{ VOL : est_destination
     COMPAGNIE_AERIENNE ||--o{ VOL : est_opere_par
     RESERVATION {
-        INTEGER id_reservation SERIAL PRIMARY KEY
-        INTEGER id_passager INTEGER REFERENCES PASSAGER(id_passager)
-        INTEGER id_vol INTEGER REFERENCES VOL(id_vol)
-        DATE date_reservation DATE NOT NULL DEFAULT CURRENT_DATE
-        INTEGER nombre_passagers INTEGER NOT NULL CHECK (nombre_passagers > 0)
-        VARCHAR statut VARCHAR(20) NOT NULL DEFAULT 'Confirmée'
+        INTEGER id_reservation PK
+        INTEGER id_passager FK
+        INTEGER id_vol FK
+        DATE date_reservation
+        INTEGER nombre_passagers
+        VARCHAR statut
     }
     PASSAGER {
-        INTEGER id_passager SERIAL PRIMARY KEY
-        VARCHAR nom VARCHAR(100) NOT NULL
-        VARCHAR prenom VARCHAR(100) NOT NULL
-        VARCHAR email VARCHAR(100) UNIQUE NOT NULL
-        VARCHAR telephone VARCHAR(20)
-        DATE date_naissance DATE
+        INTEGER id_passager PK
+        VARCHAR nom
+        VARCHAR prenom
+        VARCHAR email
+        VARCHAR telephone
+        DATE date_naissance
     }
     VOL {
-        INTEGER id_vol SERIAL PRIMARY KEY
-        INTEGER id_aeroport_depart INTEGER REFERENCES AEROPORT(id_aeroport)
-        INTEGER id_aeroport_arrivee INTEGER REFERENCES AEROPORT(id_aeroport)
-        INTEGER id_compagnie INTEGER REFERENCES COMPAGNIE_AERIENNE(id_compagnie)
-        TIMESTAMP heure_depart TIMESTAMP WITHOUT TIME ZONE NOT NULL
-        TIMESTAMP heure_arrivee TIMESTAMP WITHOUT TIME ZONE NOT NULL
-        INTEGER capacite INTEGER NOT NULL CHECK (capacite > 0)
-        NUMERIC prix NUMERIC(10, 2) NOT NULL CHECK (prix > 0)
+        INTEGER id_vol PK
+        INTEGER id_aeroport_depart FK
+        INTEGER id_aeroport_arrivee FK
+        INTEGER id_compagnie FK
+        TIMESTAMP heure_depart
+        TIMESTAMP heure_arrivee
+        INTEGER capacite
+        NUMERIC prix
     }
     AEROPORT {
-        INTEGER id_aeroport SERIAL PRIMARY KEY
-        VARCHAR code_iata VARCHAR(3) UNIQUE NOT NULL
-        VARCHAR nom_aeroport VARCHAR(200) NOT NULL
-        VARCHAR ville VARCHAR(100) NOT NULL
-        VARCHAR pays VARCHAR(100) NOT NULL
+        INTEGER id_aeroport PK
+        VARCHAR code_iata
+        VARCHAR nom_aeroport
+        VARCHAR ville
+        VARCHAR pays
     }
     COMPAGNIE_AERIENNE {
-        INTEGER id_compagnie SERIAL PRIMARY KEY
-        VARCHAR nom_compagnie VARCHAR(200) UNIQUE NOT NULL
-        VARCHAR code_icao VARCHAR(3) UNIQUE
+        INTEGER id_compagnie PK
+        VARCHAR nom_compagnie
+        VARCHAR code_icao
     }
 ```
 

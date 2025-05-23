@@ -17,80 +17,80 @@ erDiagram
     PRODUIT ||--o{ LIGNE_COMMANDE_CLIENT : concerne
     CLIENT ||--o{ COMMANDE_CLIENT : effectue
     MOUVEMENT_STOCK {
-        INTEGER id_mouvement SERIAL PRIMARY KEY
-        INTEGER id_produit INTEGER REFERENCES PRODUIT(id_produit)
-        INTEGER id_entrepot INTEGER REFERENCES ENTREPOT(id_entrepot)
-        TIMESTAMP date_mouvement TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP
-        VARCHAR type_mouvement VARCHAR(20) NOT NULL CHECK (type_mouvement IN ('Entree', 'Sortie'))
-        INTEGER quantite INTEGER NOT NULL CHECK (quantite > 0)
-        VARCHAR reference VARCHAR(50)
+        INTEGER id_mouvement PK
+        INTEGER id_produit FK
+        INTEGER id_entrepot FK
+        TIMESTAMP date_mouvement
+        VARCHAR type_mouvement
+        INTEGER quantite
+        VARCHAR reference
     }
     PRODUIT {
-        INTEGER id_produit SERIAL PRIMARY KEY
-        VARCHAR nom_produit VARCHAR(200) NOT NULL UNIQUE
+        INTEGER id_produit PK
+        VARCHAR nom_produit
         TEXT description
-        NUMERIC prix_achat NUMERIC(10, 2) NOT NULL CHECK (prix_achat >= 0)
-        NUMERIC prix_vente NUMERIC(10, 2) NOT NULL CHECK (prix_vente > prix_achat)
-        INTEGER stock_actuel INTEGER NOT NULL DEFAULT 0 CHECK (stock_actuel >= 0)
-        INTEGER seuil_reapprovisionnement INTEGER NOT NULL DEFAULT 10 CHECK (seuil_reapprovisionnement >= 0)
-        INTEGER id_fournisseur INTEGER REFERENCES FOURNISSEUR(id_fournisseur)
+        NUMERIC prix_achat
+        NUMERIC prix_vente
+        INTEGER stock_actuel
+        INTEGER seuil_reapprovisionnement
+        INTEGER id_fournisseur FK
     }
     ENTREPOT {
-        INTEGER id_entrepot SERIAL PRIMARY KEY
-        VARCHAR nom_entrepot VARCHAR(200) NOT NULL UNIQUE
-        VARCHAR adresse VARCHAR(200)
-        VARCHAR ville VARCHAR(100)
-        VARCHAR pays VARCHAR(100)
+        INTEGER id_entrepot PK
+        VARCHAR nom_entrepot
+        VARCHAR adresse
+        VARCHAR ville
+        VARCHAR pays
     }
     FOURNISSEUR {
-        INTEGER id_fournisseur SERIAL PRIMARY KEY
-        VARCHAR nom_fournisseur VARCHAR(200) NOT NULL UNIQUE
-        VARCHAR adresse VARCHAR(200)
-        VARCHAR ville VARCHAR(100)
-        VARCHAR pays VARCHAR(100)
-        VARCHAR telephone VARCHAR(20)
-        VARCHAR email VARCHAR(100)
+        INTEGER id_fournisseur PK
+        VARCHAR nom_fournisseur
+        VARCHAR adresse
+        VARCHAR ville
+        VARCHAR pays
+        VARCHAR telephone
+        VARCHAR email
     }
     COMMANDE_FOURNISSEUR {
-        INTEGER id_commande_fournisseur SERIAL PRIMARY KEY
-        INTEGER id_fournisseur INTEGER REFERENCES FOURNISSEUR(id_fournisseur)
-        DATE date_commande DATE NOT NULL DEFAULT CURRENT_DATE
-        DATE date_livraison_prevue DATE
-        VARCHAR statut VARCHAR(20) NOT NULL DEFAULT 'En cours' CHECK (statut IN ('En cours', 'Livrée', 'Annulée'))
-        VARCHAR reference VARCHAR(50) UNIQUE
+        INTEGER id_commande_fournisseur PK
+        INTEGER id_fournisseur FK
+        DATE date_commande
+        DATE date_livraison_prevue
+        VARCHAR statut
+        VARCHAR reference
     }
     LIGNE_COMMANDE_FOURNISSEUR {
-        INTEGER id_ligne_commande_fournisseur SERIAL PRIMARY KEY
-        INTEGER id_commande_fournisseur INTEGER REFERENCES COMMANDE_FOURNISSEUR(id_commande_fournisseur)
-        INTEGER id_produit INTEGER REFERENCES PRODUIT(id_produit)
-        INTEGER quantite_commandee INTEGER NOT NULL CHECK (quantite_commandee > 0)
-        NUMERIC prix_unitaire_achat NUMERIC(10, 2) NOT NULL CHECK (prix_unitaire_achat >= 0)
+        INTEGER id_ligne_commande_fournisseur PK
+        INTEGER id_commande_fournisseur FK
+        INTEGER id_produit FK
+        INTEGER quantite_commandee
+        NUMERIC prix_unitaire_achat
     }
     COMMANDE_CLIENT {
-        INTEGER id_commande_client SERIAL PRIMARY KEY
-        INTEGER id_client INTEGER REFERENCES CLIENT(id_client)
-        DATE date_commande DATE NOT NULL DEFAULT CURRENT_DATE
-        VARCHAR statut VARCHAR(20) NOT NULL DEFAULT 'En attente' CHECK (statut IN ('En attente', 'Traitée', 'Expédiée', 'Livrée', 'Annulée'))
-        NUMERIC montant_total NUMERIC(10, 2) NOT NULL DEFAULT 0 CHECK (montant_total >= 0)
-        VARCHAR reference VARCHAR(50) UNIQUE
+        INTEGER id_commande_client PK
+        INTEGER id_client FK
+        DATE date_commande
+        VARCHAR statut
+        NUMERIC montant_total
+        VARCHAR reference
     }
     LIGNE_COMMANDE_CLIENT {
-        INTEGER id_ligne_commande_client SERIAL PRIMARY KEY
-        INTEGER id_commande_client INTEGER REFERENCES COMMANDE_CLIENT(id_commande_client)
-        INTEGER id_produit INTEGER REFERENCES PRODUIT(id_produit)
-        INTEGER quantite_commandee INTEGER NOT NULL CHECK (quantite_commandee > 0)
-        NUMERIC prix_unitaire_vente NUMERIC(10, 2) NOT NULL CHECK (prix_unitaire_vente >= 0)
+        INTEGER id_ligne_commande_client PK
+        INTEGER id_commande_client FK
+        INTEGER id_produit FK
+        INTEGER quantite_commandee
+        NUMERIC prix_unitaire_vente
     }
     CLIENT {
-        INTEGER id_client SERIAL PRIMARY KEY
-        VARCHAR nom VARCHAR(100) NOT NULL
-        VARCHAR prenom VARCHAR(100) NOT NULL
-        VARCHAR email VARCHAR(100) UNIQUE NOT NULL
-        VARCHAR adresse VARCHAR(200)
-        VARCHAR ville VARCHAR(100)
-        VARCHAR pays VARCHAR(100)
-        VARCHAR telephone VARCHAR(20)
-        DATE date_inscription DATE NOT NULL DEFAULT CURRENT_DATE
+        INTEGER id_client PK
+        VARCHAR nom
+        VARCHAR prenom
+        VARCHAR email
+        VARCHAR adresse
+        VARCHAR ville
+        VARCHAR pays
+        VARCHAR telephone
+        DATE date_inscription
     }
 ```
 

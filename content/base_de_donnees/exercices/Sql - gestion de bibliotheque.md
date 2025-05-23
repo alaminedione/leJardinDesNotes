@@ -11,39 +11,39 @@ erDiagram
     LIVRE ||--o{ EMPRUNT : est_emprunte
     ADHERENT ||--o{ EMPRUNT : emprunte
     EMPRUNT {
-        INTEGER id_emprunt PK
-        INTEGER id_livre FK
-        INTEGER id_adherent FK
-        DATE date_emprunt
-        DATE date_retour_prevue
-        DATE date_retour_effective
+        id_emprunt PK
+        id_livre FK
+        id_adherent FK
+        date_emprunt
+        date_retour_prevue
+        date_retour_effective
     }
     AUTEUR ||--o{ LIVRE : a_ecrit
     LIVRE {
-        INTEGER id_livre PK
-        VARCHAR titre
-        VARCHAR isbn
-        INTEGER id_auteur FK
-        INTEGER id_genre FK
-        INTEGER nombre_exemplaires
+        id_livre PK
+        titre
+        isbn
+        id_auteur FK
+        id_genre FK
+        nombre_exemplaires
     }
     GENRE ||--o{ LIVRE : est_de_genre
     ADHERENT {
-        INTEGER id_adherent PK
-        VARCHAR nom
-        VARCHAR prenom
-        VARCHAR adresse
-        VARCHAR telephone
-        DATE date_inscription
+        id_adherent PK
+        nom
+        prenom
+        adresse
+        telephone
+        date_inscription
     }
     AUTEUR {
-        INTEGER id_auteur PK
-        VARCHAR nom_auteur
-        VARCHAR prenom_auteur
+        id_auteur PK
+        nom_auteur
+        prenom_auteur
     }
     GENRE {
-        INTEGER id_genre PK
-        VARCHAR nom_genre
+        id_genre PK
+        nom_genre
     }
 ```
 

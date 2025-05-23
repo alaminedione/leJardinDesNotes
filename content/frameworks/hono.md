@@ -774,8 +774,5 @@ app.get('/health', async (c) => {
 - [Examples](https://github.com/honojs/examples)
 - [Discord Community](https://discord.gg/KQh8xZyknB)
 
-## Notes de Maintenance
 
-Ce guide est régulièrement mis à jour pour refléter les meilleures pratiques et les nouvelles fonctionnalités de Hono. Pour toute suggestion ou correction, n'hésitez pas à contribuer via GitHub.
 
-Dernière mise à jour : 2024-01

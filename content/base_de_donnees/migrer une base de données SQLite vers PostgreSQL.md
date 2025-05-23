@@ -4,7 +4,7 @@ Pour migrer une base de données SQLite vers PostgreSQL, voici une approche stru
 
 ## Méthode Simple Avec Pgloader
 
-La méthode la plus directe utilise pgloader 26:2 :
+La méthode la plus directe utilise pgloader :
 
 ```bash
 # Installation
@@ -45,7 +45,7 @@ psql -d nom_base -U utilisateur -f dump_pg.sql
 
 ###  Adaptations Nécessaires
 
-1. **Types de Données** 26:1 :
+1. **Types de Données** :
   - INTEGER PRIMARY KEY → SERIAL PRIMARY KEY
   - DATETIME → TIMESTAMP
   - BOOLEAN → SMALLINT

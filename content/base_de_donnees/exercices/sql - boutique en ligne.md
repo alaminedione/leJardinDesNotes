@@ -10,52 +10,52 @@ Extrait de code
 erDiagram
     CLIENT ||--o{ COMMANDE : passe
     COMMANDE {
-        INTEGER id_commande PK
-        DATE date_commande
-        INTEGER id_client FK
-        FLOAT montant_total
-        VARCHAR etat
+        id_commande PK
+        date_commande
+        id_client FK
+        montant_total
+        etat
     }
     PRODUIT ||--o{ LIGNE_COMMANDE : contient
     COMMANDE ||--o{ LIGNE_COMMANDE : inclut
     LIGNE_COMMANDE {
-        INTEGER id_ligne_commande PK
-        INTEGER id_commande FK
-        INTEGER id_produit FK
-        INTEGER quantite
-        FLOAT prix_unitaire
+        id_ligne_commande PK
+        id_commande FK
+        id_produit FK
+        quantite
+        prix_unitaire
     }
     CATEGORIE ||--o{ PRODUIT : appartient
     PRODUIT {
-        INTEGER id_produit PK
-        VARCHAR nom_produit
-        TEXT description
-        FLOAT prix
-        INTEGER id_categorie FK
-        INTEGER stock
+        id_produit PK
+        nom_produit
+        description
+        prix
+        id_categorie FK
+        stock
     }
     FOURNISSEUR ||--o{ PRODUIT : fournit
     PRODUIT {
-        INTEGER id_fournisseur FK
+        id_fournisseur FK
     }
     CLIENT {
-        INTEGER id_client PK
-        VARCHAR nom
-        VARCHAR prenom
-        VARCHAR email
-        VARCHAR adresse
-        VARCHAR telephone
+        id_client PK
+        nom
+        prenom
+        email
+        adresse
+        telephone
     }
     CATEGORIE {
-        INTEGER id_categorie PK
-        VARCHAR nom_categorie
+        id_categorie PK
+        nom_categorie
     }
     FOURNISSEUR {
-        INTEGER id_fournisseur PK
-        VARCHAR nom_fournisseur
-        VARCHAR adresse_fournisseur
-        VARCHAR telephone_fournisseur
-        VARCHAR email_fournisseur
+        id_fournisseur PK
+        nom_fournisseur
+        adresse_fournisseur
+        telephone_fournisseur
+        email_fournisseur
     }
 ```
 

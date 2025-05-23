@@ -14,53 +14,53 @@ erDiagram
     EMPLOYE ||--o{ AFFECTATION : est_assigne_a
     TACHE ||--o{ AFFECTATION : concerne
     PROJET {
-        INTEGER id_projet PK
-        VARCHAR nom_projet
-        DATE date_debut
-        DATE date_fin_prevue
-        DATE date_fin_reelle
-        VARCHAR statut
+        id_projet PK
+        nom_projet
+        date_debut
+        date_fin_prevue
+        date_fin_reelle
+        statut
     }
     TACHE {
-        INTEGER id_tache PK
-        VARCHAR nom_tache
-        TEXT description
-        DATE date_debut_prevue
-        DATE date_fin_prevue
-        DATE date_fin_reelle
-        INTEGER id_projet FK
-        INTEGER priorite
-        VARCHAR statut
+        id_tache PK
+        nom_tache
+        description
+        date_debut_prevue
+        date_fin_prevue
+        date_fin_reelle
+        id_projet FK
+        priorite
+        statut
     }
     EMPLOYE {
-        INTEGER id_employe PK
-        VARCHAR nom
-        VARCHAR prenom
-        VARCHAR email
-        VARCHAR telephone
-        VARCHAR poste
+        id_employe PK
+        nom
+        prenom
+        email
+        telephone
+        poste
     }
     PARTICIPATION {
-        INTEGER id_participation PK
-        INTEGER id_employe FK
-        INTEGER id_projet FK
-        VARCHAR role
-        DATE date_debut_participation
-        DATE date_fin_participation
+        id_participation PK
+        id_employe FK
+        id_projet FK
+        role
+        date_debut_participation
+        date_fin_participation
     }
     DEPENDANCE {
-        INTEGER id_dependance PK
-        INTEGER id_tache_predecesseur FK
-        INTEGER id_tache_successeur FK
-        VARCHAR type_dependance
+        id_dependance PK
+        id_tache_predecesseur FK
+        id_tache_successeur FK
+        type_dependance
     }
     AFFECTATION {
-        INTEGER id_affectation PK
-        INTEGER id_employe FK
-        INTEGER id_tache FK
-        DATE date_debut_affectation
-        DATE date_fin_affectation
-        FLOAT taux_effort
+        id_affectation PK
+        id_employe FK
+        id_tache FK
+        date_debut_affectation
+        date_fin_affectation
+        taux_effort
     }
 ```
 
@@ -298,5 +298,3 @@ Accrochez-vous, voici une longue liste de requêtes SQL pour explorer votre base
 103. Trouvez le projet avec la durée moyenne des tâches la plus longue.
 104. Identifiez les tâches critiques (celles qui ont au moins une dépendance successeur).
 105. Trouvez les employés qui n'ont participé à aucun projet terminé.
-
-Voilà ! Plus de 100 requêtes pour vous occuper un moment. N'hésitez pas si vous avez des questions sur la structure ou l'insertion des données. Bon courage pour l'exécution de toutes ces requêtes !

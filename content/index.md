@@ -6,24 +6,20 @@ Bienvenue. Cet espace regroupe mes notes personnelles sur le développement, l'a
 
 
 ```
-           _,--._.-,
-          /\_r-,\_ )
-       .-.) _;='_/ (.;
-        \ \'     \/S )
-         L.'-. _.'|-'
-         <_`-'\'_.'/
-           `'-._( \
-                ;-'
-                /
-              .'
-             (
-             `-
+						           _,--._.-,
+						          /\_r-,\_ )
+						       .-.) _;='_/ (.;
+						        \ \'     \/S )
+						         L.'-. _.'|-'
+						         <_`-'\'_.'/
+						           `'-._( \   
+						                ;-'
+						                /
+						              .'
+						             (
+						             `-
 ```
 
-## Catégories
-Voici une proposition d’amélioration des icônes (emojis) pour ta liste de catégories, en choisissant des emojis plus précis, professionnels et parlants selon chaque thème, tout en restant cohérent et clair :
-
----
 
 ## Catégories
 

@@ -16,65 +16,64 @@ erDiagram
     OPPORTUNITE ||--o{ ACTIVITE : est_liee_a
     VENDEUR ||--o{ ACTIVITE : est_realisee_par
     OBJECTIF {
-        INTEGER id_objectif SERIAL PRIMARY KEY
-        INTEGER id_vendeur INTEGER REFERENCES VENDEUR(id_vendeur)
-        INTEGER annee INTEGER NOT NULL
-        VARCHAR type_objectif VARCHAR(50) NOT NULL CHECK (type_objectif IN ('Ventes', 'Appels', 'RDV'))
-        NUMERIC valeur_cible NUMERIC(12, 2) NOT NULL CHECK (valeur_cible >= 0)
-        DATE date_creation DATE NOT NULL DEFAULT CURRENT_DATE
-        UNIQUE (id_vendeur, annee, type_objectif)
+        INTEGER id_objectif PK
+        INTEGER id_vendeur FK
+        INTEGER annee
+        VARCHAR type_objectif
+        NUMERIC valeur_cible
+        DATE date_creation
     }
     VENDEUR {
-        INTEGER id_vendeur SERIAL PRIMARY KEY
-        INTEGER id_equipe INTEGER REFERENCES EQUIPE_VENTE(id_equipe)
-        VARCHAR nom VARCHAR(100) NOT NULL
-        VARCHAR prenom VARCHAR(100) NOT NULL
-        VARCHAR email VARCHAR(100) UNIQUE NOT NULL
-        VARCHAR telephone VARCHAR(20)
-        DATE date_embauche DATE
+        INTEGER id_vendeur PK
+        INTEGER id_equipe FK
+        VARCHAR nom
+        VARCHAR prenom
+        VARCHAR email
+        VARCHAR telephone
+        DATE date_embauche
     }
     EQUIPE_VENTE {
-        INTEGER id_equipe SERIAL PRIMARY KEY
-        VARCHAR nom_equipe VARCHAR(200) NOT NULL UNIQUE
-        INTEGER id_manager INTEGER REFERENCES VENDEUR(id_vendeur) -- Auto-référence pour le manager
+        INTEGER id_equipe PK
+        VARCHAR nom_equipe
+        INTEGER id_manager FK
     }
     CLIENT {
-        INTEGER id_client SERIAL PRIMARY KEY
-        VARCHAR nom_entreprise VARCHAR(200) NOT NULL UNIQUE
-        VARCHAR contact_principal VARCHAR(200)
-        VARCHAR email VARCHAR(100)
-        VARCHAR telephone VARCHAR(20)
-        VARCHAR secteur_activite VARCHAR(100)
-        VARCHAR adresse VARCHAR(200)
+        INTEGER id_client PK
+        VARCHAR nom_entreprise
+        VARCHAR contact_principal
+        VARCHAR email
+        VARCHAR telephone
+        VARCHAR secteur_activite
+        VARCHAR adresse
     }
     OPPORTUNITE {
-        INTEGER id_opportunite SERIAL PRIMARY KEY
-        INTEGER id_client INTEGER REFERENCES CLIENT(id_client)
-        INTEGER id_vendeur INTEGER REFERENCES VENDEUR(id_vendeur)
-        INTEGER id_produit INTEGER REFERENCES PRODUIT(id_produit)
-        VARCHAR nom_opportunite VARCHAR(200) NOT NULL
-        DATE date_creation DATE NOT NULL DEFAULT CURRENT_DATE
-        DATE date_echeance DATE
-        VARCHAR etape_vente VARCHAR(50) NOT NULL CHECK (etape_vente IN ('Prospection', 'Qualification', 'Proposition', 'Négociation', 'Gagnée', 'Perdue'))
-        NUMERIC valeur_potentielle NUMERIC(12, 2) NOT NULL CHECK (valeur_potentielle >= 0)
-        NUMERIC probabilite_succes NUMERIC(3, 2) CHECK (probabilite_succes >= 0 AND probabilite_succes <= 1)
-        DATE date_cloture DATE
-        VARCHAR raison_perte TEXT
+        INTEGER id_opportunite PK
+        INTEGER id_client FK
+        INTEGER id_vendeur FK
+        INTEGER id_produit FK
+        VARCHAR nom_opportunite
+        DATE date_creation
+        DATE date_echeance
+        VARCHAR etape_vente
+        NUMERIC valeur_potentielle
+        NUMERIC probabilite_succes
+        DATE date_cloture
+        VARCHAR raison_perte
     }
     PRODUIT {
-        INTEGER id_produit SERIAL PRIMARY KEY
-        VARCHAR nom_produit VARCHAR(200) NOT NULL UNIQUE
+        INTEGER id_produit PK
+        VARCHAR nom_produit
         TEXT description
-        NUMERIC prix NUMERIC(10, 2) NOT NULL CHECK (prix > 0)
+        NUMERIC prix
     }
     ACTIVITE {
-        INTEGER id_activite SERIAL PRIMARY KEY
-        INTEGER id_opportunite INTEGER REFERENCES OPPORTUNITE(id_opportunite)
-        INTEGER id_vendeur INTEGER REFERENCES VENDEUR(id_vendeur)
-        TIMESTAMP date_heure TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP
-        VARCHAR type_activite VARCHAR(50) NOT NULL CHECK (type_activite IN ('Appel', 'Email', 'RDV', 'Démo', 'Présentation', 'Autre'))
+        INTEGER id_activite PK
+        INTEGER id_opportunite FK
+        INTEGER id_vendeur FK
+        TIMESTAMP date_heure
+        VARCHAR type_activite
         TEXT description
-        VARCHAR statut VARCHAR(20) NOT NULL DEFAULT 'Planifiée' CHECK (statut IN ('Planifiée', 'Réalisée', 'Annulée'))
+        VARCHAR statut
     }
 ```
 
