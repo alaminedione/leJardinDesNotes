@@ -6,7 +6,7 @@ Parfait ! Voici un autre exercice complet de SQL (SQLite), cette fois-ci sur une
 
 Extrait de code
 
-```
+```mermaid
 erDiagram
     LIVRE ||--o{ EMPRUNT : est_emprunte
     ADHERENT ||--o{ EMPRUNT : emprunte

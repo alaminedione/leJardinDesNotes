@@ -6,7 +6,7 @@ Absolument ! Puisque vous souhaitez explorer des fonctionnalités avancées spé
 
 **1. Modèle Logique des Données (MLD) en ER Diagram**
 
-```
+```mermaid
 erDiagram
     PASSAGER ||--o{ RESERVATION : effectue
     VOL ||--o{ RESERVATION : concerne
@@ -197,4 +197,4 @@ Maintenant, exécutez une série de requêtes SQL avancées pour interroger votr
 29. Affichez les aéroports qui n'ont aucun vol au départ.
 30. Affichez les compagnies aériennes qui n'ont aucun vol à destination d'un aéroport spécifique.
 
-Et ainsi de suite… Continuez à explorer les possibilités offertes par PostgreSQL ! N'hésitez pas à imaginer d'autres scénarios et à écrire des requêtes pour les résoudre. Cet exercice devrait vous donner une solide base pour travailler avec PostgreSQL et ses fonctionnalités avancées. Bonne exploration !
+

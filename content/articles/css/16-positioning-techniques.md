@@ -24,7 +24,6 @@ Voici les valeurs principales de `position` :
 
 2.  **`relative`** : L'élément est positionné selon le flux normal du document, **puis** il est décalé par rapport à sa position *initiale* en utilisant les propriétés `top`, `right`, `bottom`, `left`. L'espace qu'il occupait dans le flux normal est **préservé**, ce qui signifie que les autres éléments ne viendront pas prendre sa place.
     ```css
-    /dev/null/position.css#L1-6
     .element-relative {
       position: relative;
       top: 20px;
@@ -37,7 +36,6 @@ Voici les valeurs principales de `position` :
 
 3.  **`absolute`** : L'élément est retiré du flux normal du document. Les autres éléments se positionnent comme si l'élément `absolute` n'existait pas. L'élément `absolute` est positionné par rapport à son **ancêtre positionné le plus proche** (un ancêtre dont la `position` n'est PAS `static`). S'il n'a pas d'ancêtre positionné, il est positionné par rapport à l'élément `<html>` initial (la fenêtre d'affichage si le `<body>` ou `<html>` a des marges/padding, sinon le coin supérieur gauche de la page).
     ```css
-    /dev/null/position.css#L8-15
     .parent {
       position: relative; /* Contexte de positionnement pour l\'enfant */
     }
@@ -53,7 +51,6 @@ Voici les valeurs principales de `position` :
 
 4.  **`fixed`** : L'élément est retiré du flux normal du document. Il est positionné par rapport à la **fenêtre d'affichage (viewport)** et reste à cet endroit même lorsque la page défile.
     ```css
-    /dev/null/position.css#L17-22
     .fixed-header {
       position: fixed;
       top: 0;
@@ -67,7 +64,6 @@ Voici les valeurs principales de `position` :
 
 5.  **`sticky`** : Un hybride entre `relative` et `fixed`. L'élément est positionné selon le flux normal du document (`relative`) jusqu'à ce que sa position de défilement atteigne un certain seuil défini par `top`, `right`, `bottom`, ou `left` dans son **conteneur de défilement** (l'ancêtre le plus proche avec un conteneur de défilement). À ce moment-là, il se comporte comme un élément `fixed` jusqu'à ce que son conteneur de défilement sorte de l'écran.
     ```css
-    /dev/null/position.css#L24-29
     .sticky-element {
       position: sticky;
       top: 0;
@@ -100,7 +96,6 @@ La propriété `z-index` contrôle l'ordre d'empilement des éléments qui se ch
 -   Lorsque vous spécifiez un `z-index` sur un élément, vous créez un nouveau **contexte d'empilement** pour cet élément et ses enfants. Les enfants de cet élément ne pourront être empilés qu'au-dessus ou en dessous de leur parent *à l'intérieur* de ce contexte, indépendamment des autres éléments de la page qui sont en dehors de ce contexte. Comprendre les contextes d'empilement est crucial pour déboguer les problèmes de `z-index`.
 
 ```css
-/dev/null/z-index.css#L1-14
 .box {
   position: absolute; /* z-index ne fonctionne qu\'avec une position autre que static */
   width: 100px;
@@ -136,7 +131,6 @@ La propriété `z-index` contrôle l'ordre d'empilement des éléments qui se ch
 Positionner un élément absolument au centre exact de son conteneur positionné :
 
 ```css
-/dev/null/centering.css#L1-10
 .parent {
   position: relative;
   width: 400px; /* Exemple */
@@ -157,7 +151,6 @@ Positionner un élément absolument au centre exact de son conteneur positionné
 Utiliser `position: fixed` pour créer un fond semi-transparent (overlay) et une modale centrée qui couvrent toute la fenêtre, même en défilant :
 
 ```css
-/dev/null/overlay-modal.css#L1-17
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -185,7 +178,6 @@ Utiliser `position: fixed` pour créer un fond semi-transparent (overlay) et une
 Positionner de petits éléments comme des badges ou des icônes dans un coin d'un conteneur positionné :
 
 ```css
-/dev/null/corner-element.css#L1-9
 .product-card {
   position: relative; /* Contexte pour le badge */
   /* Autres styles de la carte */
@@ -208,7 +200,6 @@ Positionner de petits éléments comme des badges ou des icônes dans un coin d'
 Utiliser `position: fixed` pour des barres qui restent visibles en haut ou en bas de la fenêtre :
 
 ```css
-/dev/null/fixed-bars.css#L1-15
 .site-header {
   position: fixed;
   top: 0;

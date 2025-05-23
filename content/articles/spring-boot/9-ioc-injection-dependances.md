@@ -11,7 +11,8 @@ Dans le développement logiciel traditionnel, un objet est généralement respon
 ### Problèmes résolus par l'IoC et la DI
 
 Sans l'IoC et la DI, les objets "tirent" leurs dépendances. Par exemple, une classe `ServiceA` pourrait créer directement une instance d'une classe `RepositoryB`.
-```/dev/null/example.java
+
+```java
 public class ServiceA {
     private RepositoryB repositoryB = new RepositoryB(); // Couplage fort
 
@@ -37,7 +38,7 @@ Le cœur de Spring est son **conteneur IoC**. Il est responsable de l'instanciat
 Spring propose plusieurs façons d'injecter des dépendances dans un bean :
 
 1.  **Injection par constructeur**: Les dépendances sont fournies via les arguments du constructeur de la classe. C'est la méthode **recommandée** car elle garantit que l'objet est dans un état valide immédiatement après sa création (toutes les dépendances requises sont présentes) et facilite les tests unitaires.
-    ```/dev/null/example.java
+    ```java
     @Service
     public class MyService {
         private final MyRepository myRepository;
@@ -51,7 +52,7 @@ Spring propose plusieurs façons d'injecter des dépendances dans un bean :
     ```
 
 2.  **Injection par setter**: Les dépendances sont injectées via des méthodes setter. Cette méthode est utile pour les dépendances optionnelles ou lorsque vous avez besoin d'éviter les références circulaires (bien que l'injection par constructeur puisse souvent être restructurée pour éviter cela).
-    ```/dev/null/example.java
+    ```java
     @Service
     public class MyService {
         private MyRepository myRepository;
@@ -65,7 +66,7 @@ Spring propose plusieurs façons d'injecter des dépendances dans un bean :
     ```
 
 3.  **Injection par champ (@Autowired)**: Les dépendances sont injectées directement dans les champs de la classe en utilisant l'annotation `@Autowired`. C'est la méthode la plus simple syntactiquement mais **souvent déconseillée** car elle rend le code plus difficile à tester (vous ne pouvez pas facilement instancier la classe dans un test unitaire sans l'aide d'un conteneur Spring ou de reflection/Mockito, et le champ `final` n'est pas possible).
-    ```/dev/null/example.java
+    ```java
     @Service
     public class MyService {
         @Autowired
@@ -83,7 +84,7 @@ Les scopes définissent quand et comment de nouvelles instances d'un bean sont c
 -   **request, session, application, websocket**: Scopes spécifiques aux applications web, liés au cycle de vie d'une requête HTTP, d'une session utilisateur, du contexte de l'application web ou d'une session WebSocket.
 
 Vous pouvez spécifier le scope d'un bean en utilisant l'annotation `@Scope`:
-```/dev/null/example.java
+```java
 @Component
 @Scope("prototype")
 public class MyPrototypeBean {
@@ -112,7 +113,7 @@ Spring propose plusieurs façons de configurer le conteneur IoC et de définir v
     ```
 
 -   **XML Config**: Configuration des beans et de leurs dépendances via des fichiers XML. C'est la méthode traditionnelle mais moins courante dans les applications modernes, surtout avec Spring Boot.
-    ```/dev/null/example.xml
+    ```xml
     <beans>
         <bean id="myService" class="com.example.MyService">
             <constructor-arg ref="myRepository"/>

@@ -7,7 +7,6 @@ tags:
   - Tailwind CSS
 draft: false
 ---
-```articles/css/article-10-css-frameworks.md
 # Article 10 : CSS Frameworks et Utilitaires
 
 ## Introduction
@@ -113,4 +112,3 @@ Il est également possible de n'utiliser qu'une partie d'un framework ou même d
 
 *   Outils de build modernes (Webpack, Parcel, Vite) pour intégrer les frameworks basés sur PostCSS/Sass.
 *   Extensions d'éditeur de code (comme les extensions Tailwind CSS) pour l'autocomplétion des classes.
-```

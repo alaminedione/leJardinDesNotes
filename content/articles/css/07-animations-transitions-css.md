@@ -1,5 +1,5 @@
 ---
-title: Animations et transitions CSS : Donnez vie à vos interfaces
+title: Animations et transitions CSS , Donnez vie à vos interfaces
 tags:
   - CSS
   - Animations
@@ -34,7 +34,6 @@ Il existe également une **notation raccourcie** `transition` qui combine toutes
 Exemple :
 
 ```css
-/dev/null/transitions.css#L1-8
 .button {
   background-color: blue;
   transition-property: background-color, transform; /* Transition sur la couleur de fond et la transformation */
@@ -55,7 +54,6 @@ Les animations CSS permettent de créer des séquences d'animation plus complexe
 La règle `@keyframes` définit les étapes (ou "keyfr**ames**") d'une animation. Chaque keyframe représente un pourcentage de la durée totale de l'animation, indiquant l'état des propriétés CSS à ce moment précis. Vous devez toujours définir les états `0%` (début, équivalent à `from`) et `100%` (fin, équivalent à `to`).
 
 ```css
-/dev/null/keyframes.css#L1-7
 @keyframes slidein {
   0% {
     transform: translateX(0);
@@ -91,7 +89,6 @@ Là aussi, une **notation raccourcie** `animation` est disponible : `animation: 
 Exemple d'application :
 
 ```css
-/dev/null/animations.css#L1-6
 .element {
   animation-name: slidein;
   animation-duration: 2s;
@@ -134,7 +131,6 @@ Propriétés qui ne sont généralement PAS animables : `display`, `position`, `
 Les transitions sont parfaites pour ajouter des effets subtils et réactifs sur les états `:hover`, `:focus`, ou `:active`.
 
 ```html
-/dev/null/hover-effect.html#L1-19
 <button class="interactive-button">Passez la souris</button>
 
 <style>
@@ -166,7 +162,6 @@ Les transitions sont parfaites pour ajouter des effets subtils et réactifs sur 
 Les animations `@keyframes` sont idéales pour créer des éléments qui bouclent continuellement, comme les indicateurs de chargement.
 
 ```html
-/dev/null/loader.html#L1-27
 <div class="loader"></div>
 
 <style>
@@ -192,7 +187,6 @@ Les animations `@keyframes` sont idéales pour créer des éléments qui bouclen
 En utilisant plusieurs keyframes ou en combinant des délais, vous pouvez créer des séquences.
 
 ```html
-/dev/null/sequence.html#L1-22
 <div class="sequenced-element"></div>
 
 <style>
@@ -239,7 +233,6 @@ En privilégiant l'animation des propriétés `opacity` et `transform`, vous pou
 Les animations peuvent provoquer de la fatigue oculaire, des vertiges ou même des crises pour les personnes souffrant de troubles vestibulaires ou d'épilepsie. Il est essentiel de respecter les préférences de l'utilisateur. Le CSS propose la média query `prefers-reduced-motion`:
 
 ```css
-/dev/null/reduced-motion.css#L1-5
 @media (prefers-reduced-motion: reduce) {
   /* Désactive ou réduit drastiquement les animations complexes */
   .element-to-animate {

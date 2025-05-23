@@ -1,10 +1,11 @@
 ---
-title: Le modèle de boîte CSS : Comprendre le layout fondamental
+title: Le modèle de boîte CSS , Comprendre le layout fondamental
 tags:
   - CSS
   - Box Model
 draft: false
 ---
+
 # Le modèle de boîte CSS : Comprendre le layout fondamental
 
 ## Introduction
@@ -53,4 +54,3 @@ Une particularité des marges verticales est qu'elles peuvent "s'effondrer" (col
 
 La maîtrise du modèle de boîte CSS est une étape fondamentale vers la création de layouts précis et fiables. Comprendre l'interaction entre contenu, padding, border et margin, ainsi que l'impact de `box-sizing`, vous permettra de construire des structures solides. L'utilisation du modèle `border-box` est devenue une pratique courante pour simplifier le calcul des dimensions.
 
-N'oubliez pas d'utiliser les outils d'inspection du navigateur pour visualiser et déboguer vos boîtes. C'est la meilleure façon de solidifier votre compréhension de ce concept essentiel.

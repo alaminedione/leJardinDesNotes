@@ -185,6 +185,6 @@ Les sélecteurs CSS avancés sont des outils puissants qui vous permettent de ci
 
 N'oubliez pas que l'utilisation de sélecteurs trop complexes peut augmenter la spécificité et potentiellement rendre votre CSS plus difficile à surcharger. Il est important de trouver un équilibre.
 
-Pour tester et déboguer vos sélecteurs complexes, les outils de développement intégrés aux navigateurs sont vos meilleurs alliés. De nombreux sélecteurs peuvent être testés directement dans la console ou dans le panneau "Styles" de l'inspecteur.
 
-Dans le prochain article, nous aborderons le layout CSS moderne avec Flexbox, une technologie fondamentale pour aligner et distribuer l'espace entre les éléments d'un conteneur.
+
+

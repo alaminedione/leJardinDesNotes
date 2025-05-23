@@ -6,56 +6,61 @@ Absolument ! Voici un exercice complet de SQL (SQLite) pour une boutique en lign
 
 Extrait de code
 
-```
+```mermaid
+
 erDiagram
     CLIENT ||--o{ COMMANDE : passe
-    COMMANDE {
-        id_commande PK
-        date_commande
-        id_client FK
-        montant_total
-        etat
-    }
-    PRODUIT ||--o{ LIGNE_COMMANDE : contient
     COMMANDE ||--o{ LIGNE_COMMANDE : inclut
-    LIGNE_COMMANDE {
-        id_ligne_commande PK
-        id_commande FK
-        id_produit FK
-        quantite
-        prix_unitaire
-    }
+    PRODUIT ||--o{ LIGNE_COMMANDE : contient
     CATEGORIE ||--o{ PRODUIT : appartient
-    PRODUIT {
-        id_produit PK
-        nom_produit
-        description
-        prix
-        id_categorie FK
-        stock
-    }
     FOURNISSEUR ||--o{ PRODUIT : fournit
-    PRODUIT {
-        id_fournisseur FK
-    }
+
     CLIENT {
-        id_client PK
-        nom
-        prenom
-        email
-        adresse
-        telephone
+        int id_client PK
+        string nom
+        string prenom
+        string email
+        string adresse
+        string telephone
     }
+
+    COMMANDE {
+        int id_commande PK
+        date date_commande
+        int id_client FK_CLIENT
+        float montant_total
+        string etat
+    }
+
+    LIGNE_COMMANDE {
+        int id_ligne_commande PK
+        int id_commande FK_COMMANDE
+        int id_produit FK_PRODUIT
+        int quantite
+        float prix_unitaire
+    }
+
+    PRODUIT {
+        int id_produit PK
+        string nom_produit
+        string description
+        float prix
+        int id_categorie FK_CATEGORIE
+        int id_fournisseur FK_FOURNISSEUR
+        int stock
+    }
+
     CATEGORIE {
-        id_categorie PK
-        nom_categorie
+        int id_categorie PK
+        string nom_categorie
     }
+
     FOURNISSEUR {
-        id_fournisseur PK
-        nom_fournisseur
-        adresse_fournisseur
-        telephone_fournisseur
-        email_fournisseur
+        int id_fournisseur PK
+        string nom_fournisseur
+        string adresse_fournisseur
+        string telephone_fournisseur
+        string email_fournisseur
     }
 ```
 

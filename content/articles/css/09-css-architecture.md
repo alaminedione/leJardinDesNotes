@@ -1,5 +1,5 @@
 ---
-title: CSS Architecture : Organisation et maintenabilité du code
+title: CSS Architecture , Organisation et maintenabilité du code
 tags:
   - CSS
   - Architecture

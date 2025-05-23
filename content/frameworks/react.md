@@ -542,147 +542,147 @@
 
 **Partie 2 : Hooks et Concepts Intermédiaires**
 
-10. **Les Hooks de Base (Approfondissement)**
-    * `useEffect` : Gérer les effets de bord (appels API, interactions DOM, timers).
-    Le Hook `useEffect` vous permet de réaliser des "effets de bord" (side effects) dans les composants fonctionnels. Les effets de bord sont des opérations qui interagissent avec le monde extérieur à React, comme les appels réseau (fetching de données), la manipulation directe du DOM, les abonnements, les timers, la configuration d'écouteurs d'événements globaux, etc.
+**10. Les Hooks de Base (Approfondissement)**
+* `useEffect` : Gérer les effets de bord (appels API, interactions DOM, timers).
+Le Hook `useEffect` vous permet de réaliser des "effets de bord" (side effects) dans les composants fonctionnels. Les effets de bord sont des opérations qui interagissent avec le monde extérieur à React, comme les appels réseau (fetching de données), la manipulation directe du DOM, les abonnements, les timers, la configuration d'écouteurs d'événements globaux, etc.
 
-        * Montage, mise à jour et démontage avec `useEffect`.
-        `useEffect` s'exécute après chaque rendu du composant par défaut. Vous pouvez contrôler quand l'effet s'exécute en utilisant le tableau de dépendances.
-        - **Montage (Mounting) :** L'effet s'exécute après le premier rendu. Si le tableau de dépendances est vide (`[]`), l'effet ne s'exécute qu'une seule fois, au montage.
-        - **Mise à jour (Updating) :** L'effet s'exécute après chaque rendu si le tableau de dépendances n'est pas spécifié, ou si les valeurs dans le tableau de dépendances ont changé par rapport au rendu précédent.
-        - **Démontage (Unmounting) :** Vous pouvez retourner une fonction de nettoyage depuis `useEffect`. Cette fonction est exécutée lorsque le composant est démonté, ou avant que l'effet ne s'exécute à nouveau (lors d'une mise à jour), pour nettoyer les ressources (annuler des abonnements, clearTimeout, etc.).
+* Montage, mise à jour et démontage avec `useEffect`.
+`useEffect` s'exécute après chaque rendu du composant par défaut. Vous pouvez contrôler quand l'effet s'exécute en utilisant le tableau de dépendances.
+- **Montage (Mounting) :** L'effet s'exécute après le premier rendu. Si le tableau de dépendances est vide (`[]`), l'effet ne s'exécute qu'une seule fois, au montage.
+- **Mise à jour (Updating) :** L'effet s'exécute après chaque rendu si le tableau de dépendances n'est pas spécifié, ou si les valeurs dans le tableau de dépendances ont changé par rapport au rendu précédent.
+- **Démontage (Unmounting) :** Vous pouvez retourner une fonction de nettoyage depuis `useEffect`. Cette fonction est exécutée lorsque le composant est démonté, ou avant que l'effet ne s'exécute à nouveau (lors d'une mise à jour), pour nettoyer les ressources (annuler des abonnements, clearTimeout, etc.).
 
-        * Le tableau de dépendances de `useEffect`.
-        Le deuxième argument de `useEffect` est un tableau de valeurs dont dépend l'effet.
-        - S'il est omis : L'effet s'exécute après chaque rendu.
-        - S'il est un tableau vide (`[]`) : L'effet s'exécute une seule fois après le montage et la fonction de nettoyage (si présente) s'exécute au démontage. Utile pour les configurations uniques ou les abonnements qui ne changent pas.
-        - S'il contient des valeurs (`[prop1, state2]`) : L'effet s'exécute après le montage et après chaque rendu où l'une des valeurs du tableau a changé.
+* Le tableau de dépendances de `useEffect`.
+Le deuxième argument de `useEffect` est un tableau de valeurs dont dépend l'effet.
+- S'il est omis : L'effet s'exécute après chaque rendu.
+- S'il est un tableau vide (`[]`) : L'effet s'exécute une seule fois après le montage et la fonction de nettoyage (si présente) s'exécute au démontage. Utile pour les configurations uniques ou les abonnements qui ne changent pas.
+- S'il contient des valeurs (`[prop1, state2]`) : L'effet s'exécute après le montage et après chaque rendu où l'une des valeurs du tableau a changé.
 
-        ```jsx
-        import React, { useState, useEffect } from 'react';
+```jsx
+import React, { useState, useEffect } from 'react';
 
-        function ExempleEffect({ userId }) {
-          const [data, setData] = useState(null);
+function ExempleEffect({ userId }) {
+  const [data, setData] = useState(null);
 
-          useEffect(() => {
-            // Cet effet s'exécute à chaque fois que userId change
-            console.log('Fetching data for user:', userId);
-            fetch(`https://api.example.com/users/${userId}`)
-              .then(response => response.json())
-              .then(data => setData(data));
+  useEffect(() => {
+	// Cet effet s'exécute à chaque fois que userId change
+	console.log('Fetching data for user:', userId);
+	fetch(`https://api.example.com/users/${userId}`)
+	  .then(response => response.json())
+	  .then(data => setData(data));
 
-            // Fonction de nettoyage (s'exécute avant le prochain effet ou au démontage)
-            return () => {
-              console.log('Cleaning up effect for user:', userId);
-              // Ici, vous pourriez annuler la requête ou nettoyer un abonnement
-            };
-          }, [userId]); // Dépendance sur userId
+	// Fonction de nettoyage (s'exécute avant le prochain effet ou au démontage)
+	return () => {
+	  console.log('Cleaning up effect for user:', userId);
+	  // Ici, vous pourriez annuler la requête ou nettoyer un abonnement
+	};
+  }, [userId]); // Dépendance sur userId
 
-          useEffect(() => {
-            // Cet effet s'exécute une seule fois au montage
-            console.log('Component mounted.');
-            return () => {
-                console.log('Component unmounted.');
-            };
-          }, []); // Tableau de dépendances vide
+  useEffect(() => {
+	// Cet effet s'exécute une seule fois au montage
+	console.log('Component mounted.');
+	return () => {
+		console.log('Component unmounted.');
+	};
+  }, []); // Tableau de dépendances vide
 
-          return (
-            <div>
-              <h2>Détails de l'utilisateur</h2>
-              {data ? <p>{data.name}</p> : <p>Chargement...</p>}
-            </div>
-          );
-        }
-        ```
+  return (
+	<div>
+	  <h2>Détails de l'utilisateur</h2>
+	  {data ? <p>{data.name}</p> : <p>Chargement...</p>}
+	</div>
+  );
+}
+```
 
     * `useContext` : Partager des données sans passer les props manuellement à chaque niveau.
     Le Hook `useContext` vous permet de vous abonner au contexte React le plus proche sans avoir à utiliser un composant `Context.Consumer`. Le Context API est conçu pour partager des données qui peuvent être considérées comme "globales" pour un arbre de composants (comme le thème actuel, la langue de l'utilisateur, les informations d'authentification, etc.) sans devoir passer des props manuellement à travers chaque niveau de l'arbre (props drilling).
 
-        * Créer, fournir et consommer un contexte.
-        1.  **Créer un contexte :** Utilisez `React.createContext()`.
-            ```jsx
-            // Dans ThemeContext.js
-            import React from 'react';
-            const ThemeContext = React.createContext('light'); // 'light' est la valeur par défaut
-            export default ThemeContext;
-            ```
-        2.  **Fournir une valeur de contexte :** Utilisez le `.Provider` du contexte créé plus haut dans l'arbre des composants.
-            ```jsx
-            // Dans App.js
-            import React, { useState } from 'react';
-            import ThemeContext from './ThemeContext';
-            import Toolbar from './Toolbar';
+* Créer, fournir et consommer un contexte.
+	1.  **Créer un contexte :** Utilisez `React.createContext()`.
+		```jsx
+		// Dans ThemeContext.js
+		import React from 'react';
+		const ThemeContext = React.createContext('light'); // 'light' est la valeur par défaut
+		export default ThemeContext;
+		```
+	2.  **Fournir une valeur de contexte :** Utilisez le `.Provider` du contexte créé plus haut dans l'arbre des composants.
+		```jsx
+		// Dans App.js
+		import React, { useState } from 'react';
+		import ThemeContext from './ThemeContext';
+		import Toolbar from './Toolbar';
 
-            function App() {
-              const [theme, setTheme] = useState('light');
+		function App() {
+		  const [theme, setTheme] = useState('light');
 
-              return (
-                <ThemeContext.Provider value={theme}>
-                  <Toolbar />
-                  <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
-                    Changer de thème
-                  </button>
-                </ThemeContext.Provider>
-              );
-            }
-            ```
-        3.  **Consommer le contexte :** Utilisez le Hook `useContext` dans un composant fonctionnel.
-            ```jsx
-            // Dans Toolbar.js
-            import React, { useContext } from 'react';
-            import ThemeContext from './ThemeContext';
+		  return (
+			<ThemeContext.Provider value={theme}>
+			  <Toolbar />
+			  <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
+				Changer de thème
+			  </button>
+			</ThemeContext.Provider>
+		  );
+		}
+		```
+	1.  **Consommer le contexte :** Utilisez le Hook `useContext` dans un composant fonctionnel.
+		```jsx
+		// Dans Toolbar.js
+		import React, { useContext } from 'react';
+		import ThemeContext from './ThemeContext';
 
-            function Toolbar() {
-              const theme = useContext(ThemeContext); // Lit la valeur du contexte
+		function Toolbar() {
+		  const theme = useContext(ThemeContext); // Lit la valeur du contexte
 
-              return (
-                <div style={{ background: theme === 'dark' ? 'black' : 'white', color: theme === 'dark' ? 'white' : 'black' }}>
-                  Thème actuel : {theme}
-                </div>
-              );
-            }
-            ```
+		  return (
+			<div style={{ background: theme === 'dark' ? 'black' : 'white', color: theme === 'dark' ? 'white' : 'black' }}>
+			  Thème actuel : {theme}
+			</div>
+		  );
+		}
+		```
 
     * `useRef` : Accéder aux éléments du DOM ou conserver des valeurs mutables sans provoquer de re-rendu.
     Le Hook `useRef` retourne un objet ref mutable dont la propriété `.current` est initialisée avec l'argument passé (`initialValue`). L'objet retourné persistera pendant toute la durée de vie du composant. `useRef` est utile pour deux cas principaux :
         1.  **Accéder aux éléments du DOM :** Il permet d'obtenir une référence directe à un nœud du DOM rendu par React.
         2.  **Stocker une valeur mutable qui ne provoque pas de re-rendu :** Contrairement au state, la modification de `.current` d'une ref ne déclenche pas de re-rendu du composant. C'est utile pour stocker des valeurs qui doivent persister entre les rendus mais dont les changements n'ont pas besoin de mettre à jour l'UI (ex: identifiants de timers, compteurs qui ne s'affichent pas, valeurs précédentes de props ou state).
 
-        ```jsx
-        import React, { useRef, useEffect } from 'react';
+	```jsx
+	import React, { useRef, useEffect } from 'react';
 
-        function InputFocus() {
-          // Crée une ref pour stocker la référence à l'élément input
-          const inputRef = useRef(null);
+	function InputFocus() {
+	  // Crée une ref pour stocker la référence à l'élément input
+	  const inputRef = useRef(null);
 
-          useEffect(() => {
-            // Accède à l'élément DOM via inputRef.current et lui donne le focus après le montage
-            inputRef.current.focus();
-          }, []); // Tableau de dépendances vide : s'exécute une seule fois au montage
+	  useEffect(() => {
+		// Accède à l'élément DOM via inputRef.current et lui donne le focus après le montage
+		inputRef.current.focus();
+	  }, []); // Tableau de dépendances vide : s'exécute une seule fois au montage
 
-          return (
-            <div>
-              <input ref={inputRef} type="text" /> {/* Associe la ref à l'élément input */}
-            </div>
-          );
-        }
+	  return (
+		<div>
+		  <input ref={inputRef} type="text" /> {/* Associe la ref à l'élément input */}
+		</div>
+	  );
+	}
 
-        function CompteurSansRerendu() {
-            const compteurRef = useRef(0);
+	function CompteurSansRerendu() {
+		const compteurRef = useRef(0);
 
-            const handleClick = () => {
-                compteurRef.current += 1; // Modifie la valeur sans re-rendu
-                console.log('Compteur (ref) :', compteurRef.current);
-                // Si on voulait afficher la valeur, il faudrait aussi utiliser useState
-            };
+		const handleClick = () => {
+			compteurRef.current += 1; // Modifie la valeur sans re-rendu
+			console.log('Compteur (ref) :', compteurRef.current);
+			// Si on voulait afficher la valeur, il faudrait aussi utiliser useState
+		};
 
-            return (
-                <button onClick={handleClick}>
-                    Incrementer le compteur (ref)
-                </button>
-            );
-        }
-        ```
+		return (
+			<button onClick={handleClick}>
+				Incrementer le compteur (ref)
+			</button>
+		);
+	}
+	```
 
 11. **Hooks Avancés**
     * `useReducer` : Gérer un state complexe avec une logique de mise à jour définie.

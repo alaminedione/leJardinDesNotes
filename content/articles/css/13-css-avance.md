@@ -1,5 +1,5 @@
 ---
-title: CSS Avancé : Fonctionnalités modernes et expérimentales
+title: CSS Avancé,  Fonctionnalités modernes et expérimentales
 tags:
   - CSS
   - Advanced CSS
@@ -29,7 +29,6 @@ Traditionnellement, le design responsive était basé sur les Media Queries, qui
 Pour utiliser les Container Queries, le conteneur parent doit définir une propriété `container-type` (par exemple, `container-type: inline-size;` pour interroger la largeur) et éventuellement `container-name`.
 
 ```css
-/dev/null/container-queries.css#L1-14
 .card-container {
   container-type: inline-size; /* Permet d'interroger la largeur du conteneur */
 }
@@ -55,7 +54,6 @@ CSS Houdini est un ensemble d'APIs de bas niveau qui expose certaines parties du
 *   **Properties & Values API (`@property`) :** Permet d'enregistrer des propriétés CSS personnalisées (variables CSS) avec une syntaxe spécifique, une valeur initiale et une indication si elles héritent. Le plus important est que cela rend ces propriétés personnalisées **animables**, ce qui n'est pas le cas par défaut pour les variables CSS simples.
 
 ```css
-/dev/null/houdini.css#L1-6
 /* Exemple d'enregistrement d\'une propriété personnalisée animable */
 @property --gradient-angle {
   syntax: '<angle>'; /* Type de données attendu */

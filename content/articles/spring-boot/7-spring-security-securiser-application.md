@@ -27,7 +27,7 @@ Pour commencer avec Spring Security, vous devez ajouter la dépendance appropri�
 Ajoutez la dépendance `spring-boot-starter-security` à votre fichier `pom.xml` (Maven) ou `build.gradle` (Gradle).
 
 Avec Maven :
-```/dev/null/pom.xml#L1-5
+```xml
 <dependency>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-security</artifactId>
@@ -35,7 +35,7 @@ Avec Maven :
 ```
 
 Avec Gradle :
-```/dev/null/build.gradle#L1-1
+```yaml
 implementation 'org.springframework.boot:spring-boot-starter-security'
 ```
 
@@ -49,7 +49,7 @@ Avant Spring Security 6, on utilisait souvent la classe `WebSecurityConfigurerAd
 
 Voici un exemple de configuration de base utilisant la nouvelle approche, désactivant la sécurité par défaut pour l'instant afin de montrer une configuration minimale :
 
-```/dev/null/SecurityConfig.java#L1-15
+```java
 package com.example.demo.security;
 
 import org.springframework.context.annotation.Bean;
@@ -87,7 +87,7 @@ L'authentification est le processus de vérification de l'identité. Qui êtes-v
 
 Pour des exemples simples ou des tests, vous pouvez configurer des utilisateurs directement en mémoire.
 
-```/dev/null/InMemorySecurityConfig.java#L1-26
+```java
 package com.example.demo.security;
 
 import org.springframework.context.annotation.Bean;
@@ -149,7 +149,7 @@ Dans cet exemple :
 
 Dans la plupart des applications réelles, les utilisateurs sont stockés dans une base de données. Vous devez implémenter l'interface `UserDetailsService` pour dire à Spring Security comment charger les détails de l'utilisateur depuis votre source de données (par exemple, via un Repository JPA).
 
-```/dev/null/JpaUserDetailsService.java#L1-28
+```java
 package com.example.demo.security;
 
 import com.example.demo.model.User; // Votre classe User
@@ -185,7 +185,7 @@ public class JpaUserDetailsService implements UserDetailsService {
 
 Vous devriez également configurer votre `SecurityFilterChain` pour utiliser l'authentification basée sur les formulaires ou une autre méthode appropriée, par exemple :
 
-```/dev/null/FormLoginSecurityConfig.java#L1-22
+```java
 package com.example.demo.security;
 
 import org.springframework.context.annotation.Bean;
@@ -222,7 +222,7 @@ L'autorisation détermine si un utilisateur authentifié a les permissions néce
 
 Vous pouvez sécuriser des méthodes spécifiques dans vos services ou contrôleurs en utilisant des annotations. Pour activer la sécurité basée sur les annotations, vous devez ajouter `@EnableMethodSecurity` à votre classe de configuration Spring Security.
 
-```/dev/null/MethodSecurityConfig.java#L1-8
+```java
 package com.example.demo.security;
 
 import org.springframework.context.annotation.Configuration;
@@ -238,7 +238,8 @@ public class MethodSecurityConfig {
 *   `prePostEnabled = true` active les annotations `@PreAuthorize` et `@PostAuthorize`.
 
 **`@Secured`** : Utilisé pour spécifier une liste de rôles requis.
-```/dev/null/SomeService.java#L1-6
+
+```java
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
@@ -253,7 +254,7 @@ public class SomeService {
 Notez le préfixe `ROLE_`.
 
 **`@PreAuthorize`** : Permet d'utiliser des expressions Spring EL pour des règles d'autorisation plus complexes avant l'exécution de la méthode. C'est l'approche recommandée car elle est plus flexible.
-```/dev/null/AnotherService.java#L1-7
+```java
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
@@ -286,7 +287,7 @@ public class AnotherService {
 La méthode la plus courante pour l'autorisation est de baser l'accès sur les rôles assignés à l'utilisateur (`ROLE_USER`, `ROLE_ADMIN`, etc.).
 
 Dans la configuration `SecurityFilterChain`, vous pouvez utiliser `hasRole()` ou `hasAnyRole()` :
-```/dev/null/RoleBasedSecurityConfig.java#L1-15
+```java
 package com.example.demo.security;
 
 import org.springframework.context.annotation.Bean;
@@ -355,7 +356,7 @@ L'implémentation de l'authentification par JWT dans Spring Security implique pl
 
 C'est un sujet plus avancé qui dépasse le cadre d'une simple introduction, mais voici un aperçu de la configuration de base sans session et l'ajout potentiel d'un filtre :
 
-```/dev/null/JwtSecurityConfig.java#L1-25
+```java
 package com.example.demo.security;
 
 import com.example.demo.security.jwt.JwtRequestFilter; // Votre filtre JWT personnalisé
@@ -407,7 +408,7 @@ Pour mettre en pratique ce que vous avez appris :
 
 Spring Security fournit des utilitaires pour tester la sécurité. Vous pouvez utiliser `@WithMockUser` ou `@WithUserDetails` pour simuler un utilisateur authentifié dans vos tests de contrôleur (avec `@WebMvcTest` et `MockMvc`).
 
-```/dev/null/SecureControllerTest.java#L1-14
+```java
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.security.test.context.support.WithMockUser;

@@ -1,5 +1,5 @@
 ---
-title: Introduction au CSS : Les bases du style web
+title: Introduction au CSS , Les bases du style web
 tags:
   - CSS
 draft: false
@@ -318,15 +318,4 @@ Félicitations ! Vous avez fait vos premiers pas dans le monde du CSS. Vous save
 
 La maîtrise du CSS est un voyage continu, et ce premier article n'est que le début. Les prochains articles exploreront des concepts clés comme le modèle de boîte, les sélecteurs avancés, Flexbox, Grid, le design responsive et bien plus encore.
 
-### Ressources pour approfondir
 
-*   [MDN Web Docs - Introduction à CSS](https://developer.mozilla.org/fr/docs/Web/CSS/Getting_started)
-*   [OpenClassrooms - Apprenez à créer votre site web avec HTML5 et CSS3](https://openclassrooms.com/fr/courses/1603881-creez-votre-site-web-avec-html5-et-css3)
-
-### Outils utiles pour les débutants en CSS
-
-*   **Éditeur de code :** VS Code, Sublime Text, Atom (avec coloration syntaxique pour HTML et CSS).
-*   **Navigateur moderne :** Chrome, Firefox (avec leurs DevTools).
-*   **Extensions de navigateur pour le développement :** ColorZilla (pour prélever des couleurs), CSS Viewer (pour voir rapidement les styles d'un élément).
-
-Continuez à pratiquer, à expérimenter et à utiliser les DevTools. Le monde de la stylisation web s'ouvre à vous !

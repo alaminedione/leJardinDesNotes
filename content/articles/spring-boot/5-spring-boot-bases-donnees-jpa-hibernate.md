@@ -32,7 +32,7 @@ Spring Boot rend la configuration de la base de données incroyablement simple, 
     *   Le starter `spring-boot-starter-data-jpa` apporte tout le nécessaire pour Spring Data JPA, JPA et une implémentation par défaut (Hibernate).
     *   Le driver de la base de données que vous souhaitez utiliser. Pour H2 en mémoire :
 
-    ```/dev/null/pom.xml
+    ```pom.xml
     <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -46,7 +46,7 @@ Spring Boot rend la configuration de la base de données incroyablement simple, 
 
 2.  **Configuration dans `application.properties`** : Spring Boot configure automatiquement beaucoup de choses par défaut. Pour H2 en mémoire, souvent, aucune configuration n'est nécessaire. Cependant, vous pourriez vouloir activer la console H2 pour visualiser les données :
 
-    ```/dev/null/application.properties
+    ```toml
     spring.h2.console.enabled=true
     spring.h2.console.path=/h2-console
     # Optionnel : configurer JPA
@@ -62,7 +62,7 @@ Spring Boot rend la configuration de la base de données incroyablement simple, 
 
 Une entité JPA est une simple classe Java qui représente une table dans votre base de données. Vous utilisez des annotations pour mapper la classe aux tables et les champs aux colonnes.
 
-```/dev/null/Todo.java
+```java
 package com.example.demo.model;
 
 import javax.persistence.*; // Utilisez jakarta.persistence si vous êtes sur Spring Boot 3+
@@ -126,7 +126,7 @@ public class Todo {
 
 C'est là que Spring Data JPA brille. Au lieu d'écrire des classes d'accès aux données (DAO) avec des méthodes d'implémentation pour chaque opération, vous définissez simplement une interface qui étend `JpaRepository`.
 
-```/dev/null/TodoRepository.java
+```java
 package com.example.demo.repository;
 
 import com.example.demo.model.Todo;
@@ -159,7 +159,7 @@ La gestion des transactions est cruciale pour assurer l'intégrité des données
 
 Spring Boot, via Spring Data JPA, intègre la gestion transactionnelle de Spring. L'annotation `@Transactional` est la manière la plus simple de gérer les transactions.
 
-```/dev/null/TodoService.java
+```java
 package com.example.demo.service;
 
 import com.example.demo.model.Todo;

@@ -1,4 +1,4 @@
-# Sans Titre
+# PgSql
 
 Parfait ! Puisque vous êtes prêt pour un autre défi conséquent, cet exercice portera sur la **gestion d'un système de suivi de la chaîne d'approvisionnement**. Nous allons continuer à explorer les fonctionnalités de PostgreSQL et à générer un grand nombre de requêtes.
 
@@ -6,7 +6,8 @@ Parfait ! Puisque vous êtes prêt pour un autre défi conséquent, cet exercice
 
 Extrait de code
 
-```
+```mermaid
+
 erDiagram
     PRODUIT ||--o{ MOUVEMENT_STOCK : concerne
     ENTREPOT ||--o{ MOUVEMENT_STOCK : concerne
@@ -283,4 +284,3 @@ Voici une longue liste de requêtes pour explorer votre système de gestion de l
 104. Analysez la performance des différents transporteurs (si vous aviez des données de transport).
 105. Simulez des scénarios de perturbation de la chaîne d'approvisionnement pour tester la résilience du système.
 
-Voilà une quantité substantielle de requêtes pour explorer en profondeur votre système de gestion de la chaîne d'approvisionnement dans PostgreSQL ! N'hésitez pas à adapter ces requêtes à vos données spécifiques et à imaginer d'autres analyses pertinentes pour ce domaine. Bon courage pour cette exploration approfondie !

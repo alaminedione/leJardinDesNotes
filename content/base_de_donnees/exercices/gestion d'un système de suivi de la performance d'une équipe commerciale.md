@@ -5,7 +5,7 @@
 
 Extrait de code
 
-```
+```mermaid
 erDiagram
 
     VENDEUR ||--o{ OBJECTIF : assigne
@@ -211,4 +211,4 @@ Voici une longue liste de requêtes pour explorer votre système de suivi de la 
 59. Trouvez les vendeurs qui n'ont aucune activité planifiée pour la semaine prochaine.
 60. Utilisez une fonction de fenêtre pour calculer la moyenne mobile de la valeur des opportunités gagnées par vendeur sur les 3 derniers mois.
 
-Et ainsi de suite ! Continuez à explorer les données et à poser des questions pertinentes pour analyser la performance de votre équipe commerciale. Cet exercice vous offre un large éventail de scénarios pour pratiquer vos compétences en SQL avec PostgreSQL. N'hésitez pas à inventer d'autres requêtes basées sur les besoins d'une entreprise. Bonne exploration !
+

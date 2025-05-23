@@ -16,7 +16,7 @@ Pour ajouter Spring Boot Actuator à votre projet, il vous suffit d'ajouter la d
 
 Avec Maven, ajoutez ceci à votre `pom.xml` :
 
-```/dev/null/pom.xml
+```xml
 <dependency>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-actuator</artifactId>
@@ -25,7 +25,7 @@ Avec Maven, ajoutez ceci à votre `pom.xml` :
 
 Avec Gradle, ajoutez ceci à votre `build.gradle` :
 
-```/dev/null/build.gradle
+```xml
 implementation 'org.springframework.boot:spring-boot-starter-actuator'
 ```
 
@@ -33,7 +33,7 @@ Une fois la dépendance ajoutée, Actuator est automatiquement configuré. Par d
 
 Vous pouvez configurer Actuator dans votre fichier `application.properties` ou `application.yml`. Par exemple, pour exposer tous les endpoints via l'interface web (car certains ne sont pas exposés par défaut pour des raisons de sécurité), vous pouvez ajouter :
 
-```/dev/null/application.properties
+```xml
 management.endpoints.web.exposure.include=*
 ```
 

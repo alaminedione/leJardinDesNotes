@@ -32,7 +32,7 @@ Une tâche simple pourrait avoir les attributs suivants :
 
 Créons une classe Java pour représenter notre modèle `Todo`. Pour cet exemple simple sans base de données persistante pour l'instant (nous verrons la persistance plus tard), nous allons juste utiliser une classe POJO (Plain Old Java Object).
 
-```articles/spring-boot/src/main/java/com/example/demo/model/Todo.java
+```java
 package com.example.demo.model;
 
 public class Todo {
@@ -85,7 +85,7 @@ Nous allons maintenant créer une classe contrôleur qui gérera les requêtes H
 
 Pour cet exemple simple, nous allons stocker les tâches dans une simple liste en mémoire. Dans une application réelle, vous interagiriez avec une couche Service qui elle-même utiliserait une couche Repository pour accéder à une base de données.
 
-```articles/spring-boot/src/main/java/com/example/demo/controller/TodoController.java
+```java
 package com.example.demo.controller;
 
 import com.example.demo.model.Todo;

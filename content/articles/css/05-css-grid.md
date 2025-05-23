@@ -1,5 +1,5 @@
 ---
-title: CSS Grid : Créez des layouts complexes en toute simplicité
+title: CSS Grid , Créez des layouts complexes en toute simplicité
 tags:
   - CSS
   - Grid
@@ -34,7 +34,7 @@ Ce sont les propriétés appliquées à l'élément sur lequel `display: grid` e
 
 -   `display: grid;`: Transforme l'élément en un conteneur grid.
 -   `grid-template-columns` et `grid-template-rows`: Définissent la structure explicite de la grille en termes de colonnes et de lignes. Vous spécifiez la taille de chaque piste (colonne ou ligne) en utilisant des unités comme `px`, `%`, `auto`, ou la nouvelle unité `fr` (fraction de l'espace disponible).
-    ```/dev/null/example.css#L1-3
+    ```html
     .container {
       display: grid;
       grid-template-columns: 1fr 2fr 1fr; /* 3 colonnes: 1/4, 2/4, 1/4 de l'espace */
@@ -42,7 +42,7 @@ Ce sont les propriétés appliquées à l'élément sur lequel `display: grid` e
     }
     ```
 -   `grid-template-areas`: Permet de définir des zones nommées dans la grille, rendant le layout plus lisible et plus facile à modifier.
-    ```/dev/null/example.css#L1-6
+    ```html
     .container {
       display: grid;
       grid-template-columns: 1fr 3fr;
@@ -54,7 +54,7 @@ Ce sont les propriétés appliquées à l'élément sur lequel `display: grid` e
     }
     ```
 -   `gap` (ou `grid-row-gap`, `grid-column-gap`): Définit l'espace entre les pistes de la grille. `gap` est une notation raccourcie pour les deux.
-    ```/dev/null/example.css#L1-2
+    ```html
     .container {
       gap: 20px; /* 20px d'espace entre les lignes ET les colonnes */
     }
@@ -68,7 +68,7 @@ Ces propriétés sont appliquées aux enfants directs du conteneur grid :
 
 -   `grid-column` et `grid-row`: Permettent de spécifier où un élément doit commencer et se terminer dans la grille, en faisant référence aux lignes de la grille. Vous pouvez utiliser les numéros de ligne (`grid-column: 1 / 3;` pour couvrir de la ligne 1 à 3, c'est-à-dire la première colonne) ou le mot clé `span` (`grid-column: span 2;` pour couvrir 2 colonnes).
 -   `grid-area`: Permet de placer un élément en le faisant correspondre au nom d'une zone définie avec `grid-template-areas`. C'est une alternative très lisible à `grid-column` et `grid-row` pour les layouts complexes.
-    ```/dev/null/example.css#L1-3
+    ```html
     .header {
       grid-area: header; /* Place cet élément dans la zone nommée "header" */
     }

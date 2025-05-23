@@ -1,12 +1,11 @@
 ---
-title: Performances CSS : Optimisez votre feuille de style
+title: Performances CSS , Optimisez votre feuille de style
 tags:
   - CSS
   - Performance
   - Optimisation
 draft: false
 ---
-```articles/css/article-12-performances-css.md
 # Performances CSS : Optimisez votre feuille de style
 
 ## Introduction
@@ -76,94 +75,3 @@ I need to provide the remaining content for article 12, starting from where I le
 
 The plan sections I need to complete are "En pratique" and "Conclusion".
 
-Plan for Article 12 from `articles/css/README.md`:
-## 12. Performances CSS : Optimisez votre feuille de style
-
-### Introduction
-- Impact du CSS sur les performances du site
-- Métriques importantes (CLS, FCP, etc.)
-
-### Contenu principal
-- Goulots d'étranglement CSS
-  - Sélecteurs inefficaces
-  - Spécificité excessive
-  - Layout thrashing
-  - Animations lourdes
-- Optimisation du rendu
-  - Critical CSS
-  - Chargement asynchrone
-  - Minification
-  - Réduction des requêtes HTTP
-- Propriétés affectant les performances
-  - will-change
-  - transform vs left/top
-  - Animations hardware-accelerated
-- Outils d'analyse
-  - DevTools Performance
-  - Lighthouse
-  - WebPageTest
-
-### En pratique
-- Audit de performance d'une feuille de style
-- Optimisation d'animations lourdes
-- Implémentation de Critical CSS
-
-### Conclusion
-- Checklist d'optimisation CSS
-- Équilibre entre fonctionnalités et performances
-
-I have already generated the "Introduction" and "Contenu principal" sections in the previous turn (although the file creation failed). I will generate the full content for the file now, including "En pratique" and "Conclusion".
-
-I will respond directly with the full content of the file as requested.points détaillés (Waterfall view, vidéo de chargement, Core Web Vitals). Il est excellent pour simuler l'expérience utilisateur réelle sur différentes connexions.
-
-## En pratique
-
-Passons à l'action pour améliorer la performance de vos feuilles de style.
-
-### Audit de performance d'une feuille de style
-
-La première étape est de comprendre où se situent les problèmes.
-
-1.  **Utilisez Lighthouse ou WebPageTest :** Lancez un audit sur votre page. Regardez les scores de performance et les recommandations liées au CSS. Identifiez les grosses feuilles de style, les temps de FCP/LCP élevés.
-2.  **Explorez avec les DevTools Performance :** Ouvrez l'onglet Performance, enregistrez le chargement de la page ou une interaction (comme le défilement rapide ou l'ouverture d'une modale). Analysez les barres de temps pour \"Recalcul Style\", \"Layout\", \"Paint\". Survolez les marques rouges indiquant les *layout shifts* pour voir ce qui les a causés.
-3.  **Analysez votre code CSS :** Parcourez vos fichiers CSS. Cherchez les sélecteurs potentiellement inefficaces (imbrication profonde, sélecteur universel en début de chaîne). Identifiez les animations qui pourraient affecter le layout.
-
-### Optimisation d'animations lourdes
-
-Si l'audit révèle que les animations sont une source de ralentissement :
-
-*   **Vérifiez les propriétés animées :** Assurez-vous que vous animez principalement `opacity` et `transform`. Si vous animez des propriétés comme `width`, `height`, `margin`, `padding`, `top`/`left` sur de nombreux éléments, voyez si vous pouvez obtenir le même effet en utilisant `transform: translate()` ou en modifiant la structure HTML/CSS pour que ces animations affectent moins d'éléments.
-*   **Utilisez `will-change` avec discernement :** Pour les éléments qui subissent des animations complexes et prévisibles, ajoutez `will-change: transform, opacity;` (ou les propriétés pertinentes) *avant* l'animation, par exemple, au `:hover` ou lorsque l'animation est sur le point de commencer via JavaScript. Retirez la propriété après l'animation si possible.
-*   **Testez sur des appareils réels :** Les performances sur votre machine de développement puissante ne reflètent pas nécessairement l'expérience sur un appareil mobile moins puissant. Testez vos animations sur des smartphones bas de gamme.
-
-### Implémentation de Critical CSS
-
-Pour améliorer le FCP, l'implémentation du Critical CSS est très efficace.
-
-1.  **Identifiez le CSS critique :** Utilisez des outils comme le module `critical` pour Node.js ou des services en ligne pour analyser votre page et extraire le CSS nécessaire au rendu du contenu visible sans défilement.
-2.  **Intégrez le CSS critique :** Copiez le CSS généré et collez-le à l'intérieur d'une balise `<style>` dans le `<head>` de votre document HTML.
-3.  **Chargez le reste du CSS de manière asynchrone :** Modifiez la balise `<link>` de votre fichier CSS principal pour qu'il se charge de manière asynchrone après le rendu initial (en utilisant l'attribut `onload` ou un script JavaScript).
-
-Cette étape demande généralement une intégration dans votre processus de build pour automatiser l'extraction du CSS critique.
-
-## Conclusion
-
-L'optimisation des performances CSS est une partie essentielle du développement web front-end moderne. Un CSS performant améliore l'expérience utilisateur, réduit les temps de chargement et contribue à un meilleur classement SEO. En comprenant l'impact du CSS sur le rendu, en identifiant les goulots d'étranglement potentiels (sélecteurs inefficaces, animations coûteuses) et en appliquant des techniques comme le Critical CSS, le chargement asynchrone et l'animation de propriétés performantes, vous pouvez rendre vos sites web plus rapides et plus fluides.
-
-N'oubliez pas d'utiliser les outils d'analyse (DevTools, Lighthouse, WebPageTest) pour mesurer l'impact de vos optimisations et identifier les prochaines étapes. C'est un processus continu qui demande de l'attention tout au long du cycle de développement.
-
-### Checklist d'optimisation CSS
-
-*   Minifier les fichiers CSS en production.
-*   Utiliser des sélecteurs efficaces et éviter l'imbrication excessive.
-*   Privilégier les animations sur `opacity` et `transform`.
-*   Utiliser `will-change` avec prudence sur les éléments animés.
-*   Implémenter le Critical CSS pour un FCP rapide.
-*   Charger le CSS non critique de manière asynchrone.
-*   Spécifier les dimensions des images et autres médias pour éviter les *layout shifts*.
-*   Tester la performance sur différents appareils et conditions réseau.
-
-Trouver le bon **équilibre entre fonctionnalités, design et performances** est la clé. Il n'est pas toujours nécessaire d'éliminer toutes les animations ou tous les effets, mais il faut être conscient de leur coût potentiel et choisir les optimisations les plus pertinentes pour votre projet.
-
-Dans les prochains articles, nous explorerons des fonctionnalités CSS plus avancées et la gestion des formulaires.
-```

@@ -1,5 +1,5 @@
 ---
-title: CSS Responsive : Design adaptatif pour tous les écrans
+title: CSS Responsive , Design adaptatif pour tous les écrans
 tags:
   - CSS
   - Responsive Design
@@ -45,7 +45,6 @@ Avant de plonger dans les media queries, certaines bases doivent être en place.
 
 *   **Viewport meta tag :** C'est l'élément crucial pour informer les navigateurs mobiles comment dimensionner le contenu. Sans lui, les navigateurs mobiles essaieraient de rendre la page à la taille d'un écran de bureau (souvent 960px de large) puis de zoomer.
     ```html
-    /dev/null/head.html#L1-3
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">

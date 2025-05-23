@@ -5,59 +5,65 @@ Absolument \! Pour cet exercice, nous allons concevoir un système d'authentific
 **1. Modèle Logique des Données (MLD) en ER Diagram**
 
 ```mermaid
+
 erDiagram
     UTILISATEUR ||--o{ ROLE_UTILISATEUR : possede
     ROLE ||--o{ ROLE_UTILISATEUR : est_attribue_a
     ROLE ||--o{ PERMISSION_ROLE : inclut
     PERMISSION ||--o{ PERMISSION_ROLE : est_incluse_dans
     CLIENT_OAUTH ||--o{ JETON_ACCES : possede
+
     UTILISATEUR {
-        INTEGER id_utilisateur SERIAL PRIMARY KEY
-        VARCHAR nom_utilisateur VARCHAR(100) UNIQUE NOT NULL
-        VARCHAR mot_de_passe VARCHAR(255) NOT NULL -- Hash du mot de passe
-        VARCHAR email VARCHAR(100) UNIQUE NOT NULL
-        BOOLEAN est_actif BOOLEAN NOT NULL DEFAULT TRUE
-        DATE date_creation DATE NOT NULL DEFAULT CURRENT_DATE
+        int id_utilisateur PK
+        string nom_utilisateur
+        string mot_de_passe
+        string email
+        boolean est_actif
+        date date_creation
     }
+
     ROLE {
-        INTEGER id_role SERIAL PRIMARY KEY
-        VARCHAR nom_role VARCHAR(100) UNIQUE NOT NULL
-        VARCHAR description VARCHAR(255)
+        int id_role PK
+        string nom_role
+        string description
     }
+
     PERMISSION {
-        INTEGER id_permission SERIAL PRIMARY KEY
-        VARCHAR nom_permission VARCHAR(100) UNIQUE NOT NULL
-        VARCHAR description VARCHAR(255)
+        int id_permission PK
+        string nom_permission
+        string description
     }
+
     ROLE_UTILISATEUR {
-        INTEGER id_role_utilisateur SERIAL PRIMARY KEY
-        INTEGER id_utilisateur INTEGER REFERENCES UTILISATEUR(id_utilisateur)
-        INTEGER id_role INTEGER REFERENCES ROLE(id_role)
-        UNIQUE (id_utilisateur, id_role)
+        int id_role_utilisateur PK
+        int id_utilisateur FK_UTILISATEUR
+        int id_role FK_ROLE
     }
+
     PERMISSION_ROLE {
-        INTEGER id_permission_role SERIAL PRIMARY KEY
-        INTEGER id_role INTEGER REFERENCES ROLE(id_role)
-        INTEGER id_permission INTEGER REFERENCES PERMISSION(id_permission)
-        UNIQUE (id_role, id_permission)
+        int id_permission_role PK
+        int id_role FK_ROLE
+        int id_permission FK_PERMISSION
     }
+
     CLIENT_OAUTH {
-        INTEGER id_client SERIAL PRIMARY KEY
-        VARCHAR client_id VARCHAR(255) UNIQUE NOT NULL
-        VARCHAR client_secret VARCHAR(255) NOT NULL
-        VARCHAR redirect_uri TEXT
-        VARCHAR grant_types VARCHAR(255) -- Ex: 'authorization_code,password,refresh_token'
-        VARCHAR scope TEXT
+        int id_client PK
+        string client_id
+        string client_secret
+        string redirect_uri
+        string grant_types
+        string scope
     }
+
     JETON_ACCES {
-        INTEGER id_jeton SERIAL PRIMARY KEY
-        VARCHAR jeton VARCHAR(255) UNIQUE NOT NULL
-        INTEGER id_utilisateur INTEGER REFERENCES UTILISATEUR(id_utilisateur)
-        INTEGER id_client INTEGER REFERENCES CLIENT_OAUTH(id_client)
-        TIMESTAMP date_creation TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP
-        TIMESTAMP date_expiration TIMESTAMP WITHOUT TIME ZONE NOT NULL
-        VARCHAR refresh_token VARCHAR(255) UNIQUE
-        VARCHAR scope TEXT
+        int id_jeton PK
+        string jeton
+        int id_utilisateur FK_UTILISATEUR
+        int id_client FK_CLIENT_OAUTH
+        date date_creation
+        date date_expiration
+        string refresh_token
+        string scope
     }
 ```
 

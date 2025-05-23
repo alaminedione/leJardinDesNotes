@@ -27,7 +27,7 @@ Ces annotations aident Spring Boot à configurer l'application et à gérer le c
     -   `@EnableAutoConfiguration`: Déclenche l'auto-configuration de Spring Boot. Elle examine les JARs présents dans le classpath et configure automatiquement les beans basés sur ces dépendances et les paramètres de configuration.
     -   `@ComponentScan`: Active le scan des composants. Elle indique à Spring de rechercher d'autres composants (classes annotées `@Component`, `@Service`, `@Repository`, `@Controller`, etc.) dans le package de la classe actuelle (et ses sous-packages) et de les enregistrer comme des beans.
 
-    ```/dev/null/MyApplication.java
+    ```java
     package com.example.demo;
 
     import org.springframework.boot.SpringApplication;
@@ -45,7 +45,7 @@ Ces annotations aident Spring Boot à configurer l'application et à gérer le c
 
 -   `@Bean`: Utilisée dans une classe `@Configuration`, cette annotation indique que la méthode produit un bean qui doit être géré par le conteneur Spring. Le nom de la méthode est utilisé comme nom du bean par défaut.
 
-    ```/dev/null/AppConfig.java
+    ```java
     package com.example.demo.config;
 
     import com.example.demo.service.MyService;
@@ -64,7 +64,7 @@ Ces annotations aident Spring Boot à configurer l'application et à gérer le c
 
 -   `@ConfigurationProperties`: Permet de lier des propriétés externes (depuis `application.properties` ou `application.yml`) à un bean Java fortement typé.
 
-    ```/dev/null/AppProperties.java
+    ```java
     package com.example.demo.config;
 
     import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -96,14 +96,14 @@ Ces annotations aident Spring Boot à configurer l'application et à gérer le c
     }
     ```
     Avec `application.properties`:
-    ```/dev/null/application.properties
+    ```yaml
     app.name=My Awesome App
     app.version=1.0.0
     ```
 
 -   `@Value`: Permet d'injecter des valeurs individuelles depuis les fichiers de propriétés ou les variables d'environnement dans les champs ou les paramètres des beans.
 
-    ```/dev/null/MyService.java
+    ```java
     package com.example.demo.service;
 
     import org.springframework.beans.factory.annotation.Value;
@@ -127,7 +127,7 @@ Ces annotations sont des spécialisations de `@Component` et indiquent à Spring
 
 -   `@Component`: Annotation générique pour n'importe quel composant géré par Spring. C'est l'annotation de base pour les stéréotypes.
 
-    ```/dev/null/MyUtility.java
+    ```java
     package com.example.demo.utils;
 
     import org.springframework.stereotype.Component;
@@ -140,7 +140,7 @@ Ces annotations sont des spécialisations de `@Component` et indiquent à Spring
 
 -   `@Service`: Spécifie qu'une classe est un service de la couche métier. Bien qu'elle soit techniquement similaire à `@Component`, elle ajoute une sémantique qui peut être utile pour la lisibilité et potentiellement pour d'autres outils ou aspects orientés.
 
-    ```/dev/null/MyService.java
+    ```java
     package com.example.demo.service;
 
     import org.springframework.stereotype.Service;
@@ -153,7 +153,7 @@ Ces annotations sont des spécialisations de `@Component` et indiquent à Spring
 
 -   `@Repository`: Indique qu'une classe est un dépôt de données (DAO - Data Access Object). Elle est typiquement utilisée pour les classes qui interagissent directement avec une base de données ou une autre source de données. Spring peut appliquer une traduction d'exceptions spécifiques à la base de données aux classes annotées `@Repository`.
 
-    ```/dev/null/MyRepository.java
+    ```java
     package com.example.demo.repository;
 
     import org.springframework.stereotype.Repository;
@@ -166,7 +166,7 @@ Ces annotations sont des spécialisations de `@Component` et indiquent à Spring
 
 -   `@Controller`: Indique qu'une classe est un contrôleur de la couche présentation, gérant les requêtes web entrantes et renvoyant des vues. Utilisée typiquement dans les applications basées sur MVC (Model-View-Controller).
 
-    ```/dev/null/MyViewController.java
+    ```java
     package com.example.demo.controller;
 
     import org.springframework.stereotype.Controller;
@@ -184,7 +184,7 @@ Ces annotations sont des spécialisations de `@Component` et indiquent à Spring
 
 -   `@RestController`: C'est une annotation de commodité qui combine `@Controller` et `@ResponseBody`. Elle est utilisée pour créer des services web RESTful, où les méthodes retournent directement des données qui seront sérialisées (par exemple en JSON) dans le corps de la réponse HTTP, plutôt que de retourner des noms de vues.
 
-    ```/dev/null/MyRestController.java
+    ```java
     package com.example.demo.controller;
 
     import org.springframework.web.bind.annotation.GetMapping;
@@ -206,7 +206,7 @@ Ces annotations sont utilisées pour demander à Spring d'injecter automatiqueme
 
 -   `@Autowired`: C'est l'annotation la plus courante pour l'injection de dépendances. Elle peut être appliquée sur un constructeur, une méthode setter ou un champ. Spring résout la dépendance par type par défaut.
 
-    ```/dev/null/MyService.java
+    ```java
     package com.example.demo.service;
 
     import com.example.demo.repository.MyRepository;
@@ -242,7 +242,7 @@ Ces annotations sont utilisées pour demander à Spring d'injecter automatiqueme
 
 -   `@Qualifier`: Utilisée avec `@Autowired`, elle permet de spécifier le nom du bean exact à injecter lorsque plusieurs beans du même type sont disponibles.
 
-    ```/dev/null/MyService.java
+    ```java
     package com.example.demo.service;
 
     import org.springframework.beans.factory.annotation.Autowired;
@@ -264,7 +264,7 @@ Ces annotations sont utilisées pour demander à Spring d'injecter automatiqueme
 
 -   `@Primary`: Utilisée sur un bean, elle indique que ce bean doit être préféré lorsqu'il y a plusieurs beans du même type et qu'aucun `@Qualifier` n'est spécifié.
 
-    ```/dev/null/DataSourceConfig.java
+    ```java
     package com.example.demo.config;
 
     import org.springframework.context.annotation.Bean;
@@ -293,7 +293,7 @@ Ces annotations sont spécifiquement utilisées dans la couche web pour mapper l
 
 -   `@RequestMapping`: Annotation polyvalente pour mapper les requêtes web à des méthodes de contrôleur. Elle peut être utilisée au niveau de la classe pour définir un chemin de base, et au niveau de la méthode pour un chemin spécifique. Elle permet de spécifier la méthode HTTP (`GET`, `POST`, etc.) et d'autres détails (paramètres, en-têtes, etc.).
 
-    ```/dev/null/ArticleController.java
+    ```java
     package com.example.demo.controller;
 
     import org.springframework.web.bind.annotation.RequestMapping;
@@ -316,7 +316,7 @@ Ces annotations sont spécifiquement utilisées dans la couche web pour mapper l
     -   `@DeleteMapping`
     -   `@PatchMapping`
     Ces annotations sont préférables car plus lisibles. L'exemple ci-dessus devient :
-    ```/dev/null/ArticleController.java
+    ```java
     package com.example.demo.controller;
 
     import org.springframework.web.bind.annotation.GetMapping;
@@ -337,7 +337,7 @@ Ces annotations sont spécifiquement utilisées dans la couche web pour mapper l
 
 -   `@RequestParam`: Permet d'extraire des paramètres de la chaîne de requête (query parameters) de l'URL.
 
-    ```/dev/null/SearchController.java
+    ```java
     package com.example.demo.controller;
 
     import org.springframework.web.bind.annotation.GetMapping;
@@ -361,7 +361,7 @@ Ces annotations sont spécifiquement utilisées dans la couche web pour mapper l
 
 -   `@PathVariable`: Permet d'extraire des valeurs des variables de chemin (path variables) dans l'URL.
 
-    ```/dev/null/UserController.java
+    ```java
     package com.example.demo.controller;
 
     import org.springframework.web.bind.annotation.GetMapping;
@@ -380,7 +380,7 @@ Ces annotations sont spécifiquement utilisées dans la couche web pour mapper l
 
 -   `@RequestBody`: Indique qu'une méthode de contrôleur ou un argument de méthode doit être lié au corps de la requête HTTP. Spring utilise des convertisseurs de messages (comme Jackson pour JSON) pour désérialiser le corps de la requête en un objet Java.
 
-    ```/dev/null/ProductController.java
+    ```java
     package com.example.demo.controller;
 
     import com.example.demo.model.Product;
@@ -401,7 +401,7 @@ Ces annotations sont spécifiquement utilisées dans la couche web pour mapper l
 
 -   `@ResponseBody`: Indique que la valeur de retour d'une méthode doit être sérialisée directement dans le corps de la réponse HTTP. C'est l'annotation qui transforme `@Controller` en `@RestController`. Utilisée seule sur une méthode dans un `@Controller` (non `@RestController`), elle a le même effet que si la classe était annotée `@RestController`.
 
-    ```/dev/null/DataController.java
+    ```java
     package com.example.demo.controller;
 
     import org.springframework.stereotype.Controller;

@@ -19,7 +19,7 @@ Pour commencer à tester votre application Spring Boot, vous aurez besoin d'ajou
 - **Dépendances nécessaires (JUnit, Mockito, etc.)**
   Lorsque vous créez un projet Spring Boot via Spring Initializr, la dépendance `spring-boot-starter-test` est généralement incluse par défaut. Cette dépendance apporte JUnit 5, Mockito, AssertJ, Hamcrest, et d'autres bibliothèques de test courantes.
 
-  ```/dev/null/pom.xml#L1-5
+  ```xml
   <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
@@ -41,7 +41,7 @@ Les tests unitaires visent à tester de petites unités de code isolément, gén
 - **Mockito pour les mocks**
   Mockito est un framework de mocking populaire utilisé pour créer des objets fictifs (mocks) pour les dépendances. Cela permet de tester l'unité de code en isolation sans dépendre de ses collaborateurs réels.
 
-  ```/dev/null/SomeServiceTest.java#L1-10
+  ```java
   import org.junit.jupiter.api.Test;
   import org.mockito.Mockito;
 
@@ -68,7 +68,7 @@ Les tests d'intégration vérifient que différentes parties de votre applicatio
 - **@SpringBootTest pour les tests complets**
   Cette annotation charge le contexte complet de l'application et est utilisée pour tester des scénarios de bout en bout ou des interactions complexes entre composants.
 
-  ```/dev/null/FullIntegrationTest.java#L1-5
+  ```java
   import org.springframework.boot.test.context.SpringBootTest;
   import org.junit.jupiter.api.Test;
 
@@ -81,7 +81,7 @@ Les tests d'intégration vérifient que différentes parties de votre applicatio
 - **TestRestTemplate pour tester les API REST**
   `TestRestTemplate` est un utilitaire fourni par Spring Boot pour effectuer facilement des appels HTTP dans vos tests d'intégration, simulant un client REST.
 
-  ```/dev/null/ApiTest.java#L1-10
+  ```java
   import org.springframework.beans.factory.annotation.Autowired;
   import org.springframework.boot.test.context.SpringBootTest;
   import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -110,7 +110,7 @@ Spring Boot offre des annotations spécialisées pour tester des couches spécif
 - **Tests des contrôleurs avec MockMvc**
   `@WebMvcTest` permet de tester la couche web Spring MVC sans démarrer le serveur HTTP complet. `MockMvc` est utilisé pour simuler des requêtes HTTP.
 
-  ```/dev/null/WebLayerTest.java#L1-10
+  ```java
   import org.springframework.beans.factory.annotation.Autowired;
   import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
   import org.springframework.test.web.servlet.MockMvc;
@@ -132,7 +132,7 @@ Spring Boot offre des annotations spécialisées pour tester des couches spécif
 - **Tests des repositories avec @DataJpaTest**
   `@DataJpaTest` configure un environnement de test pour tester la couche Spring Data JPA. Il configure une base de données embarquée par défaut et est transactionnel par test.
 
-  ```/dev/null/JpaLayerTest.java#L1-10
+  ```java
   import org.springframework.beans.factory.annotation.Autowired;
   import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
   import org.junit.jupiter.api.Test;
@@ -153,7 +153,7 @@ Spring Boot offre des annotations spécialisées pour tester des couches spécif
 - **Tests des services avec @MockBean**
   Dans les tests slice ou `@SpringBootTest`, `@MockBean` permet de remplacer un bean existant dans le contexte Spring par un mock Mockito. Utile pour isoler la couche testée des dépendances externes.
 
-  ```/dev/null/ServiceTest.java#L1-10
+  ```java
   import org.springframework.boot.test.context.SpringBootTest; // or @WebMvcTest, etc.
   import org.springframework.boot.test.mock.mockito.MockBean;
   import org.junit.jupiter.api.Test;

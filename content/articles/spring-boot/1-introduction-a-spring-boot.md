@@ -61,20 +61,6 @@ public class MyApp {
     }
 }
 ```
-```/dev/null/MyApp.java#L4-13
-package com.example.myapp;
-
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-@SpringBootApplication
-public class MyApp {
-
-    public static void main(String[] args) {
-        SpringApplication.run(MyApp.class, args);
-    }
-}
-```
 
 ### Structure d'un projet Spring Boot typique
 
@@ -98,25 +84,6 @@ my-app/
 ├── pom.xml (ou build.gradle)         // Fichier de build
 └── HELP.md
 ```
-```/dev/null/project-structure#L1-15
-my-app/
-├── src/
-│   ├── main/
-│   │   ├── java/
-│   │   │   └── com/example/myapp/
-│   │   │       └── MyApp.java      // Classe principale
-│   │   └── resources/
-│   │       ├── application.properties  // Fichier de configuration
-│   │       ├── static/               // Contenu statique (HTML, JS, CSS)
-│   │       └── templates/            // Templates (Thymeleaf, Freemarker)
-│   └── test/
-│       └── java/
-│           └── com/example/myapp/
-│               └── MyAppTests.java   // Classes de test
-├── pom.xml (ou build.gradle)         // Fichier de build
-└── HELP.md
-```
-
 ### Outils pour démarrer facilement (Spring Initializr)
 
 Spring Initializr (accessible via [start.spring.io](https://start.spring.io/) ou intégré dans la plupart des IDE) est l'outil recommandé pour générer un projet Spring Boot de base. Il vous permet de choisir la version de Spring Boot, les dépendances (starters), le langage de build (Maven ou Gradle) et le langage de programmation (Java, Kotlin, Groovy).

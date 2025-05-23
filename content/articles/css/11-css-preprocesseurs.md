@@ -1,5 +1,5 @@
 ---
-title: CSS préprocesseurs : SASS, LESS et PostCSS
+title: CSS préprocesseurs , SASS, LESS et PostCSS
 tags:
   - CSS
   - Préprocesseurs
@@ -29,7 +29,7 @@ SASS (Syntactically Awesome Style Sheets) est le préprocesseur le plus mature e
 Voici les fonctionnalités clés de SASS/SCSS :
 
 *   **Variables :** Définissez des valeurs réutilisables (couleurs, tailles, polices, etc.) avec le préfixe `$` en SCSS.
-    ```/dev/null/example.scss
+    ```scss
     $primary-color: #3498db;
     $font-stack: Helvetica, sans-serif;
 
@@ -39,7 +39,7 @@ Voici les fonctionnalités clés de SASS/SCSS :
     }
     ```
 *   **Nesting (Imbrication) :** Imbriquez des sélecteurs CSS les uns dans les autres pour suivre la structure HTML. Cela réduit la répétition des sélecteurs parents.
-    ```/dev/null/example.scss
+    ```scss
     nav {
       ul {
         margin: 0;
@@ -64,7 +64,7 @@ Voici les fonctionnalités clés de SASS/SCSS :
     ```
     *Attention :* L'imbrication excessive peut générer des sélecteurs CSS trop spécifiques et difficiles à surcharger. À utiliser avec modération.
 *   **Mixins :** Définissez des blocs de code CSS réutilisables pour éviter de répéter des groupes de propriétés, souvent pour des préfixes navigateurs ou des motifs complexes. Utilisez `@mixin` pour définir et `@include` pour inclure.
-    ```/dev/null/example.scss
+    ```scss
     @mixin clearfix {
       &::after {
         content: "";
@@ -78,7 +78,7 @@ Voici les fonctionnalités clés de SASS/SCSS :
     }
     ```
 *   **Functions :** Définissez des fonctions personnalisées qui peuvent accepter des arguments et retourner des valeurs. Utile pour des calculs ou des manipulations de couleurs (par exemple, éclaircir ou assombrir une couleur).
-    ```/dev/null/example.scss
+    ```scss
     $base-color: #f36;
 
     .element {
@@ -87,7 +87,7 @@ Voici les fonctionnalités clés de SASS/SCSS :
     ```
 *   **Conditionals et boucles :** SASS offre des structures de contrôle (`@if`, `@else`, `@for`, `@each`, `@while`) pour générer du CSS de manière dynamique, utile pour des grilles ou des variations de composants.
 *   **Partials et @import :** Divisez votre code SASS en fichiers plus petits et modulaires (partials, nommés avec un underscore au début, ex: `_variables.scss`). Utilisez `@import` pour inclure ces partials dans votre fichier principal. SASS compile alors tous les fichiers importés en un seul fichier CSS de sortie.
-    ```/dev/null/main.scss
+    ```scss
     @import 'variables';
     @import 'mixins';
     @import 'layout';
@@ -139,7 +139,7 @@ Voici quelques étapes pratiques pour commencer avec les préprocesseurs.
 
 3.  **Création de mixins utiles :**
     *   Créez un mixin pour gérer les media queries. Bien que les media queries natives fonctionnent très bien, un mixin peut vous aider à définir des points de rupture réutilisables.
-        ```/dev/null/mixins.scss
+        ```scss
         $breakpoint-tablet: 768px;
         $breakpoint-desktop: 1024px;
 

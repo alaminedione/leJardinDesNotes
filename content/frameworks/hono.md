@@ -226,8 +226,6 @@ Hono, étant agnostique quant à l'environnement d'exécution, s'intègre facile
 
 Redis est un store de données in-memory souvent utilisé comme cache, broker de messages ou base de données. Intégrer Redis dans une application Hono est simple, généralement en créant un client Redis et en le rendant accessible aux gestionnaires de routes via le contexte Hono (`c.set()`), similaire à l'injection de dépendances.
 
-```typescript
-import { Redis } from '@upstash/redis'
 
 ```typescript
 import { Redis } from '@upstash/redis'
@@ -252,13 +250,6 @@ app.get('/cache/:key', async (c) => {
 
 Les WebSockets permettent une communication bidirectionnelle en temps réel entre le client et le serveur. Hono, en s'appuyant sur les Web Standards et les capacités des runtimes Edge comme Deno et Cloudflare Workers, permet de gérer les connexions WebSocket. L'approche peut varier légèrement selon le runtime utilisé (l'exemple ci-dessous montre l'API spécifique à Deno).
 
-```typescript
-app.get('/ws', (c) => {
-  if (!c.req.raw.headers.get('Upgrade')) {
-    return c.text('Expected Upgrade header')
-  }
-
-  const { response, socket } = Deno.upgradeWebSocket(c.req.raw)
 
 ```typescript
 app.get('/ws', (c) => {
@@ -281,9 +272,6 @@ app.get('/ws', (c) => {
 
 tRPC est un framework qui permet de construire des API end-to-end type-safe sans génération de code. Il s'intègre très bien avec TypeScript et React/Next.js côté client. Hono dispose d'une intégration `@hono/trpc-server` qui permet de lier un routeur tRPC à une route Hono, offrant ainsi une API typée sur votre backend Hono.
 
-```typescript
-import { initTRPC } from '@trpc/server'
-import { createTRPCHono } from '@hono/trpc-server'
 
 ```typescript
 import { initTRPC } from '@trpc/server'
@@ -416,6 +404,7 @@ app.get('/traced-route', async (c) => {
     span.end()
   }
 })
+```
 
 ### Monitoring Middleware
 
@@ -460,13 +449,6 @@ app.get('/metrics', (c) => {
 
 Le streaming JSON permet d'envoyer des données JSON au client en plusieurs morceaux (chunks) plutôt que d'attendre que toutes les données soient prêtes avant d'envoyer une seule réponse. Cela peut améliorer la performance perçue, en particulier pour les grandes quantités de données. Hono prend en charge le streaming via l'API `ReadableStream`.
 
-```typescript
-app.get('/stream-data', (c) => {
-  const stream = new ReadableStream({
-    async start(controller) {
-      for (let i = 0; i < 100; i++) {
-        controller.enqueue(JSON.stringify({ count: i }) + '\n')
-        await new Promise(r => setTimeout(r, 100))
 
 ```typescript
 app.get('/stream-data', (c) => {
@@ -496,10 +478,6 @@ La gestion du cache est essentielle pour améliorer la performance des applicati
 ```typescript
 const cacheControl = (maxAge: number) => async (c: Context, next: Next) => {
   await next()
-
-```typescript
-const cacheControl = (maxAge: number) => async (c: Context, next: Next) => {
-  await next()
   
   if (c.res.headers.get('Cache-Control')) {
     // Skip if Cache-Control is already set
@@ -517,9 +495,6 @@ app.use('/api/*', cacheControl(3600)) // 1 hour cache
 ### Response Compression
 
 La compression des réponses HTTP (gzip, Brotli) réduit la taille des données transférées entre le serveur et le client, ce qui améliore le temps de chargement des pages. Hono fournit un middleware `compress` pour activer la compression des réponses.
-
-```typescript
-import { compress } from 'hono/compress'
 
 ```typescript
 import { compress } from 'hono/compress'
@@ -556,15 +531,6 @@ const app = new Hono()
 export const handler = handle(app)
 ```
 
-<old_text>
-### Google Cloud Functions
-
-```typescript
-import { Hono } from 'hono'
-import { handle } from '@hono/node-server/gcf'
-
-const app = new Hono()
-
 ### Google Cloud Functions
 
 ```typescript
@@ -579,16 +545,8 @@ const app = new Hono()
 export const handler = handle(app)
 ```
 
-<old_text>
 ### Azure Functions
 
-```typescript
-import { Hono } from 'hono'
-import { handle } from '@hono/node-server/azure'
-
-const app = new Hono()
-
-### Azure Functions
 
 ```typescript
 import { Hono } from 'hono'
@@ -602,8 +560,6 @@ const app = new Hono()
 export default handle(app)
 ```
 
-</edits>
-```
 
 ## Sécurité Avancée
 

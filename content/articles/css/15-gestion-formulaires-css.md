@@ -1,5 +1,5 @@
 ---
-title: Gestion des formulaires avec CSS : Styliser pour une meilleure UX
+title: Gestion des formulaires avec CSS , Styliser pour une meilleure UX
 tags:
   - CSS
   - Formulaires
@@ -39,7 +39,6 @@ La première étape consiste souvent à appliquer une base de style uniforme pou
 
 *   **Normalisation des styles par défaut :** Des bibliothèques CSS comme Normalize.css ou Reset CSS incluent des règles pour fournir une meilleure cohérence pour les éléments de formulaire. Vous pouvez aussi appliquer vos propres règles de base.
     ```css
-    /dev/null/form-base.css#L1-10
     input,
     textarea,
     select,
@@ -52,7 +51,6 @@ La première étape consiste souvent à appliquer une base de style uniforme pou
     ```
 *   **Cohérence entre navigateurs :** En plus de la police et des marges, il peut être utile de réinitialiser les bordures ou le `box-sizing` pour une meilleure prévisibilité.
     ```css
-    /dev/null/form-base.css#L12-18
     input[type="text"],
     input[type="email"],
     input[type="password"],
@@ -70,7 +68,6 @@ Les champs de texte (`<input type="text">`, `type="email"`, etc.) et les zones d
 
 *   **Bordures et outline :** Vous pouvez facilement modifier la bordure. L'`outline` (le contour qui apparaît par défaut au focus) est important pour l'accessibilité (navigation au clavier), mais ses styles par défaut sont souvent peu esthétiques. Il est courant de le retirer avec `outline: none;` MAIS il faut impérativement le remplacer par un style de focus visible alternatif (changement de bordure, ombre, etc.).
     ```css
-    /dev/null/text-fields.css#L1-10
     input[type="text"],
     textarea {
       border-radius: 4px;
@@ -86,7 +83,6 @@ Les champs de texte (`<input type="text">`, `type="email"`, etc.) et les zones d
     ```
 *   **États (focus, disabled, readonly) :** Utilisez les pseudo-classes CSS (`:focus`, `:disabled`, `:read-only`) pour styliser ces états.
     ```css
-    /dev/null/text-fields.css#L12-19
     input:disabled,
     textarea:disabled {
       background-color: #eee;
@@ -101,7 +97,6 @@ Les champs de texte (`<input type="text">`, `type="email"`, etc.) et les zones d
     ```
 *   **Placeholder styling :** Le texte placeholder (`placeholder="..."`) peut être stylisé avec des pseudo-éléments spécifiques aux navigateurs :
     ```css
-    /dev/null/text-fields.css#L21-32
     /* Pour la plupart des navigateurs modernes */
     ::placeholder {
       color: #999;
@@ -134,7 +129,6 @@ Ces éléments sont historiquement plus difficiles à styliser uniformément en 
     *   **Pour Checkboxes et Radios :** Utiliser la pseudo-classe `:checked` et les sélecteurs frères (`+` ou `~`) en combinaison avec des pseudo-éléments (`::before`, `::after`) sur le `<label>` associé pour styliser une icône personnalisée.
 
     ```html
-    /dev/null/custom-checkbox.html#L1-13
     <input type="checkbox" id="myCheckbox" class="hidden-checkbox">
     <label for="myCheckbox" class="custom-checkbox-label"></label>
     <span>Accepter les termes</span>
