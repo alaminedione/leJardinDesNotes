@@ -10,41 +10,47 @@ Extrait de code
 erDiagram
     LIVRE ||--o{ EMPRUNT : est_emprunte
     ADHERENT ||--o{ EMPRUNT : emprunte
-    EMPRUNT {
-        id_emprunt PK
-        id_livre FK
-        id_adherent FK
-        date_emprunt
-        date_retour_prevue
-        date_retour_effective
-    }
     AUTEUR ||--o{ LIVRE : a_ecrit
-    LIVRE {
-        id_livre PK
-        titre
-        isbn
-        id_auteur FK
-        id_genre FK
-        nombre_exemplaires
-    }
     GENRE ||--o{ LIVRE : est_de_genre
+
+    EMPRUNT {
+        int id_emprunt PK
+        int id_livre FK
+        int id_adherent FK
+        date date_emprunt
+        date date_retour_prevue
+        date date_retour_effective
+    }
+
+    LIVRE {
+        int id_livre PK
+        string titre
+        string isbn
+        int id_auteur FK
+        int id_genre FK
+        int nombre_exemplaires
+    }
+
     ADHERENT {
-        id_adherent PK
-        nom
-        prenom
-        adresse
-        telephone
-        date_inscription
+        int id_adherent PK
+        string nom
+        string prenom
+        string adresse
+        string telephone
+        date date_inscription
     }
+
     AUTEUR {
-        id_auteur PK
-        nom_auteur
-        prenom_auteur
+        int id_auteur PK
+        string nom_auteur
+        string prenom_auteur
     }
+
     GENRE {
-        id_genre PK
-        nom_genre
+        int id_genre PK
+        string nom_genre
     }
+
 ```
 
 **2. Création de la Base de Données et des Tables (À faire par vous)**

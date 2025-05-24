@@ -13,55 +13,62 @@ erDiagram
     TACHE ||--o{ DEPENDANCE : est_successeur_de
     EMPLOYE ||--o{ AFFECTATION : est_assigne_a
     TACHE ||--o{ AFFECTATION : concerne
+
     PROJET {
-        id_projet PK
-        nom_projet
-        date_debut
-        date_fin_prevue
-        date_fin_reelle
-        statut
+        int id_projet PK
+        string nom_projet
+        date date_debut
+        date date_fin_prevue
+        date date_fin_reelle
+        string statut
     }
+
     TACHE {
-        id_tache PK
-        nom_tache
-        description
-        date_debut_prevue
-        date_fin_prevue
-        date_fin_reelle
-        id_projet FK
-        priorite
-        statut
+        int id_tache PK
+        string nom_tache
+        string description
+        date date_debut_prevue
+        date date_fin_prevue
+        date date_fin_reelle
+        int id_projet FK
+        int priorite
+        string statut
     }
+
     EMPLOYE {
-        id_employe PK
-        nom
-        prenom
-        email
-        telephone
-        poste
+        int id_employe PK
+        string nom
+        string prenom
+        string email
+        string telephone
+        string poste
     }
+
     PARTICIPATION {
-        id_participation PK
-        id_employe FK
-        id_projet FK
-        role
-        date_debut_participation
-        date_fin_participation
+        int id_participation PK
+        int id_employe FK
+        int id_projet FK
+        string role
+        date date_debut_participation
+        date date_fin_participation
     }
+
     DEPENDANCE {
-        id_dependance PK
-        id_tache_predecesseur FK
-        id_tache_successeur FK
-        type_dependance
+        int id_dependance PK
+        int id_tache_predecesseur FK
+        int id_tache_successeur FK
+        string type_dependance
     }
+
     AFFECTATION {
-        id_affectation PK
-        id_employe FK
-        id_tache FK
-        date_debut_affectation
-        date_fin_affectation
-        taux_effort
+        int id_affectation PK
+        int id_employe FK
+        int id_tache FK
+        date date_debut_affectation
+        date date_fin_affectation
+        float taux_effort
     }
+
 ```
 
 **2. Création de la Base de Données et des Tables (À faire par vous)**

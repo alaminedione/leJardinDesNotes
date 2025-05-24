@@ -7,7 +7,6 @@ Absolument ! Voici un exercice complet de SQL (SQLite) pour une boutique en lign
 Extrait de code
 
 ```mermaid
-
 erDiagram
     CLIENT ||--o{ COMMANDE : passe
     COMMANDE ||--o{ LIGNE_COMMANDE : inclut
@@ -27,15 +26,15 @@ erDiagram
     COMMANDE {
         int id_commande PK
         date date_commande
-        int id_client FK_CLIENT
+        int id_client FK
         float montant_total
         string etat
     }
 
     LIGNE_COMMANDE {
         int id_ligne_commande PK
-        int id_commande FK_COMMANDE
-        int id_produit FK_PRODUIT
+        int id_commande FK
+        int id_produit FK
         int quantite
         float prix_unitaire
     }
@@ -45,8 +44,8 @@ erDiagram
         string nom_produit
         string description
         float prix
-        int id_categorie FK_CATEGORIE
-        int id_fournisseur FK_FOURNISSEUR
+        int id_categorie FK
+        int id_fournisseur FK
         int stock
     }
 
@@ -62,6 +61,7 @@ erDiagram
         string telephone_fournisseur
         string email_fournisseur
     }
+
 ```
 
 **2. Création de la Base de Données et des Tables (À faire par vous)**
