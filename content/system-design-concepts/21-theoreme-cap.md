@@ -71,17 +71,29 @@ export default app;
 
 **Diagramme Mermaid**
 ```mermaid
+**Diagramme Mermaid : Les Trois Propriétés du Théorème CAP (Pie Chart)**
+
+```mermaid
+pie
+    title Théorème CAP : Choisir 2 sur 3
+    "Cohérence (C)" : 33.3
+    "Disponibilité (A)" : 33.3
+    "Tolérance aux Partitions (P)" : 33.3
+```
+
+**Diagramme Mermaid : Compromis du Théorème CAP (Graph TD)**
+
+```mermaid
 graph TD
-    subgraph "Théorème CAP"
-        C[Cohérence]
-        A[Disponibilité]
-        P[Tolérance aux Partitions]
-    end
+    P(Tolérance aux Partitions) --> Choix[En cas de Partition Réseau, choisir entre]
 
-    P -- Inévitable en système distribué --> Choix[Choisir entre C et A]
+    Choix -- Priorité Cohérence --> CP_System[Système CP (Cohérence + Partition Tolerance)]
+    CP_System --> Indisponibilite[Peut devenir Indisponible]
 
-    Choix -- Si Cohérence > Disponibilité --> SystèmeCP[Système CP]
-    Choix -- Si Disponibilité > Cohérence --> SystèmeAP[Système AP]
+    Choix -- Priorité Disponibilité --> AP_System[Système AP (Disponibilité + Partition Tolerance)]
+    AP_System --> EventualConsistency[Cohérence Éventuelle]
 
-    SystèmeCP -- En cas de Partition --> Indisponibilité[Peut devenir Indisponible]
-    SystèmeAP -- En cas de Partition --> CohérenceEventuelle[Cohérence Éventuelle]
+    style P fill:#f9f,stroke:#333,stroke-width:2px
+    style C fill:#ccf,stroke:#333,stroke-width:2px
+    style A fill:#cfc,stroke:#333,stroke-width:2px
+```

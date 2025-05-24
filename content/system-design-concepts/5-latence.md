@@ -71,8 +71,18 @@ export default app;
 
 **Diagramme Mermaid**
 ```mermaid
-graph LR
-    Client -- Requête (Délai réseau) --> Serveur
-    Serveur -- Traitement (Délai serveur) --> Serveur
-    Serveur -- Réponse (Délai réseau) --> Client
-    Note right of Client: Latence = Délai Requête + Délai Serveur + Délai Réponse
+sequenceDiagram
+    participant Client
+    participant Réseau
+    participant Serveur
+
+    Client->>Réseau: Envoi Requête
+    Note right of Réseau: Délai de transmission (Réseau)
+    Réseau->>Serveur: Réception Requête
+    Serveur->>Serveur: Traitement Requête
+    Note right of Serveur: Délai de traitement (Serveur)
+    Serveur->>Réseau: Envoi Réponse
+    Note right of Réseau: Délai de transmission (Réseau)
+    Réseau->>Client: Réception Réponse
+    Note right of Client: Latence Totale = Délai Réseau (aller) + Délai Serveur + Délai Réseau (retour)
+```

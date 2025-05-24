@@ -82,10 +82,30 @@ export default app;
 
 **Diagramme Mermaid**
 ```mermaid
-graph LR
-    Utilisateur -- Requête Page HTML --> ApplicationHono[Application Hono (Serveur d'Origine)]
-    ApplicationHono -- Renvoie HTML (référençant CDN) --> Utilisateur
-    Utilisateur -- Requête Image (URL CDN) --> CDN[Réseau de Diffusion de Contenu (CDN)]
-    CDN -- Si Cache Miss --> ServeurOrigineStatic[Serveur d'Origine (Contenu Statique)]
-    ServeurOrigineStatic -- Contenu --> CDN
-    CDN -- Sert Image depuis PoP le plus proche --> Utilisateur
+sequenceDiagram
+    participant Utilisateur
+    participant Navigateur
+    participant ServeurOrigine[Serveur d'Origine (Application)]
+    participant CDN[CDN (Point de Présence)]
+
+    Utilisateur->>Navigateur: Accède à la page web
+    Navigateur->>ServeurOrigine: Requête HTML (ex: index.html)
+    activate ServeurOrigine
+    ServeurOrigine-->>Navigateur: Renvoie HTML (avec URLs CDN pour les assets)
+    deactivate ServeurOrigine
+
+    Note over Navigateur,CDN: Pour chaque asset (image, CSS, JS) référencé par le CDN
+    Navigateur->>CDN: Requête Asset (ex: image.jpg via URL CDN)
+    activate CDN
+
+    alt Cache Hit (CDN)
+        CDN-->>Navigateur: Sert Asset depuis le cache du PoP
+    else Cache Miss (CDN)
+        CDN->>ServeurOrigine: Requête Asset au serveur d'origine
+        activate ServeurOrigine
+        ServeurOrigine-->>CDN: Renvoie Asset
+        deactivate ServeurOrigine
+        CDN->>CDN: Met en cache l'Asset
+        CDN-->>Navigateur: Sert Asset
+    end
+    deactivate CDN

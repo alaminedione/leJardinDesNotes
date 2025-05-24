@@ -98,8 +98,16 @@ export default app;
 
 **Diagramme Mermaid**
 ```mermaid
-graph LR
-    ApplicationHono[Application Hono] -- Requête de données --> SGBD[SGBD]
-    SGBD -- Accède --> BaseDeDonnees[Base de Données]
-    BaseDeDonnees -- Données --> SGBD
-    SGBD -- Résultat --> ApplicationHono
+sequenceDiagram
+    participant Application
+    participant SGBD
+    participant BaseDeDonnees
+
+    Application->>SGBD: Requête de données (ex: SELECT * FROM Users)
+    activate SGBD
+    SGBD->>BaseDeDonnees: Accès aux données
+    activate BaseDeDonnees
+    BaseDeDonnees-->>SGBD: Retourne les données brutes
+    deactivate BaseDeDonnees
+    SGBD-->>Application: Retourne le jeu de résultats
+    deactivate SGBD

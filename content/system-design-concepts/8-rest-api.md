@@ -98,13 +98,22 @@ export default app;
 
 **Diagramme Mermaid**
 ```mermaid
-graph LR
-    Client -- GET /products --> API[API RESTful]
-    API -- Liste de produits (JSON) --> Client
+sequenceDiagram
+    participant Client
+    participant API_RESTful
 
-    Client -- POST /products (Nouveau produit JSON) --> API
-    API -- Confirmation (JSON) --> Client
+    Client->>API_RESTful: GET /products
+    API_RESTful-->>Client: 200 OK (Liste de produits)
 
-    Client -- GET /products/123 --> API
-    API -- Détails du produit 123 (JSON) --> Client
+    Client->>API_RESTful: POST /products (Nouveau produit JSON)
+    API_RESTful-->>Client: 201 Created (Confirmation)
+
+    Client->>API_RESTful: GET /products/123
+    API_RESTful-->>Client: 200 OK (Détails du produit 123)
+
+    Client->>API_RESTful: PUT /products/123 (Mise à jour JSON)
+    API_RESTful-->>Client: 200 OK (Produit mis à jour)
+
+    Client->>API_RESTful: DELETE /products/123
+    API_RESTful-->>Client: 200 OK (Confirmation de suppression)
 ```

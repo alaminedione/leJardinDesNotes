@@ -76,12 +76,30 @@ export default app;
 
 **Diagramme Mermaid**
 ```mermaid
-graph LR
-    Client -- Requête --> Proxy[Proxy (Forward)]
-    Proxy -- Requête --> Internet
-    Internet -- Requête --> ReverseProxy[Proxy Inverse]
-    ReverseProxy -- Requête --> ServeurBackend[Serveur Backend (Hono App)]
-    ServeurBackend -- Réponse --> ReverseProxy
-    ReverseProxy -- Réponse --> Internet
-    Internet -- Réponse --> Proxy
-    Proxy -- Réponse --> Client
+**Diagramme Mermaid : Proxy (Forward Proxy)**
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant Proxy
+    participant Internet
+
+    Client->>Proxy: Requête (ex: google.com)
+    Proxy->>Internet: Requête (au nom du Client)
+    Internet-->>Proxy: Réponse
+    Proxy-->>Client: Réponse
+```
+
+**Diagramme Mermaid : Proxy Inverse (Reverse Proxy)**
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant ReverseProxy
+    participant ServeurBackend
+
+    Client->>ReverseProxy: Requête (ex: monapp.com)
+    ReverseProxy->>ServeurBackend: Requête (vers le serveur réel)
+    ServeurBackend-->>ReverseProxy: Réponse
+    ReverseProxy-->>Client: Réponse
+```

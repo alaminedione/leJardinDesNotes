@@ -114,12 +114,40 @@ export default app; // Ce service serait déployé indépendamment
 
 **Diagramme Mermaid**
 ```mermaid
-graph LR
-    Client -- Requête --> APIGateway[API Gateway]
-    APIGateway -- Route /users --> MicroserviceUtilisateurs[Microservice Utilisateurs (Hono)]
-    APIGateway -- Route /products --> MicroserviceProduits[Microservice Produits (Hono)]
+sequenceDiagram
+    participant Client
+    participant APIGateway
+    participant UserService[Microservice Utilisateurs]
+    participant ProductService[Microservice Produits]
+    participant UserDB[Base de Données Utilisateurs]
+    participant ProductDB[Base de Données Produits]
 
-    MicroserviceUtilisateurs -- Accède --> DBUtilisateurs[Base de Données Utilisateurs]
-    MicroserviceProduits -- Accède --> DBProduits[Base de Données Produits]
+    Client->>APIGateway: Requête (ex: GET /users/1)
+    activate APIGateway
+    APIGateway->>UserService: Route la requête
+    activate UserService
+    UserService->>UserDB: Récupère les données utilisateur
+    activate UserDB
+    UserDB-->>UserService: Données utilisateur
+    deactivate UserDB
+    UserService-->>APIGateway: Réponse utilisateur
+    deactivate UserService
+    APIGateway-->>Client: Réponse finale
 
-    MicroserviceUtilisateurs -- Communication Inter-services --> MicroserviceProduits
+    Client->>APIGateway: Requête (ex: GET /products/101)
+    activate APIGateway
+    APIGateway->>ProductService: Route la requête
+    activate ProductService
+    ProductService->>ProductDB: Récupère les données produit
+    activate ProductDB
+    ProductDB-->>ProductService: Données produit
+    deactivate ProductDB
+    ProductService-->>APIGateway: Réponse produit
+    deactivate ProductService
+    APIGateway-->>Client: Réponse finale
+
+    Note over UserService,ProductService: Communication Inter-services (ex: UserService appelle ProductService)
+    UserService->>ProductService: Requête (ex: GET /products?userId=1)
+    activate ProductService
+    ProductService-->>UserService: Réponse
+    deactivate ProductService

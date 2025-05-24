@@ -84,9 +84,24 @@ export default app;
 
 **Diagramme Mermaid**
 ```mermaid
-graph TD
-    Client -- Requête HTTP (Upgrade: websocket) --> Serveur[Serveur (Application Hono)]
-    Serveur -- Réponse HTTP (101 Switching Protocols) --> Client
-    Client <--> |Connexion Persistante| Serveur
-    Client -- Messages --> Serveur
-    Serveur -- Messages --> Client
+sequenceDiagram
+    participant Client
+    participant Serveur
+
+    Client->>Serveur: Requête HTTP (Upgrade: websocket)
+    activate Serveur
+    Serveur-->>Client: Réponse HTTP (101 Switching Protocols)
+    deactivate Serveur
+    Note over Client,Serveur: Connexion WebSocket établie
+
+    loop Échange de messages
+        Client->>Serveur: Message du client
+        activate Serveur
+        Serveur-->>Client: Message du serveur
+        deactivate Serveur
+    end
+
+    Client->>Serveur: Fermer la connexion
+    activate Serveur
+    Serveur-->>Client: Confirmation de fermeture
+    deactivate Serveur

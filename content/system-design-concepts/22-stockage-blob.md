@@ -103,11 +103,21 @@ export default app;
 
 **Diagramme Mermaid**
 ```mermaid
-graph TD
-    Client -- Téléverser Fichier --> ApplicationHono[Application Hono]
-    ApplicationHono -- Appel API (PutObject) --> ServiceStockageBlob[Service de Stockage Blob (S3/GCS/Azure)]
-    ServiceStockageBlob -- Stocke l'Objet --> Conteneur[Conteneur/Bucket]
+sequenceDiagram
+    participant Client
+    participant Application
+    participant BlobStorage[Service de Stockage Blob]
 
-    Client -- Demander Fichier (URL) --> ServiceStockageBlob
-    ServiceStockageBlob -- Récupère l'Objet --> Conteneur
-    ServiceStockageBlob -- Renvoie l'Objet --> Client
+    Client->>Application: Téléverser Fichier (POST /upload)
+    activate Application
+    Application->>BlobStorage: Uploader Objet (PutObject API)
+    activate BlobStorage
+    BlobStorage-->>Application: Confirmation de l'upload (URL de l'objet)
+    deactivate BlobStorage
+    Application-->>Client: Réponse (URL du fichier)
+    deactivate Application
+
+    Client->>BlobStorage: Demander Fichier (GET via URL directe)
+    activate BlobStorage
+    BlobStorage-->>Client: Fichier (Objet Blob)
+    deactivate BlobStorage

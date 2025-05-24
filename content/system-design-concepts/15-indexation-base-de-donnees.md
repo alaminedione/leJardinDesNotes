@@ -86,9 +86,25 @@ export default app;
 
 **Diagramme Mermaid**
 ```mermaid
-graph TD
-    ApplicationHono[Application Hono] -- Requête (SELECT WHERE email=...) --> SGBD[SGBD]
-    SGBD -- Utilise l'Index --> Index[Index sur 'email']
-    Index -- Pointeur vers données --> TableUtilisateurs[Table Utilisateurs]
-    TableUtilisateurs -- Données --> SGBD
-    SGBD -- Résultat --> ApplicationHono
+sequenceDiagram
+    participant Application
+    participant SGBD
+    participant Index
+    participant Table
+
+    Application->>SGBD: Requête (ex: SELECT * FROM Users WHERE email='...')
+    activate SGBD
+
+    alt Avec Index
+        SGBD->>Index: Recherche 'email' dans l'index
+        activate Index
+        Index-->>SGBD: Retourne l'emplacement de la ligne
+        deactivate Index
+        SGBD->>Table: Accède directement à la ligne
+    else Sans Index
+        SGBD->>Table: Parcourt toutes les lignes (Scan de table)
+    end
+
+    Table-->>SGBD: Retourne les données
+    SGBD-->>Application: Retourne le résultat
+    deactivate SGBD

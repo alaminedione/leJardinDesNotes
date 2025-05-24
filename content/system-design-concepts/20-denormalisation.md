@@ -103,15 +103,49 @@ export default app;
 
 **Diagramme Mermaid**
 ```mermaid
-graph TD
-    TableOrders[Table Orders]
-    TableUsers[Table Users]
-    TableOrdersDenormalized[Table orders_denormalized (Dénormalisée)]
+**Diagramme Mermaid : Normalisation vs Dénormalisation (Class Diagram)**
 
-    TableOrders -- Données combinées --> TableOrdersDenormalized
-    TableUsers -- Données combinées --> TableOrdersDenormalized
+```mermaid
+classDiagram
+    class Orders {
+        +order_id: int
+        +user_id: int
+        +item: string
+        +amount: float
+    }
+    class Users {
+        +user_id: int
+        +user_name: string
+        +user_email: string
+    }
+    class OrdersDenormalized {
+        +order_id: int
+        +user_id: int
+        +item: string
+        +amount: float
+        +user_name: string
+        +user_email: string
+    }
 
-    ApplicationHono[Application Hono] -- Requête simple --> SGBD[SGBD]
-    SGBD -- Lit --> TableOrdersDenormalized
-    TableOrdersDenormalized -- Données --> SGBD
-    SGBD -- Résultat --> ApplicationHono
+    Orders "1" -- "N" Users : user_id (Normalisé)
+    OrdersDenormalized -- Orders : Dénormalisé de
+    OrdersDenormalized -- Users : Dénormalisé de
+```
+
+**Diagramme Mermaid : Accès aux Données Dénormalisées (Sequence Diagram)**
+
+```mermaid
+sequenceDiagram
+    participant Application
+    participant SGBD
+    participant DenormalizedTable[Table Dénormalisée]
+
+    Application->>SGBD: Requête pour détails commande (ex: SELECT * FROM OrdersDenormalized WHERE order_id=X)
+    activate SGBD
+    SGBD->>DenormalizedTable: Lit les données
+    activate DenormalizedTable
+    DenormalizedTable-->>SGBD: Données complètes (sans jointure)
+    deactivate DenormalizedTable
+    SGBD-->>Application: Retourne le résultat
+    deactivate SGBD
+```

@@ -73,15 +73,17 @@ export default app;
 **Diagramme Mermaid**
 ```mermaid
 graph TD
-    Serveur[Serveur Unique]
-    Utilisateurs[Utilisateurs]
+    A[Serveur Initial] --> B{Ajout de Ressources}
+    B --> C[Serveur Plus Puissant]
 
-    Utilisateurs -- Requêtes --> Serveur
-    Serveur -- Traite les requêtes --> Serveur
-
-    subgraph "Mise à l'échelle Verticale"
-        Serveur -- Ajouter CPU/RAM/Stockage --> Serveur_Plus_Puissant[Serveur Plus Puissant]
+    subgraph Avant Mise à l'échelle
+        Client1(Client) -- Requête --> A
+        Client2(Client) -- Requête --> A
     end
 
-    Utilisateurs -- Plus de Requêtes --> Serveur_Plus_Puissant
-    Serveur_Plus_Puissant -- Gère plus de requêtes --> Serveur_Plus_Puissant
+    subgraph Après Mise à l'échelle Verticale
+        Client3(Client) -- Requête --> C
+        Client4(Client) -- Requête --> C
+        Client5(Client) -- Requête --> C
+        Note right of C: Gère plus de charge
+    end

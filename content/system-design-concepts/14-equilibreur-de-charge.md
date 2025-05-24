@@ -70,18 +70,26 @@ export default app;
 
 **Diagramme Mermaid**
 ```mermaid
-graph LR
-    Client -- Requête --> LoadBalancer[Équilibreur de Charge]
-    LoadBalancer -- Algorithme de Répartition --> ServeurA[Serveur A (Hono)]
-    LoadBalancer -- Algorithme de Répartition --> ServeurB[Serveur B (Hono)]
-    LoadBalancer -- Algorithme de Répartition --> ServeurC[Serveur C (Hono)]
+sequenceDiagram
+    participant Client
+    participant LoadBalancer
+    participant ServeurA
+    participant ServeurB
+    participant ServeurC
 
-    ServeurA -- Réponse --> LoadBalancer
-    ServeurB -- Réponse --> LoadBalancer
-    ServeurC -- Réponse --> LoadBalancer
+    Client->>LoadBalancer: Requête HTTP
+    activate LoadBalancer
+    LoadBalancer->>ServeurA: Distribue la requête (ex: Round Robin)
+    activate ServeurA
+    ServeurA-->>LoadBalancer: Réponse HTTP
+    deactivate ServeurA
+    LoadBalancer-->>Client: Réponse HTTP
+    deactivate LoadBalancer
 
-    LoadBalancer -- Réponse --> Client
-
-    LoadBalancer -- Vérification de Santé --> ServeurA
-    LoadBalancer -- Vérification de Santé --> ServeurB
-    LoadBalancer -- Vérification de Santé --> ServeurC
+    Note over LoadBalancer,ServeurC: Vérifications de Santé régulières
+    LoadBalancer->>ServeurA: Health Check
+    ServeurA-->>LoadBalancer: OK
+    LoadBalancer->>ServeurB: Health Check
+    ServeurB-->>LoadBalancer: OK
+    LoadBalancer->>ServeurC: Health Check
+    ServeurC-->>LoadBalancer: OK

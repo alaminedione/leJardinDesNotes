@@ -89,9 +89,16 @@ export default app;
 
 **Diagramme Mermaid**
 ```mermaid
-graph TD
-    Fournisseur[Application Fournisseur (ex: Stripe)] -- Événement Déclenché --> Fournisseur
-    Fournisseur -- Envoie Webhook (HTTP POST) --> Internet
-    Internet -- Arrive à l'URL de Rappel --> ApplicationHono[Application Hono (Consommateur)]
-    ApplicationHono -- Traite la Charge Utile --> ApplicationHono
-    ApplicationHono -- Réponse HTTP 200 OK --> Fournisseur
+sequenceDiagram
+    participant Fournisseur[Application Fournisseur]
+    participant Consommateur[Application Consommateur (Webhook Listener)]
+
+    Fournisseur->>Fournisseur: 1. Événement se produit (ex: Paiement réussi)
+    Fournisseur->>Consommateur: 2. Envoie Webhook (HTTP POST à l'URL de rappel)
+    activate Consommateur
+    Consommateur->>Consommateur: 3. Valide et traite la charge utile
+    Consommateur-->>Fournisseur: 4. Réponse HTTP 200 OK
+    deactivate Consommateur
+
+    Note over Fournisseur,Consommateur: Le fournisseur attend une réponse 2xx pour confirmer la réception.
+    Note over Fournisseur,Consommateur: En cas d'échec, le fournisseur peut re-tenter l'envoi.

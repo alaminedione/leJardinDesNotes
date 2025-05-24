@@ -104,12 +104,32 @@ export default app;
 
 **Diagramme Mermaid**
 ```mermaid
-graph LR
-    Client -- Requête --> ApplicationHono[Application Hono]
-    ApplicationHono -- 1. Vérifier Cache --> Cache[Cache (Redis/Memcached)]
-    Cache -- Cache Hit --> ApplicationHono
-    Cache -- Cache Miss --> ApplicationHono
-    ApplicationHono -- 2. Lire DB --> BaseDeDonnees[Base de Données]
-    BaseDeDonnees -- Données --> ApplicationHono
-    ApplicationHono -- 3. Écrire Cache --> Cache
-    ApplicationHono -- Réponse --> Client
+sequenceDiagram
+    participant Client
+    participant Application
+    participant Cache
+    participant BaseDeDonnees
+
+    Client->>Application: Requête de données
+    activate Application
+    Application->>Cache: 1. Vérifier si les données sont en cache
+    activate Cache
+
+    alt Cache Hit
+        Cache-->>Application: Données trouvées dans le cache
+        deactivate Cache
+        Application-->>Client: Réponse (rapide depuis le cache)
+    else Cache Miss
+        Cache-->>Application: Données non trouvées
+        deactivate Cache
+        Application->>BaseDeDonnees: 2. Lire les données depuis la base de données
+        activate BaseDeDonnees
+        BaseDeDonnees-->>Application: Données lues
+        deactivate BaseDeDonnees
+        Application->>Cache: 3. Stocker les données dans le cache (avec TTL)
+        activate Cache
+        Cache-->>Application: Confirmation de stockage
+        deactivate Cache
+        Application-->>Client: Réponse (depuis la base de données)
+    end
+    deactivate Application

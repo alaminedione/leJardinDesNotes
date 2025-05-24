@@ -99,11 +99,29 @@ export default app;
 
 **Diagramme Mermaid**
 ```mermaid
-graph TD
-    Producteur[Application Producteur (ex: Hono)] -- Envoie Message --> FileMessages[File de Messages]
-    FileMessages -- Stocke Message --> FileMessages
-    FileMessages -- Message Disponible --> Consommateur1[Application Consommateur 1]
-    FileMessages -- Message Disponible --> Consommateur2[Application Consommateur 2]
+sequenceDiagram
+    participant Producteur[Application Producteur]
+    participant FileDeMessages[File de Messages]
+    participant Consommateur1[Application Consommateur 1]
+    participant Consommateur2[Application Consommateur 2]
 
-    Consommateur1 -- Traite Message --> Consommateur1
-    Consommateur2 -- Traite Message --> Consommateur2
+    Producteur->>FileDeMessages: 1. Envoie Message (asynchrone)
+    activate FileDeMessages
+    Note over FileDeMessages: Le message est stocké
+    deactivate FileDeMessages
+
+    loop Traitement des messages
+        FileDeMessages->>Consommateur1: 2. Message disponible
+        activate Consommateur1
+        Consommateur1->>Consommateur1: Traite le message
+        Consommateur1-->>FileDeMessages: 3. Accusé de réception (message retiré)
+        deactivate Consommateur1
+
+        FileDeMessages->>Consommateur2: 2. Message disponible (si Pub/Sub ou autre message)
+        activate Consommateur2
+        Consommateur2->>Consommateur2: Traite le message
+        Consommateur2-->>FileDeMessages: 3. Accusé de réception
+        deactivate Consommateur2
+    end
+
+    Note over Producteur,Consommateur2: Découplage et Scalabilité: Les producteurs et consommateurs sont indépendants.

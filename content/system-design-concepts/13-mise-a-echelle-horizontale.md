@@ -89,12 +89,43 @@ export default app;
 
 **Diagramme Mermaid**
 ```mermaid
-graph LR
-    Utilisateurs -- Requêtes --> LoadBalancer[Équilibreur de Charge]
-    LoadBalancer -- Distribue --> Serveur1[Serveur Hono 1]
-    LoadBalancer -- Distribue --> Serveur2[Serveur Hono 2]
-    LoadBalancer -- Distribue --> Serveur3[Serveur Hono 3]
+graph TD
+    subgraph Clients
+        C1(Client 1)
+        C2(Client 2)
+        C3(Client 3)
+    end
 
-    Serveur1 -- Accède à l'état partagé --> ÉtatPartagé[Base de Données / Cache Distribué]
-    Serveur2 -- Accède à l'état partagé --> ÉtatPartagé
-    Serveur3 -- Accède à l'état partagé --> ÉtatPartagé
+    subgraph Équilibreur de Charge
+        LB[Équilibreur de Charge]
+    end
+
+    subgraph Instances d'Application
+        S1[Serveur App 1]
+        S2[Serveur App 2]
+        S3[Serveur App 3]
+    end
+
+    subgraph État Partagé
+        DB[Base de Données / Cache Distribué]
+    end
+
+    C1 -- Requête --> LB
+    C2 -- Requête --> LB
+    C3 -- Requête --> LB
+
+    LB -- Distribue --> S1
+    LB -- Distribue --> S2
+    LB -- Distribue --> S3
+
+    S1 -- Accède/Met à jour --> DB
+    S2 -- Accède/Met à jour --> DB
+    S3 -- Accède/Met à jour --> DB
+
+    S1 -- Réponse --> LB
+    S2 -- Réponse --> LB
+    S3 -- Réponse --> LB
+
+    LB -- Réponse --> C1
+    LB -- Réponse --> C2
+    LB -- Réponse --> C3

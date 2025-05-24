@@ -27,7 +27,6 @@ L'architecture client-serveur est un modèle fondamental dans le développement 
     - **Clients Mobiles:** Applications natives (iOS, Android) ou hybrides.
     - **Clients Desktop:** Applications logicielles installées sur un ordinateur (ex: Microsoft Word, Adobe Photoshop).
     - **Autres Clients:** Appareils IoT, terminaux de paiement, etc.
-
 - **Types de Serveurs:**
     - **Serveurs Web:** Servent des pages web et des ressources statiques (Apache, Nginx, IIS).
     - **Serveurs d'Applications:** Exécutent la logique métier et interagissent avec les bases de données (Node.js, Java Spring Boot, Python Django/Flask).
@@ -83,7 +82,12 @@ fetchData();
 ```
 
 **Diagramme Mermaid**
+
 ```mermaid
-graph LR
-    Client -- Requête --> Serveur
-    Serveur -- Réponse --> Client
+sequenceDiagram
+    participant Client
+    participant Serveur
+
+    Client->>Serveur: Requête (ex: GET /data)
+    Serveur-->>Client: Réponse (ex: Données JSON)
+```

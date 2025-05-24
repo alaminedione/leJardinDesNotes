@@ -47,13 +47,25 @@ La stratégie Read Through est bien adaptée aux applications à forte lecture o
 *   Profils d'utilisateurs
 
 ```mermaid
-graph LR
-    A[Application] --> C{Cache}
-    C -->|Cache Hit: Data from cache| A
-    C -->|Cache Miss:| DB[Database]
-    DB -->|Read data| C
-    C -->|Store data in cache| C
-    C -->|Return data to application| A
+sequenceDiagram
+    participant Application
+    participant Cache
+    participant Database
+
+    Application->>Cache: 1. Demande de données
+    activate Cache
+
+    alt Cache Hit
+        Cache-->>Application: Données (depuis le cache)
+    else Cache Miss
+        Cache->>Database: 2. Demande de données
+        activate Database
+        Database-->>Cache: Données
+        deactivate Database
+        Cache->>Cache: 3. Stocke les données
+        Cache-->>Application: Données (depuis le cache après chargement)
+    end
+    deactivate Cache
 ```
 
 ## 2. Cache Aside
@@ -93,12 +105,29 @@ Exemple :
 *   Un site web de commerce électronique où les données des produits (prix, descriptions, stock) sont lues fréquemment mais mises à jour rarement.
 
 ```mermaid
-graph LR
-    A[Application] --> C{Cache}
-    C -->|Cache Hit: Data from cache| A
-    A -->|Cache Miss:| DB[Database]
-    DB -->|Read data| A
-    A -->|Write data to cache| C
+sequenceDiagram
+    participant Application
+    participant Cache
+    participant Database
+
+    Application->>Cache: 1. Demande de données
+    activate Cache
+
+    alt Cache Hit
+        Cache-->>Application: Données (depuis le cache)
+    else Cache Miss
+        Cache-->>Application: Données non trouvées
+        deactivate Cache
+        Application->>Database: 2. Récupère les données
+        activate Database
+        Database-->>Application: Données
+        deactivate Database
+        Application->>Cache: 3. Stocke les données dans le cache
+        activate Cache
+        Cache-->>Application: Confirmation de stockage
+        deactivate Cache
+    end
+    deactivate Cache
 ```
 
 ## 3. Write Through
@@ -134,10 +163,19 @@ Exemples :
 *   Systèmes de traitement des transactions en ligne
 
 ```mermaid
-graph LR
-    A[Application] --> C{Cache}
-    A --> D[Database]
-    C & D -->|Write data simultaneously| A
+sequenceDiagram
+    participant Application
+    participant Cache
+    participant Database
+
+    Application->>Cache: 1. Écriture de données
+    activate Cache
+    Cache->>Database: 2. Écriture de données (synchrone)
+    activate Database
+    Database-->>Cache: Confirmation d'écriture
+    deactivate Database
+    Cache-->>Application: Confirmation d'écriture
+    deactivate Cache
 ```
 
 ## 4. Write Around
@@ -173,14 +211,34 @@ Exemple :
 *   Systèmes de journalisation
 
 ```mermaid
-graph LR
-    A[Application] --> D[Database]
-    D -->|Write data| A
-    A --> C{Cache}
-    C --o|Cache Miss| D
-    D -->|Read data| C
-    C --> A
-    C --o|Cache Hit| A
+sequenceDiagram
+    participant Application
+    participant Cache
+    participant Database
+
+    Application->>Database: 1. Écriture de données (directement à la DB)
+    activate Database
+    Database-->>Application: Confirmation d'écriture
+    deactivate Database
+
+    Application->>Cache: 2. Demande de lecture (peut être un cache miss)
+    activate Cache
+
+    alt Cache Hit
+        Cache-->>Application: Données (depuis le cache)
+    else Cache Miss
+        Cache-->>Application: Données non trouvées
+        deactivate Cache
+        Application->>Database: 3. Récupère les données (pour la lecture)
+        activate Database
+        Database-->>Application: Données
+        deactivate Database
+        Application->>Cache: 4. Stocke les données dans le cache
+        activate Cache
+        Cache-->>Application: Confirmation de stockage
+        deactivate Cache
+    end
+    deactivate Cache
 ```
 
 ## 5. Write Back
@@ -219,7 +277,18 @@ Exemples :
 *   Applications de streaming de données
 
 ```mermaid
-graph LR
-    A[Application] --> C{Cache}
-    C -->|Write data| A
-    C -->|Asynchronously write data to DB| D[Database]
+sequenceDiagram
+    participant Application
+    participant Cache
+    participant Database
+
+    Application->>Cache: 1. Écriture de données
+    activate Cache
+    Cache-->>Application: Confirmation d'écriture (rapide)
+    deactivate Cache
+
+    Note over Cache,Database: 2. Le cache écrit les données à la base de données de manière asynchrone
+    Cache->>Database: Écriture de données (asynchrone)
+    activate Database
+    Database-->>Cache: Confirmation d'écriture
+    deactivate Database

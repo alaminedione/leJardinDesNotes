@@ -86,10 +86,21 @@ export default app;
 
 **Diagramme Mermaid**
 ```mermaid
-graph LR
-    Client -- Requête GraphQL (POST /graphql) --> HonoApp[Application Hono]
-    HonoApp -- Passe la requête --> GraphQLServer[Serveur GraphQL (avec Schéma/Resolvers)]
-    GraphQLServer -- Récupère les données --> BaseDeDonnees[Base de Données ou autre source]
-    BaseDeDonnees -- Données --> GraphQLServer
-    GraphQLServer -- Résultat --> HonoApp
-    HonoApp -- Réponse GraphQL (JSON) --> Client
+sequenceDiagram
+    participant Client
+    participant HonoApp
+    participant GraphQLServer
+    participant DataSource[Base de Données / Service Externe]
+
+    Client->>HonoApp: Requête GraphQL (POST /graphql)
+    activate HonoApp
+    HonoApp->>GraphQLServer: Transmet la requête GraphQL
+    activate GraphQLServer
+    GraphQLServer->>DataSource: Exécute les Resolvers (récupère données)
+    activate DataSource
+    DataSource-->>GraphQLServer: Retourne les données
+    deactivate DataSource
+    GraphQLServer-->>HonoApp: Retourne le résultat GraphQL
+    deactivate GraphQLServer
+    HonoApp-->>Client: Réponse GraphQL (JSON)
+    deactivate HonoApp

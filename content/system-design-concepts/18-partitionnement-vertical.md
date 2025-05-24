@@ -97,13 +97,60 @@ export default app;
 
 **Diagramme Mermaid**
 ```mermaid
-graph TD
-    TableOriginale[Table Utilisateurs Originale] -- Divisée par colonnes --> TableLogin[Table user_login]
-    TableOriginale -- Divisée par colonnes --> TableProfile[Table user_profile]
+**Diagramme Mermaid : Structure des Tables (Class Diagram)**
 
-    ApplicationHono[Application Hono] -- Requête (JOIN) --> SGBD[SGBD]
-    SGBD -- Jointure --> TableLogin
-    SGBD -- Jointure --> TableProfile
-    TableLogin -- Données --> SGBD
-    TableProfile -- Données --> SGBD
-    SGBD -- Résultat Joint --> ApplicationHono
+```mermaid
+classDiagram
+    class UserOriginal {
+        +id: int
+        +username: string
+        +password_hash: string
+        +last_login: datetime
+        +full_name: string
+        +email: string
+        +bio: text
+        +address: string
+    }
+
+    class UserLogin {
+        +id: int
+        +username: string
+        +password_hash: string
+        +last_login: datetime
+    }
+
+    class UserProfile {
+        +id: int
+        +full_name: string
+        +email: string
+        +bio: text
+        +address: string
+    }
+
+    UserOriginal --|> UserLogin : partitionné
+    UserOriginal --|> UserProfile : partitionné
+    UserLogin "1" -- "1" UserProfile : joint par id
+```
+
+**Diagramme Mermaid : Accès aux Données (Sequence Diagram)**
+
+```mermaid
+sequenceDiagram
+    participant Application
+    participant SGBD
+    participant UserLoginTable[Table user_login]
+    participant UserProfileTable[Table user_profile]
+
+    Application->>SGBD: Requête pour détails utilisateur (ex: SELECT username, bio WHERE id=X)
+    activate SGBD
+    SGBD->>UserLoginTable: Récupère username
+    activate UserLoginTable
+    UserLoginTable-->>SGBD: username
+    deactivate UserLoginTable
+    SGBD->>UserProfileTable: Récupère bio
+    activate UserProfileTable
+    UserProfileTable-->>SGBD: bio
+    deactivate UserProfileTable
+    SGBD-->>Application: Retourne username et bio (après jointure interne)
+    deactivate SGBD
+```

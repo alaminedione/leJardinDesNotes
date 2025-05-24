@@ -107,15 +107,37 @@ export default app;
 
 **Diagramme Mermaid**
 ```mermaid
-graph TD
-    Client -- Requête Écriture --> ApplicationHono[Application Hono]
-    ApplicationHono -- Écriture --> RépliquePrimaire[Réplique Primaire (Master)]
-    RépliquePrimaire -- Réplication --> RépliqueSecondaire1[Réplique Secondaire 1]
-    RépliquePrimaire -- Réplication --> RépliqueSecondaire2[Réplique Secondaire 2]
+sequenceDiagram
+    participant Client
+    participant Application
+    participant PrimaryDB[Base de Données Primaire]
+    participant Replica1[Réplique de Lecture 1]
+    participant Replica2[Réplique de Lecture 2]
 
-    Client -- Requête Lecture --> ApplicationHono
-    ApplicationHono -- Lecture --> RépliqueSecondaire1
-    ApplicationHono -- Lecture --> RépliqueSecondaire2
+    Client->>Application: Requête d'Écriture (ex: POST /data)
+    activate Application
+    Application->>PrimaryDB: Écriture de données
+    activate PrimaryDB
+    PrimaryDB-->>Application: Confirmation d'écriture
+    deactivate PrimaryDB
+    Application-->>Client: Réponse (Écriture réussie)
+    deactivate Application
 
-    RépliqueSecondaire1 -- Données --> ApplicationHono
-    RépliqueSecondaire2 -- Données --> ApplicationHono
+    PrimaryDB-->>Replica1: Réplication des données
+    PrimaryDB-->>Replica2: Réplication des données
+
+    Client->>Application: Requête de Lecture (ex: GET /data)
+    activate Application
+    alt Lecture sur Réplique 1
+        Application->>Replica1: Lecture de données
+        activate Replica1
+        Replica1-->>Application: Données lues
+        deactivate Replica1
+    else Lecture sur Réplique 2
+        Application->>Replica2: Lecture de données
+        activate Replica2
+        Replica2-->>Application: Données lues
+        deactivate Replica2
+    end
+    Application-->>Client: Réponse (Données lues)
+    deactivate Application

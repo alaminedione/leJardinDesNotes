@@ -108,10 +108,23 @@ export default app;
 
 **Diagramme Mermaid**
 ```mermaid
-graph TD
-    Client -- Requêtes --> LimiteurDeDebit[Système de Limitation de Débit]
-    LimiteurDeDebit -- Si dans la limite --> ApplicationHono[Application Hono]
-    LimiteurDeDebit -- Si dépasse la limite --> Réponse429[Réponse HTTP 429]
+sequenceDiagram
+    participant Client
+    participant RateLimiter[Système de Limitation de Débit]
+    participant Application
 
-    ApplicationHono -- Traite la requête --> ApplicationHono
-    ApplicationHono -- Réponse --> Client
+    Client->>RateLimiter: Requête
+    activate RateLimiter
+
+    alt Requête dans la limite
+        RateLimiter-->>Application: Transmet la requête
+        activate Application
+        Application-->>RateLimiter: Réponse de l'application
+        deactivate Application
+        RateLimiter-->>Client: Réponse (200 OK)
+    else Requête dépasse la limite
+        RateLimiter-->>Client: Réponse (429 Too Many Requests)
+    end
+    deactivate RateLimiter
+
+    Note over RateLimiter,Application: Le Rate Limiter protège l'application des surcharges.

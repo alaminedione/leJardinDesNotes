@@ -51,10 +51,16 @@ app.get('/client-ip', (c) => {
 
 export default app;
 ```
+
 *Note : L'obtention de l'adresse IP réelle du client peut dépendre de l'infrastructure (par exemple, l'utilisation d'un proxy inverse ou d'un équilibreur de charge) et peut nécessiter de vérifier différents en-têtes.*
 
 **Diagramme Mermaid**
+
 ```mermaid
-graph LR
-    AppareilA -- Utilise l'adresse IP --> AppareilB
-    AppareilB -- Utilise l'adresse IP --> AppareilA
+sequenceDiagram
+    participant Client
+    participant ServeurWeb
+
+    Client->>ServeurWeb: Requête HTTP (vers l'adresse IP du ServeurWeb)
+    ServeurWeb-->>Client: Réponse HTTP (depuis l'adresse IP du ServeurWeb)
+```

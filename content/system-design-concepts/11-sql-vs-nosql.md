@@ -98,12 +98,22 @@ export default app;
 **Diagramme Mermaid**
 ```mermaid
 graph TD
-    AppHono[Application Hono]
-    SQLDB[Base de Données SQL]
-    NoSQLDB[Base de Données NoSQL]
+    subgraph SQL (Relationnel)
+        SQL_A[Schéma Fixe] --> SQL_B(ACID)
+        SQL_B --> SQL_C{Jointures Complexes}
+        SQL_C --> SQL_D[Scalabilité Verticale]
+        SQL_D --> SQL_E(Ex: PostgreSQL, MySQL)
+    end
 
-    AppHono -- Requêtes structurées --> SQLDB
-    AppHono -- Requêtes flexibles --> NoSQLDB
+    subgraph NoSQL (Non Relationnel)
+        NoSQL_A[Schéma Flexible] --> NoSQL_B(BASE)
+        NoSQL_B --> NoSQL_C{Modèles Variés}
+        NoSQL_C --> NoSQL_D[Scalabilité Horizontale]
+        NoSQL_D --> NoSQL_E(Ex: MongoDB, Cassandra)
+    end
 
-    SQLDB -- Données relationnelles --> AppHono
-    NoSQLDB -- Données non relationnelles --> AppHono
+    Decision[Choix de la DB] --> SQL
+    Decision --> NoSQL
+
+    SQL -- Données Structurées, Transactions --> Application[Application]
+    NoSQL -- Données Non Structurées, Big Data --> Application

@@ -98,9 +98,24 @@ export default app;
 
 **Diagramme Mermaid**
 ```mermaid
-graph LR
-    Client -- Requête HTTP --> ServeurWeb[Serveur Web]
-    ServeurWeb -- Réponse HTTP --> Client
+**Diagramme Mermaid : Communication HTTP**
 
-    Client -- Requête HTTPS (Chiffrée) --> ServeurWebSec[Serveur Web (HTTPS)]
-    ServeurWebSec -- Réponse HTTPS (Chiffrée) --> Client
+```mermaid
+sequenceDiagram
+    participant Client
+    participant ServeurWeb
+
+    Client->>ServeurWeb: Requête HTTP (non chiffrée)
+    ServeurWeb-->>Client: Réponse HTTP (non chiffrée)
+```
+
+**Diagramme Mermaid : Communication HTTPS**
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant ServeurWebSec
+
+    Client->>ServeurWebSec: Requête HTTPS (chiffrée par SSL/TLS)
+    ServeurWebSec-->>Client: Réponse HTTPS (chiffrée par SSL/TLS)
+```

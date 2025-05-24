@@ -101,8 +101,16 @@ export default app;
 
 **Diagramme Mermaid**
 ```mermaid
-graph LR
-    Client -- Appel API (Requête) --> Serveur[Serveur (Application API)]
-    Serveur -- Traitement --> BaseDeDonnees[Base de Données]
-    BaseDeDonnees -- Données --> Serveur
-    Serveur -- Réponse API --> Client
+sequenceDiagram
+    participant Client
+    participant ApplicationAPI
+    participant BaseDeDonnees
+
+    Client->>ApplicationAPI: Requête API (ex: GET /tasks)
+    activate ApplicationAPI
+    ApplicationAPI->>BaseDeDonnees: Requête de données
+    activate BaseDeDonnees
+    BaseDeDonnees-->>ApplicationAPI: Données
+    deactivate BaseDeDonnees
+    ApplicationAPI-->>Client: Réponse API (JSON/XML)
+    deactivate ApplicationAPI

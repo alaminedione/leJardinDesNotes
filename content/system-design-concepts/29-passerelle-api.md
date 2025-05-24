@@ -94,13 +94,38 @@ export default app;
 
 **Diagramme Mermaid**
 ```mermaid
-graph TD
-    Client -- Requête --> PasserelleAPI[Passerelle API]
-    PasserelleAPI -- Authentification --> SystèmeAuth[Système d'Authentification]
-    PasserelleAPI -- Limitation de Débit --> SystèmeRateLimit[Système de Limitation de Débit]
-    PasserelleAPI -- Routage --> ServiceA[Service A (Hono)]
-    PasserelleAPI -- Routage --> ServiceB[Service B (Hono)]
+sequenceDiagram
+    participant Client
+    participant APIGateway
+    participant AuthService[Système d'Authentification]
+    participant RateLimitService[Système de Limitation de Débit]
+    participant ServiceA[Microservice A]
+    participant ServiceB[Microservice B]
 
-    ServiceA -- Réponse --> PasserelleAPI
-    ServiceB -- Réponse --> PasserelleAPI
-    PasserelleAPI -- Réponse --> Client
+    Client->>APIGateway: Requête API (ex: GET /users/profile)
+    activate APIGateway
+
+    APIGateway->>AuthService: 1. Vérifier Authentification/Autorisation
+    activate AuthService
+    AuthService-->>APIGateway: Résultat Authentification
+    deactivate AuthService
+
+    APIGateway->>RateLimitService: 2. Vérifier Limitation de Débit
+    activate RateLimitService
+    RateLimitService-->>APIGateway: Résultat Limitation de Débit
+    deactivate RateLimitService
+
+    alt Routage vers Service A
+        APIGateway->>ServiceA: 3. Route la requête
+        activate ServiceA
+        ServiceA-->>APIGateway: Réponse du Service A
+        deactivate ServiceA
+    else Routage vers Service B
+        APIGateway->>ServiceB: 3. Route la requête
+        activate ServiceB
+        ServiceB-->>APIGateway: Réponse du Service B
+        deactivate ServiceB
+    end
+
+    APIGateway-->>Client: Réponse finale
+    deactivate APIGateway

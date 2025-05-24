@@ -67,10 +67,26 @@ export default app;
 ```
 
 **Diagramme Mermaid**
+
 ```mermaid
-graph LR
-    Utilisateur -- Tape nom de domaine --> Navigateur
-    Navigateur -- Requête DNS --> ServeurDNS
-    ServeurDNS -- Adresse IP --> Navigateur
-    Navigateur -- Requête HTTP --> ServeurWeb[Serveur Web (Adresse IP)]
-    ServeurWeb -- Réponse HTTP --> Navigateur
+sequenceDiagram
+    participant Utilisateur
+    participant Navigateur
+    participant ResolverDNS
+    participant ServeurRacine
+    participant ServeurTLD
+    participant ServeurAutorite
+    participant ServeurWeb
+
+    Utilisateur->>Navigateur: Tape nom de domaine (ex: example.com)
+    Navigateur->>ResolverDNS: Requête DNS pour example.com
+    ResolverDNS->>ServeurRacine: Requête pour .com
+    ServeurRacine-->>ResolverDNS: Adresse du Serveur TLD (.com)
+    ResolverDNS->>ServeurTLD: Requête pour example.com
+    ServeurTLD-->>ResolverDNS: Adresse du Serveur d'Autorité (example.com)
+    ResolverDNS->>ServeurAutorite: Requête pour example.com
+    ServeurAutorite-->>ResolverDNS: Adresse IP de example.com
+    ResolverDNS-->>Navigateur: Adresse IP de example.com
+    Navigateur->>ServeurWeb: Requête HTTP (vers l'adresse IP)
+    ServeurWeb-->>Navigateur: Réponse HTTP
+```

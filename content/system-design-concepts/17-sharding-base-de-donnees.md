@@ -114,16 +114,27 @@ export default app;
 
 **Diagramme Mermaid**
 ```mermaid
-graph TD
-    Client -- Requête (avec Shard Key) --> ApplicationHono[Application Hono]
-    ApplicationHono -- Routage basé sur Shard Key --> LogiqueSharding[Logique de Sharding]
-    LogiqueSharding -- Dirige la requête --> ShardA[Shard A]
-    LogiqueSharding -- Dirige la requête --> ShardB[Shard B]
-    LogiqueSharding -- Dirige la requête --> ShardC[Shard C]
+sequenceDiagram
+    participant Client
+    participant Application
+    participant ShardingLogic[Logique de Sharding]
+    participant ShardA
+    participant ShardB
+    participant ShardC
 
-    ShardA -- Données --> LogiqueSharding
-    ShardB -- Données --> LogiqueSharding
-    ShardC -- Données --> LogiqueSharding
+    Client->>Application: Requête (avec Clé de Sharding)
+    activate Application
+    Application->>ShardingLogic: Déterminer le Shard
+    activate ShardingLogic
+    ShardingLogic-->>Application: Retourne le Shard Cible (ex: ShardB)
+    deactivate ShardingLogic
 
-    LogiqueSharding -- Résultat --> ApplicationHono
-    ApplicationHono -- Réponse --> Client
+    Application->>ShardB: Requête de données
+    activate ShardB
+    ShardB-->>Application: Données du Shard
+    deactivate ShardB
+
+    Application-->>Client: Réponse
+    deactivate Application
+
+    Note over ShardingLogic,ShardC: La logique de sharding dirige les requêtes vers le shard approprié en fonction de la clé de sharding.
