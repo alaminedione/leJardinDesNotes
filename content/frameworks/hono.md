@@ -10,7 +10,7 @@ tags:
 description: Guide complet et référence pratique pour le développement moderne avec Hono.js, incluant des exemples concrets et cas d'utilisation avancés.
 ---
 
-# Hono.js - Guide Complet du Framework Web Ultra-Rapide
+# Hono.js - Guide Complet Du Framework Web Ultra-Rapide
 
 ## Vue d'Ensemble
 
@@ -24,14 +24,13 @@ Ses principaux atouts :
 - **Standards Web** : Basé sur les Web Standards (Web APIs)
 - **Zéro dépendance** : Pas de dépendances externes
 
-## Installation et Configuration
+## Installation Et Configuration
 
 Mettre en place un projet Hono est rapide et s'adapte à votre environnement d'exécution JavaScript préféré. Hono est distribué sous forme de paquet npm standard, mais peut aussi être utilisé directement via l'importation d'URL dans des runtimes comme Deno.
 
 ### Installation Standard
 
 L'installation de Hono se fait généralement via un gestionnaire de paquets pour Node.js ou Bun. Pour Deno, qui prend en charge les imports de modules ES via URL, vous pouvez l'importer directement.
-
 
 ```bash
 # npm
@@ -66,7 +65,7 @@ Hono est écrit en TypeScript et offre une excellente expérience de développem
 
 Cette section couvre les éléments de base nécessaires pour construire une application web simple avec Hono, y compris la création d'une instance d'application, l'ajout de middlewares et la définition de routes.
 
-### Application de Base
+### Application De Base
 
 Une application Hono est créée en instanciant la classe `Hono`. Vous pouvez ensuite utiliser des middlewares et définir des gestionnaires de routes pour différents verbes HTTP et chemins.
 
@@ -91,7 +90,7 @@ app.post('/api/data', async (c) => {
 export default app
 ```
 
-### Système de Routage Avancé
+### Système De Routage Avancé
 
 Hono offre un système de routage flexible et puissant qui prend en charge non seulement les chemins statiques, mais aussi les paramètres dynamiques, les expressions régulières et les routes optionnelles. Il permet également d'organiser les routes en groupes pour une meilleure structuration.
 
@@ -118,11 +117,54 @@ app.get('/posts/:id?', (c) => {
 })
 ```
 
-## Patterns de Design Avancés
+### Gestion Des Erreurs
+
+Hono permet une gestion des erreurs centralisée via des middlewares. Vous pouvez définir un middleware global pour intercepter les erreurs et renvoyer des réponses d'erreur formatées, ce qui est crucial pour la robustesse de votre API.
+
+```typescript
+app.onError((err, c) => {
+  console.error(`${err}`)
+  return c.text('Internal Server Error', 500)
+})
+
+// Exemple de route qui peut générer une erreur
+app.get('/error', (c) => {
+  throw new Error('Something went wrong!')
+})
+```
+
+### Validation Des Données Avec Zod
+
+La validation des données entrantes est essentielle pour la sécurité et la fiabilité de votre application. Hono s'intègre parfaitement avec des bibliothèques de validation de schéma comme Zod, permettant de définir des schémas de données et de valider les requêtes de manière typée.
+
+```typescript
+import { z } from 'zod'
+import { zValidator } from '@hono/zod-validator'
+
+const userSchema = z.object({
+  name: z.string().min(3),
+  email: z.string().email(),
+})
+
+app.post(
+  '/users',
+  zValidator('json', userSchema, (result, c) => {
+    if (!result.success) {
+      return c.json({ error: result.error.flatten() }, 400)
+    }
+  }),
+  (c) => {
+    const user = c.req.valid('json')
+    return c.json({ message: 'User created', user }, 201)
+  }
+)
+```
+
+## Patterns De Design Avancés
 
 Au-delà des fondamentaux, l'architecture de Hono se prête bien à l'application de divers patterns de design pour structurer des applications plus complexes, améliorer la testabilité et organiser le code.
 
-### Injection de Dépendances
+### Injection De Dépendances
 
 L'injection de dépendances est un pattern qui permet de fournir les dépendances (comme des services de base de données, de cache, des loggers, etc.) à un module ou une fonction plutôt que de les laisser les créer elles-mêmes. Dans Hono, cela peut être réalisé en créant l'application avec une fonction factory qui prend les dépendances en argument et les rend disponibles aux gestionnaires de routes via `c.set()`.
 
@@ -152,7 +194,7 @@ const app = createApp({
 })
 ```
 
-### Factory Pattern pour les Routes
+### Factory Pattern Pour Les Routes
 
 Le Factory Pattern peut être appliqué aux routes pour créer des routeurs Hono de manière structurée. Cela est particulièrement utile pour regrouper les routes liées à une ressource ou une fonctionnalité spécifique et leur injecter des dépendances nécessaires, rendant chaque routeur indépendant et testable séparément.
 
@@ -222,10 +264,37 @@ app.get('/users/:id', async (c) => {
 
 Hono, étant agnostique quant à l'environnement d'exécution, s'intègre facilement avec diverses bases de données, caches et services externes. Cette section explore quelques intégrations courantes et avancées.
 
+### Intégration Avec Prisma ORM
+
+Prisma est un ORM (Object-Relational Mapper) moderne qui simplifie l'accès aux bases de données et la manipulation des données. Il offre une API typée et une génération de code automatique. L'intégration de Prisma avec Hono implique la création d'une instance de `PrismaClient` et sa mise à disposition via le contexte Hono.
+
+```typescript
+import { PrismaClient } from '@prisma/client'
+
+const prisma = new PrismaClient()
+
+app.use('*', async (c, next) => {
+  c.set('prisma', prisma)
+  await next()
+})
+
+app.get('/db/users', async (c) => {
+  const users = await c.get('prisma').user.findMany()
+  return c.json(users)
+})
+
+app.post('/db/users', async (c) => {
+  const body = await c.req.json()
+  const newUser = await c.get('prisma').user.create({
+    data: body,
+  })
+  return c.json(newUser, 201)
+})
+```
+
 ### Redis Integration
 
 Redis est un store de données in-memory souvent utilisé comme cache, broker de messages ou base de données. Intégrer Redis dans une application Hono est simple, généralement en créant un client Redis et en le rendant accessible aux gestionnaires de routes via le contexte Hono (`c.set()`), similaire à l'injection de dépendances.
-
 
 ```typescript
 import { Redis } from '@upstash/redis'
@@ -246,10 +315,9 @@ app.get('/cache/:key', async (c) => {
 })
 ```
 
-### WebSocket avec Hono
+### WebSocket Avec Hono
 
 Les WebSockets permettent une communication bidirectionnelle en temps réel entre le client et le serveur. Hono, en s'appuyant sur les Web Standards et les capacités des runtimes Edge comme Deno et Cloudflare Workers, permet de gérer les connexions WebSocket. L'approche peut varier légèrement selon le runtime utilisé (l'exemple ci-dessous montre l'API spécifique à Deno).
-
 
 ```typescript
 app.get('/ws', (c) => {
@@ -268,10 +336,9 @@ app.get('/ws', (c) => {
 })
 ```
 
-### RPC avec tRPC
+### RPC Avec tRPC
 
 tRPC est un framework qui permet de construire des API end-to-end type-safe sans génération de code. Il s'intègre très bien avec TypeScript et React/Next.js côté client. Hono dispose d'une intégration `@hono/trpc-server` qui permet de lier un routeur tRPC à une route Hono, offrant ainsi une API typée sur votre backend Hono.
-
 
 ```typescript
 import { initTRPC } from '@trpc/server'
@@ -297,11 +364,11 @@ const trpcRouter = createTRPCHono({
 app.use('/trpc/*', trpcRouter)
 ```
 
-## Tests et Qualité
+## Tests Et Qualité
 
 Assurer la qualité de votre application Hono est essentiel, et les tests automatisés sont un élément clé de ce processus. Hono s\'intègre bien avec les outils de test JavaScript standard.
 
-### Tests Unitaires avec Vitest
+### Tests Unitaires Avec Vitest
 
 Vitest est un framework de test rapide et moderne, compatible avec les projets configurés avec Vite (souvent utilisé avec Hono). Il offre une excellente expérience développeur et s\'intègre facilement. Pour tester vos gestionnaires de routes ou vos middlewares en isolation, Hono fournit une méthode `app.request()` qui simule une requête HTTP, sans avoir besoin d\'un vrai serveur.
 
@@ -378,7 +445,7 @@ describe('Integration Tests', () => {
 })
 ```
 
-## Monitoring et Observabilité
+## Monitoring Et Observabilité
 
 Dans un environnement de production, il est crucial de surveiller les performances et le comportement de votre application Hono. L'observabilité, comprenant les métriques, le tracing et le logging, permet de comprendre ce qui se passe à l'intérieur de l'application.
 
@@ -448,7 +515,6 @@ app.get('/metrics', (c) => {
 ### Streaming JSON
 
 Le streaming JSON permet d'envoyer des données JSON au client en plusieurs morceaux (chunks) plutôt que d'attendre que toutes les données soient prêtes avant d'envoyer une seule réponse. Cela peut améliorer la performance perçue, en particulier pour les grandes quantités de données. Hono prend en charge le streaming via l'API `ReadableStream`.
-
 
 ```typescript
 app.get('/stream-data', (c) => {
@@ -547,7 +613,6 @@ export const handler = handle(app)
 
 ### Azure Functions
 
-
 ```typescript
 import { Hono } from 'hono'
 import { handle } from '@hono/node-server/azure'
@@ -560,12 +625,97 @@ const app = new Hono()
 export default handle(app)
 ```
 
+### Vercel Edge Functions
+
+Vercel Edge Functions vous permet de déployer des fonctions serverless qui s'exécutent au plus près de vos utilisateurs. Hono est un excellent choix pour les Edge Functions en raison de sa légèreté et de ses performances.
+
+```typescript
+// api/index.ts
+import { Hono } from 'hono'
+import { handle } from '@hono/node-server/vercel'
+
+const app = new Hono()
+
+app.get('/api/hello', (c) => {
+  return c.text('Hello from Vercel Edge Functions!')
+})
+
+export default handle(app)
+```
+
+### Netlify Functions
+
+Netlify Functions offre une plateforme serverless pour exécuter du code côté serveur. Hono peut être déployé sur Netlify Functions en utilisant l'adaptateur approprié.
+
+```typescript
+// netlify/functions/hono-app.ts
+import { Hono } from 'hono'
+import { handle } from '@hono/node-server/netlify'
+
+const app = new Hono()
+
+app.get('/api/hello', (c) => {
+  return c.text('Hello from Netlify Functions!')
+})
+
+export default handle(app)
+```
 
 ## Sécurité Avancée
 
 La sécurité est un aspect crucial du développement web. Hono, bien qu'étant un framework minimaliste, permet d'intégrer facilement diverses mesures de sécurité pour protéger vos applications.
 
-### Rate Limiting avec Redis
+### Authentification JWT
+
+L'authentification JSON Web Token (JWT) est une méthode populaire pour sécuriser les API. Hono peut être utilisé pour générer et valider des JWT, permettant ainsi une authentification stateless.
+
+```typescript
+import { jwt } from 'hono/jwt'
+
+const secret = 'your-jwt-secret' // À remplacer par une clé secrète forte et stockée en sécurité
+
+app.use('/auth/*', jwt({ secret }))
+
+app.post('/login', async (c) => {
+  const { username, password } = await c.req.json()
+  // Valider les identifiants de l'utilisateur (ex: depuis une base de données)
+  if (username === 'user' && password === 'password') {
+    const payload = {
+      sub: username,
+      role: 'admin',
+      exp: Math.floor(Date.now() / 1000) + (60 * 60) // Expire dans 1 heure
+    }
+    const token = await jwt.sign(payload, secret)
+    return c.json({ token })
+  }
+  return c.json({ error: 'Invalid credentials' }, 401)
+})
+
+app.get('/protected', (c) => {
+  const payload = c.get('jwtPayload')
+  return c.json({ message: 'You are authorized', user: payload.sub, role: payload.role })
+})
+```
+
+### Autorisation Basée Sur Les Rôles
+
+L'autorisation basée sur les rôles (Role-Based Access Control - RBAC) permet de contrôler l'accès aux ressources en fonction des rôles attribués aux utilisateurs. Vous pouvez créer un middleware Hono pour vérifier les rôles de l'utilisateur avant d'autoriser l'accès à une route.
+
+```typescript
+const authorize = (requiredRole: string) => async (c: Context, next: Next) => {
+  const payload = c.get('jwtPayload')
+  if (!payload || payload.role !== requiredRole) {
+    return c.json({ error: 'Forbidden' }, 403)
+  }
+  await next()
+}
+
+app.get('/admin/dashboard', authorize('admin'), (c) => {
+  return c.text('Welcome to the admin dashboard!')
+})
+```
+
+### Rate Limiting Avec Redis
 
 La limitation du débit (rate limiting) permet de protéger votre API contre les abus et les attaques par déni de service (DoS) en limitant le nombre de requêtes qu'un client peut effectuer dans un laps de temps donné. Cet exemple utilise Redis pour stocker et incrémenter le nombre de requêtes par adresse IP.
 
@@ -628,11 +778,11 @@ app.use('*', async (c, next) => {
 })
 ```
 
-## Maintenance et Mises à Jour
+## Maintenance Et Mises à Jour
 
 La maintenance et les mises à jour sont des aspects importants du cycle de vie d'une application web. Cette section décrit comment gérer les migrations de base de données et les vérifications de l'état de santé (health checks) dans une application Hono.
 
-### Scripts de Migration
+### Scripts De Migration
 
 Les scripts de migration sont essentiels pour faire évoluer le schéma de votre base de données de manière contrôlée. Ils permettent d'appliquer des changements de schéma, d'ajouter ou de supprimer des tables ou des colonnes, et de mettre à jour les données existantes. Cet exemple montre comment organiser et exécuter des migrations dans une application Hono.
 
@@ -723,12 +873,9 @@ app.get('/health', async (c) => {
 })
 ```
 
-## Ressources et Liens Utiles
+## Ressources Et Liens Utiles
 
 - [Documentation Officielle](https://hono.dev)
 - [GitHub Repository](https://github.com/honojs/hono)
 - [Examples](https://github.com/honojs/examples)
 - [Discord Community](https://discord.gg/KQh8xZyknB)
-
-
-

@@ -46,13 +46,33 @@ description: Interpréteur de commandes Unix, largement utilisé pour l'automati
 10. Débogage de Scripts Bash
     *   Options de débogage (set -x, set -e)
     *   Affichage des variables
+    *   Outils de débogage
 11. Bonnes Pratiques
     *   Commentaires
     *   Gestion des erreurs
     *   Utilisation de guillemets
+    *   Sécurité et Portabilité
 12. Ressources et Communauté
     *   Documentation (man pages)
     *   Communautés en ligne
+13. Tableaux (Arrays)
+    *   Déclaration et accès
+    *   Opérations sur les tableaux
+14. Expressions Arithmétiques Avancées
+    *   Utilisation de `bc` et `awk`
+    *   Calculs en virgule flottante
+15. Gestion des Signaux et `trap`
+    *   Types de signaux
+    *   Utilisation de `trap`
+16. Gestion des Erreurs Avancée et `exit`
+    *   Codes de sortie
+    *   Gestion des erreurs avec `set -e` et `trap`
+17. Alias et Fonctions Shell
+    *   Création d'alias
+    *   Fonctions shell avancées
+18. Historique des Commandes et Autocomplétion
+    *   Gestion de l'historique
+    *   Autocomplétion personnalisée
 ## 1. Introduction à Bash
 
 ### Qu'est-ce que Bash ?
@@ -336,6 +356,21 @@ echo "Nom: $nom"
 
 set +x # Désactive le débogage
 ```
+
+### Outils de débogage
+
+*   **`shellcheck`** : Un outil statique d'analyse de scripts shell qui détecte les erreurs courantes et les avertissements.
+*   **`bashdb`** : Un débogueur pour les scripts Bash, similaire à `gdb` pour C/C++. Il permet de définir des points d'arrêt, d'inspecter les variables et d'exécuter le script pas à pas.
+
+```bash
+# Exemple d'utilisation de shellcheck
+# Installez-le via votre gestionnaire de paquets (ex: sudo apt install shellcheck)
+shellcheck mon_script.sh
+
+# Exemple d'utilisation de bashdb
+# Installez-le via votre gestionnaire de paquets (ex: sudo apt install bashdb)
+# bashdb mon_script.sh
+```
 ## 11. Bonnes Pratiques
 
 ### Commentaires
@@ -353,6 +388,27 @@ set +x # Désactive le débogage
 
 *   Utiliser des guillemets doubles (`"`) pour permettre l'expansion des variables.
 *   Utiliser des guillemets simples (`'`) pour empêcher l'expansion des variables.
+
+### Sécurité et Portabilité
+
+*   **Éviter l'exécution de commandes non fiables** : Toujours valider les entrées utilisateur et éviter d'exécuter des commandes construites à partir de chaînes non nettoyées.
+*   **Utiliser des chemins absolus ou vérifier les chemins** : Pour les scripts critiques, utilisez des chemins absolus pour les exécutables ou vérifiez que les commandes sont bien celles attendues (ex: `command -v`).
+*   **Gérer les fichiers temporaires de manière sécurisée** : Utilisez `mktemp` pour créer des fichiers temporaires uniques et sécurisés.
+*   **Compatibilité Shell** : Si le script doit être portable, évitez les fonctionnalités spécifiques à Bash et privilégiez les constructions POSIX shell. Utilisez `#!/bin/sh` si la compatibilité est une priorité.
+
+```bash
+# Exemple de création de fichier temporaire sécurisé
+TEMP_FILE=$(mktemp)
+echo "Contenu temporaire" > "$TEMP_FILE"
+cat "$TEMP_FILE"
+rm "$TEMP_FILE"
+
+# Vérification de l'existence d'une commande
+if ! command -v docker &> /dev/null; then
+    echo "Docker n'est pas installé. Veuillez l'installer pour continuer."
+    exit 1
+fi
+```
 ## 12. Ressources et Communauté
 
 ### Documentation (man pages)
@@ -367,3 +423,227 @@ man ls
 
 *   [Stack Overflow](https://stackoverflow.com/)
 *   [Reddit (r/bash)](https://www.reddit.com/r/bash/)
+
+## 13. Tableaux (Arrays)
+
+### Déclaration et accès
+
+*   Les tableaux en Bash permettent de stocker une collection de valeurs.
+*   Déclaration : `array_name=(valeur1 valeur2 ...)`
+*   Accès à un élément : `${array_name[index]}` (l'index commence à 0).
+*   Accès à tous les éléments : `${array_name[@]}` ou `${array_name[*]}`.
+*   Nombre d'éléments : `${#array_name[@]}`.
+
+```bash
+fruits=("pomme" "banane" "cerise")
+echo "Premier fruit: ${fruits[0]}"
+echo "Tous les fruits: ${fruits[@]}"
+echo "Nombre de fruits: ${#fruits[@]}"
+
+# Ajouter un élément
+fruits+=("orange")
+echo "Après ajout: ${fruits[@]}"
+
+# Supprimer un élément
+unset fruits[1] # Supprime "banane"
+echo "Après suppression: ${fruits[@]}"
+```
+
+### Opérations sur les tableaux
+
+*   **Parcourir un tableau** :
+
+```bash
+for fruit in "${fruits[@]}"; do
+    echo "J'aime les $fruit"
+done
+```
+
+*   **Tableaux associatifs (Bash 4+)** :
+
+```bash
+declare -A personne
+personne["nom"]="Alice"
+personne["age"]=30
+
+echo "Nom: ${personne["nom"]}, Âge: ${personne["age"]}"
+
+for cle in "${!personne[@]}"; do
+    echo "$cle: ${personne[$cle]}"
+done
+```
+
+## 14. Expressions Arithmétiques Avancées
+
+### Utilisation de `bc` et `awk`
+
+*   Bash ne gère que les entiers par défaut. Pour les calculs en virgule flottante, utilisez des outils externes comme `bc` (basic calculator) ou `awk`.
+
+```bash
+# Utilisation de bc pour les calculs en virgule flottante
+echo "scale=2; 10 / 3" | bc
+
+# Utilisation de awk pour les calculs en virgule flottante
+awk 'BEGIN { print 10 / 3 }'
+```
+
+### Calculs en virgule flottante
+
+```bash
+num1=10.5
+num2=2.3
+
+# Addition
+result=$(echo "$num1 + $num2" | bc)
+echo "Addition: $result"
+
+# Multiplication
+result=$(echo "$num1 * $num2" | bc)
+echo "Multiplication: $result"
+```
+
+## 15. Gestion des Signaux et `trap`
+
+### Types de signaux
+
+*   Les signaux sont des messages envoyés aux processus pour leur indiquer un événement.
+*   Exemples courants : `SIGINT` (Ctrl+C), `SIGTERM` (terminaison normale), `SIGKILL` (terminaison forcée), `SIGHUP` (déconnexion du terminal).
+*   Liste des signaux : `kill -l`
+
+### Utilisation de `trap`
+
+*   La commande `trap` permet de spécifier des commandes à exécuter lorsqu'un signal est reçu ou qu'un événement se produit (ex: sortie du script).
+*   Syntaxe : `trap 'commande' signal`
+
+```bash
+# Exécuter une commande avant de quitter le script
+trap 'echo "Le script est terminé."' EXIT
+
+# Gérer Ctrl+C (SIGINT)
+trap 'echo "Ctrl+C a été pressé. Arrêt propre..." ; exit 1' INT
+
+echo "Script en cours d'exécution. Appuyez sur Ctrl+C pour tester le trap."
+sleep 10
+echo "Fin normale du script."
+```
+
+## 16. Gestion des Erreurs Avancée et `exit`
+
+### Codes de sortie
+
+*   Chaque commande Bash retourne un code de sortie (exit status).
+*   `0` indique le succès.
+*   Toute autre valeur (généralement 1-255) indique une erreur.
+*   Accès au code de sortie de la dernière commande : `$?`
+
+```bash
+ls fichier_non_existant
+echo "Code de sortie: $?"
+
+# Quitter le script avec un code d'erreur
+exit 1
+```
+
+### Gestion des erreurs avec `set -e` et `trap`
+
+*   `set -e` : Arrête le script immédiatement si une commande échoue (retourne un code de sortie non nul).
+*   Combiné avec `trap` pour un nettoyage ou un message d'erreur personnalisé.
+
+```bash
+#!/bin/bash
+
+set -e # Arrête le script en cas d'erreur
+
+# Fonction de gestion d'erreur
+handle_error() {
+    echo "Une erreur est survenue à la ligne $1."
+    exit 1
+}
+
+# Définir un trap pour appeler handle_error en cas d'erreur
+trap 'handle_error $LINENO' ERR
+
+echo "Début du script."
+
+# Cette commande va échouer et déclencher le trap
+cp fichier_source_inexistant fichier_destination
+
+echo "Cette ligne ne sera pas exécutée si l'erreur se produit."
+```
+
+## 17. Alias et Fonctions Shell
+
+### Création d'alias
+
+*   Les alias sont des raccourcis pour des commandes plus longues.
+*   Syntaxe : `alias nom_alias='commande'`
+*   Utile pour les commandes fréquemment utilisées.
+
+```bash
+alias ll='ls -alF'
+alias grep_py='grep --color=auto "\.py$"'
+
+# Pour rendre les alias persistants, ajoutez-les à ~/.bashrc ou ~/.bash_profile
+```
+
+### Fonctions shell avancées
+
+*   Les fonctions sont plus puissantes que les alias car elles peuvent prendre des arguments, avoir leur propre portée de variables et exécuter des blocs de code complexes.
+*   Elles sont chargées une seule fois et restent en mémoire, ce qui les rend plus rapides que les scripts externes pour des tâches répétitives.
+
+```bash
+# Fonction pour créer un répertoire et s'y déplacer
+mkcd() {
+    mkdir -p "$1" && cd "$1"
+}
+
+# Fonction avec gestion d'erreurs
+safe_rm() {
+    if [ -z "$1" ]; then
+        echo "Usage: safe_rm <fichier_ou_dossier>"
+        return 1
+    fi
+    read -p "Êtes-vous sûr de vouloir supprimer '$1' ? (oui/non) " reponse
+    if [[ "$reponse" == "oui" ]]; then
+        rm -rf "$1"
+        echo "'$1' supprimé."
+    else
+        echo "Opération annulée."
+    fi
+}
+```
+
+## 18. Historique des Commandes et Autocomplétion
+
+### Gestion de l'historique
+
+*   Bash garde une trace des commandes exécutées dans un fichier d'historique (généralement `~/.bash_history`).
+*   Commandes utiles : `history` (afficher l'historique), `Ctrl+R` (recherche inversée).
+*   Variables d'environnement pour l'historique : `HISTSIZE`, `HISTFILESIZE`, `HISTCONTROL`.
+
+```bash
+# Afficher les 10 dernières commandes
+history 10
+
+# Rechercher une commande dans l'historique (Ctrl+R puis taper le motif)
+```
+
+### Autocomplétion personnalisée
+
+*   Bash peut être configuré pour autocompléter des arguments de commandes ou des noms de fichiers.
+*   Utilisation de la commande `complete` pour définir des règles d'autocomplétion.
+*   Souvent utilisé pour les commandes personnalisées ou les scripts.
+
+```bash
+# Exemple d'autocomplétion pour une commande personnalisée 'mycommand'
+# Complète avec les fichiers .txt
+_mycommand_completion() {
+    local cur
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    COMPREPLY=( $(compgen -f -X '!*.txt' -- "$cur") )
+}
+complete -F _mycommand_completion mycommand
+
+# Pour rendre l'autocomplétion persistante, ajoutez-la à ~/.bashrc
+```
