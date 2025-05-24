@@ -1,13 +1,10 @@
 ---
 title: Équilibreur de Charge
-tags:
-  - System Design
-  - Équilibreur de Charge
-  - Load Balancer
+tags: system-design equilibreur-de-charge load-balancer
 draft : false
 ---
 
-# Équilibreur de Charge (Load Balancer)
+# Équilibreur De Charge (Load Balancer)
 
 **Présentation**
 Un équilibreur de charge est un dispositif ou un logiciel qui distribue le trafic réseau entrant sur un groupe de serveurs backend, appelés pool de serveurs. Il garantit qu'aucune machine individuelle n'est surchargée, améliorant ainsi la réactivité et la disponibilité de l'application.
@@ -66,9 +63,11 @@ app.get('/hello', (c) => {
 
 export default app;
 ```
+
 *Note : L'équilibreur de charge est configuré séparément de l'application Hono. La configuration de l'équilibreur de charge spécifierait les adresses IP ou les noms d'hôte des serveurs exécutant l'application Hono.*
 
 **Diagramme Mermaid**
+
 ```mermaid
 sequenceDiagram
     participant Client
@@ -93,3 +92,4 @@ sequenceDiagram
     ServeurB-->>LoadBalancer: OK
     LoadBalancer->>ServeurC: Health Check
     ServeurC-->>LoadBalancer: OK
+```

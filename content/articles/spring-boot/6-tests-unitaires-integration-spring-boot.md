@@ -1,4 +1,10 @@
-# Les tests unitaires et d'intégration avec Spring Boot
+---
+title: Les tests unitaires et d'intégration avec Spring Boot
+tags: spring-boot tests unitaires tests integration qualite
+draft: false
+---
+
+# Les Tests Unitaires Et D'intégration Avec Spring Boot
 
 ## Introduction
 
@@ -10,9 +16,9 @@ Les tests automatisés sont une pierre angulaire du développement logiciel mode
 - **Comment Spring Boot facilite l'écriture de tests**
   Spring Boot offre une excellente intégration avec des frameworks de test comme JUnit et Mockito. Il fournit également des annotations et des utilitaires spécifiques pour configurer facilement des contextes de test pour les tests d'intégration, rendant le test de diverses couches de votre application simple et efficace.
 
-## Contenu principal
+## Contenu Principal
 
-### Configuration de l'environnement de test
+### Configuration De L'environnement De Test
 
 Pour commencer à tester votre application Spring Boot, vous aurez besoin d'ajouter les dépendances de test appropriées à votre projet.
 
@@ -31,7 +37,7 @@ Pour commencer à tester votre application Spring Boot, vous aurez besoin d'ajou
   - `@SpringBootTest`: Charge le contexte d'application Spring Boot complet. Utile pour les tests d'intégration où vous testez plusieurs couches ensemble. Cela peut être plus lent car cela démarre une grande partie de l'application.
   - Tests slice (ex: `@WebMvcTest`, `@DataJpaTest`): Chargent une partie spécifique du contexte Spring (par exemple, uniquement la couche web ou la couche JPA). Ils sont plus rapides et adaptés aux tests d'intégration ciblant une seule couche.
 
-### Tests unitaires
+### Tests Unitaires
 
 Les tests unitaires visent à tester de petites unités de code isolément, généralement une méthode ou une classe, en mockant leurs dépendances.
 
@@ -61,7 +67,7 @@ Les tests unitaires visent à tester de petites unités de code isolément, gén
 - **Tester des services et composants**
   Vous pouvez tester des services ou d'autres composants Spring en instanciant la classe directement et en injectant des mocks pour ses dépendances.
 
-### Tests d'intégration
+### Tests D'intégration
 
 Les tests d'intégration vérifient que différentes parties de votre application fonctionnent correctement ensemble. Spring Boot fournit des outils pour simplifier la configuration de ces tests.
 
@@ -103,7 +109,7 @@ Les tests d'intégration vérifient que différentes parties de votre applicatio
 - **Tests avec base de données (TestContainers)**
   Pour tester l'interaction avec une base de données réelle, vous pouvez utiliser TestContainers, qui permet de démarrer des conteneurs Docker pour des bases de données dans vos tests.
 
-### Tests spécifiques
+### Tests Spécifiques
 
 Spring Boot offre des annotations spécialisées pour tester des couches spécifiques de votre application de manière isolée (tests slice).
 
@@ -170,7 +176,7 @@ Spring Boot offre des annotations spécialisées pour tester des couches spécif
   }
   ```
 
-## Bonnes pratiques
+## Bonnes Pratiques
 
 - **Isolation des tests**
   Assurez-vous que chaque test est indépendant des autres. Les tests d'intégration avec base de données devraient être transactionnels pour revenir à un état propre après chaque test.

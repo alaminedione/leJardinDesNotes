@@ -1,13 +1,10 @@
 ---
 title: Indexation de Base de Données
-tags:
-  - System Design
-  - Indexation de Base de Données
-  - Database Indexing
+tags: system-design indexation-de-base-de-donnees database-indexing
 draft : false
 ---
 
-# Indexation de Base de Données (Database Indexing)
+# Indexation De Base De Données (Database Indexing)
 
 **Présentation**
 L'indexation de base de données est une technique utilisée pour améliorer la vitesse de récupération des données à partir d'une base de données. Un index est une structure de données qui permet de localiser rapidement les lignes d'une table sans avoir à parcourir chaque ligne, de manière similaire à l'index d'un livre.
@@ -82,9 +79,11 @@ app.get('/users/by-email', async (c) => {
 
 export default app;
 ```
+
 *Note : L'index sur la colonne `email` serait créé en utilisant des commandes SQL (par exemple, `CREATE INDEX idx_user_email ON users (email);`) exécutées directement sur la base de données, indépendamment du code Hono.*
 
 **Diagramme Mermaid**
+
 ```mermaid
 sequenceDiagram
     participant Application
@@ -108,3 +107,4 @@ sequenceDiagram
     Table-->>SGBD: Retourne les données
     SGBD-->>Application: Retourne le résultat
     deactivate SGBD
+```

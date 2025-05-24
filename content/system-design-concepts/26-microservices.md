@@ -1,8 +1,6 @@
 ---
 title: Microservices
-tags:
-  - System Design
-  - Microservices
+tags: system-design microservices
 draft : false
 ---
 
@@ -68,6 +66,7 @@ Hono est un excellent choix pour construire des microservices individuels en rai
 Voici un exemple conceptuel de deux microservices Hono distincts :
 
 **Microservice "Utilisateurs" (users-service.ts):**
+
 ```typescript
 import { Hono } from 'hono';
 import { json } from 'hono/json';
@@ -90,6 +89,7 @@ export default app; // Ce service serait déployé indépendamment
 ```
 
 **Microservice "Produits" (products-service.ts):**
+
 ```typescript
 import { Hono } from 'hono';
 import { json } from 'hono/json';
@@ -110,9 +110,11 @@ app.get('/products/:id', (c) => {
 
 export default app; // Ce service serait déployé indépendamment
 ```
+
 *Note : Dans une architecture réelle, ces services communiqueraient entre eux via des APIs ou des messages, et un API Gateway serait utilisé pour router les requêtes des clients vers le service approprié.*
 
 **Diagramme Mermaid**
+
 ```mermaid
 sequenceDiagram
     participant Client
@@ -151,3 +153,4 @@ sequenceDiagram
     activate ProductService
     ProductService-->>UserService: Réponse
     deactivate ProductService
+```

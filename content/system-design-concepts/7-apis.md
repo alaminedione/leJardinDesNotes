@@ -1,8 +1,6 @@
 ---
 title: APIs (Application Programming Interfaces)
-tags:
-  - System Design
-  - APIs
+tags: system-design apis
 draft : false
 ---
 
@@ -114,3 +112,4 @@ sequenceDiagram
     deactivate BaseDeDonnees
     ApplicationAPI-->>Client: Réponse API (JSON/XML)
     deactivate ApplicationAPI
+```

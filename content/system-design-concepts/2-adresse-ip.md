@@ -1,8 +1,6 @@
 ---
 title: Adresse IP
-tags:
-  - System Design
-  - Adresse IP
+tags: system-design adresse-ip
 draft : false
 ---
 

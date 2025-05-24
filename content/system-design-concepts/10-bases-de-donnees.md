@@ -1,8 +1,6 @@
 ---
 title: Bases de Données
-tags:
-  - System Design
-  - Bases de Données
+tags: system-design bases-de-donnees
 draft : false
 ---
 
@@ -111,3 +109,4 @@ sequenceDiagram
     deactivate BaseDeDonnees
     SGBD-->>Application: Retourne le jeu de résultats
     deactivate SGBD
+ ```

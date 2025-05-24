@@ -1,9 +1,6 @@
 ---
 title: CDN (Content Delivery Network)
-tags:
-  - System Design
-  - CDN
-  - Content Delivery Network
+tags: system-design cdn content-delivery-network
 draft : false
 ---
 
@@ -78,9 +75,11 @@ app.get('/page-with-image', (c) => {
 
 export default app;
 ```
+
 *Note : L'URL du CDN (`CDN_IMAGE_URL`) pointerait vers le contenu mis en cache par le CDN, qui à son tour a été récupéré de votre serveur d'origine.*
 
 **Diagramme Mermaid**
+
 ```mermaid
 sequenceDiagram
     participant Utilisateur
@@ -109,3 +108,4 @@ sequenceDiagram
         CDN-->>Navigateur: Sert Asset
     end
     deactivate CDN
+```

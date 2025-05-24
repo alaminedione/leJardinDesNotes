@@ -1,3 +1,9 @@
+---
+title: Créer Une API REST Simple Avec Spring Boot
+tags: spring-boot api rest developpement web
+draft: false
+---
+
 # Créer Une API REST Simple Avec Spring Boot
 
 ## Introduction

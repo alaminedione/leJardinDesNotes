@@ -1,8 +1,6 @@
 ---
 title: WebSockets
-tags:
-  - System Design
-  - WebSockets
+tags: system-design websockets
 draft : false
 ---
 
@@ -80,9 +78,11 @@ app.get('/realtime', (c) => {
 
 export default app;
 ```
+
 *Note : L'implémentation réelle de la gestion des connexions WebSocket et de l'échange de messages dépend fortement de l'environnement d'exécution (Node.js, Deno, Cloudflare Workers, etc.) et des bibliothèques utilisées.*
 
 **Diagramme Mermaid**
+
 ```mermaid
 sequenceDiagram
     participant Client
@@ -105,3 +105,4 @@ sequenceDiagram
     activate Serveur
     Serveur-->>Client: Confirmation de fermeture
     deactivate Serveur
+```

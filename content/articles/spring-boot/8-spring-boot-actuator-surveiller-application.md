@@ -1,3 +1,14 @@
+---
+title: Spring Boot Actuator  - Surveillez Votre Application En Production
+tags:
+  - spring-boot
+  - actuator
+  - monitoring
+  - production
+  - metrics
+draft: false
+---
+
 # Spring Boot Actuator : Surveillez Votre Application En Production
 
 ## Introduction

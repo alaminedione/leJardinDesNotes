@@ -1,13 +1,10 @@
 ---
 title: Réplication de Base de Données
-tags:
-  - System Design
-  - Réplication de Base de Données
-  - Replication
+tags: system-design replication-base-de-donnees replication
 draft : false
 ---
 
-# Réplication de Base de Données (Replication)
+# Réplication De Base De Données (Replication)
 
 **Présentation**
 La réplication de base de données consiste à créer et maintenir des copies identiques d'une base de données sur plusieurs serveurs. Cela permet d'améliorer la disponibilité des données, la tolérance aux pannes et les performances en distribuant la charge de lecture.
@@ -25,7 +22,6 @@ Il existe deux modes principaux de réplication :
     - **Avantages:** Garantit une forte cohérence des données (pas de perte de données en cas de panne de la primaire).
     - **Inconvénients:** Introduit une latence supplémentaire pour les opérations d'écriture, car la primaire doit attendre la réplique. Peut affecter les performances.
     - **Cas d'utilisation:** Systèmes où la perte de données est inacceptable (ex: transactions financières).
-
 - **Réplication Asynchrone:**
     - **Description:** La réplique primaire confirme l'opération d'écriture au client immédiatement, sans attendre la confirmation des répliques secondaires. Les données sont copiées vers les secondaires avec un léger délai.
     - **Avantages:** Faible latence pour les écritures, meilleures performances.
@@ -103,9 +99,11 @@ app.get('/articles/:id', async (c) => {
 
 export default app;
 ```
+
 *Note : La gestion de la logique de basculement (failover) en cas de défaillance de la réplique primaire est gérée par le SGBD ou des outils de gestion de cluster, pas directement dans le code Hono.*
 
 **Diagramme Mermaid**
+
 ```mermaid
 sequenceDiagram
     participant Client
@@ -141,3 +139,4 @@ sequenceDiagram
     end
     Application-->>Client: Réponse (Données lues)
     deactivate Application
+```

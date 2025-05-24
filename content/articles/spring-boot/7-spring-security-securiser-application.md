@@ -1,3 +1,9 @@
+---
+title: Spring Security : Sécuriser Votre Application Spring Boot
+tags: spring-boot security authentification autorisation jwt
+draft: false
+---
+
 # Spring Security : Sécuriser Votre Application Spring Boot
 
 ## Introduction
@@ -423,7 +429,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.junit.jupiter.api.Test;\n
+import org.junit.jupiter.api.Test;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 

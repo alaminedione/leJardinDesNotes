@@ -1,8 +1,6 @@
 ---
 title: Latence
-tags:
-  - System Design
-  - Latence
+tags: system-design latence
 draft : false
 ---
 
@@ -67,9 +65,11 @@ app.get('/slow-response', async (c) => {
 
 export default app;
 ```
+
 *Note : Le délai simulé dans `/slow-response` contribue au temps de réponse total, et donc à la latence perçue par le client.*
 
 **Diagramme Mermaid**
+
 ```mermaid
 sequenceDiagram
     participant Client

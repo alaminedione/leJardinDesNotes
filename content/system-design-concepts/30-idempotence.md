@@ -1,11 +1,9 @@
 ---
 title: Idempotence
-tags:
-  - System Design
-  - Idempotence
-  - Idempotency
+tags: system-design idempotence idempotency
 draft : false
 ---
+
 Imaginez un système de paiement où, en raison d'un problème de réseau, une transaction est traitée deux fois. Le client est débité deux fois pour le même achat, ce qui entraîne frustration et mécontentement. C'est là qu'intervient l'idempotence.
 
 L'idempotence est une propriété essentielle des opérations dans les systèmes distribués qui garantit qu'une opération peut être exécutée plusieurs fois sans modifier le résultat au-delà de l'exécution initiale. En d'autres termes, l'exécution répétée d'une opération idempotente a le même effet qu'une seule exécution.
@@ -98,9 +96,11 @@ app.post('/resources', async (c) => {
 
 export default app;
 ```
+
 *Note : L'implémentation de `idempotencyStore` nécessiterait un stockage persistant (base de données, cache distribué) et une stratégie d'expiration pour les clés d'idempotence.*
 
 **Diagramme Mermaid**
+
 ```mermaid
 sequenceDiagram
     participant Client
@@ -131,3 +131,4 @@ sequenceDiagram
         Application-->>Client: Renvoie le résultat de l'opération
     end
     deactivate Application
+```

@@ -1,3 +1,9 @@
+---
+title: Comment Configurer Votre Premier Projet Spring Boot En 15 Minutes
+tags: spring-boot configuration projet demarrage rapide
+draft: false
+---
+
 # Comment Configurer Votre Premier Projet Spring Boot En 15 Minutes
 
 ## Introduction

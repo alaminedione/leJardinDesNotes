@@ -1,9 +1,6 @@
 ---
 title: Proxy / Proxy Inverse
-tags:
-  - System Design
-  - Proxy
-  - Reverse Proxy
+tags: system-design proxy reverse-proxy
 draft : false
 ---
 
@@ -75,8 +72,6 @@ export default app;
 ```
 
 **Diagramme Mermaid**
-```mermaid
-**Diagramme Mermaid : Proxy (Forward Proxy)**
 
 ```mermaid
 sequenceDiagram

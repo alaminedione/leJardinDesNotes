@@ -1,12 +1,10 @@
 ---
 title: Mise à l'échelle Horizontale
-tags:
-  - System Design
-  - Mise à l'échelle Horizontale
+tags: system-design mise-a-echelle-horizontale
 draft : false
 ---
 
-# Mise à l'échelle Horizontale (Horizontal Scaling)
+# Mise à L'échelle Horizontale (Horizontal Scaling)
 
 **Présentation**
 La mise à l'échelle horizontale, également appelée "scaling out", consiste à augmenter la capacité d'un système en ajoutant davantage de serveurs ou de machines pour distribuer la charge de travail. C'est une approche courante pour construire des systèmes hautement disponibles et évolutifs.
@@ -85,9 +83,11 @@ app.post('/user/:userId/settings', async (c) => {
 
 export default app;
 ```
+
 *Note : Dans cet exemple, l'état de l'utilisateur (ses paramètres) n'est pas stocké dans la mémoire de l'application Hono, mais serait géré par un service externe, ce qui permet à n'importe quelle instance de l'application Hono de traiter la requête.*
 
 **Diagramme Mermaid**
+
 ```mermaid
 graph TD
     subgraph Clients
@@ -129,3 +129,4 @@ graph TD
     LB -- Réponse --> C1
     LB -- Réponse --> C2
     LB -- Réponse --> C3
+```

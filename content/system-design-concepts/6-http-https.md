@@ -1,9 +1,6 @@
 ---
 title: HTTP / HTTPS
-tags:
-  - System Design
-  - HTTP
-  - HTTPS
+tags: system-design http https
 draft : false
 ---
 
@@ -94,11 +91,10 @@ app.put('/items/:id', async (c) => {
 
 export default app;
 ```
+
 *Note : La gestion de HTTPS en production implique généralement la configuration d'un serveur web (comme Nginx) ou d'un service cloud (comme un Load Balancer) devant votre application Hono pour gérer le certificat SSL/TLS.*
 
 **Diagramme Mermaid**
-```mermaid
-**Diagramme Mermaid : Communication HTTP**
 
 ```mermaid
 sequenceDiagram

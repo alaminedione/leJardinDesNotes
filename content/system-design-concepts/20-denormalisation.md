@@ -1,9 +1,6 @@
 ---
 title: Dénormalisation
-tags:
-  - System Design
-  - Dénormalisation
-  - Denormalization
+tags: system-design denormalisation denormalization
 draft : false
 ---
 
@@ -99,11 +96,10 @@ app.get('/orders-denormalized/:orderId', async (c) => {
 
 export default app;
 ```
+
 *Note : La table `orders_denormalized` serait créée et maintenue (par exemple, via des triggers, des jobs ETL ou des vues matérialisées) indépendamment du code Hono.*
 
 **Diagramme Mermaid**
-```mermaid
-**Diagramme Mermaid : Normalisation vs Dénormalisation (Class Diagram)**
 
 ```mermaid
 classDiagram

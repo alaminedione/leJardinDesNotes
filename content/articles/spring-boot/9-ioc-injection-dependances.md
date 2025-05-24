@@ -1,3 +1,9 @@
+---
+title: Comprendre Le Principe D'inversion De Contrôle Et L'injection De Dépendances
+tags: spring-boot ioc injection-dependances architecture conception
+draft: false
+---
+
 # 9. Comprendre Le Principe D'inversion De Contrôle Et L'injection De Dépendances
 
 ## Introduction

@@ -1,13 +1,10 @@
 ---
 title: Sharding de Base de Données
-tags:
-  - System Design
-  - Sharding
-  - Base de Données
+tags: system-design sharding base-de-donnees
 draft : false
 ---
 
-# Sharding de Base de Données (Sharding)
+# Sharding De Base De Données (Sharding)
 
 **Présentation**
 Le sharding est une technique de partitionnement horizontal des données qui consiste à diviser une grande base de données en morceaux plus petits et plus gérables, appelés shards, et à les distribuer sur plusieurs serveurs de base de données. Cela permet de gérer des volumes de données massifs et d'augmenter les performances en répartissant la charge de lecture et d'écriture.
@@ -110,9 +107,11 @@ app.post('/users', async (c) => {
 
 export default app;
 ```
+
 *Note : L'implémentation réelle du client de base de données shardée (`shardedDb` dans l'exemple) est complexe et dépend du SGBD et de la stratégie de sharding.*
 
 **Diagramme Mermaid**
+
 ```mermaid
 sequenceDiagram
     participant Client
@@ -138,3 +137,4 @@ sequenceDiagram
     deactivate Application
 
     Note over ShardingLogic,ShardC: La logique de sharding dirige les requêtes vers le shard approprié en fonction de la clé de sharding.
+```

@@ -1,8 +1,6 @@
 ---
 title: Architecture Client-Serveur
-tags:
-  - System Design
-  - Architecture Client-Serveur
+tags: system-design architecture-client-serveur
 draft : false
 ---
 

@@ -1,9 +1,6 @@
 ---
 title: Passerelle API
-tags:
-  - System Design
-  - Passerelle API
-  - API Gateway
+tags: system-design passerelle-api api-gateway
 draft : false
 ---
 
@@ -90,9 +87,11 @@ app.get('/profile', (c) => {
 
 export default app;
 ```
+
 *Note : La configuration de la passerelle API pour authentifier les utilisateurs et ajouter l'en-tête `X-Authenticated-User-Id` est gérée au niveau de la passerelle, pas dans le code Hono.*
 
 **Diagramme Mermaid**
+
 ```mermaid
 sequenceDiagram
     participant Client
@@ -129,3 +128,4 @@ sequenceDiagram
 
     APIGateway-->>Client: Réponse finale
     deactivate APIGateway
+```

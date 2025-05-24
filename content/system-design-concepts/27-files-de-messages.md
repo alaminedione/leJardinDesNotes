@@ -1,13 +1,10 @@
 ---
 title: Files de Messages
-tags:
-  - System Design
-  - Files de Messages
-  - Message Queues
+tags: system-design files-de-messages message-queues
 draft : false
 ---
 
-# Files de Messages (Message Queues)
+# Files De Messages (Message Queues)
 
 **Présentation**
 Une file de messages est un composant d'infrastructure qui permet la communication asynchrone entre différentes parties d'une application ou entre différents services (comme dans une architecture de microservices). Les applications peuvent envoyer des messages à une file (producteurs) sans attendre de réponse immédiate, et d'autres applications peuvent lire ces messages à partir de la file (consommateurs) lorsqu'elles sont prêtes.
@@ -95,9 +92,11 @@ app.post('/process-order', async (c) => {
 
 export default app;
 ```
+
 *Note : L'implémentation réelle de l'envoi ou de la réception de messages dépend de la bibliothèque cliente spécifique à votre système de file de messages.*
 
 **Diagramme Mermaid**
+
 ```mermaid
 sequenceDiagram
     participant Producteur[Application Producteur]
@@ -125,3 +124,4 @@ sequenceDiagram
     end
 
     Note over Producteur,Consommateur2: Découplage et Scalabilité: Les producteurs et consommateurs sont indépendants.
+```

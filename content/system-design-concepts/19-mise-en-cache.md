@@ -1,13 +1,10 @@
 ---
 title: Mise en Cache
-tags:
-  - System Design
-  - Mise en Cache
-  - Caching
+tags: system-design mise-en-cache caching
 draft : false
 ---
 
-# Mise en Cache (Caching)
+# Mise En Cache (Caching)
 
 **Présentation**
 La mise en cache est une technique qui consiste à stocker des copies de données fréquemment consultées dans un emplacement de stockage temporaire et rapide (le cache), généralement la mémoire vive (RAM). L'objectif est de réduire le temps d'accès aux données en évitant de les récupérer à chaque fois depuis une source plus lente, comme une base de données ou un disque.
@@ -100,9 +97,11 @@ app.get('/products/:productId', async (c) => {
 
 export default app;
 ```
+
 *Note : L'implémentation réelle nécessiterait un client Redis configuré et une logique de sérialisation/désérialisation si vous stockez des objets complexes.*
 
 **Diagramme Mermaid**
+
 ```mermaid
 sequenceDiagram
     participant Client
@@ -133,3 +132,4 @@ sequenceDiagram
         Application-->>Client: Réponse (depuis la base de données)
     end
     deactivate Application
+```

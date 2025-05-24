@@ -1,8 +1,6 @@
 ---
 title: Webhooks
-tags:
-  - System Design
-  - Webhooks
+tags: system-design webhooks
 draft : false
 ---
 

@@ -1,3 +1,9 @@
+---
+title: Introduction à Spring Boot  Pourquoi C'est Révolutionnaire Pour Java
+tags: spring-boot introduction java developpement
+draft: false
+---
+
 # 1. Introduction à Spring Boot : Pourquoi C'est Révolutionnaire Pour Java
 
 Spring Boot est devenu le standard de facto pour le développement d'applications basées sur Spring en Java. Il simplifie grandement le processus de développement, de configuration et de déploiement d'applications, en particulier les microservices et les applications web.
@@ -73,15 +79,15 @@ my-app/
 │   │   ├── java/
 │   │   │   └── com/example/myapp/
 │   │   │       └── MyApp.java      // Classe principale
-│   │   └── resources/
-│   │       ├── application.properties  // Fichier de configuration
-│   │       ├── static/               // Contenu statique (HTML, JS, CSS)
-│   │       └── templates/            // Templates (Thymeleaf, Freemarker)
-│   └── test/
-│       └── java/
-│           └── com/example/myapp/
-│               └── MyAppTests.java   // Classes de test
-├── pom.xml (ou build.gradle)         // Fichier de build
+│   │   │   └── resources/
+│   │   │       ├── application.properties  // Fichier de configuration
+│   │   │       ├── static/               // Contenu statique (HTML, JS, CSS)
+│   │   │       └── templates/            // Templates (Thymeleaf, Freemarker)
+│   │   └── test/
+│   │       └── java/
+│   │           └── com/example/myapp/
+│   │               └── MyAppTests.java   // Classes de test
+│   ├── pom.xml (ou build.gradle)         // Fichier de build
 └── HELP.md
 ```
 

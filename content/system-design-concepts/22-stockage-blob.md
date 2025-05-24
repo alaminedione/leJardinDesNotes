@@ -1,9 +1,6 @@
 ---
 title: Stockage Blob
-tags:
-  - System Design
-  - Stockage Blob
-  - Blob Storage
+tags: system-design stockage-blob blob-storage
 draft : false
 ---
 
@@ -99,9 +96,11 @@ app.post('/upload', async (c) => {
 
 export default app;
 ```
+
 *Note : L'exemple utilise des importations et des appels de fonction conceptuels pour le SDK AWS S3. L'implémentation réelle nécessiterait l'installation du SDK et la configuration des informations d'identification.*
 
 **Diagramme Mermaid**
+
 ```mermaid
 sequenceDiagram
     participant Client
@@ -121,3 +120,4 @@ sequenceDiagram
     activate BlobStorage
     BlobStorage-->>Client: Fichier (Objet Blob)
     deactivate BlobStorage
+```

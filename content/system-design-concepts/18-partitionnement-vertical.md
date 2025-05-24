@@ -1,9 +1,6 @@
 ---
 title: Partitionnement Vertical
-tags:
-  - System Design
-  - Partitionnement Vertical
-  - Vertical Partitioning
+tags: system-design partitionnement-vertical vertical-partitioning
 draft : false
 ---
 
@@ -41,6 +38,7 @@ Le partitionnement vertical est une technique de normalisation de base de donné
 Le partitionnement vertical est bénéfique lorsque vous avez des tables avec de nombreuses colonnes et que les modèles d'accès aux données varient considérablement entre les groupes de colonnes. Par exemple, dans une table utilisateur, les informations de connexion fréquemment consultées pourraient être dans une table, tandis que les informations de profil détaillées et moins souvent consultées pourraient être dans une autre. Cela réduit la quantité de données lues lors des requêtes courantes.
 
 **Comparaison avec le Sharding (Partitionnement Horizontal)**
+
 | Caractéristique           | Partitionnement Vertical                                    | Sharding (Partitionnement Horizontal)                               |
 | :------------------------ | :---------------------------------------------------------- | :------------------------------------------------------------------ |
 | **Méthode de Division**   | Par colonnes (divise une table en plusieurs tables).        | Par lignes (divise une table en plusieurs instances de la table).   |
@@ -93,9 +91,11 @@ app.get('/users/:userId/details', async (c) => {
 
 export default app;
 ```
+
 *Note : La structure des tables `user_login` et `user_profile` avec une clé étrangère `user_id` serait définie lors de la conception de la base de données.*
 
 **Diagramme Mermaid**
+
 ```mermaid
 **Diagramme Mermaid : Structure des Tables (Class Diagram)**
 

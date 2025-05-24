@@ -1,9 +1,6 @@
 ---
 title: Théorème CAP
-tags:
-  - System Design
-  - Théorème CAP
-  - CAP Theorem
+tags: system-design theoreme-cap cap-theorem
 draft : false
 ---
 
@@ -67,9 +64,11 @@ app.get('/user-profile/:userId', async (c) => {
 
 export default app;
 ```
+
 *Note : La gestion de la cohérence éventuelle dans le code applicatif peut impliquer des techniques comme la lecture de vos propres écritures (read-your-writes consistency) ou l'utilisation de versions de données.*
 
 **Diagramme Mermaid**
+
 ```mermaid
 **Diagramme Mermaid : Les Trois Propriétés du Théorème CAP (Pie Chart)**
 

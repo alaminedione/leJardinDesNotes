@@ -1,13 +1,10 @@
 ---
 title: Limitation de Débit
-tags:
-  - System Design
-  - Limitation de Débit
-  - Rate Limiting
+tags: system-design limitation-de-debit rate-limiting
 draft : false
 ---
 
-# Limitation de Débit (Rate Limiting)
+# Limitation De Débit (Rate Limiting)
 
 **Présentation**
 La limitation de débit est une technique utilisée pour contrôler le taux auquel un client ou un utilisateur peut envoyer des requêtes à un service ou une API dans un laps de temps donné. Elle est essentielle pour protéger les services contre les abus, les attaques par déni de service (DoS), la surcharge des ressources et pour garantir une utilisation équitable pour tous les utilisateurs.
@@ -104,9 +101,11 @@ app.get('/limited-resource', (c) => {
 
 export default app;
 ```
+
 *Note : Pour une limitation de débit en production dans une architecture distribuée, utilisez un service dédié (API Gateway, Load Balancer) ou une bibliothèque qui utilise un stockage partagé (comme Redis) pour les compteurs.*
 
 **Diagramme Mermaid**
+
 ```mermaid
 sequenceDiagram
     participant Client
@@ -128,3 +127,4 @@ sequenceDiagram
     deactivate RateLimiter
 
     Note over RateLimiter,Application: Le Rate Limiter protège l'application des surcharges.
+```

@@ -1,8 +1,6 @@
 ---
 title: GraphQL
-tags:
-  - System Design
-  - GraphQL
+tags: system-design graphql
 draft : false
 ---
 
@@ -104,3 +102,4 @@ sequenceDiagram
     deactivate GraphQLServer
     HonoApp-->>Client: Réponse GraphQL (JSON)
     deactivate HonoApp
+```

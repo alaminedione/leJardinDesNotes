@@ -1,12 +1,10 @@
 ---
 title: Mise à l'échelle Verticale
-tags:
-  - System Design
-  - Mise à l'échelle Verticale
-draft : false
+tags: system-design verticale-scaling
+draft: false
 ---
 
-# Mise à l'échelle Verticale (Vertical Scaling)
+# Mise à L'échelle Verticale (Vertical Scaling)
 
 **Présentation**
 La mise à l'échelle verticale, également appelée "scaling up", consiste à augmenter la capacité d'un serveur individuel en lui ajoutant des ressources (CPU, RAM, stockage) pour gérer une charge de travail accrue.
@@ -32,6 +30,7 @@ La mise à l'échelle verticale, également appelée "scaling up", consiste à a
 La mise à l'échelle verticale est souvent la première approche envisagée pour gérer une charge croissante en raison de sa simplicité. Elle est adaptée aux applications avec une croissance prévisible et modérée, ou comme solution temporaire avant de mettre en œuvre une stratégie de mise à l'échelle horizontale. Cependant, elle atteint rapidement ses limites en termes de coût, de capacité matérielle et de résilience aux pannes.
 
 **Comparaison avec la Mise à l'échelle Horizontale**
+
 | Caractéristique       | Mise à l'échelle Verticale (Scale Up)                               | Mise à l'échelle Horizontale (Scale Out)                               |
 | :-------------------- | :------------------------------------------------------------------ | :---------------------------------------------------------------------- |
 | **Méthode**           | Ajouter des ressources (CPU, RAM) à un serveur existant.            | Ajouter plus de serveurs (instances) à votre système.                   |
@@ -68,9 +67,11 @@ app.post('/process-data', async (c) => {
 
 export default app;
 ```
+
 *Note : L'impact de la mise à l'échelle verticale sur les performances dépend de la nature de la charge de travail de l'application.*
 
 **Diagramme Mermaid**
+
 ```mermaid
 graph TD
     A[Serveur Initial] --> B{Ajout de Ressources}
@@ -85,5 +86,6 @@ graph TD
         Client3(Client) -- Requête --> C
         Client4(Client) -- Requête --> C
         Client5(Client) -- Requête --> C
-        Note right of C: Gère plus de charge
+        C --> D(Gère plus de charge)
     end
+```

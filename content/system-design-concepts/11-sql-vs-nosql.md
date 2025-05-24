@@ -1,13 +1,10 @@
 ---
 title: SQL vs NoSQL
-tags:
-  - System Design
-  - SQL
-  - NoSQL
+tags: system-design sql nosql
 draft : false
 ---
 
-# SQL vs NoSQL
+# SQL Vs NoSQL
 
 **Présentation**
 Le choix entre les bases de données SQL (relationnelles) et NoSQL (non relationnelles) est une décision d'architecture cruciale qui dépend des besoins spécifiques d'une application en termes de structure des données, de scalabilité, de performance et de cohérence.
@@ -93,19 +90,21 @@ app.get('/nosql/profiles/:userId', async (c) => {
 
 export default app;
 ```
+
 *Note : Remplacez la logique simulée par l'utilisation de bibliothèques réelles pour interagir avec vos bases de données SQL et NoSQL.*
 
 **Diagramme Mermaid**
+
 ```mermaid
 graph TD
-    subgraph SQL (Relationnel)
+    subgraph SQL
         SQL_A[Schéma Fixe] --> SQL_B(ACID)
         SQL_B --> SQL_C{Jointures Complexes}
         SQL_C --> SQL_D[Scalabilité Verticale]
         SQL_D --> SQL_E(Ex: PostgreSQL, MySQL)
     end
 
-    subgraph NoSQL (Non Relationnel)
+    subgraph NoSQL
         NoSQL_A[Schéma Flexible] --> NoSQL_B(BASE)
         NoSQL_B --> NoSQL_C{Modèles Variés}
         NoSQL_C --> NoSQL_D[Scalabilité Horizontale]
@@ -117,3 +116,4 @@ graph TD
 
     SQL -- Données Structurées, Transactions --> Application[Application]
     NoSQL -- Données Non Structurées, Big Data --> Application
+```

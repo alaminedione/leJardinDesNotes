@@ -1,8 +1,6 @@
 ---
 title: API REST
-tags:
-  - System Design
-  - REST API
+tags: system-design rest-api
 draft : false
 ---
 
