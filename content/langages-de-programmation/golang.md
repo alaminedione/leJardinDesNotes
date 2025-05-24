@@ -19,6 +19,10 @@ description: Langage de programmation compilé, concurrent et typé statiquement
 2. Bases du Langage
     * Syntaxe de base
     * Variables et types de données
+        * Types de base
+        * Types de données complexes
+        * Types de données définis par l'utilisateur
+        * Conversions de types
     * Constantes
     * Opérateurs
     * Structures de contrôle (if, for, switch)
@@ -57,11 +61,21 @@ description: Langage de programmation compilé, concurrent et typé statiquement
     * Création de serveurs web
     * Gestion des requêtes et réponses
     * Frameworks populaires (Gin, Echo)
-11. Bonnes Pratiques
+11. Déploiement d'Applications Go
+    * Création d'Exécutables
+    * Utilisation de Docker
+12. Intégration Continue
+    * Utilisation de GitHub Actions
+    * Utilisation de Travis CI
+13. Microservices avec Go
+    * Avantages de Go pour les Microservices
+    * Frameworks pour Microservices
+    * Exemple de Microservice
+14. Bonnes Pratiques
     * Conventions de nommage
     * Formatage du code (go fmt)
     * Documentation (go doc)
-12. Ressources et Communauté
+15. Ressources et Communauté
     * Documentation officielle
     * Communautés en ligne
 
@@ -131,6 +145,35 @@ var age int = 30
 name := "John"
 var pi float64 = 3.14159
 is_valid := true
+```
+
+Go est un langage à typage statique, ce qui signifie que le type de chaque variable doit être connu à la compilation. Go offre plusieurs types de données de base, ainsi que la possibilité de définir des types de données complexes.
+
+#### Types de données complexes
+
+Go offre plusieurs types de données complexes, tels que les tableaux, les slices, les maps et les structs.
+
+*   **Tableaux :** Un tableau est une collection d'éléments du même type, de taille fixe.
+*   **Slices :** Un slice est une abstraction au-dessus des tableaux, permettant une taille dynamique.
+*   **Maps :** Une map est une table de hachage (dictionnaire) associant des clés à des valeurs.
+*   **Structs :** Un struct est un type composite regroupant des champs de types différents.
+
+#### Types de données définis par l'utilisateur
+
+Go permet également de définir des types de données personnalisés en utilisant le mot-clé `type`.
+
+```go
+type Celsius float64
+type Fahrenheit float64
+```
+
+#### Conversions de types
+
+Go exige des conversions de types explicites. Vous ne pouvez pas mélanger des types différents dans une expression sans effectuer une conversion.
+
+```go
+var x int = 10
+var y float64 = float64(x)
 ```
 
 ### Constantes
@@ -620,6 +663,192 @@ func main() {
 * `Gin` : Framework web léger et performant.
 * `Echo` : Autre framework web populaire, mettant l'accent sur la simplicité et la performance.
 
+## 13. Microservices avec Go
+
+Go est un excellent choix pour la construction de microservices en raison de sa performance, de sa simplicité et de sa concurrence.
+
+### Avantages de Go pour les Microservices
+
+*   **Performance :** Go est un langage compilé qui offre d'excellentes performances.
+*   **Simplicité :** La syntaxe de Go est simple et facile à apprendre.
+*   **Concurrence :** Go offre d'excellentes fonctionnalités de concurrence grâce aux goroutines et aux channels.
+*   **Déploiement facile :** Go produit des exécutables autonomes qui sont faciles à déployer.
+
+### Frameworks pour Microservices
+
+*   **Go Micro :** Un framework pour la construction de microservices en Go.
+*   **Kratos :** Un autre framework populaire pour les microservices en Go.
+
+### Exemple de Microservice
+
+Voici un exemple simple de microservice en Go qui expose une API REST pour récupérer des informations sur un utilisateur.
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"net/http"
+
+	"github.com/gorilla/mux"
+)
+
+type User struct {
+	ID    string `json:"id"`
+	Name  string `json:"name"`
+	Email string `json:"email"`
+}
+
+func GetUser(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	userID := params["id"]
+
+	user := User{
+		ID:    userID,
+		Name:  "John Doe",
+		Email: "john.doe@example.com",
+	}
+
+	json.NewEncoder(w).Encode(user)
+}
+
+func main() {
+	r := mux.NewRouter()
+
+	r.HandleFunc("/users/{id}", GetUser).Methods("GET")
+
+	fmt.Println("Serveur démarré sur le port 8000")
+	http.ListenAndServe(":8000", r)
+}
+```
+
+Ce code utilise le framework `gorilla/mux` pour gérer les routes HTTP. La fonction `GetUser` récupère l'ID de l'utilisateur à partir des paramètres de la requête et renvoie un objet `User` au format JSON.
+## 12. Intégration Continue
+
+L'intégration continue (CI) est une pratique de développement logiciel qui consiste à automatiser les tests et le déploiement de votre application à chaque modification du code. Cela permet de détecter rapidement les erreurs et de s'assurer que votre application est toujours dans un état stable.
+
+### Utilisation de GitHub Actions
+
+GitHub Actions est une plateforme d'automatisation CI/CD intégrée à GitHub. Vous pouvez créer un fichier de workflow dans le répertoire `.github/workflows` de votre dépôt pour définir les étapes de votre pipeline CI/CD.
+
+```yaml
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: '1.17'
+    - name: Build
+      run: go build -v ./...
+    - name: Test
+      run: go test -v ./...
+```
+
+Ce workflow effectue les étapes suivantes :
+
+*   Déclenche le workflow à chaque push ou pull request sur la branche `main`.
+*   Utilise l'image `ubuntu-latest` comme environnement de build.
+*   Configure Go avec la version 1.17.
+*   Construit l'application en utilisant la commande `go build`.
+*   Exécute les tests en utilisant la commande `go test`.
+
+### Utilisation de Travis CI
+
+Travis CI est une autre plateforme d'automatisation CI/CD populaire. Vous pouvez créer un fichier `.travis.yml` à la racine de votre dépôt pour définir les étapes de votre pipeline CI/CD.
+
+```yaml
+language: go
+go:
+  - "1.17"
+
+before_install:
+  - go get -u golang.org/x/lint/golint
+
+script:
+  - go build -v ./...
+  - go test -v ./...
+  - golint ./...
+```
+
+Ce fichier effectue les étapes suivantes :
+
+*   Spécifie que le langage est Go et que la version est 1.17.
+*   Installe `golint` avant d'exécuter les tests.
+*   Construit l'application en utilisant la commande `go build`.
+*   Exécute les tests en utilisant la commande `go test`.
+*   Exécute `golint` pour vérifier le style du code.
+## 11. Déploiement d'Applications Go
+
+### Création d'Exécutables
+
+Pour déployer une application Go, vous devez d'abord créer un exécutable. Vous pouvez le faire en utilisant la commande `go build`.
+
+```bash
+go build -o myapp main.go
+```
+
+Cela créera un exécutable nommé `myapp` dans le répertoire courant.
+
+### Utilisation de Docker
+
+Docker est un outil populaire pour le déploiement d'applications. Vous pouvez créer une image Docker pour votre application Go en utilisant un fichier Dockerfile.
+
+```dockerfile
+FROM golang:latest
+
+WORKDIR /app
+
+COPY go.mod go.sum ./
+RUN go mod download && go mod verify
+
+COPY . .
+
+RUN go build -o myapp main.go
+
+EXPOSE 8080
+
+CMD ["./myapp"]
+```
+
+Ce Dockerfile utilise l'image `golang:latest` comme base, copie le code source de l'application dans le conteneur, télécharge les dépendances, construit l'exécutable et expose le port 8080.
+
+Vous pouvez ensuite construire l'image Docker en utilisant la commande `docker build`.
+
+```bash
+docker build -t myapp .
+```
+
+Et exécuter le conteneur en utilisant la commande `docker run`.
+
+```bash
+docker run -p 8080:8080 myapp
+```
+
+### Frameworks Populaires (Gin, Echo, Fiber)
+
+* `Gin` : Framework web léger et performant, idéal pour les API.
+* `Echo` : Framework web mettant l'accent sur la simplicité et la performance.
+* `Fiber` : Framework web inspiré par Express.js, offrant une expérience de développement familière aux développeurs Node.js.
+
+### Outils Utiles
+
+* `GoLand` : IDE populaire pour le développement Go, offrant des fonctionnalités avancées telles que l'autocomplétion, le débogage et le refactoring.
+* `Delve` : Débogueur pour Go.
+* `Staticcheck` : Linter pour Go.
 ## 11. Bonnes Pratiques
 
 ### Conventions De Nommage
