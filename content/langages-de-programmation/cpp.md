@@ -7,79 +7,81 @@ tags:
 description: Extension du langage C, ajoutant des fonctionnalités de programmation orientée objet, générique et fonctionnelle.
 ---
 
+# Cpp
+
 ## Sommaire
 
-1.  Introduction au C++
-    *   Qu'est-ce que le C++ ?
-    *   Historique et normes (C++11, C++14, C++17, C++20)
-    *   Compilation et liaison
-    *   Structure d'un programme C++
-2.  Bases du Langage
-    *   Syntaxe de base
-    *   Variables et types de données
-    *   Opérateurs
-    *   Structures de contrôle
-    *   Fonctions
-    *   Pointeurs et Références
-3.  Programmation Orientée Objet (POO) en C++
-    *   Classes et Objets
-    *   Constructeurs et Destructeurs
-    *   Encapsulation, Héritage, Polymorphisme
-    *   Fonctions virtuelles et Classes abstraites
-4.  Gestion de la Mémoire
-    *   Allocation statique, dynamique (new, delete)
-    *   Pointeurs intelligents (smart pointers)
-5.  Templates (Programmation Générique)
-    *   Templates de fonctions
-    *   Templates de classes
-6.  Bibliothèque Standard C++ (STL)
-    *   Conteneurs (Vector, List, Map, Set)
-    *   Algorithmes
-    *   Itérateurs
-    *   Flux d'entrée/sortie (iostream)
-7.  Gestion des Exceptions
-    *   Blocs try-catch
-    *   Levée d'exceptions
-8.  Multithreading
-    *   Le modèle mémoire C++
-    *   Threads (std::thread)
-    *   Mutexes et conditions variables
-9.  Nouvelles Fonctionnalités des Normes C++ Modernes
-    *   Lambdas
-    *   Auto
-    *   Rvalue references et move semantics
-    *   Concepts
+1. Introduction au C++
+    * Qu'est-ce que le C++ ?
+    * Historique et normes (C++11, C++14, C++17, C++20)
+    * Compilation et liaison
+    * Structure d'un programme C++
+2. Bases du Langage
+    * Syntaxe de base
+    * Variables et types de données
+    * Opérateurs
+    * Structures de contrôle
+    * Fonctions
+    * Pointeurs et Références
+3. Programmation Orientée Objet (POO) en C++
+    * Classes et Objets
+    * Constructeurs et Destructeurs
+    * Encapsulation, Héritage, Polymorphisme
+    * Fonctions virtuelles et Classes abstraites
+4. Gestion de la Mémoire
+    * Allocation statique, dynamique (new, delete)
+    * Pointeurs intelligents (smart pointers)
+5. Templates (Programmation Générique)
+    * Templates de fonctions
+    * Templates de classes
+6. Bibliothèque Standard C++ (STL)
+    * Conteneurs (Vector, List, Map, Set)
+    * Algorithmes
+    * Itérateurs
+    * Flux d'entrée/sortie (iostream)
+7. Gestion des Exceptions
+    * Blocs try-catch
+    * Levée d'exceptions
+8. Multithreading
+    * Le modèle mémoire C++
+    * Threads (std::thread)
+    * Mutexes et conditions variables
+9. Nouvelles Fonctionnalités des Normes C++ Modernes
+    * Lambdas
+    * Auto
+    * Rvalue references et move semantics
+    * Concepts
 10. Compilation et Débogage
-    *   Utilisation de G++
-    *   Options de compilation
-    *   Débogage avec GDB
+    * Utilisation de G++
+    * Options de compilation
+    * Débogage avec GDB
 11. Bonnes Pratiques et Patterns
-    *   Conventions de codage
-    *   Patterns de conception courants
-    *   RAII (Resource Acquisition Is Initialization)
+    * Conventions de codage
+    * Patterns de conception courants
+    * RAII (Resource Acquisition Is Initialization)
 12. Ressources et Communauté
-    *   Documentation
-    *   Communautés en ligne
+    * Documentation
+    * Communautés en ligne
 
-## 1. Introduction au C++
+## 1. Introduction Au C++
 
-### Qu'est-ce que le C++ ?
+### Qu'est-ce Que Le C++ ?
 
 Extension du C, ajoutant la POO, la programmation générique et fonctionnelle. Langage compilé, performant, utilisé pour systèmes d'exploitation, jeux, applications embarquées, etc.
 
-### Historique et normes (C++11, C++14, C++17, C++20)
+### Historique Et Normes (C++11, C++14, C++17, C++20)
 
-*   **C++98/03**: Première norme standard.
-*   **C++11**: Ajout majeur (lambdas, auto, smart pointers, threads).
-*   **C++14**: Améliorations mineures.
-*   **C++17**: Améliorations (structured bindings, if constexpr).
-*   **C++20**: Ajouts significatifs (Concepts, Coroutines, Modules, Ranges).
+* **C++98/03**: Première norme standard.
+* **C++11**: Ajout majeur (lambdas, auto, smart pointers, threads).
+* **C++14**: Améliorations mineures.
+* **C++17**: Améliorations (structured bindings, if constexpr).
+* **C++20**: Ajouts significatifs (Concepts, Coroutines, Modules, Ranges).
 
-### Compilation et liaison
+### Compilation Et Liaison
 
-1.  **Préprocesseur**: Traite les directives (`#include`, `#define`).
-2.  **Compilation**: Convertit le code source (`.cpp`) en code objet (`.o`).
-3.  **Liaison (Linking)**: Combine les fichiers objet et les bibliothèques pour créer l'exécutable.
+1. **Préprocesseur**: Traite les directives (`#include`, `#define`).
+2. **Compilation**: Convertit le code source (`.cpp`) en code objet (`.o`).
+3. **Liaison (Linking)**: Combine les fichiers objet et les bibliothèques pour créer l'exécutable.
 
 ```cpp
 // Exemple simple de compilation avec g++
@@ -101,7 +103,7 @@ g++ main.o -o main
 ./main
 ```
 
-### Structure d'un programme C++
+### Structure D'un Programme C++
 
 ```cpp
 #include <iostream> // Inclusion de la bibliothèque iostream
@@ -113,13 +115,13 @@ int main() { // Fonction principale, point d'entrée du programme
 }
 ```
 
-## 2. Bases du Langage
+## 2. Bases Du Langage
 
-### Syntaxe de base
+### Syntaxe De Base
 
-*   Les instructions se terminent par un point-virgule (`;`).
-*   Les commentaires commencent par `//` (ligne unique) ou sont encadrés par `/* */` (bloc).
-*   Les blocs de code sont délimités par des accolades (`{}`).
+* Les instructions se terminent par un point-virgule (`;`).
+* Les commentaires commencent par `//` (ligne unique) ou sont encadrés par `/* */` (bloc).
+* Les blocs de code sont délimités par des accolades (`{}`).
 
 ```cpp
 // Ceci est un commentaire sur une seule ligne
@@ -139,17 +141,17 @@ int main() {
 }
 ```
 
-### Variables et types de données
+### Variables Et Types De Données
 
-*   Déclaration: `type nom_variable;`
-*   Initialisation: `type nom_variable = valeur;`
+* Déclaration: `type nom_variable;`
+* Initialisation: `type nom_variable = valeur;`
 
 Types de base :
-*   `int`: Entiers
-*   `float`, `double`: Nombres à virgule flottante
-*   `char`: Caractères
-*   `bool`: Booléens (`true`, `false`)
-*   `void`: Absence de type
+* `int`: Entiers
+* `float`, `double`: Nombres à virgule flottante
+* `char`: Caractères
+* `bool`: Booléens (`true`, `false`)
+* `void`: Absence de type
 
 ```cpp
 int age = 30;
@@ -160,11 +162,11 @@ bool is_active = true;
 
 ### Opérateurs
 
-*   **Arithmétiques**: `+`, `-`, `*`, `/`, `%`
-*   **Relationnels**: `==`, `!=`, `<`, `>`, `<=`, `>=`
-*   **Logiques**: `&&` (ET), `||` (OU), `!` (NON)
-*   **Affectation**: `=`, `+=`, `-=`, `*=`, `/=`, `%=`
-*   **Incrémentation/Décrémentation**: `++`, `--`
+* **Arithmétiques**: `+`, `-`, `*`, `/`, `%`
+* **Relationnels**: `==`, `!=`, `<`, `>`, `<=`, `>=`
+* **Logiques**: `&&` (ET), `||` (OU), `!` (NON)
+* **Affectation**: `=`, `+=`, `-=`, `*=`, `/=`, `%=`
+* **Incrémentation/Décrémentation**: `++`, `--`
 
 ```cpp
 int x = 10, y = 5;
@@ -174,10 +176,10 @@ bool condition = (x > 0 && y < 10); // true
 x++; // x devient 11
 ```
 
-### Structures de contrôle
+### Structures De Contrôle
 
-*   **Conditionnelles**: `if`, `else if`, `else`, `switch`
-*   **Boucles**: `for`, `while`, `do-while`
+* **Conditionnelles**: `if`, `else if`, `else`, `switch`
+* **Boucles**: `for`, `while`, `do-while`
 
 ```cpp
 int score = 85;
@@ -201,9 +203,9 @@ while (score > 0) {
 
 ### Fonctions
 
-*   Déclaration: `type_retour nom_fonction(paramètres);`
-*   Définition: `type_retour nom_fonction(paramètres) { // corps }`
-*   Appel: `nom_fonction(arguments);`
+* Déclaration: `type_retour nom_fonction(paramètres);`
+* Définition: `type_retour nom_fonction(paramètres) { // corps }`
+* Appel: `nom_fonction(arguments);`
 
 ```cpp
 int add(int a, int b) {
@@ -216,10 +218,10 @@ int main() {
 }
 ```
 
-### Pointeurs et Références
+### Pointeurs Et Références
 
-*   **Pointeur**: Variable qui stocke l'adresse mémoire d'une autre variable. Déclaration: `type* nom_pointeur;`
-*   **Référence**: Alias d'une variable existante. Déclaration: `type& nom_reference = variable_existante;`
+* **Pointeur**: Variable qui stocke l'adresse mémoire d'une autre variable. Déclaration: `type* nom_pointeur;`
+* **Référence**: Alias d'une variable existante. Déclaration: `type& nom_reference = variable_existante;`
 
 ```cpp
 int var = 10;
@@ -231,12 +233,12 @@ ref = 20; // Modifie var via la référence
 std::cout << var; // Affiche 20
 ```
 
-## 3. Programmation Orientée Objet (POO) en C++
+## 3. Programmation Orientée Objet (POO) En C++
 
-### Classes et Objets
+### Classes Et Objets
 
-*   **Classe**: Modèle pour créer des objets. Définit les données (attributs) et les comportements (méthodes).
-*   **Objet**: Instance d'une classe.
+* **Classe**: Modèle pour créer des objets. Définit les données (attributs) et les comportements (méthodes).
+* **Objet**: Instance d'une classe.
 
 ```cpp
 class Dog {
@@ -258,10 +260,10 @@ int main() {
 }
 ```
 
-### Constructeurs et Destructeurs
+### Constructeurs Et Destructeurs
 
-*   **Constructeur**: Méthode spéciale appelée lors de la création d'un objet. Initialise l'objet. Nom identique à la classe.
-*   **Destructeur**: Méthode spéciale appelée lors de la destruction d'un objet. Nettoie les ressources. Nom de la classe précédé de `~`.
+* **Constructeur**: Méthode spéciale appelée lors de la création d'un objet. Initialise l'objet. Nom identique à la classe.
+* **Destructeur**: Méthode spéciale appelée lors de la destruction d'un objet. Nettoie les ressources. Nom de la classe précédé de `~`.
 
 ```cpp
 class MyClass {
@@ -292,9 +294,9 @@ int main() {
 
 ### Encapsulation, Héritage, Polymorphisme
 
-*   **Encapsulation**: Regrouper données et méthodes au sein d'une classe. Contrôler l'accès (public, private, protected).
-*   **Héritage**: Une classe (dérivée) hérite des propriétés et comportements d'une autre classe (base). `class Derived : public Base { ... };`
-*   **Polymorphisme**: Possibilité de traiter des objets de classes différentes de manière uniforme via une interface commune (souvent avec des pointeurs/références et des fonctions virtuelles).
+* **Encapsulation**: Regrouper données et méthodes au sein d'une classe. Contrôler l'accès (public, private, protected).
+* **Héritage**: Une classe (dérivée) hérite des propriétés et comportements d'une autre classe (base). `class Derived : public Base { … };`
+* **Polymorphisme**: Possibilité de traiter des objets de classes différentes de manière uniforme via une interface commune (souvent avec des pointeurs/références et des fonctions virtuelles).
 
 ```cpp
 // Encapsulation
@@ -322,10 +324,10 @@ public:
 // Polymorphisme (voir Fonctions virtuelles)
 ```
 
-### Fonctions virtuelles et Classes abstraites
+### Fonctions Virtuelles Et Classes Abstraites
 
-*   **Fonction virtuelle**: Fonction dans une classe de base déclarée avec le mot-clé `virtual`. Permet le polymorphisme dynamique (résolution de l'appel de fonction à l'exécution).
-*   **Classe abstraite**: Classe qui ne peut pas être instanciée directement. Contient au moins une fonction virtuelle pure (`= 0`). Sert de classe de base pour l'héritage.
+* **Fonction virtuelle**: Fonction dans une classe de base déclarée avec le mot-clé `virtual`. Permet le polymorphisme dynamique (résolution de l'appel de fonction à l'exécution).
+* **Classe abstraite**: Classe qui ne peut pas être instanciée directement. Contient au moins une fonction virtuelle pure (`= 0`). Sert de classe de base pour l'héritage.
 
 ```cpp
 class Shape { // Classe de base abstraite
@@ -368,12 +370,12 @@ int main() {
 }
 ```
 
-## 4. Gestion de la Mémoire
+## 4. Gestion De la Mémoire
 
-### Allocation statique, dynamique (new, delete)
+### Allocation Statique, Dynamique (new, delete)
 
-*   **Allocation statique**: Mémoire allouée au moment de la compilation (variables globales, locales, membres de classe non-pointeurs). Gérée automatiquement.
-*   **Allocation dynamique**: Mémoire allouée à l'exécution sur le tas (heap) avec `new`. Doit être libérée explicitement avec `delete` pour éviter les fuites de mémoire.
+* **Allocation statique**: Mémoire allouée au moment de la compilation (variables globales, locales, membres de classe non-pointeurs). Gérée automatiquement.
+* **Allocation dynamique**: Mémoire allouée à l'exécution sur le tas (heap) avec `new`. Doit être libérée explicitement avec `delete` pour éviter les fuites de mémoire.
 
 ```cpp
 int static_var; // Allocation statique
@@ -387,13 +389,13 @@ dynamic_array[0] = 1;
 delete[] dynamic_array; // Libération du tableau
 ```
 
-### Pointeurs intelligents (smart pointers)
+### Pointeurs Intelligents (smart pointers)
 
 Objets qui gèrent automatiquement la mémoire allouée dynamiquement, évitant les fuites de mémoire.
 
-*   `std::unique_ptr`: Pointeur qui possède exclusivement l'objet pointé. Ne peut pas être copié, seulement déplacé.
-*   `std::shared_ptr`: Pointeur qui partage la propriété de l'objet pointé. Utilise un compteur de références. L'objet est détruit quand le dernier `shared_ptr` est détruit.
-*   `std::weak_ptr`: Pointeur non-possédant. Utilisé avec `shared_ptr` pour éviter les références circulaires.
+* `std::unique_ptr`: Pointeur qui possède exclusivement l'objet pointé. Ne peut pas être copié, seulement déplacé.
+* `std::shared_ptr`: Pointeur qui partage la propriété de l'objet pointé. Utilise un compteur de références. L'objet est détruit quand le dernier `shared_ptr` est détruit.
+* `std::weak_ptr`: Pointeur non-possédant. Utilisé avec `shared_ptr` pour éviter les références circulaires.
 
 ```cpp
 #include <memory>
@@ -419,7 +421,7 @@ int main() {
 
 Permet d'écrire du code qui fonctionne avec différents types de données sans répéter le code pour chaque type.
 
-### Templates de fonctions
+### Templates De Fonctions
 
 Crée une famille de fonctions pour différents types.
 
@@ -436,7 +438,7 @@ int main() {
 }
 ```
 
-### Templates de classes
+### Templates De Classes
 
 Crée une famille de classes pour différents types.
 
@@ -469,10 +471,10 @@ Ensemble de classes et fonctions templates fournissant des structures de donnée
 
 Stockent des collections d'objets.
 
-*   `std::vector`: Tableau dynamique. Accès rapide par index.
-*   `std::list`: Liste doublement chaînée. Insertions/suppressions rapides n'importe où.
-*   `std::map`: Conteneur associatif clé-valeur trié. Accès rapide par clé.
-*   `std::set`: Conteneur d'éléments uniques triés.
+* `std::vector`: Tableau dynamique. Accès rapide par index.
+* `std::list`: Liste doublement chaînée. Insertions/suppressions rapides n'importe où.
+* `std::map`: Conteneur associatif clé-valeur trié. Accès rapide par clé.
+* `std::set`: Conteneur d'éléments uniques triés.
 
 ```cpp
 #include <vector>
@@ -533,8 +535,8 @@ int main() {
 
 Objets qui permettent de parcourir les éléments des conteneurs. Se comportent comme des pointeurs.
 
-*   `begin()`: Retourne un itérateur sur le premier élément.
-*   `end()`: Retourne un itérateur "past-the-end".
+* `begin()`: Retourne un itérateur sur le premier élément.
+* `end()`: Retourne un itérateur "past-the-end".
 
 ```cpp
 #include <vector>
@@ -554,10 +556,10 @@ int main() {
 
 Gère les opérations d'entrée et de sortie (console, fichiers).
 
-*   `std::cin`: Flux d'entrée standard (clavier).
-*   `std::cout`: Flux de sortie standard (console).
-*   `std::cerr`: Flux d'erreur standard.
-*   `std::clog`: Flux de journalisation standard.
+* `std::cin`: Flux d'entrée standard (clavier).
+* `std::cout`: Flux de sortie standard (console).
+* `std::cerr`: Flux d'erreur standard.
+* `std::clog`: Flux de journalisation standard.
 
 ```cpp
 #include <iostream>
@@ -572,11 +574,11 @@ int main() {
 }
 ```
 
-## 7. Gestion des Exceptions
+## 7. Gestion Des Exceptions
 
 Mécanisme pour gérer les erreurs et autres événements exceptionnels pendant l'exécution.
 
-### Blocs try-catch
+### Blocs Try-catch
 
 Utilisé pour intercepter et gérer les exceptions.
 
@@ -597,7 +599,7 @@ int main() {
 }
 ```
 
-### Levée d'exceptions
+### Levée D'exceptions
 
 Utilisé pour signaler qu'une erreur ou une condition exceptionnelle s'est produite.
 
@@ -627,7 +629,7 @@ int main() {
 
 Permet d'exécuter plusieurs parties d'un programme simultanément.
 
-### Le modèle mémoire C++
+### Le Modèle Mémoire C++
 
 Définit comment les threads interagissent avec la mémoire. Assure la cohérence des données partagées.
 
@@ -655,12 +657,12 @@ int main() {
 }
 ```
 
-### Mutexes et conditions variables
+### Mutexes Et Conditions Variables
 
 Utilisés pour synchroniser l'accès aux ressources partagées et éviter les conditions de course.
 
-*   `std::mutex`: Verrouille l'accès à une section critique.
-*   `std::condition_variable`: Permet à un thread d'attendre qu'une certaine condition soit remplie.
+* `std::mutex`: Verrouille l'accès à une section critique.
+* `std::condition_variable`: Permet à un thread d'attendre qu'une certaine condition soit remplie.
 
 ```cpp
 #include <iostream>
@@ -694,7 +696,7 @@ int main() {
 }
 ```
 
-## 9. Nouvelles Fonctionnalités des Normes C++ Modernes
+## 9. Nouvelles Fonctionnalités Des Normes C++ Modernes
 
 Introduites dans C++11 et les normes ultérieures pour améliorer la productivité et les performances.
 
@@ -736,10 +738,10 @@ int main() {
 }
 ```
 
-### Rvalue references et move semantics
+### Rvalue References Et Move Semantics
 
-*   **Rvalue reference (`&&`)**: Référence à une valeur temporaire (rvalue). Permet de distinguer les lvalues (qui ont une identité et persistent au-delà d'une expression) des rvalues.
-*   **Move semantics**: Permet de "déplacer" efficacement les ressources (comme la mémoire allouée dynamiquement) d'un objet rvalue à un autre, au lieu de faire une copie coûteuse. Utilisé dans les constructeurs et opérateurs d'affectation par déplacement (`&&`).
+* **Rvalue reference (`&&`)**: Référence à une valeur temporaire (rvalue). Permet de distinguer les lvalues (qui ont une identité et persistent au-delà d'une expression) des rvalues.
+* **Move semantics**: Permet de "déplacer" efficacement les ressources (comme la mémoire allouée dynamiquement) d'un objet rvalue à un autre, au lieu de faire une copie coûteuse. Utilisé dans les constructeurs et opérateurs d'affectation par déplacement (`&&`).
 
 ```cpp
 #include <vector>
@@ -793,9 +795,9 @@ int main() {
 }
 ```
 
-## 10. Compilation et Débogage
+## 10. Compilation Et Débogage
 
-### Utilisation de G++
+### Utilisation De G++
 
 G++ est le compilateur GNU pour C++.
 
@@ -812,48 +814,52 @@ g++ -c file2.cpp # Crée file2.o
 g++ file1.o file2.o -o program # Lie les fichiers objet
 ```
 
-### Options de compilation
+### Options De Compilation
 
 Quelques options courantes de G++:
 
-*   `-o <output>`: Spécifie le nom du fichier de sortie.
-*   `-c`: Compile seulement, ne lie pas.
-*   `-Wall`: Active la plupart des avertissements. Très recommandé.
-*   `-Wextra`: Active des avertissements supplémentaires.
-*   `-g`: Inclut les informations de débogage pour GDB.
-*   `-O<level>`: Optimise le code (`-O1`, `-O2`, `-O3`, `-Os`).
-*   `-std=<standard>`: Spécifie la norme C++ (`c++11`, `c++14`, `c++17`, `c++20`).
-*   `-I<directory>`: Ajoute un répertoire pour la recherche des fichiers d'en-tête.
-*   `-L<directory>`: Ajoute un répertoire pour la recherche des bibliothèques.
-*   `-l<library>`: Lie avec une bibliothèque (ex: `-lpthread` pour les threads).
+* `-o <output>`: Spécifie le nom du fichier de sortie.
+* `-c`: Compile seulement, ne lie pas.
+* `-Wall`: Active la plupart des avertissements. Très recommandé.
+* `-Wextra`: Active des avertissements supplémentaires.
+* `-g`: Inclut les informations de débogage pour GDB.
+* `-O<level>`: Optimise le code (`-O1`, `-O2`, `-O3`, `-Os`).
+* `-std=<standard>`: Spécifie la norme C++ (`c++11`, `c++14`, `c++17`, `c++20`).
+* `-I<directory>`: Ajoute un répertoire pour la recherche des fichiers d'en-tête.
+* `-L<directory>`: Ajoute un répertoire pour la recherche des bibliothèques.
+* `-l<library>`: Lie avec une bibliothèque (ex: `-lpthread` pour les threads).
 
 ```bash
 # Exemple avec plusieurs options
 g++ main.cpp -o main -Wall -Wextra -g -O2 -std=c++17 -Iinclude -Llib -lmylib
 ```
 
-### Débogage avec GDB
+### Débogage Avec GDB
 
 GDB (GNU Debugger) est un outil puissant pour trouver et corriger les erreurs dans les programmes C++.
 
-1.  **Compiler avec les informations de débogage**: Utilisez l'option `-g` lors de la compilation.
+1. **Compiler avec les informations de débogage**: Utilisez l'option `-g` lors de la compilation.
+
     ```bash
     g++ main.cpp -o main -g
     ```
-2.  **Lancer GDB**:
+
+2. **Lancer GDB**:
+
     ```bash
     gdb ./main
     ```
-3.  **Commandes GDB courantes**:
-    *   `run` (`r`): Exécute le programme.
-    *   `break <location>` (`b`): Définit un point d'arrêt (ligne, fonction). Ex: `b main.cpp:10`, `b my_function`.
-    *   `continue` (`c`): Continue l'exécution jusqu'au prochain point d'arrêt.
-    *   `next` (`n`): Exécute la ligne de code suivante (passe par-dessus les appels de fonction).
-    *   `step` (`s`): Exécute la ligne de code suivante (entre dans les appels de fonction).
-    *   `print <variable>` (`p`): Affiche la valeur d'une variable.
-    *   `info locals`: Affiche les variables locales.
-    *   `backtrace` (`bt`): Affiche la pile d'appels.
-    *   `quit` (`q`): Quitte GDB.
+
+3. **Commandes GDB courantes**:
+    * `run` (`r`): Exécute le programme.
+    * `break <location>` (`b`): Définit un point d'arrêt (ligne, fonction). Ex: `b main.cpp:10`, `b my_function`.
+    * `continue` (`c`): Continue l'exécution jusqu'au prochain point d'arrêt.
+    * `next` (`n`): Exécute la ligne de code suivante (passe par-dessus les appels de fonction).
+    * `step` (`s`): Exécute la ligne de code suivante (entre dans les appels de fonction).
+    * `print <variable>` (`p`): Affiche la valeur d'une variable.
+    * `info locals`: Affiche les variables locales.
+    * `backtrace` (`bt`): Affiche la pile d'appels.
+    * `quit` (`q`): Quitte GDB.
 
 ```gdb
 # Exemple de session GDB
@@ -873,23 +879,23 @@ $1 = 10
 (gdb) quit
 ```
 
-## 11. Bonnes Pratiques et Patterns
+## 11. Bonnes Pratiques Et Patterns
 
 Conseils pour écrire du code C++ propre, efficace et maintenable.
 
-### Conventions de codage
+### Conventions De Codage
 
-*   Cohérence dans le nommage (variables, fonctions, classes).
-*   Indentation et formatage uniformes.
-*   Utilisation judicieuse des commentaires.
-*   Éviter les variables globales autant que possible.
-*   Préférer les constantes (`const`, `constexpr`).
+* Cohérence dans le nommage (variables, fonctions, classes).
+* Indentation et formatage uniformes.
+* Utilisation judicieuse des commentaires.
+* Éviter les variables globales autant que possible.
+* Préférer les constantes (`const`, `constexpr`).
 
-### Patterns de conception courants
+### Patterns De Conception Courants
 
-*   **Singleton**: Assure qu'une classe n'a qu'une seule instance et fournit un point d'accès global à celle-ci.
-*   **Factory Method**: Définit une interface pour créer un objet, mais laisse les sous-classes décider quelle classe instancier.
-*   **Observer**: Définit une dépendance un-à-plusieurs entre objets, de sorte que lorsque un objet change d'état, tous ses dépendants sont notifiés et mis à jour automatiquement.
+* **Singleton**: Assure qu'une classe n'a qu'une seule instance et fournit un point d'accès global à celle-ci.
+* **Factory Method**: Définit une interface pour créer un objet, mais laisse les sous-classes décider quelle classe instancier.
+* **Observer**: Définit une dépendance un-à-plusieurs entre objets, de sorte que lorsque un objet change d'état, tous ses dépendants sont notifiés et mis à jour automatiquement.
 
 ### RAII (Resource Acquisition Is Initialization)
 
@@ -937,17 +943,10 @@ int main() {
 } // Le destructeur de handler est appelé ici, fermant le fichier
 ```
 
-## 12. Ressources et Communauté
+## 12. Ressources Et Communauté
 
 ### Documentation
 
-*   **cppreference.com**: Documentation de référence complète de la bibliothèque standard C++.
-*   **cplusplus.com**: Tutoriels et références sur le langage C++.
-*   **ISO C++ Standard**: La norme officielle du langage C++.
-
-### Communautés en ligne
-
-*   **Stack Overflow**: Questions et réponses sur la programmation C++.
-*   **Reddit (r/cpp)**: Discussions sur C++.
-*   **Meeting C++**: Conférences et communauté C++.
-```
+* **cppreference.com**: Documentation de référence complète de la bibliothèque standard C++.
+* **cplusplus.com**: Tutoriels et références sur le langage C++.
+* **ISO C++ Standard**: La norme officielle du langage C++.
