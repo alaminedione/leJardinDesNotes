@@ -92,11 +92,11 @@ Spring Boot s'appuie sur Spring Framework mais simplifie considérablement le pr
 
 ### Avantages De Spring Boot : Simplicité, Rapidité, Convention over Configuration
 
-- **Simplicité :** Spring Boot simplifie grandement la configuration des applications Spring grâce à l'auto-configuration et aux starters.
+- **Simplicité :** Spring Boot simplifie grandement la configuration des applications Spring grâce à l'auto-configuration et aux starters. L'**auto-configuration** examine les dépendances présentes dans votre classpath et configure automatiquement de nombreux aspects de votre application (par exemple, la base de données, le serveur web, la sécurité) avec des valeurs par défaut raisonnables.
 - **Rapidité :** Le démarrage rapide des applications et la réduction de la configuration permettent de développer et de déployer des applications plus rapidement.
 - **Convention over Configuration :** Spring Boot favorise les conventions par défaut, ce qui réduit la nécessité de configurer explicitement de nombreux aspects de l'application. Cela permet aux développeurs de se concentrer sur la logique métier.
 - **Serveurs embarqués :** Il inclut des serveurs web embarqués (Tomcat, Jetty, Undertow), ce qui permet de créer des applications autonomes qui peuvent être exécutées directement avec un simple `java -jar`.
-- **Starters :** Les "Starters" sont des ensembles de dépendances préconfigurées qui facilitent l'ajout de fonctionnalités à votre application (par exemple, `spring-boot-starter-web` pour le développement web, `spring-boot-starter-data-jpa` pour l'accès aux données).
+- **Starters :** Les "Starters" sont des ensembles de descripteurs de dépendances pratiques que vous pouvez inclure dans votre build. Ils contiennent toutes les dépendances nécessaires pour une fonctionnalité spécifique, regroupées en une seule dépendance. Par exemple, `spring-boot-starter-web` inclut Spring MVC, Tomcat et Jackson, ce qui vous permet de démarrer rapidement le développement d'applications web. De même, `spring-boot-starter-data-jpa` regroupe Spring Data JPA, Hibernate et un driver de base de données embarqué.
 
 ### Installation De L'environnement De Développement (JDK, IDE, Maven/Gradle)
 
@@ -148,11 +148,11 @@ myproject/
 │   ├── main/
 │   │   ├── java/
 │   │   │   └── com/example/myproject/
-│   │   │       ├── MyprojectApplication.java  // Classe principale
-│   │   │       ├── controller/             // Contrôleurs REST ou MVC
-│   │   │       ├── service/                // Services métier
-│   │   │       ├── repository/             // Repositories pour l'accès aux données
-│   │   │       └── model/                  // Classes de modèle (entités JPA, DTOs)
+│   │   │       ├── MyprojectApplication.java  // Classe principale de l'application
+│   │   │       ├── controller/             // Couche de présentation : gère les requêtes HTTP et retourne les réponses (Contrôleurs REST ou MVC)
+│   │   │       ├── service/                // Couche métier : contient la logique métier de l'application
+│   │   │       ├── repository/             // Couche d'accès aux données : interagit avec la base de données
+│   │   │       └── model/                  // Classes de modèle (entités JPA, DTOs - Data Transfer Objects)
 │   │   └── resources/
 │   │       ├── application.properties (ou application.yml) // Fichier de configuration
 │   │       ├── static/                     // Fichiers statiques (CSS, JS, images)
@@ -274,6 +274,38 @@ Ces fichiers permettent de configurer divers aspects de l'application, tels que 
 
 ---
 
+### Composants et Scopes des Beans
+
+Dans Spring, un "bean" est un objet qui est instancié, assemblé et géré par le conteneur IoC de Spring. Les annotations comme `@Component`, `@Service`, `@Repository`, et `@Controller` sont des stéréotypes de `@Component` et sont utilisées pour marquer les classes comme des beans Spring.
+
+Chaque bean a un "scope" qui détermine son cycle de vie et le nombre d'instances créées par le conteneur. Les scopes les plus courants sont :
+
+-   **Singleton (par défaut) :** Une seule instance du bean est créée par conteneur Spring. C'est le scope par défaut et le plus couramment utilisé. Toutes les injections de ce bean feront référence à la même instance.
+    ```java
+    @Service // Par défaut, c'est un singleton
+    public class MySingletonService {
+        // ...
+    }
+    ```
+
+-   **Prototype :** Une nouvelle instance du bean est créée à chaque fois qu'il est demandé (injecté). Utile pour les beans qui ne sont pas thread-safe ou qui doivent avoir un état unique par utilisation.
+    ```java
+    import org.springframework.context.annotation.Scope;
+    import org.springframework.stereotype.Component;
+
+    @Component
+    @Scope("prototype")
+    public class MyPrototypeBean {
+        // ...
+    }
+    ```
+
+-   **Request :** (Uniquement pour les applications web) Une nouvelle instance du bean est créée pour chaque requête HTTP.
+-   **Session :** (Uniquement pour les applications web) Une nouvelle instance du bean est créée pour chaque session HTTP.
+-   **Application :** (Uniquement pour les applications web) Une seule instance du bean est créée pour la durée de vie de l'application web (similaire au singleton mais au niveau du `ServletContext`).
+
+La gestion des scopes est cruciale pour la performance et la gestion de l'état dans les applications Spring.
+
 ## 3. Injection De Dépendances Et Gestion Des Beans
 
 ### Principe De L'inversion De Contrôle (IoC)
@@ -286,7 +318,7 @@ Au lieu que les objets créent ou recherchent leurs dépendances, le conteneur I
 
 Spring prend en charge plusieurs types d'injection de dépendances :
 
-- **Injection par constructeur :** Les dépendances sont fournies via les arguments du constructeur de la classe. C'est le type d'injection recommandé car il garantit que les dépendances requises sont présentes lors de la création de l'objet et facilite les tests unitaires.
+- **Injection par constructeur :** Les dépendances sont fournies via les arguments du constructeur de la classe. C'est le type d'injection **recommandé** car il garantit que les dépendances requises sont présentes lors de la création de l'objet (rendant l'objet immuable si les champs sont `final`) et facilite grandement les tests unitaires en permettant de passer facilement des mocks. L'annotation `@Autowired` n'est pas strictement nécessaire si la classe n'a qu'un seul constructeur.
 
     ```java
     import org.springframework.beans.factory.annotation.Autowired;
@@ -326,7 +358,7 @@ Spring prend en charge plusieurs types d'injection de dépendances :
     }
     ```
 
-- **Injection par champ :** Les dépendances sont injectées directement dans les champs de la classe à l'aide de l'annotation `@Autowired`. Bien que plus concise, cette méthode est généralement déconseillée car elle rend la classe plus difficile à tester (les dépendances sont cachées) et viole le principe de l'encapsulation.
+- **Injection par champ :** Les dépendances sont injectées directement dans les champs de la classe à l'aide de l'annotation [`@Autowired`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/beans/factory/annotation/Autowired.html). Bien que plus concise, cette méthode est généralement déconseillée car elle rend la classe plus difficile à tester (les dépendances sont cachées et ne peuvent pas être facilement remplacées par des mocks sans l'aide d'un framework de test), viole le principe de l'encapsulation et peut masquer des dépendances cycliques.
 
     ```java
     import org.springframework.beans.factory.annotation.Autowired;
@@ -341,6 +373,47 @@ Spring prend en charge plusieurs types d'injection de dépendances :
         // ...
     }
     ```
+
+### L'Annotation `@Autowired`
+
+L'annotation `@Autowired` est utilisée par Spring pour effectuer l'injection automatique de dépendances. Lorsque Spring rencontre `@Autowired` sur un constructeur, un setter ou un champ, il recherche un bean compatible dans son conteneur IoC et l'injecte automatiquement.
+
+-   **Fonctionnement :** Spring tente de trouver un bean du type requis. Si plusieurs beans du même type existent, Spring essaiera de les différencier par leur nom (par exemple, le nom du champ ou du paramètre). Vous pouvez utiliser `@Qualifier("nomDuBean")` pour spécifier explicitement quel bean injecter si l'ambiguïté persiste.
+-   **`required` :** Par défaut, `@Autowired` est `required = true`, ce qui signifie que si Spring ne trouve pas de bean compatible, il lèvera une `NoSuchBeanDefinitionException`. Vous pouvez définir `required = false` si la dépendance est optionnelle.
+
+```java
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+
+@Service
+public class AnotherService {
+
+    private MyRepository primaryRepository;
+    private MyRepository secondaryRepository;
+
+    @Autowired
+    public AnotherService(@Qualifier("primaryRepo") MyRepository primaryRepository,
+                          @Qualifier("secondaryRepo") MyRepository secondaryRepository) {
+        this.primaryRepository = primaryRepository;
+        this.secondaryRepository = secondaryRepository;
+    }
+}
+
+// Exemple de configuration pour les qualificateurs
+@Configuration
+public class RepositoryConfig {
+    @Bean
+    public MyRepository primaryRepo() {
+        return new MyRepository("Primary");
+    }
+
+    @Bean
+    public MyRepository secondaryRepo() {
+        return new MyRepository("Secondary");
+    }
+}
+```
 
 ### Cycle De Vie Des Beans : Initialisation, Destruction
 
@@ -476,7 +549,12 @@ public class WebController {
 }
 ```
 
-Dans cet exemple, la méthode `greeting` gère les requêtes GET sur `/greeting`, prend un paramètre de requête `name`, ajoute un attribut au modèle et retourne le nom de la vue "greeting".
+Dans cet exemple, la méthode `greeting` gère les requêtes GET sur `/greeting`, prend un paramètre de requête `name` (avec une valeur par défaut "World" si non fourni), ajoute un attribut au modèle (`Model`) pour le rendre disponible à la vue, et retourne le nom de la vue "greeting".
+
+-   [`@RequestParam`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/RequestParam.html): Utilisé pour lier les paramètres de requête URL (ceux après `?` dans l'URL) aux arguments de la méthode du contrôleur.
+-   [`@PathVariable`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/PathVariable.html): Utilisé pour lier les variables de chemin d'URI (parties de l'URL) aux arguments de la méthode. Par exemple, dans `/users/{id}`, `{id}` serait une variable de chemin.
+-   [`Model`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/ui/Model.html): Un objet qui contient les données à afficher dans la vue. Les contrôleurs ajoutent des attributs au `Model`, et ces attributs sont ensuite accessibles dans le template de vue.
+-   [`ModelAndView`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/servlet/ModelAndView.html): Une classe qui encapsule à la fois le `Model` et le nom de la `View`. Elle est souvent utilisée lorsque vous avez besoin d'un contrôle plus fin sur la vue et les données.
 
 ### Gestion Des Vues Avec Thymeleaf Et Bootstrap
 
@@ -855,6 +933,60 @@ class Product {
 
 ### Sérialisation Et Désérialisation JSON Avec Jackson
 
+### Gestion Des Exceptions Personnalisées Pour Les API REST
+
+Pour les API RESTful, il est courant de retourner des réponses d'erreur structurées (par exemple, au format JSON) avec des codes de statut HTTP appropriés. Spring Boot facilite la gestion des exceptions de manière cohérente.
+
+Vous pouvez utiliser `@ControllerAdvice` et `@ExceptionHandler` pour intercepter les exceptions et les transformer en réponses d'erreur personnalisées.
+
+```java
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
+import java.time.LocalDateTime;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+@ControllerAdvice
+public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler {
+
+    @ExceptionHandler(ProductNotFoundException.class)
+    public ResponseEntity<Object> handleProductNotFoundException(
+            ProductNotFoundException ex, WebRequest request) {
+
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("message", "Product not found");
+        body.put("details", ex.getMessage());
+
+        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+    }
+
+    // Vous pouvez ajouter d'autres @ExceptionHandler pour d'autres types d'exceptions
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Object> handleAllExceptions(Exception ex, WebRequest request) {
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("message", "An unexpected error occurred");
+        body.put("details", ex.getMessage());
+        return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+}
+
+// Exemple d'exception personnalisée
+class ProductNotFoundException extends RuntimeException {
+    public ProductNotFoundException(String message) {
+        super(message);
+    }
+}
+```
+
+Dans cet exemple, `CustomGlobalExceptionHandler` intercepte `ProductNotFoundException` et `Exception` génériques, et retourne une réponse JSON structurée avec le code de statut HTTP approprié. Cela permet une gestion centralisée et uniforme des erreurs dans votre API.
+
 Spring Boot utilise Jackson par défaut pour la sérialisation (conversion d'objets Java en JSON) et la désérialisation (conversion de JSON en objets Java). Lorsque vous utilisez `@RestController` et retournez un objet Java, Spring Boot, avec l'aide de Jackson, convertit automatiquement cet objet en réponse JSON. De même, lorsque vous utilisez `@RequestBody`, Jackson désérialise le corps de la requête JSON en l'objet Java spécifié.
 
 Vous pouvez personnaliser le comportement de Jackson en ajoutant des annotations Jackson à vos classes de modèle (par exemple, `@JsonIgnore`, `@JsonProperty`) ou en configurant l'objet `ObjectMapper` de Jackson.
@@ -928,6 +1060,41 @@ Les étapes générales pour sécuriser une API REST avec Spring Security et JWT
 C'est un sujet complexe qui nécessite une configuration détaillée, mais Spring Security fournit les blocs de construction nécessaires pour implémenter une sécurité robuste pour vos API REST.
 
 ---
+
+### Gestion des Versions d'API
+
+La gestion des versions d'API est une pratique essentielle pour maintenir la compatibilité ascendante et permettre l'évolution de votre API sans casser les applications clientes existantes. Il existe plusieurs stratégies courantes pour versionner les API RESTful :
+
+-   **Versionnement par URI (URL Path Versioning) :** La version de l'API est incluse directement dans le chemin de l'URI. C'est une approche simple et très visible.
+    ```
+    GET /api/v1/products
+    GET /api/v2/products
+    ```
+    Avantages : Facile à comprendre et à mettre en œuvre.
+    Inconvénients : Nécessite des modifications de code pour chaque nouvelle version et peut rendre les URIs plus longues.
+
+-   **Versionnement par Paramètre de Requête (Query Parameter Versioning) :** La version est spécifiée comme un paramètre de requête.
+    ```
+    GET /api/products?version=1
+    GET /api/products?version=2
+    ```
+    Avantages : Les URIs restent propres.
+    Inconvénients : Moins RESTful car la version n'est pas une ressource, et les clients peuvent oublier de spécifier la version.
+
+-   **Versionnement par En-tête HTTP (Header Versioning) :** La version est spécifiée dans un en-tête HTTP personnalisé (par exemple, `X-API-Version` ou `Accept` header avec un type de média personnalisé).
+    ```
+    GET /api/products
+    Accept: application/vnd.yourapp.v1+json
+
+    GET /api/products
+    Accept: application/vnd.yourapp.v2+json
+    ```
+    Avantages : Les URIs restent propres et c'est une approche plus conforme à REST.
+    Inconvénients : Moins visible pour les utilisateurs et peut être plus complexe à tester manuellement.
+
+-   **Versionnement par Négociation de Contenu (Content Negotiation Versioning) :** Similaire au versionnement par en-tête, mais utilise l'en-tête `Accept` standard avec des types de médias spécifiques.
+
+Spring MVC peut être configuré pour prendre en charge ces différentes stratégies de versionnement en utilisant `@RequestMapping` avec des attributs `headers`, `params` ou en définissant des chemins d'URI spécifiques. Le choix de la stratégie dépend des besoins spécifiques de votre projet et de vos clients.
 
 ## 7. Tests Avec Spring Boot
 
@@ -1112,6 +1279,49 @@ Pour tester une API Spring Boot avec Postman :
 Postman est un outil précieux pour le développement et le débogage des API RESTful.
 
 ---
+
+### Tests de Gestion des Erreurs et des Exceptions
+
+Il est crucial de tester la manière dont votre application gère les erreurs et les exceptions, en particulier pour les API RESTful. Vous voulez vous assurer que les messages d'erreur sont clairs, que les codes de statut HTTP sont corrects et que les informations sensibles ne sont pas exposées.
+
+Vous pouvez tester la gestion des exceptions en utilisant `MockMvc` pour les contrôleurs, et en simulant des exceptions dans vos services ou repositories.
+
+Exemple de test d'un contrôleur qui lève une exception :
+
+```java
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.web.servlet.MockMvc;
+
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+@WebMvcTest(ProductRestController.class)
+public class ProductRestControllerErrorTest {
+
+    @Autowired
+    private MockMvc mockMvc;
+
+    @MockBean
+    private ProductService productService; // Simule le service
+
+    @Test
+    void testGetProductById_NotFound() throws Exception {
+        when(productService.getProductById(1L)).thenThrow(new ProductNotFoundException("Product with ID 1 not found"));
+
+        mockMvc.perform(get("/api/products/1"))
+                .andExpect(status().isNotFound()) // Vérifie le code de statut 404
+                .andExpect(jsonPath("$.message").value("Product not found")) // Vérifie le message d'erreur
+                .andExpect(jsonPath("$.details").value("Product with ID 1 not found")); // Vérifie les détails
+    }
+}
+```
+
+Dans cet exemple, nous utilisons `@MockBean` pour simuler le `ProductService` et le configurer pour qu'il lève une `ProductNotFoundException` lorsque `getProductById(1L)` est appelé. Le test vérifie ensuite que le contrôleur retourne un code de statut 404 et un corps de réponse JSON structuré comme attendu.
 
 ## 8. Sécurisation D'une Application Spring Boot
 
@@ -1516,8 +1726,55 @@ Une fois la dépendance ajoutée et l'application démarrée, vous pourrez accé
 
 ### Gestion Des Dépendances Avec Maven Ou Gradle
 
-Spring Boot s'appuie sur Maven ou Gradle pour la gestion des dépendances. Les "Starters" de Spring Boot simplifient la déclaration des dépendances en fournissant des ensembles de dépendances préconfigurées et compatibles.
+La gestion efficace des dépendances est cruciale pour tout projet Java, et Spring Boot simplifie cela grâce à ses "Starters" et à la gestion des dépendances parentes.
 
-Assurez-vous de bien comprendre comment gérer les dépendances avec l'outil de build de votre choix, y compris la gestion des versions, les exclusions de dépendances et la création de profils de build.
+-   **Spring Boot Starters :** Comme mentionné précédemment, les starters sont des ensembles de dépendances préconfigurées. Ils réduisent le besoin de configurer manuellement les dépendances transitives. Par exemple, l'ajout de `spring-boot-starter-web` apporte automatiquement toutes les dépendances nécessaires pour une application web, y compris Tomcat, Spring MVC, et Jackson.
+-   **Gestion des dépendances parentes :** Le `spring-boot-starter-parent` (pour Maven) ou le plugin Spring Boot (pour Gradle) gère automatiquement les versions de nombreuses dépendances courantes. Cela garantit la compatibilité entre les différentes bibliothèques et réduit les conflits de versions. Vous n'avez généralement pas besoin de spécifier la version pour les dépendances gérées par le parent.
 
-En suivant ces bonnes pratiques et en utilisant les outils complémentaires appropriés, vous pouvez développer, tester, sécuriser et déployer vos applications Spring Boot de manière plus efficace.
+    **Maven (dans `pom.xml`) :**
+    ```xml
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.5</version> <!-- Utilisez la version de Spring Boot que vous ciblez -->
+        <relativePath/> <!-- Lookup parent from repository -->
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!-- Pas besoin de spécifier la version pour spring-boot-starter-web -->
+    </dependencies>
+    ```
+
+    **Gradle (dans `build.gradle`) :**
+    ```gradle
+    plugins {
+        id 'java'
+        id 'org.springframework.boot' version '3.2.5' // Utilisez la version de Spring Boot que vous ciblez
+        id 'io.spring.dependency-management' version '1.1.4'
+    }
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        // Pas besoin de spécifier la version pour spring-boot-starter-web
+    }
+    ```
+
+-   **Exclusions de dépendances :** Parfois, vous pourriez avoir besoin d'exclure une dépendance transitive qu'un starter apporte, par exemple pour remplacer une bibliothèque de logging par une autre.
+    ```xml
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+        <exclusions>
+            <exclusion>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-logging</artifactId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+    ```
+
+En suivant ces principes, vous pouvez gérer efficacement les dépendances de votre projet Spring Boot, en vous assurant que toutes les bibliothèques sont compatibles et à jour.
