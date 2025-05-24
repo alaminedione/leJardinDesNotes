@@ -19,6 +19,19 @@ Le sharding est une technique de partitionnement horizontal des données qui con
 - Améliore la scalabilité horizontale pour les opérations de lecture et d'écriture.
 - Réduit la quantité de données qu'un seul serveur de base de données doit gérer.
 
+**Stratégies de Sharding**
+Le choix de la stratégie de sharding est crucial et dépend des modèles d'accès aux données :
+- **Sharding par Plage (Range-Based Sharding):** Les données sont distribuées en fonction d'une plage de valeurs de la clé de sharding (ex: utilisateurs avec des IDs de 1 à 1000 sur shard A, 1001 à 2000 sur shard B).
+    - **Avantages:** Facile à implémenter, les requêtes par plage sont efficaces.
+    - **Inconvénients:** Peut entraîner des "hot spots" si certaines plages sont plus actives que d'autres.
+- **Sharding par Hachage (Hash-Based Sharding):** Les données sont distribuées en appliquant une fonction de hachage à la clé de sharding, ce qui répartit les données de manière plus uniforme.
+    - **Avantages:** Meilleure distribution de la charge, réduit les hot spots.
+    - **Inconvénients:** Les requêtes par plage sont moins efficaces, l'ajout ou le retrait de shards est plus complexe (nécessite une redistribution des données).
+- **Sharding par Répertoire (Directory-Based Sharding):** Un service de "look-up" (répertoire) maintient une carte des clés de sharding vers les shards correspondants.
+    - **Avantages:** Très flexible, permet de déplacer des données entre les shards sans modifier la logique de l'application.
+    - **Inconvénients:** Le service de répertoire devient un point de défaillance unique et un goulot d'étranglement potentiel.
+- **Sharding Géographique/Localisation:** Les données sont shardées en fonction de la localisation géographique des utilisateurs ou des données.
+
 **Composants Principaux**
 - **Shards:** Les partitions individuelles de la base de données.
 - **Clé de Sharding (Shard Key):** Une ou plusieurs colonnes utilisées pour déterminer comment les données sont distribuées entre les shards. Le choix de la clé de sharding est crucial pour une distribution uniforme des données et des requêtes.
@@ -26,6 +39,22 @@ Le sharding est une technique de partitionnement horizontal des données qui con
 
 **Guides d'utilisation**
 Le sharding est généralement mis en œuvre lorsque la taille de la base de données devient trop importante pour être gérée efficacement par un seul serveur, même avec la réplication. Il est essentiel de choisir une clé de sharding appropriée qui permet une distribution équilibrée des données et minimise les requêtes qui nécessitent d'interroger plusieurs shards (requêtes "cross-shard"). Le sharding introduit de la complexité dans la gestion et les requêtes de base de données.
+
+**Avantages et Inconvénients du Sharding**
+
+**Avantages:**
+- **Scalabilité Horizontale Massive:** Permet de gérer des volumes de données et des charges de trafic bien au-delà des capacités d'un seul serveur.
+- **Performances Améliorées:** Les requêtes sont exécutées sur des sous-ensembles plus petits de données, ce qui réduit les temps de réponse.
+- **Haute Disponibilité:** Une panne sur un shard n'affecte pas l'ensemble de la base de données.
+- **Réduction des Coûts:** Permet d'utiliser du matériel moins cher en distribuant la charge.
+
+**Inconvénients:**
+- **Complexité de l'Implémentation:** La conception et la mise en œuvre du sharding sont complexes.
+- **Complexité des Requêtes:** Les requêtes "cross-shard" (qui nécessitent des données de plusieurs shards) sont difficiles et coûteuses.
+- **Re-sharding (Re-partitionnement):** La redistribution des données lorsque de nouveaux shards sont ajoutés ou retirés est une opération complexe et potentiellement coûteuse en temps.
+- **Point de Défaillance de la Clé de Sharding:** Un mauvais choix de clé de sharding peut entraîner des hot spots ou une distribution inégale des données.
+- **Gestion des Transactions Distribuées:** Les transactions qui s'étendent sur plusieurs shards sont très complexes à gérer (nécessitent des protocoles comme le Two-Phase Commit).
+- **Coût Opérationnel:** La maintenance et la surveillance d'un système shardé sont plus exigeantes.
 
 **Exemples de Code (Hono avec Sharding DB - Conceptuel)**
 Dans une architecture shardée, l'application Hono doit être consciente de la logique de sharding pour diriger les requêtes vers le bon shard. Cela implique généralement d'inclure la clé de sharding dans les requêtes de base de données et d'utiliser une bibliothèque ou un service qui gère le routage vers le shard approprié.

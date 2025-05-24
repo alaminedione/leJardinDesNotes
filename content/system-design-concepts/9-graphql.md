@@ -17,12 +17,33 @@ GraphQL est un langage de requête pour les API et un runtime pour exécuter ces
 - **Une Seule Endpoint:** Typiquement, une API GraphQL est exposée via une seule endpoint HTTP (souvent POST).
 - **Récupération Efficace des Données:** Réduit le nombre de requêtes et la quantité de données transférées.
 
+**Avantages et Inconvénients de GraphQL**
+
+**Avantages:**
+- **Récupération de données précise:** Les clients demandent exactement ce dont ils ont besoin, évitant la sur-acquisition ou la sous-acquisition de données.
+- **Moins de requêtes:** Souvent, une seule requête GraphQL peut remplacer plusieurs requêtes REST, réduisant les allers-retour réseau.
+- **Évolution facile de l'API:** L'ajout de nouveaux champs ou types n'affecte pas les clients existants.
+- **Schéma fortement typé:** Fournit une validation des données et une auto-complétion pour les clients.
+- **Agrégation de données:** Facilite la récupération de données provenant de multiples sources en une seule requête.
+
+**Inconvénients:**
+- **Complexité côté serveur:** Nécessite une logique de résolution plus complexe pour gérer les requêtes flexibles.
+- **Mise en cache:** La mise en cache côté client est plus complexe qu'avec REST en raison de la nature des requêtes.
+- **Gestion des erreurs:** Les erreurs sont souvent renvoyées dans le corps de la réponse avec un statut HTTP 200, ce qui peut compliquer la gestion des erreurs.
+- **Apprentissage:** Courbe d'apprentissage plus raide pour les développeurs habitués à REST.
+- **Upload de fichiers:** Moins direct qu'avec REST, souvent géré via des extensions ou des approches spécifiques.
+
 **Composants Principaux**
 - **Schéma:** Définit la structure des données disponibles et les opérations possibles (Queries, Mutations, Subscriptions).
 - **Queries:** Utilisées pour lire des données.
 - **Mutations:** Utilisées pour modifier des données (créer, mettre à jour, supprimer).
 - **Resolvers:** Fonctions côté serveur qui récupèrent les données demandées par une requête.
 - **Types:** Définissent la structure des objets dans le schéma.
+
+**Subscriptions GraphQL**
+Les Subscriptions sont une fonctionnalité de GraphQL qui permet aux clients de recevoir des mises à jour en temps réel du serveur lorsqu'un événement spécifique se produit. Elles sont généralement implémentées via WebSockets.
+- **Cas d'utilisation:** Notifications en temps réel, mises à jour de flux de données (ex: chat, cotations boursières), suivi de progression.
+- **Fonctionnement:** Le client envoie une requête de subscription au serveur. Le serveur maintient une connexion persistante (via WebSocket) et envoie des données au client chaque fois que l'événement souscrit se produit.
 
 **Guides d'utilisation**
 Pour implémenter une API GraphQL avec Hono, vous auriez besoin d'intégrer une bibliothèque GraphQL (comme `graphql-js` ou `graphql-yoga`) et de définir votre schéma et vos resolvers. Hono peut servir de couche de transport HTTP pour recevoir les requêtes GraphQL et les passer au moteur GraphQL.

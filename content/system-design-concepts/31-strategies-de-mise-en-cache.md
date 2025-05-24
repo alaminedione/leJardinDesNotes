@@ -7,6 +7,9 @@ tags:
   - Architecture
 draft: false
 ---
+La mise en cache est une technique essentielle dans la conception de systèmes distribués performants et évolutifs. Elle permet de réduire la latence, d'améliorer le débit et de diminuer la charge sur les bases de données en stockant temporairement les données fréquemment consultées dans un emplacement plus rapide d'accès.
+
+Ce document explore les cinq stratégies de mise en cache les plus courantes : Read Through, Cache Aside, Write Through, Write Around et Write Back. Pour chaque stratégie, nous examinerons son fonctionnement, ses avantages, ses inconvénients et ses cas d'utilisation appropriés. Nous discuterons également des considérations relatives à la cohérence des données et des compromis à prendre en compte lors du choix d'une stratégie de mise en cache particulière.
 
 # Stratégies de Mise en Cache
 
@@ -14,94 +17,209 @@ Ce document explique les 5 stratégies de mise en cache courantes.
 
 ## 1. Read Through
 
-Dans la stratégie Read Through, le cache agit comme un intermédiaire entre l'application et la base de données. Lorsque l'application demande des données, elle cherche d'abord dans le cache. Si les données sont disponibles (cache hit), elles sont retournées à l'application. Si les données ne sont pas trouvées dans le cache (cache miss), le cache est lui-même responsable de la récupération des données de la base de données, de leur stockage dans le cache et de leur retour à l'application.
+Dans la stratégie Read Through, le cache se situe devant la base de données et est interrogé en premier lors d'une requête de données. L'application interagit directement avec le cache.
 
-Cette approche simplifie la logique de l'application car l'application n'a pas besoin de gérer la logique de récupération et de mise à jour du cache. Le cache gère lui-même la lecture de la base de données et le stockage des données demandées automatiquement. Cela minimise les données inutiles dans le cache et garantit que les données fréquemment consultées sont facilement disponibles.
+**Fonctionnement :**
 
-Pour les cache hits, Read Through offre un accès aux données à faible latence. Cependant, pour les cache misses, il peut y avoir un délai potentiel pendant que le cache interroge la base de données et stocke les données. Cela peut entraîner une latence plus élevée lors des lectures initiales. Pour éviter que le cache ne serve des données périmées, un time-to-live (TTL) peut être ajouté aux entrées mises en cache. Le TTL expire automatiquement les données après une durée spécifiée, permettant de les recharger à partir de la base de données si nécessaire.
+1.  **Cache Hit :** Si les données sont présentes dans le cache (cache hit), le cache les renvoie directement à l'application.
+2.  **Cache Miss :** Si les données ne sont pas présentes dans le cache (cache miss), le cache, de manière autonome :
+    *   Récupère les données de la base de données.
+    *   Stocke une copie des données dans le cache.
+    *   Renvoie les données à l'application.
 
-Read Through caching est mieux adapté aux applications à forte lecture où les données sont consultées fréquemment mais mises à jour moins souvent, comme les systèmes de diffusion de contenu (CDN), les flux de médias sociaux ou les profils d'utilisateurs.
+**Avantages :**
+
+*   **Simplicité :** L'application n'a pas à se soucier de la logique de récupération des données à partir de la base de données ou de la mise à jour du cache.
+*   **Cohérence :** Le cache est toujours à jour avec les données de la base de données.
+*   **Performance :** Les lectures sont rapides en cas de cache hit.
+
+**Inconvénients :**
+
+*   **Latence initiale :** La première requête pour une donnée donnée entraînera toujours un cache miss, ce qui peut entraîner une latence plus élevée.
+*   **Charge sur le cache :** Le cache peut être soumis à une charge importante si de nombreuses données sont demandées pour la première fois en même temps.
+
+**Cas d'utilisation :**
+
+La stratégie Read Through est bien adaptée aux applications à forte lecture où les données sont consultées fréquemment mais mises à jour moins souvent. Exemples :
+
+*   Systèmes de diffusion de contenu (CDN)
+*   Flux de médias sociaux
+*   Profils d'utilisateurs
 
 ```mermaid
 graph LR
     A[Application] --> C{Cache}
-    C -->|Cache Hit? Read from cache| A
-    C -->|Cache Miss? Read from DB and store in cache| D[Database]
-    D --> C
+    C -->|Cache Hit: Data from cache| A
+    C -->|Cache Miss:| DB[Database]
+    DB -->|Read data| C
+    C -->|Store data in cache| C
+    C -->|Return data to application| A
 ```
 
 ## 2. Cache Aside
 
-Cache Aside, également connu sous le nom de "Lazy Loading", est une stratégie où le code de l'application gère l'interaction entre le cache et la base de données. Les données ne sont chargées dans le cache qu'en cas de besoin. L'application vérifie d'abord le cache pour les données. Si les données existent dans le cache (cache hit), elles sont retournées à l'application. Si les données ne sont pas trouvées dans le cache (cache miss), l'application les récupère de la base de données, puis les charge dans le cache pour les requêtes ultérieures.
+Cache Aside, également connu sous le nom de "Lazy Loading", est une stratégie où l'application est responsable de la gestion du cache.
 
-Cette approche donne à l'application un contrôle total sur la logique de mise en cache, ce qui la rend flexible et adaptable à divers cas d'utilisation. Cependant, elle ajoute de la complexité au code de l'application car elle doit gérer à la fois les lectures et les écritures dans le cache.
+**Fonctionnement :**
 
-Pour les cache misses, il y a une latence plus élevée car l'application doit d'abord récupérer les données de la base de données avant de les servir. Pour éviter les données périmées, un TTL peut être utilisé pour les entrées de cache.
+1.  **Cache Hit :** L'application vérifie si les données sont présentes dans le cache. Si c'est le cas (cache hit), elle les récupère et les utilise.
+2.  **Cache Miss :** Si les données ne sont pas présentes dans le cache (cache miss), l'application :
+    *   Récupère les données de la base de données.
+    *   Stocke les données dans le cache.
+    *   Utilise les données.
 
-Cache Aside est parfait pour les systèmes où le rapport lecture-écriture est élevé et où les mises à jour de données sont peu fréquentes. Par exemple, dans un site Web de commerce électronique, les données de produits (comme les prix, les descriptions ou l'état des stocks) sont souvent lues beaucoup plus fréquemment qu'elles ne sont mises à jour.
+**Avantages :**
+
+*   **Contrôle :** L'application a un contrôle total sur la logique de mise en cache.
+*   **Flexibilité :** La stratégie peut être adaptée à différents cas d'utilisation.
+*   **Évite la pollution du cache :** Seules les données réellement utilisées sont stockées dans le cache.
+
+**Inconvénients :**
+
+*   **Complexité :** L'application doit gérer la logique de mise en cache.
+*   **Latence :** La première requête pour une donnée donnée entraînera toujours un cache miss, ce qui peut entraîner une latence plus élevée.
+*   **Cohérence :** L'application doit s'assurer que les données dans le cache sont cohérentes avec les données dans la base de données (par exemple, en utilisant des TTL).
+
+**Cas d'utilisation :**
+
+Cache Aside est bien adapté aux applications où :
+
+*   Le rapport lecture/écriture est élevé.
+*   Les données sont mises à jour peu fréquemment.
+*   L'application a besoin d'un contrôle précis sur la logique de mise en cache.
+
+Exemple :
+
+*   Un site web de commerce électronique où les données des produits (prix, descriptions, stock) sont lues fréquemment mais mises à jour rarement.
 
 ```mermaid
 graph LR
     A[Application] --> C{Cache}
-    C -->|Cache Hit? Read from cache| A
-    A -->|Cache Miss? Read from DB| D[Database]
-    D --> A
-    A -->|Write to Cache| C
+    C -->|Cache Hit: Data from cache| A
+    A -->|Cache Miss:| DB[Database]
+    DB -->|Read data| A
+    A -->|Write data to cache| C
 ```
 
 ## 3. Write Through
 
-Dans la stratégie Write Through, chaque opération d'écriture est exécutée sur le cache et la base de données en même temps. Il s'agit d'un processus synchrone, ce qui signifie que le cache et la base de données sont mis à jour dans le cadre de la même opération, garantissant ainsi l'absence de délai dans la propagation des données.
+Dans la stratégie Write Through, chaque écriture est effectuée simultanément dans le cache et dans la base de données.
 
-Cette approche garantit que le cache et la base de données restent synchronisés et que les requêtes de lecture du cache renverront toujours les données les plus récentes, évitant ainsi le risque de servir des données périmées.
+**Fonctionnement :**
 
-Le plus grand avantage de Write Through est qu'il assure une forte cohérence des données entre le cache et la base de données. Étant donné que le cache contient toujours les données les plus récentes, les opérations de lecture bénéficient d'une faible latence car les données peuvent être directement récupérées du cache. Cependant, la latence d'écriture peut être plus élevée en raison de la surcharge liée à l'écriture dans le cache et la base de données.
+1.  L'application effectue une écriture.
+2.  Les données sont écrites simultanément dans le cache et dans la base de données.
+3.  L'application reçoit une confirmation une fois que l'écriture a été effectuée avec succès dans les deux emplacements.
 
-Dans une stratégie de mise en cache Write Through, les politiques d'expiration du cache (telles que TTL) ne sont généralement pas nécessaires. Cependant, si vous êtes préoccupé par l'utilisation de la mémoire cache, vous pouvez implémenter une politique TTL pour supprimer les données peu fréquemment consultées après un certain temps.
+**Avantages :**
 
-Write Through est idéal pour les systèmes critiques en matière de cohérence, tels que les applications financières ou les systèmes de traitement des transactions en ligne, où le cache et la base de données doivent toujours avoir les données les plus récentes.
+*   **Cohérence des données :** Le cache et la base de données sont toujours synchronisés.
+*   **Fiabilité :** Les données sont stockées dans deux emplacements, ce qui réduit le risque de perte de données.
+
+**Inconvénients :**
+
+*   **Latence d'écriture :** Les écritures sont plus lentes car elles doivent être effectuées dans le cache et dans la base de données.
+*   **Charge sur la base de données :** Chaque écriture entraîne une opération d'écriture dans la base de données.
+
+**Cas d'utilisation :**
+
+Write Through est bien adapté aux applications où :
+
+*   La cohérence des données est primordiale.
+*   La latence d'écriture n'est pas un problème majeur.
+
+Exemples :
+
+*   Applications financières
+*   Systèmes de traitement des transactions en ligne
 
 ```mermaid
 graph LR
     A[Application] --> C{Cache}
     A --> D[Database]
-    C -->|Write to Cache| D
-    D -->|Write to DB immediately| C
+    C & D -->|Write data simultaneously| A
 ```
 
 ## 4. Write Around
 
-Write Around est une stratégie de mise en cache où les données sont écrites directement dans la base de données, en contournant le cache. Le cache n'est mis à jour que lorsque les données sont demandées ultérieurement lors d'une opération de lecture, moment auquel la stratégie Cache Aside est utilisée pour charger les données dans le cache.
+Dans la stratégie Write Around, les écritures sont effectuées directement dans la base de données, sans passer par le cache. Le cache est mis à jour uniquement lors des lectures, en utilisant généralement une stratégie Cache Aside.
 
-Cette approche empêche le cache d'être pollué par des données qui pourraient ne pas être consultées à nouveau rapidement. Elle maintient le cache propre en évitant les données inutiles qui pourraient ne pas être demandées après avoir été écrites.
+**Fonctionnement :**
 
-Les écritures sont relativement plus rapides car elles ne ciblent que la base de données et n'entraînent pas la surcharge de l'écriture dans le cache. Un TTL peut être utilisé pour garantir que les données ne restent pas indéfiniment dans le cache. Une fois le TTL expiré, les données sont supprimées du cache, forçant le système à les récupérer à nouveau de la base de données si nécessaire.
+1.  L'application effectue une écriture.
+2.  Les données sont écrites directement dans la base de données.
+3.  Lors d'une lecture, si les données ne sont pas présentes dans le cache (cache miss), elles sont récupérées de la base de données et stockées dans le cache.
 
-Write Around caching est mieux utilisé dans les systèmes à forte écriture où les données sont fréquemment écrites ou mises à jour, mais pas immédiatement ou fréquemment lues, comme les systèmes de journalisation.
+**Avantages :**
+
+*   **Évite la pollution du cache :** Seules les données qui sont réellement lues sont stockées dans le cache.
+*   **Latence d'écriture réduite :** Les écritures sont plus rapides car elles ne passent pas par le cache.
+
+**Inconvénients :**
+
+*   **Latence de lecture initiale :** La première lecture d'une donnée donnée entraînera toujours un cache miss.
+*   **Cohérence :** Le cache peut ne pas être toujours à jour avec les données les plus récentes de la base de données.
+
+**Cas d'utilisation :**
+
+Write Around est bien adapté aux applications où :
+
+*   Les écritures sont fréquentes.
+*   Les lectures sont moins fréquentes ou concernent des données différentes de celles qui sont écrites.
+*   Il est important d'éviter la pollution du cache.
+
+Exemple :
+
+*   Systèmes de journalisation
 
 ```mermaid
 graph LR
     A[Application] --> D[Database]
+    D -->|Write data| A
     A --> C{Cache}
-    D -->|Write to DB| A
-    C -->|Cache Hit? Read from cache| A
-    A -->|Cache Miss? Read from DB| D
-    D --> A
-    A -->|Update Cache| C
+    C --o|Cache Miss| D
+    D -->|Read data| C
+    C --> A
+    C --o|Cache Hit| A
 ```
 
 ## 5. Write Back
 
-Dans la stratégie Write Back, les données sont d'abord écrites dans le cache, puis écrites de manière asynchrone dans la base de données ultérieurement. Cette écriture différée signifie que le cache agit comme le stockage principal pendant les opérations d'écriture, tandis que la base de données est mise à jour périodiquement en arrière-plan.
+Dans la stratégie Write Back (ou Write Behind), les écritures sont d'abord effectuées dans le cache, puis propagées à la base de données de manière asynchrone.
 
-Cette stratégie se concentre sur la minimisation de la latence d'écriture en différant les écritures dans la base de données. Cette écriture différée signifie que le cache agit comme le stockage principal pendant les opérations d'écriture, tandis que la base de données est mise à jour périodiquement en arrière-plan.
+**Fonctionnement :**
 
-Le principal avantage de Write Back est qu'il réduit considérablement la latence d'écriture, car les écritures sont effectuées rapidement dans le cache et les mises à jour de la base de données sont différées ou regroupées. Cependant, avec cette approche, il existe un risque de perte de données si le cache tombe en panne avant que les données ne soient écrites dans la base de données.
+1.  L'application effectue une écriture.
+2.  Les données sont écrites uniquement dans le cache.
+3.  Le cache accuse réception de l'écriture à l'application.
+4.  Plus tard, les données sont écrites de manière asynchrone dans la base de données.
 
-Write Back est idéal pour les systèmes où la latence d'écriture est critique et où une certaine perte de données est acceptable, comme les systèmes de mise en mémoire tampon ou les applications de streaming de données.
+**Avantages :**
+
+*   **Latence d'écriture très faible :** Les écritures sont très rapides car elles ne concernent que le cache.
+*   **Débit d'écriture élevé :** Le système peut gérer un grand nombre d'écritures car elles sont mises en mémoire tampon dans le cache.
+
+**Inconvénients :**
+
+*   **Risque de perte de données :** Si le cache tombe en panne avant que les données ne soient écrites dans la base de données, les données sont perdues.
+*   **Cohérence :** Le cache et la base de données peuvent être incohérents pendant un certain temps.
+*   **Complexité :** La mise en œuvre de cette stratégie est plus complexe que les autres.
+
+**Cas d'utilisation :**
+
+Write Back est bien adapté aux applications où :
+
+*   La latence d'écriture est critique.
+*   Une certaine perte de données est acceptable.
+*   Le débit d'écriture est élevé.
+
+Exemples :
+
+*   Systèmes de mise en mémoire tampon
+*   Applications de streaming de données
 
 ```mermaid
 graph LR
     A[Application] --> C{Cache}
-    C -->|Write to Cache constantly| A
-    C -->|Write to DB asynchronously| D[Database]
+    C -->|Write data| A
+    C -->|Asynchronously write data to DB| D[Database]

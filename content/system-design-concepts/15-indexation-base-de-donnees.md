@@ -18,6 +18,15 @@ L'indexation de base de données est une technique utilisée pour améliorer la 
 - Nécessite de l'espace de stockage supplémentaire pour l'index lui-même.
 - L'efficacité de l'indexation dépend des colonnes indexées et des types de requêtes.
 
+**Types d'Index**
+Il existe plusieurs types d'index, chacun adapté à des cas d'utilisation spécifiques :
+- **Index Clustered (Groupé):** Détermine l'ordre physique de stockage des données dans la table. Une table ne peut avoir qu'un seul index groupé. Les recherches sur la colonne indexée sont très rapides.
+- **Index Non-Clustered (Non-Groupé):** Crée une structure de données séparée qui contient les valeurs indexées et des pointeurs vers l'emplacement réel des données. Une table peut avoir plusieurs index non-groupés.
+- **Index Unique:** Assure que toutes les valeurs dans la colonne indexée sont uniques, empêchant les doublons.
+- **Index Composite (Multi-colonnes):** Créé sur plusieurs colonnes. Utile pour les requêtes qui filtrent ou trient sur plusieurs colonnes. L'ordre des colonnes dans l'index est important.
+- **Index Full-Text (Texte Intégral):** Utilisé pour la recherche de texte libre dans de grandes quantités de texte.
+- **Index Spatial:** Utilisé pour les données géospatiales.
+
 **Composants Principaux**
 - **Index:** La structure de données (souvent un arbre B-tree) qui stocke les valeurs des colonnes indexées et les pointeurs vers les lignes de données correspondantes.
 - **Colonnes Indexées:** Les colonnes sur lesquelles l'index est créé.
@@ -25,6 +34,15 @@ L'indexation de base de données est une technique utilisée pour améliorer la 
 
 **Guides d'utilisation**
 L'indexation doit être appliquée judicieusement aux colonnes fréquemment utilisées dans les clauses `WHERE`, `JOIN`, `ORDER BY` et `GROUP BY` des requêtes de lecture. Il est important de ne pas sur-indexer une base de données, car cela peut dégrader les performances d'écriture et consommer un espace disque excessif. L'analyse des requêtes lentes est essentielle pour identifier les opportunités d'indexation.
+
+**Bonnes Pratiques d'Indexation**
+- **Indexez les colonnes fréquemment utilisées dans les clauses `WHERE`, `JOIN`, `ORDER BY`, `GROUP BY`.**
+- **Évitez la sur-indexation:** Trop d'index peuvent dégrader les performances d'écriture et consommer de l'espace disque.
+- **Choisissez le bon type d'index:** Un index B-tree est un bon point de départ, mais d'autres types peuvent être plus appropriés pour des cas spécifiques.
+- **Considérez les index composites:** Pour les requêtes qui filtrent sur plusieurs colonnes. L'ordre des colonnes est crucial.
+- **Surveillez les performances:** Utilisez les outils de surveillance du SGBD pour analyser l'utilisation des index et identifier les requêtes lentes.
+- **Reconstruisez les index si nécessaire:** Les index peuvent se fragmenter avec le temps, ce qui peut affecter leurs performances.
+- **N'indexez pas les colonnes avec peu de valeurs distinctes:** L'indexation sur des colonnes avec une faible cardinalité (ex: `gender`) est généralement inefficace.
 
 **Exemples de Code (Hono avec Indexation DB - Conceptuel)**
 L'indexation est configurée au niveau de la base de données elle-même, et non dans le code de l'application Hono. Cependant, les requêtes exécutées par l'application Hono bénéficieront de l'indexation appropriée dans la base de données sous-jacente.

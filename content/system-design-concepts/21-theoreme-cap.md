@@ -22,6 +22,15 @@ Le théorème CAP (Consistency, Availability, Partition Tolerance) est un princi
 - **Systèmes CP (Cohérence + Tolérance aux Partitions):** Privilégient la cohérence. En cas de partition, le système peut devenir indisponible pour certaines requêtes afin de garantir que les données renvoyées sont cohérentes. Exemples : bases de données relationnelles distribuées (certaines configurations), ZooKeeper, Consul (en mode cohérent).
 - **Systèmes AP (Disponibilité + Tolérance aux Partitions):** Privilégient la disponibilité. En cas de partition, le système reste disponible pour les requêtes, mais il peut renvoyer des données potentiellement obsolètes. La cohérence est atteinte éventuellement (Eventual Consistency). Exemples : la plupart des bases de données NoSQL (Cassandra, DynamoDB, MongoDB - par défaut), systèmes DNS.
 
+**Implications Pratiques du Théorème CAP**
+- **Pas de système parfait:** Il n'existe pas de système distribué qui puisse garantir les trois propriétés simultanément. Le choix dépend des priorités de l'application.
+- **Les partitions sont inévitables:** Dans un environnement distribué, les pannes réseau et les retards sont une réalité. Il est donc impératif de concevoir des systèmes qui tolèrent les partitions.
+- **Compromis:** Le théorème CAP force un compromis entre la cohérence et la disponibilité en cas de partition.
+    - **Pour les applications bancaires ou financières:** La cohérence est souvent primordiale (systèmes CP).
+    - **Pour les réseaux sociaux ou les systèmes de recommandation:** La disponibilité est souvent plus importante, et une cohérence éventuelle est acceptable (systèmes AP).
+- **Cohérence Éventuelle:** Dans les systèmes AP, les données finiront par être cohérentes une fois que la partition est résolue. Le défi est de gérer cette période d'incohérence.
+- **Microservices et Services Distribués:** Le théorème CAP est particulièrement pertinent dans les architectures de microservices où de nombreux services communiquent entre eux et gèrent leurs propres données.
+
 **Exemples de Code (Hono et CAP - Conceptuel)**
 Le théorème CAP est un concept d'architecture système et ne se traduit pas directement par du code Hono spécifique. Cependant, la conception de votre application Hono et la manière dont elle interagit avec les bases de données ou d'autres services distribués doivent tenir compte des compromis CAP faits par ces services.
 

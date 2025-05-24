@@ -17,6 +17,7 @@ REST (Representational State Transfer) est un style d'architecture logicielle qu
 - **Cacheable:** Les réponses du serveur peuvent être mises en cache par les clients pour améliorer les performances.
 - **Système en Couches (Layered System):** L'architecture peut être composée de plusieurs couches (serveurs, proxys, passerelles) sans affecter la communication entre le client et le serveur final.
 - **Interface Uniforme (Uniform Interface):** Un ensemble standardisé de contraintes pour l'interaction entre le client et le serveur. Cela inclut l'identification des ressources, la manipulation des ressources via des représentations, les messages auto-descriptifs et HATEOAS (Hypermedia as the Engine of Application State).
+    - **HATEOAS (Hypermedia as the Engine of Application State):** C'est une contrainte clé de REST qui signifie que les réponses de l'API doivent inclure des liens hypermédia pertinents qui guident le client sur les actions possibles et les ressources connexes. Le client n'a pas besoin de connaître à l'avance toutes les URL, il les découvre dynamiquement via les liens fournis par le serveur. Cela rend l'API plus découplée et évolutive.
 
 **Composants Principaux**
 - **Ressources:** Les données ou les concepts clés exposés par l'API (par exemple, un utilisateur, un produit, une commande).

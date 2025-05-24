@@ -17,6 +17,26 @@ Une base de données est un système organisé pour stocker, gérer et récupér
 - **Gestion de l'Accès:** Contrôle qui peut accéder aux données et quelles opérations ils peuvent effectuer.
 - **Intégrité des Données:** Assurer l'exactitude et la cohérence des données.
 
+**Types de Bases de Données**
+Il existe principalement deux grandes catégories de bases de données :
+
+- **Bases de Données Relationnelles (SQL):**
+    - **Description:** Stockent les données dans des tables avec des lignes et des colonnes. Les relations entre les tables sont définies par des clés primaires et étrangères.
+    - **Caractéristiques:** Schéma fixe, forte cohérence (ACID), jointures complexes.
+    - **Cas d'utilisation:** Applications nécessitant une forte intégrité des données, transactions complexes, données structurées (ex: systèmes bancaires, ERP, CRM).
+    - **Exemples:** MySQL, PostgreSQL, Oracle, SQL Server.
+
+- **Bases de Données Non Relationnelles (NoSQL):**
+    - **Description:** Offrent des modèles de données plus flexibles et sont conçues pour gérer de grands volumes de données non structurées ou semi-structurées.
+    - **Caractéristiques:** Schéma dynamique ou flexible, haute scalabilité horizontale, performances élevées pour des opérations spécifiques.
+    - **Types courants:**
+        - **Document-Orientées:** Stockent les données sous forme de documents (JSON, BSON). Ex: MongoDB, Couchbase.
+        - **Clé-Valeur:** Stockent des paires clé-valeur simples. Ex: Redis, DynamoDB.
+        - **Colonnes Larges:** Stockent les données en colonnes plutôt qu'en lignes. Ex: Cassandra, HBase.
+        - **Graphe:** Stockent les données sous forme de nœuds et d'arêtes pour représenter les relations. Ex: Neo4j, Amazon Neptune.
+    - **Cas d'utilisation:** Big Data, applications en temps réel, données non structurées, microservices, IoT.
+    - **Principes:** Souvent basées sur le modèle BASE (Basically Available, Soft state, Eventually consistent).
+
 **Composants Principaux**
 - **SGBD (Système de Gestion de Base de Données):** Le logiciel qui interagit avec la base de données (par exemple, MySQL, PostgreSQL, MongoDB).
 - **Schéma:** La structure logique qui définit comment les données sont organisées (pour les bases de données relationnelles).
