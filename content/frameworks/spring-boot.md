@@ -274,13 +274,14 @@ Ces fichiers permettent de configurer divers aspects de l'application, tels que 
 
 ---
 
-### Composants et Scopes des Beans
+### Composants Et Scopes Des Beans
 
 Dans Spring, un "bean" est un objet qui est instancié, assemblé et géré par le conteneur IoC de Spring. Les annotations comme `@Component`, `@Service`, `@Repository`, et `@Controller` sont des stéréotypes de `@Component` et sont utilisées pour marquer les classes comme des beans Spring.
 
 Chaque bean a un "scope" qui détermine son cycle de vie et le nombre d'instances créées par le conteneur. Les scopes les plus courants sont :
 
--   **Singleton (par défaut) :** Une seule instance du bean est créée par conteneur Spring. C'est le scope par défaut et le plus couramment utilisé. Toutes les injections de ce bean feront référence à la même instance.
+- **Singleton (par défaut) :** Une seule instance du bean est créée par conteneur Spring. C'est le scope par défaut et le plus couramment utilisé. Toutes les injections de ce bean feront référence à la même instance.
+
     ```java
     @Service // Par défaut, c'est un singleton
     public class MySingletonService {
@@ -288,7 +289,8 @@ Chaque bean a un "scope" qui détermine son cycle de vie et le nombre d'instance
     }
     ```
 
--   **Prototype :** Une nouvelle instance du bean est créée à chaque fois qu'il est demandé (injecté). Utile pour les beans qui ne sont pas thread-safe ou qui doivent avoir un état unique par utilisation.
+- **Prototype :** Une nouvelle instance du bean est créée à chaque fois qu'il est demandé (injecté). Utile pour les beans qui ne sont pas thread-safe ou qui doivent avoir un état unique par utilisation.
+
     ```java
     import org.springframework.context.annotation.Scope;
     import org.springframework.stereotype.Component;
@@ -300,9 +302,9 @@ Chaque bean a un "scope" qui détermine son cycle de vie et le nombre d'instance
     }
     ```
 
--   **Request :** (Uniquement pour les applications web) Une nouvelle instance du bean est créée pour chaque requête HTTP.
--   **Session :** (Uniquement pour les applications web) Une nouvelle instance du bean est créée pour chaque session HTTP.
--   **Application :** (Uniquement pour les applications web) Une seule instance du bean est créée pour la durée de vie de l'application web (similaire au singleton mais au niveau du `ServletContext`).
+- **Request :** (Uniquement pour les applications web) Une nouvelle instance du bean est créée pour chaque requête HTTP.
+- **Session :** (Uniquement pour les applications web) Une nouvelle instance du bean est créée pour chaque session HTTP.
+- **Application :** (Uniquement pour les applications web) Une seule instance du bean est créée pour la durée de vie de l'application web (similaire au singleton mais au niveau du `ServletContext`).
 
 La gestion des scopes est cruciale pour la performance et la gestion de l'état dans les applications Spring.
 
@@ -378,8 +380,8 @@ Spring prend en charge plusieurs types d'injection de dépendances :
 
 L'annotation `@Autowired` est utilisée par Spring pour effectuer l'injection automatique de dépendances. Lorsque Spring rencontre `@Autowired` sur un constructeur, un setter ou un champ, il recherche un bean compatible dans son conteneur IoC et l'injecte automatiquement.
 
--   **Fonctionnement :** Spring tente de trouver un bean du type requis. Si plusieurs beans du même type existent, Spring essaiera de les différencier par leur nom (par exemple, le nom du champ ou du paramètre). Vous pouvez utiliser `@Qualifier("nomDuBean")` pour spécifier explicitement quel bean injecter si l'ambiguïté persiste.
--   **`required` :** Par défaut, `@Autowired` est `required = true`, ce qui signifie que si Spring ne trouve pas de bean compatible, il lèvera une `NoSuchBeanDefinitionException`. Vous pouvez définir `required = false` si la dépendance est optionnelle.
+- **Fonctionnement :** Spring tente de trouver un bean du type requis. Si plusieurs beans du même type existent, Spring essaiera de les différencier par leur nom (par exemple, le nom du champ ou du paramètre). Vous pouvez utiliser `@Qualifier("nomDuBean")` pour spécifier explicitement quel bean injecter si l'ambiguïté persiste.
+- **`required` :** Par défaut, `@Autowired` est `required = true`, ce qui signifie que si Spring ne trouve pas de bean compatible, il lèvera une `NoSuchBeanDefinitionException`. Vous pouvez définir `required = false` si la dépendance est optionnelle.
 
 ```java
 import org.springframework.beans.factory.annotation.Autowired;
@@ -551,10 +553,10 @@ public class WebController {
 
 Dans cet exemple, la méthode `greeting` gère les requêtes GET sur `/greeting`, prend un paramètre de requête `name` (avec une valeur par défaut "World" si non fourni), ajoute un attribut au modèle (`Model`) pour le rendre disponible à la vue, et retourne le nom de la vue "greeting".
 
--   [`@RequestParam`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/RequestParam.html): Utilisé pour lier les paramètres de requête URL (ceux après `?` dans l'URL) aux arguments de la méthode du contrôleur.
--   [`@PathVariable`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/PathVariable.html): Utilisé pour lier les variables de chemin d'URI (parties de l'URL) aux arguments de la méthode. Par exemple, dans `/users/{id}`, `{id}` serait une variable de chemin.
--   [`Model`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/ui/Model.html): Un objet qui contient les données à afficher dans la vue. Les contrôleurs ajoutent des attributs au `Model`, et ces attributs sont ensuite accessibles dans le template de vue.
--   [`ModelAndView`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/servlet/ModelAndView.html): Une classe qui encapsule à la fois le `Model` et le nom de la `View`. Elle est souvent utilisée lorsque vous avez besoin d'un contrôle plus fin sur la vue et les données.
+- [`@RequestParam`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/RequestParam.html): Utilisé pour lier les paramètres de requête URL (ceux après `?` dans l'URL) aux arguments de la méthode du contrôleur.
+- [`@PathVariable`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/PathVariable.html): Utilisé pour lier les variables de chemin d'URI (parties de l'URL) aux arguments de la méthode. Par exemple, dans `/users/{id}`, `{id}` serait une variable de chemin.
+- [`Model`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/ui/Model.html): Un objet qui contient les données à afficher dans la vue. Les contrôleurs ajoutent des attributs au `Model`, et ces attributs sont ensuite accessibles dans le template de vue.
+- [`ModelAndView`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/servlet/ModelAndView.html): Une classe qui encapsule à la fois le `Model` et le nom de la `View`. Elle est souvent utilisée lorsque vous avez besoin d'un contrôle plus fin sur la vue et les données.
 
 ### Gestion Des Vues Avec Thymeleaf Et Bootstrap
 
@@ -1061,27 +1063,32 @@ C'est un sujet complexe qui nécessite une configuration détaillée, mais Sprin
 
 ---
 
-### Gestion des Versions d'API
+### Gestion Des Versions d'API
 
 La gestion des versions d'API est une pratique essentielle pour maintenir la compatibilité ascendante et permettre l'évolution de votre API sans casser les applications clientes existantes. Il existe plusieurs stratégies courantes pour versionner les API RESTful :
 
--   **Versionnement par URI (URL Path Versioning) :** La version de l'API est incluse directement dans le chemin de l'URI. C'est une approche simple et très visible.
+- **Versionnement par URI (URL Path Versioning) :** La version de l'API est incluse directement dans le chemin de l'URI. C'est une approche simple et très visible.
+
     ```
     GET /api/v1/products
     GET /api/v2/products
     ```
+
     Avantages : Facile à comprendre et à mettre en œuvre.
     Inconvénients : Nécessite des modifications de code pour chaque nouvelle version et peut rendre les URIs plus longues.
 
--   **Versionnement par Paramètre de Requête (Query Parameter Versioning) :** La version est spécifiée comme un paramètre de requête.
+- **Versionnement par Paramètre de Requête (Query Parameter Versioning) :** La version est spécifiée comme un paramètre de requête.
+
     ```
     GET /api/products?version=1
     GET /api/products?version=2
     ```
+
     Avantages : Les URIs restent propres.
     Inconvénients : Moins RESTful car la version n'est pas une ressource, et les clients peuvent oublier de spécifier la version.
 
--   **Versionnement par En-tête HTTP (Header Versioning) :** La version est spécifiée dans un en-tête HTTP personnalisé (par exemple, `X-API-Version` ou `Accept` header avec un type de média personnalisé).
+- **Versionnement par En-tête HTTP (Header Versioning) :** La version est spécifiée dans un en-tête HTTP personnalisé (par exemple, `X-API-Version` ou `Accept` header avec un type de média personnalisé).
+
     ```
     GET /api/products
     Accept: application/vnd.yourapp.v1+json
@@ -1089,10 +1096,11 @@ La gestion des versions d'API est une pratique essentielle pour maintenir la com
     GET /api/products
     Accept: application/vnd.yourapp.v2+json
     ```
-    Avantages : Les URIs restent propres et c'est une approche plus conforme à REST.
-    Inconvénients : Moins visible pour les utilisateurs et peut être plus complexe à tester manuellement.
 
--   **Versionnement par Négociation de Contenu (Content Negotiation Versioning) :** Similaire au versionnement par en-tête, mais utilise l'en-tête `Accept` standard avec des types de médias spécifiques.
+Avantages : Les URIs restent propres et c'est une approche plus conforme à REST.
+Inconvénients : Moins visible pour les utilisateurs et peut être plus complexe à tester manuellement.
+
+- **Versionnement par Négociation de Contenu (Content Negotiation Versioning) :** Similaire au versionnement par en-tête, mais utilise l'en-tête `Accept` standard avec des types de médias spécifiques.
 
 Spring MVC peut être configuré pour prendre en charge ces différentes stratégies de versionnement en utilisant `@RequestMapping` avec des attributs `headers`, `params` ou en définissant des chemins d'URI spécifiques. Le choix de la stratégie dépend des besoins spécifiques de votre projet et de vos clients.
 
@@ -1280,7 +1288,7 @@ Postman est un outil précieux pour le développement et le débogage des API RE
 
 ---
 
-### Tests de Gestion des Erreurs et des Exceptions
+### Tests De Gestion Des Erreurs Et Des Exceptions
 
 Il est crucial de tester la manière dont votre application gère les erreurs et les exceptions, en particulier pour les API RESTful. Vous voulez vous assurer que les messages d'erreur sont clairs, que les codes de statut HTTP sont corrects et que les informations sensibles ne sont pas exposées.
 
@@ -1728,10 +1736,11 @@ Une fois la dépendance ajoutée et l'application démarrée, vous pourrez accé
 
 La gestion efficace des dépendances est cruciale pour tout projet Java, et Spring Boot simplifie cela grâce à ses "Starters" et à la gestion des dépendances parentes.
 
--   **Spring Boot Starters :** Comme mentionné précédemment, les starters sont des ensembles de dépendances préconfigurées. Ils réduisent le besoin de configurer manuellement les dépendances transitives. Par exemple, l'ajout de `spring-boot-starter-web` apporte automatiquement toutes les dépendances nécessaires pour une application web, y compris Tomcat, Spring MVC, et Jackson.
--   **Gestion des dépendances parentes :** Le `spring-boot-starter-parent` (pour Maven) ou le plugin Spring Boot (pour Gradle) gère automatiquement les versions de nombreuses dépendances courantes. Cela garantit la compatibilité entre les différentes bibliothèques et réduit les conflits de versions. Vous n'avez généralement pas besoin de spécifier la version pour les dépendances gérées par le parent.
+- **Spring Boot Starters :** Comme mentionné précédemment, les starters sont des ensembles de dépendances préconfigurées. Ils réduisent le besoin de configurer manuellement les dépendances transitives. Par exemple, l'ajout de `spring-boot-starter-web` apporte automatiquement toutes les dépendances nécessaires pour une application web, y compris Tomcat, Spring MVC, et Jackson.
+- **Gestion des dépendances parentes :** Le `spring-boot-starter-parent` (pour Maven) ou le plugin Spring Boot (pour Gradle) gère automatiquement les versions de nombreuses dépendances courantes. Cela garantit la compatibilité entre les différentes bibliothèques et réduit les conflits de versions. Vous n'avez généralement pas besoin de spécifier la version pour les dépendances gérées par le parent.
 
     **Maven (dans `pom.xml`) :**
+
     ```xml
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -1750,6 +1759,7 @@ La gestion efficace des dépendances est cruciale pour tout projet Java, et Spri
     ```
 
     **Gradle (dans `build.gradle`) :**
+
     ```gradle
     plugins {
         id 'java'
@@ -1763,7 +1773,8 @@ La gestion efficace des dépendances est cruciale pour tout projet Java, et Spri
     }
     ```
 
--   **Exclusions de dépendances :** Parfois, vous pourriez avoir besoin d'exclure une dépendance transitive qu'un starter apporte, par exemple pour remplacer une bibliothèque de logging par une autre.
+- **Exclusions de dépendances :** Parfois, vous pourriez avoir besoin d'exclure une dépendance transitive qu'un starter apporte, par exemple pour remplacer une bibliothèque de logging par une autre.
+
     ```xml
     <dependency>
         <groupId>org.springframework.boot</groupId>
